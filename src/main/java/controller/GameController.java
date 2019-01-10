@@ -1,13 +1,17 @@
 package controller;
 
+import model.Cup;
+
 public class GameController {
     private PlayerController plCtrl;
     private GameLogic gL;
     private GUIBoundary guiB;
+    private Cup cup;
 
     public GameController() {
         gL = new GameLogic();
         guiB = new GUIBoundary();
+        cup = new Cup();
     }
 
     public void startGame() {
@@ -23,6 +27,12 @@ public class GameController {
 
         plCtrl.createPlayers();
 
-//        runGame();
+        runGame();
+    }
+
+    private void runGame() {
+        while (true){
+            cup.throwDices();
+        }
     }
 }
