@@ -6,9 +6,9 @@ import gui_main.GUI;
 public class GUIBoundary {
     private GUI gui = new GUI();
 
-    public int getUserInteger(String s, int minPlayers, int maxPlayers) {
-        int res = gui.getUserInteger(s, minPlayers, maxPlayers);
-        return res;
+    public int askForPlayerCount(int minPlayers, int maxPlayers) {
+        int playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
+        return playerCount;
     }
 
     public GUI_Player setUpPlayer(String name, int balance) {

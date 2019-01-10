@@ -14,7 +14,7 @@ public class GameController {
 
         int numberOfPlayers;
         do {
-            numberOfPlayers = guiB.getUserInteger("Vælg antal spillere (3-6)",gL.getMinPlayers() ,gL.getMaxPlayers());
+            numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
         plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
