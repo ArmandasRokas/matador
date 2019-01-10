@@ -16,7 +16,7 @@ public class GameController {
 
     public void startGame() {
 //        ...loadBoard();
-//        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)
+//        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?
 
         int numberOfPlayers;
         do {
@@ -31,8 +31,19 @@ public class GameController {
     }
 
     private void runGame() {
-        while (true){
-            cup.throwDices();
+        //TODO Fix kommunikation med spiller
+        while (true) {
+
+            throwDices();
+            //changePlayer();
         }
+
     }
+
+    private void throwDices() {
+
+        cup.roll();
+        int rollScore = cup.getCurrentRollScore();
+        plCtrl.movePlayer(rollScore);
+     }
 }

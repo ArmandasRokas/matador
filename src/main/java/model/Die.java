@@ -17,7 +17,6 @@ public class Die {
      * Constructor of the Die
      */
     public Die(int minEyes, int maxEyes) {
-        this.eyes = minEyes;
         this.minEyes = minEyes;
         this.maxEyes = maxEyes;
     }

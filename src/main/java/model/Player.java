@@ -20,4 +20,16 @@ public class Player {
     public int getBalance() {
         return balance;
     }
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setPosition(int newPosition) {
+        this.currentPosition = newPosition;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
 }
