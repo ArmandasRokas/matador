@@ -41,4 +41,16 @@ public class GUIBoundary {
         fieldList[previousPosition].setCar(playerList[playerID],false);
         fieldList[newPosition].setCar(playerList[playerID],true);
     }
+
+    public int takeTurn() {
+        String res = gui.getUserButtonPressed("Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
+        int switchRes = 0;
+        switch (res){
+            case "Kast terninger":
+                switchRes = 1;
+                break;
+        }
+
+        return switchRes;
+    }
 }

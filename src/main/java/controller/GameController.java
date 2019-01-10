@@ -33,8 +33,12 @@ public class GameController {
     private void runGame() {
         //TODO Fix kommunikation med spiller
         while (true) {
-
-            throwDices();
+            int res = guiB.takeTurn();
+            switch (res){
+                case 1:
+                    throwDices();
+                    break;
+            }
             //changePlayer();
         }
 
