@@ -33,6 +33,11 @@ public class PlayerController {
         int newPosition = (rollScore + currPosition) % 40;
         currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
+
+        if(newPosition < currPosition) {
+            currPlayer.moneyinfluence(200);
+            guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+        }
     }
 
     public void changePlayer() {
@@ -40,4 +45,6 @@ public class PlayerController {
         currID = (currID + 1) % playerList.length;
         currPlayer = playerList[currID];
     }
+
+
 }

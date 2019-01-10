@@ -57,4 +57,8 @@ public class GUIBoundary {
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);
     }
+
+    public void updateBalance(int playerID, int balance) {
+        playerList[playerID].setBalance(balance);
+    }
 }

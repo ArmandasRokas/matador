@@ -32,4 +32,8 @@ public class Player {
     public int getPlayerID() {
         return playerID;
     }
+
+    public void moneyinfluence(int cash) {
+        balance += cash;
+    }
 }
