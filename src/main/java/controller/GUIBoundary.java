@@ -53,4 +53,8 @@ public class GUIBoundary {
 
         return switchRes;
     }
+
+    public void setDices(int eyesDie1, int eyesDie2) {
+        gui.setDice(eyesDie1, eyesDie2);
+    }
 }

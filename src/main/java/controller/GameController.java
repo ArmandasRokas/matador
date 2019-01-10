@@ -39,15 +39,22 @@ public class GameController {
                     throwDices();
                     break;
             }
-            //changePlayer();
+            if(!(cup.getEyesDie1() == cup.getEyesDie2())) {
+                plCtrl.changePlayer();
+            }
+
+
         }
 
     }
 
     private void throwDices() {
-
         cup.roll();
+        guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
+
         int rollScore = cup.getCurrentRollScore();
         plCtrl.movePlayer(rollScore);
+
+
      }
 }

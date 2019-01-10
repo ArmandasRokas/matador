@@ -34,4 +34,10 @@ public class PlayerController {
         currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
     }
+
+    public void changePlayer() {
+        int currID = currPlayer.getPlayerID();
+        currID = (currID + 1) % playerList.length;
+        currPlayer = playerList[currID];
+    }
 }
