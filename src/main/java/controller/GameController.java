@@ -5,10 +5,12 @@ public class GameController {
     private GameLogic gL;
     private GUIBoundary guiB;
 
-    public void runGame() {
+    public GameController() {
         gL = new GameLogic();
         guiB = new GUIBoundary();
+    }
 
+    public void startGame() {
 //        ...loadBoard();
 //        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)
 
@@ -19,6 +21,8 @@ public class GameController {
 
         plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
 
-        plCtrl.createPlayerNames();
+        plCtrl.createPlayers();
+
+//        runGame();
     }
 }

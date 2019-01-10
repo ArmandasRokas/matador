@@ -1,14 +1,12 @@
 package model;
 
-import gui_fields.GUI_Player;
-
 public class Player {
     private String name;
-    private int balance, currentPosition, getOutOfPrisonCards;
-    private GUI_Player piece; //TODO Ændre til playerNumber, da man ellers skal herned og ændrer hvis man skifter GUI
-//    private Property[] properties;
+    private int playerID, balance, currentPosition, getOutOfPrisonCards;
+//    private Property[] properties; //TODO Afkommenter når at Property bliver oprettet
 
-    public Player(String name, int balance) {
+    public Player(int playerID, String name, int balance) {
+        this.playerID = playerID;
         this.name = name;
         this.balance = balance;
         currentPosition = 0;
@@ -21,9 +19,5 @@ public class Player {
 
     public int getBalance() {
         return balance;
-    }
-
-    public void setPiece(GUI_Player piece) {
-        this.piece = piece;
     }
 }

@@ -1,10 +1,11 @@
 package controller;
 
-import gui_fields.GUI_Player;
 import model.Player;
 
+import java.awt.Color;
+
 public class PlayerController {
-    private Player playerList[];
+    private Player[] playerList;
     private GameLogic gL;
     private GUIBoundary guiB;
 
@@ -14,13 +15,13 @@ public class PlayerController {
         playerList = new Player[numberOfPlayers];
     }
 
-    public void createPlayerNames() {
-        String names[] = guiB.askForNames(playerList.length);
+    public void createPlayers() {
+        String[] names = guiB.askForNames(playerList.length);
+        Color[] carColors = gL.getColors();
 
         for(int i = 0; i < playerList.length; i++){
-            playerList[i] = new Player(names[i], gL.getStartBalance());
-            GUI_Player piece = guiB.setUpPlayer(playerList[i].getName(), playerList[i].getBalance());
-            playerList[i].setPiece(piece);
+            playerList[i] = new Player(i, names[i], gL.getStartBalance());
+            guiB.setUpPlayer(playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
         }
     }
 }
