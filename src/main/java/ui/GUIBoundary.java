@@ -1,4 +1,4 @@
-package controller;
+package ui;
 
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
@@ -8,7 +8,7 @@ import java.awt.Color;
 
 public class GUIBoundary {
     private GUI gui = new GUI();
-    private GUI_Player[] playerList;
+    protected GUI_Player[] playerList;
     private GUI_Field[] fieldList = gui.getFields();
 
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
@@ -17,14 +17,13 @@ public class GUIBoundary {
         return playerCount;
     }
 
-    public GUI_Player setUpPlayer(int playerID, String name, int balance, Color color) {
+    public void setUpPlayer(int playerID, String name, int balance, Color color) {
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);
         GUI_Player guiPlayer = new GUI_Player(name, balance, car);
         playerList[playerID] = guiPlayer;
         gui.addPlayer(playerList[playerID]);
         fieldList[0].setCar(playerList[playerID], true);
-        return guiPlayer;
     }
 
     public String[] askForNames(int playerCount) { //TODO Fix at man ikke kan hedde det samme, da det overwriter den forrige GUI_Player

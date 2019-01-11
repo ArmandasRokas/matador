@@ -1,6 +1,7 @@
 package controller;
 
 import model.Cup;
+import ui.GUIBoundary;
 
 public class GameController {
     private PlayerController plCtrl;

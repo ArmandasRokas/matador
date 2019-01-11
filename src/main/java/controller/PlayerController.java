@@ -1,6 +1,7 @@
 package controller;
 
 import model.Player;
+import ui.GUIBoundary;
 
 import java.awt.Color;
 
@@ -35,7 +36,7 @@ public class PlayerController {
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
         if(newPosition < currPosition) {
-            currPlayer.moneyinfluence(200);
+            moneyInfluence(200);
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
     }
@@ -46,5 +47,12 @@ public class PlayerController {
         currPlayer = playerList[currID];
     }
 
+    public void moneyInfluence(int cash) {
+        currPlayer.moneyInfluence(200);
+    }
 
+
+    public Player[] getPlayerList() {
+        return playerList;
+    }
 }

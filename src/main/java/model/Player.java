@@ -33,7 +33,7 @@ public class Player {
         return playerID;
     }
 
-    public void moneyinfluence(int cash) {
+    public void moneyInfluence(int cash) {
         balance += cash;
     }
 }
