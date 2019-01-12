@@ -1,5 +1,6 @@
 package ui;
 
+import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
 
 import java.awt.*;
@@ -27,4 +28,17 @@ public class MockGUI extends GUIBoundary {
 
     @Override
     public void movePlayer(int previousPosition, int newPosition, int playerID) { }
+
+    public boolean askToBuyProperty(int playerID, int fieldID){
+
+        return true;
+    }
+    @Override
+    public void setOwnerOnSquare(int playerID, int squareIndex){
+
+    }
+
+    public void updateBalance(int playerID, int balance) {
+    }
+
 }

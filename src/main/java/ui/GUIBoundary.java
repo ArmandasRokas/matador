@@ -71,21 +71,19 @@ public class GUIBoundary {
         return answer;
     }
 
-    public boolean showCurrScenarioForPlayer(String scenario) {
+    public void showCurrScenarioForPlayer(String scenario) {
 
         //TODO switch statment show player action, when player do something else than buy or rent property.
         gui.getUserButtonPressed(scenario, "OK");
 
-        return false;
     }
 
-    public boolean setOwnerOnSquare(int playerID, int squareIndex){
+    public void setOwnerOnSquare(int playerID, int squareIndex){
 
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
         ownable.setOwnerName(playerList[playerID].getName());
         ownable.setSubText(playerList[playerID].getName());
         ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
         ownable.setRentLabel("");
-        return true;
     }
 }

@@ -49,4 +49,8 @@ public class Player {
             }
         }
     }
+
+    public PropertySquare[] getProperties(){
+        return properties;
+    }
 }

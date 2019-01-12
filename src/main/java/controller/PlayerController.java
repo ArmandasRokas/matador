@@ -82,4 +82,8 @@ public class PlayerController {
     public int getCurrPlayerBalance(){
         return currPlayer.getBalance();
     }
+
+    public PropertySquare[] getCurrPlayerPropertie(){
+        return currPlayer.getProperties();
+    }
 }
