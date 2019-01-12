@@ -55,4 +55,9 @@ public class PlayerController {
     public Player[] getPlayerList() {
         return playerList;
     }
+
+    public int getCurrPlayerPos() {
+        int currPos = currPlayer.getCurrentPosition();
+        return currPos;
+    }
 }

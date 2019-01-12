@@ -40,6 +40,7 @@ public class GameController {
             switch (res){
                 case 1:
                     throwDices();
+                    boardCtrl.actOnSquare(plCtrl);
                     break;
             }
             if(!(cup.getEyesDie1() == cup.getEyesDie2())) {
