@@ -19,6 +19,7 @@ public class StreetSquare extends PropertySquare {
     public void landedOn(PlayerController playerController) {
 
 
+
 //        if(isOwned && !p.equals(owner)){
 //            int rentPrice = getRentPrice();
 //

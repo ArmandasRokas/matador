@@ -50,7 +50,7 @@ public class PlayerController {
     }
 
     public void moneyInfluence(int cash) {
-        currPlayer.moneyInfluence(200);
+        currPlayer.moneyInfluence(cash);
     }
 
 
@@ -77,5 +77,9 @@ public class PlayerController {
 
     public int getCurrPlayerID(){
         return currPlayer.getPlayerID();
+    }
+
+    public int getCurrPlayerBalance(){
+        return currPlayer.getBalance();
     }
 }

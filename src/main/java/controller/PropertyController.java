@@ -33,6 +33,7 @@ public class PropertyController {
             square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square.getSquareName());
 
             guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex());
+            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
         }
 
 
