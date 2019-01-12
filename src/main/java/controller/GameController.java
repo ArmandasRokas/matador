@@ -8,11 +8,13 @@ public class GameController {
     private GameLogic gL;
     private GUIBoundary guiB;
     private Cup cup;
+    private GameBoardController boardCtrl;
 
     public GameController() {
         gL = new GameLogic();
         guiB = new GUIBoundary();
         cup = new Cup();
+        this.boardCtrl = new GameBoardController();
     }
 
     public void startGame() {
