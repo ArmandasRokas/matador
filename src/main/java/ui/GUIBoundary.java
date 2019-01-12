@@ -60,4 +60,22 @@ public class GUIBoundary {
     public void updateBalance(int playerID, int balance) {
         playerList[playerID].setBalance(balance);
     }
+
+    public boolean askToBuyProperty(int playerID, int fieldID){
+
+        boolean answer = gui.getUserLeftButtonPressed(
+                playerList[playerID].getName() + ", du har mulighed at købe " +
+                        fieldList[fieldID].getTitle() + ". Vil du det?",
+                "ja", "nej");
+
+        return answer;
+    }
+
+    public boolean showCurrScenarioForPlayer(String scenario) {
+
+        //TODO switch statment show player action, when player do something else than buy or rent property.
+        gui.getUserButtonPressed(scenario, "OK");
+
+        return false;
+    }
 }
