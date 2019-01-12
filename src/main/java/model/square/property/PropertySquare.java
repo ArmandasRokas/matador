@@ -1,5 +1,6 @@
 package model.square.property;
 
+import controller.PropertyController;
 import model.Player;
 import model.square.Square;
 
@@ -16,7 +17,7 @@ public abstract class PropertySquare extends Square {
 
 
     public PropertySquare(String scenario, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingsSqaures, PropertyController propertyController) {
-        super(scenario);
+        super(scenario, index);
         this.price = price;
         this.rentPrice = rentPrice;
         this.groupID = groupID;
@@ -80,5 +81,6 @@ public abstract class PropertySquare extends Square {
         }
 
     }
+
 }
 

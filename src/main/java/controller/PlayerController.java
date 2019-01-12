@@ -1,6 +1,8 @@
 package controller;
 
 import model.Player;
+import model.square.Square;
+import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
@@ -59,5 +61,21 @@ public class PlayerController {
     public int getCurrPlayerPos() {
         int currPos = currPlayer.getCurrentPosition();
         return currPos;
+    }
+
+    public String getCurrPlayerName(){
+        return currPlayer.getName();
+    }
+
+    public Player getCurrPlayer() {
+        return currPlayer;
+    }
+
+    public void addCurrPlayerProperty(PropertySquare square) {
+        currPlayer.addProperty(square);
+    }
+
+    public int getCurrPlayerID(){
+        return currPlayer.getPlayerID();
     }
 }

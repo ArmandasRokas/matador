@@ -14,7 +14,7 @@ public class GameController {
         gL = new GameLogic();
         guiB = new GUIBoundary();
         cup = new Cup();
-        this.boardCtrl = new GameBoardController();
+        this.boardCtrl = new GameBoardController(guiB);
     }
 
     public void startGame() {
@@ -37,12 +37,14 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         while (true) {
             int res = guiB.takeTurn();
-            switch (res){
+            switch (res) {
                 case 1:
                     throwDices();
                     boardCtrl.actOnSquare(plCtrl);
+                    guiB.showCurrScenarioForPlayer(boardCtrl.getCurrSquareToString());
                     break;
             }
+
             if(!(cup.getEyesDie1() == cup.getEyesDie2())) {
                 plCtrl.changePlayer();
             }

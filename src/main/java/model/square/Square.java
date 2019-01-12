@@ -10,32 +10,19 @@ import controller.PlayerController;
  */
 public abstract class Square {
     protected String squareName;  //Name of square, used to describe the scenario of the turn
-    protected String currScenarioForPlayer;
+    private String currScenarioForPlayer;
+    private int index;
 
 
-    /**
-     *  Super-constructor of Square's subclasses
-     *
-     * @param scenario  Name of the square
-     */
-    public Square(String scenario){
-        this.squareName = scenario;
+
+    public Square(String squareName, int index){
+
+        this.squareName = squareName;
+        this.index = index;
     }
 
-
-    // getScenario()
-    /**
-     * Abstract method, to act on the model.squares scenario
-     *
-     * @param p Instance of player who have landed on the square
-     */
     public abstract void landedOn(PlayerController p);
 
-    /**
-     * toString method of Square
-     *
-     * @return  Message of Square
-     */
     public String toString(){
         return currScenarioForPlayer;
     }
@@ -46,5 +33,9 @@ public abstract class Square {
 
     public void setCurrScenarioForPlayer(String currScenarioForPlayer){
         this.currScenarioForPlayer = currScenarioForPlayer;
+    }
+
+    public int getIndex(){
+        return index;
     }
 }

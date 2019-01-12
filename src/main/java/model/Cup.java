@@ -31,9 +31,14 @@ public class Cup {
      *
      * @return  Sum of the two dices
      */
+//    public int getCurrentRollScore() {
+//        return d1.getEyes() + d2.getEyes();
+//    }
+
     public int getCurrentRollScore() {
-        return d1.getEyes() + d2.getEyes();
+        return 1;
     }
+
 
     public int getEyesDie1() {
         return d1.getEyes();

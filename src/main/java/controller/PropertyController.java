@@ -16,19 +16,19 @@ public class PropertyController {
 
     public void buyProperty(PropertySquare square, PlayerController playerController) {
 
-        boolean answer = guiB.askToBuyProperty(playerController.getCurrPlayerName(), square.getSquareName());
+        boolean answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
 
 
         if(answer){
 
             int price = square.getBuyPrice();
 
-            playerController.getCurrPlayer().moneyInfluence(-price);
+            playerController.moneyInfluence(-price);
             square.setOwner(playerController.getCurrPlayer());
             square.setIsOwned(true);
 
-            playerController.setProperty(square);
-            square.setCurrScenarioForPlayer(p.getName() + " købt " + square.getSquareName());
+            playerController.addCurrPlayerProperty(square);
+            square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square.getSquareName());
         }
 
 

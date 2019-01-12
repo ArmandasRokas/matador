@@ -1,5 +1,6 @@
 package controller;
 
+import model.GameBoard;
 import model.square.Square;
 import ui.GUIBoundary;
 
@@ -30,4 +31,3 @@ public class GameBoardController {
 }
 
 
-}
