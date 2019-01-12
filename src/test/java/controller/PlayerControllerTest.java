@@ -10,6 +10,7 @@ class PlayerControllerTest {
 
     @Test
     void movePlayer() {
+        //TODO add test if player can go in a circle correctly. Check for off-by-one bug
         PlayerController plCtrl = new PlayerController(new MockGUI(), new GameLogic(), 3);
         plCtrl.createPlayers();
 
