@@ -10,7 +10,7 @@ public abstract class PropertySquare extends Square {
     protected int[] rentPrice;                  //Price of landing on the property
     protected final int groupID;
     protected Player owner;                   //Reference to the player that owns the property
-    protected boolean isOwned;                //Boolean to determine if the property is owned
+    private boolean isOwned;                //Boolean to determine if the property is owned
     protected Square[] siblingSquares;   //Reference to the other property of same color
     protected int index;
     protected PropertyController propertyController;
@@ -28,7 +28,7 @@ public abstract class PropertySquare extends Square {
         this.propertyController = propertyController;
     }
 
-    public boolean isOwned() {
+    public boolean getIsOwned() {
         return isOwned;
     }
 

@@ -15,7 +15,6 @@ public class GameBoardController {
 
         gameBoard = new GameBoard(new PropertyController(guiBoundary), new ChanceCardController(guiBoundary));
 
-
     }
 
     public void actOnSquare(PlayerController playerCtrl) {

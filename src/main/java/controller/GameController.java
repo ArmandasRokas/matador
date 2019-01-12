@@ -20,6 +20,7 @@ public class GameController {
     public void startGame() {
 //        ...loadBoard();
 //        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?
+        //TODO ARM setGUIBoard(String[] gameBoardController.getSquaresNames()) in order to fix danish letters bug.
 
         int numberOfPlayers;
         do {

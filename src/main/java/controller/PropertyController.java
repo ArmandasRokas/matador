@@ -16,7 +16,9 @@ public class PropertyController {
 
     public void buyProperty(PropertySquare square, PlayerController playerController) {
 
-        boolean answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
+        boolean answer = false;
+        //TODO if player have enough money run line 21.
+        answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
 
 
         if(answer){
@@ -29,6 +31,8 @@ public class PropertyController {
 
             playerController.addCurrPlayerProperty(square);
             square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square.getSquareName());
+
+            guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex());
         }
 
 

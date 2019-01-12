@@ -34,7 +34,7 @@ public class StreetSquare extends PropertySquare {
 //            super.playerAction = p.getName() + " står på " + super.toString() +
 //                    " som " + p.getName() + " ejer selv.";
 //        } else
-        if(!isOwned){
+        if(!super.getIsOwned()){
 //                res = true;
             propertyController.buyProperty(this, playerController);
         }

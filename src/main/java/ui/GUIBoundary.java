@@ -1,8 +1,6 @@
 package ui;
 
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
+import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
 
@@ -42,6 +40,7 @@ public class GUIBoundary {
     }
 
     public int takeTurn() {
+        //FIXME show which player has a turn.
         String res = gui.getUserButtonPressed("Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
         int switchRes = 0;
         switch (res){
@@ -63,6 +62,7 @@ public class GUIBoundary {
 
     public boolean askToBuyProperty(int playerID, int fieldID){
 
+        fieldList[1].setTitle("Rød");
         boolean answer = gui.getUserLeftButtonPressed(
                 playerList[playerID].getName() + ", du har mulighed at købe " +
                         fieldList[fieldID].getTitle() + ". Vil du det?",
@@ -77,5 +77,15 @@ public class GUIBoundary {
         gui.getUserButtonPressed(scenario, "OK");
 
         return false;
+    }
+
+    public boolean setOwnerOnSquare(int playerID, int squareIndex){
+
+        GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
+        ownable.setOwnerName(playerList[playerID].getName());
+        ownable.setSubText(playerList[playerID].getName());
+        ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
+        ownable.setRentLabel("");
+        return true;
     }
 }
