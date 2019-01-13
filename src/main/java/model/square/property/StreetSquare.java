@@ -20,21 +20,22 @@ public class StreetSquare extends PropertySquare {
 
 
 
-        if(super.getIsOwned() && !playerController.getCurrPlayer().equals(owner)){
+        if(super.getIsOwned() && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
             //TODO pay rent to owner
-        } else if (super.getIsOwned() && playerController.getCurrPlayer().equals(owner)){
+        } else if (super.getIsOwned() && playerController.getCurrPlayer().equals(super.getOwner())){
             super.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + super.getSquareName() +
                     " som " + playerController.getCurrPlayerName() + " ejer selv.");
 
-        } else if(!super.getIsOwned()){
+        } else if(!super.getIsOwned()){ //
             propertyController.buyProperty(this, playerController);
         }
-
     }
 
     @Override
-    protected int getRentPrice() {
-        return 0;
+    public int getRentPrice() {
+        //TODO ckecks how many houses is build on the square
+
+        return super.getRentPriceList()[0];
     }
 
 
