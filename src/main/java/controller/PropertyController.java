@@ -34,6 +34,8 @@ public class PropertyController {
 
             guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex());
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+        } else{
+            square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square.getSquareName());
         }
 
 

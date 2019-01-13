@@ -62,7 +62,6 @@ public class GUIBoundary {
 
     public boolean askToBuyProperty(int playerID, int fieldID){
 
-        fieldList[1].setTitle("Rød");
         boolean answer = gui.getUserLeftButtonPressed(
                 playerList[playerID].getName() + ", du har mulighed at købe " +
                         fieldList[fieldID].getTitle() + ". Vil du det?",
