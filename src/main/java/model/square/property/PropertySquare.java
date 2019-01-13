@@ -33,16 +33,6 @@ public abstract class PropertySquare extends Square {
     }
 
 
-    public boolean isPropertySetOwned() {
-        boolean res = false;
-
-        //     if(owner.equals(siblingSquare.getOwner())) {
-        //         res = true;
-        //     }
-        return res;
-    }
-
-
     public int getGroupID() {
         return groupID;
     }
@@ -53,10 +43,6 @@ public abstract class PropertySquare extends Square {
         return price;
     }
 
-
-//    public void setSiblingSquare(PropertySquare ps) {
-//        siblingSquares.add(ps);
-//    }
 
     public Player getOwner() {
         return owner;

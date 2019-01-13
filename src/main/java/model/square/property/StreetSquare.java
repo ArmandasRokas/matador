@@ -20,23 +20,13 @@ public class StreetSquare extends PropertySquare {
 
 
 
-//        if(isOwned && !p.equals(owner)){
-//            int rentPrice = getRentPrice();
-//
-//            payRent(p);
-//
-//
-//
-//            super.currScenarioForPlayer = p.getName() + " står på " + super.getName() + ", som ejes af " + owner.getName() +
-//                    ". Du har betalt " + rentPrice + "DKK til " + owner.getName();
-//
-//
-//        } else if (isOwned && p.equals(owner)){
-//            super.playerAction = p.getName() + " står på " + super.toString() +
-//                    " som " + p.getName() + " ejer selv.";
-//        } else
-        if(!super.getIsOwned()){
-//                res = true;
+        if(super.getIsOwned() && !playerController.getCurrPlayer().equals(owner)){
+            //TODO pay rent to owner
+        } else if (super.getIsOwned() && playerController.getCurrPlayer().equals(owner)){
+            super.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + super.getSquareName() +
+                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
+
+        } else if(!super.getIsOwned()){
             propertyController.buyProperty(this, playerController);
         }
 
@@ -47,47 +37,16 @@ public class StreetSquare extends PropertySquare {
         return 0;
     }
 
-    //    public void buildHouse(){
-//        numberOfHouses++;
-//    }
-//
 
-    //    public boolean canBuild(){
-//
-//        for(PropertySquare propertySquare: siblingSquares){
-//            if(!propertySquare.getOwner().equals(owner)){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
-
-
-
-
-//    public boolean isPropertySetOwned() {
-//        boolean res = false;
-//
-//        //     if(owner.equals(siblingSquare.getOwner())) {
-//        //         res = true;
-//        //     }
-//        return res;
-//    }
-
-
-//    private void payRent(Player p){
-//
-//    }
 
     @Override
 //    protected int getRentPrice() {
 //
 //        int toBePayed = rentPrice[0]; //TODO checks how many houses are on field and change rent price
 //        //TODO Create test for this if-statement
-////        if(isPropertySetOwned()) {
-////            toBePayed = toBePayed * 2;
-////        }
+//        if(isPropertySetOwned()) {
+//            toBePayed = toBePayed * 2;
+//        }
 //
 //
 //        p.addToCash(-toBePayed);
