@@ -40,9 +40,7 @@ public class Cup {
     }
 
 
-    public int getEyesDie1() {
-        return d1.getEyes();
-    }
+    public int getEyesDie1() { return d1.getEyes(); }
     public int getEyesDie2() {
         return d2.getEyes();
     }

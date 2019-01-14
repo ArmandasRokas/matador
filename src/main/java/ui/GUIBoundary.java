@@ -3,6 +3,8 @@ package ui;
 import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
+import model.Player;
+
 import java.awt.Color;
 
 public class GUIBoundary {
@@ -38,6 +40,11 @@ public class GUIBoundary {
     public void movePlayer(int previousPosition, int newPosition, int playerID) {
         fieldList[previousPosition].setCar(playerList[playerID],false);
         fieldList[newPosition].setCar(playerList[playerID],true);
+    }
+
+    public void removePlayer(int position, int playerID) {
+        fieldList[position].setCar(playerList[playerID],false);
+        playerList[playerID].setName(playerList[playerID].getName() + " (gået fallit)");
     }
 
     public int takeTurn(PlayerController plCtrl) {
@@ -86,5 +93,14 @@ public class GUIBoundary {
         ownable.setSubText("Leje: " + Integer.toString(rentPrice));
         ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
         ownable.setRent(Integer.toString(rentPrice));
+    }
+
+    public void declareWinner(int playerID) {
+        gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
+    }
+
+    public String endGame() {
+        String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
+        return input;
     }
 }

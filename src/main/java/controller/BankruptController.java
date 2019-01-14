@@ -29,13 +29,12 @@ public class BankruptController {
         transferPropertyToCreditor(playerController, propertySquare.getOwner());
         propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
         + " har gået fallit. Bye bye. ");
-        guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+        guiBoundary.removePlayer(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
 
 
     }
 
     public void transferPropertyToCreditor(PlayerController playerController, Player owner) {
-      //  if(owner == null) {
             PropertySquare[] currentPlayerProperties = playerController.getCurrPlayerProperties();
 
             for(PropertySquare square: currentPlayerProperties) {
@@ -44,11 +43,14 @@ public class BankruptController {
                     square.setOwner(owner);
                 }
             }
+            playerController.payPlayer(owner, playerController.getCurrPlayerBalance());
             playerController.setCurrPlayerBalance(0);
             //TODO chancekort gives også til banken
-       // }
 
-        playerController.currPlayerGoBankrupt();
+            guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+            guiBoundary.updateBalance(owner.getPlayerID(), owner.getBalance());
+
+            playerController.currPlayerGoBankrupt();
     }
 
 }

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="CDIO_matador" />
         <module name="matador" />
         <module name="matador_ver_1_11" />
         <module name="Semester1_Matador" />
