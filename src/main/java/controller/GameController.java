@@ -9,12 +9,15 @@ public class GameController {
     private GUIBoundary guiB;
     private Cup cup;
     private GameBoardController boardCtrl;
+    private BankruptController bankruptController;
 
     public GameController() {
         gL = new GameLogic();
         guiB = new GUIBoundary();
         cup = new Cup();
-        this.boardCtrl = new GameBoardController(guiB);
+        this.bankruptController = new BankruptController(guiB);
+        this.boardCtrl = new GameBoardController(guiB, bankruptController);
+
     }
 
     public void startGame() {

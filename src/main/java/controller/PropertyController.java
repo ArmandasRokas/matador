@@ -6,11 +6,12 @@ import ui.GUIBoundary;
 public class PropertyController {
 
     private GUIBoundary guiB;
+    private BankruptController bankruptCtrl;
 
 
-    public PropertyController(GUIBoundary guiBoundary){
-
+    public PropertyController(GUIBoundary guiBoundary, BankruptController bankruptCtrl){
         this.guiB = guiBoundary;
+        this.bankruptCtrl = bankruptCtrl;
 
     }
 
@@ -45,7 +46,7 @@ public class PropertyController {
 
         if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
             propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-            bankruptController.handleNegativeBalance(propertySquare, playerController);
+            bankruptCtrl.handleNegativeBalance(propertySquare, playerController);
         //TODO naviger til pantsætningsside, hvor yderligere valg foretages
         } else {
             playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());

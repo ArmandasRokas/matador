@@ -1,8 +1,15 @@
 package controller;
 
 import model.square.property.PropertySquare;
+import ui.GUIBoundary;
 
 public class BankruptController {
+
+    private GUIBoundary guiBoundary;
+
+    public BankruptController(GUIBoundary guiBoundary){
+        this.guiBoundary = guiBoundary;
+    }
 
     public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController){
 

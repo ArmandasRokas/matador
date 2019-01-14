@@ -11,9 +11,9 @@ public class GameBoardController {
     private Square currSquare;
 
 
-    public GameBoardController(GUIBoundary guiBoundary){
+    public GameBoardController(GUIBoundary guiBoundary, BankruptController bankruptController){
 
-        gameBoard = new GameBoard(new PropertyController(guiBoundary), new ChanceCardController(guiBoundary));
+        gameBoard = new GameBoard(new PropertyController(guiBoundary, bankruptController), new ChanceCardController(guiBoundary));
 
     }
 
