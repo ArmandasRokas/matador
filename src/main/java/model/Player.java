@@ -66,4 +66,8 @@ public class Player {
     public boolean getBankrupt(){
         return this.isBankrupt;
     }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

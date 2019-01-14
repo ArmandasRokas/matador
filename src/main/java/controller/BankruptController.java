@@ -29,14 +29,17 @@ public class BankruptController {
 
     }
 
-    public void transferPropertyToCreditor(PlayerController playerController, PropertySquare propertySquare, Player owner) {
+    public void transferPropertyToCreditor(PlayerController playerController, Player owner) {
         if(owner == null) {
             PropertySquare[] currentPlayerProperties = playerController.getCurrPlayerProperties();
 
             for(PropertySquare square: currentPlayerProperties) {
                 square.setOwner(null);
             }
+            playerController.setCurrPlayerBalance(0);
+            //TODO chancekort gives også til banken
         }
+
 
     }
 

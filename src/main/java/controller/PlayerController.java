@@ -96,4 +96,8 @@ public class PlayerController {
     public void currPlayerGoBankrupt() {
         this.currPlayer.goBankrupt();
     }
+
+    public void setCurrPlayerBalance(int balance) {
+        currPlayer.setBalance(balance);
+    }
 }
