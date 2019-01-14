@@ -1,10 +1,10 @@
 package model.square;
 
 import controller.PlayerController;
-import controller.PropertyController;
 
-public class Parking extends Square {
-    public Parking(String name, int index) {
+public class ToJail extends Square {
+
+    public ToJail(String name, int index) {
         super(name, index);
     }
 

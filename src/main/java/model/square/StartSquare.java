@@ -3,8 +3,8 @@ package model.square;
 import controller.PlayerController;
 
 public class  StartSquare extends Square {
-    public StartSquare(String name) {
-        super();
+    public StartSquare(String name, int index) {
+        super(name, index);
     }
 
     @Override
