@@ -51,6 +51,7 @@ public class Player {
         for(int i = 0; i<28; i++){
             if(properties[i] == null){
                 properties[i] = square;
+                break;
             }
         }
     }

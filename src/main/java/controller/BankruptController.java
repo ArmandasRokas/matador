@@ -20,27 +20,35 @@ public class BankruptController {
 
 
         // hvis ingen mulighder
-            // overføre grunde, penge til kreditor og
+
 
             // setCurrentPlayerScenario(" du er gået falit.
             // boolean isBankrupt is true
             // slet bilen fra spillerpladen.
 
+        transferPropertyToCreditor(playerController, propertySquare.getOwner());
+        propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+        + " har gået fallit. Bye bye. ");
+        guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+
 
     }
 
     public void transferPropertyToCreditor(PlayerController playerController, Player owner) {
-        if(owner == null) {
+      //  if(owner == null) {
             PropertySquare[] currentPlayerProperties = playerController.getCurrPlayerProperties();
 
             for(PropertySquare square: currentPlayerProperties) {
-                square.setOwner(null);
+
+                if(square != null){
+                    square.setOwner(owner);
+                }
             }
             playerController.setCurrPlayerBalance(0);
             //TODO chancekort gives også til banken
-        }
+       // }
 
-
+        playerController.currPlayerGoBankrupt();
     }
 
 }

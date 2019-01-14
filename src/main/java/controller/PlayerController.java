@@ -90,7 +90,9 @@ public class PlayerController {
 
     public void payPlayer(Player propertyOwner, int cash) {
         currPlayerMoneyInfluence(-cash);
-        propertyOwner.moneyInfluence(cash);
+        if(propertyOwner != null){
+            propertyOwner.moneyInfluence(cash);
+        }
     }
 
     public void currPlayerGoBankrupt() {

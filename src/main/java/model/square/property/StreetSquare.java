@@ -23,8 +23,6 @@ public class StreetSquare extends PropertySquare {
         if(super.getOwner() != null && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
             //TODO pay rent to owner. Do not forget overwrite setCurrScenarioForPlayer
             propertyController.payRent(this, playerController);
-
-
         } else if (super.getOwner() != null && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
             super.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + super.getSquareName() +
                     " som " + playerController.getCurrPlayerName() + " ejer selv.");

@@ -30,9 +30,9 @@ public class GameBoard {
 
         //TODO fix prices
         //    squareList [0] = new StartSquare("Start");
-        squareList [1] = new StreetSquare("Rødovrevej", new int[]{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 1, 2,propertyController);
+        squareList [1] = new StreetSquare("Rødovrevej", new int[]{10000, 250, 750, 2250, 4000, 6000}, 1200, 0, 1, 2,propertyController);
         //     squareList [2] = new ChanceSquare("Prøv lykken", 0, gui_boundary);
-        squareList [2] = new StreetSquare("Hvidovrevej", new int []{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 3, 2, propertyController);
+        squareList [2] = new StreetSquare("Hvidovrevej", new int []{5000, 250, 750, 2250, 4000, 6000}, 1200, 0, 3, 2, propertyController);
         //      squareList [3] = new PropertySquare("Hvidovrevej", new int []{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 3, gui_boundary);
         //      squareList [4] = new Tax("Indkomstskat", 4000, 10, gui_boundary);
         //      squareList [5] = new Fleet("Helsingør/Helsingborg",  new int []{500, 1000, 2000, 4000},4000, gui_boundary);
