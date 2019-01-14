@@ -83,7 +83,6 @@ public class GUIBoundary {
         ownable.setOwnerName(playerList[playerID].getName());
         ownable.setSubText("Leje: " + Integer.toString(rentPrice));
         ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
-        ownable.setRentLabel("");
         ownable.setRent(Integer.toString(rentPrice));
     }
 }
