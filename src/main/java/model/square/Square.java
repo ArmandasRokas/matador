@@ -1,6 +1,7 @@
 package model.square;
 
 import controller.PlayerController;
+import model.Player;
 
 /**@author Hold 44
  * @version
@@ -12,6 +13,7 @@ public abstract class Square {
     protected String squareName;  //Name of square, used to describe the scenario of the turn
     private String currScenarioForPlayer;
     private int index;
+    private Player owner;                   //Reference to the player that owns the property, or null if property is owned by bank
 
 
 
@@ -19,6 +21,7 @@ public abstract class Square {
 
         this.squareName = squareName;
         this.index = index;
+        this.owner = null;
     }
 
     public abstract void landedOn(PlayerController p);
@@ -37,5 +40,13 @@ public abstract class Square {
 
     public int getIndex(){
         return index;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player p) {
+        this.owner = p;
     }
 }

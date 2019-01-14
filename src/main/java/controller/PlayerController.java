@@ -84,12 +84,16 @@ public class PlayerController {
         return currPlayer.getBalance();
     }
 
-    public PropertySquare[] getCurrPlayerPropertie(){
+    public PropertySquare[] getCurrPlayerProperties(){
         return currPlayer.getProperties();
     }
 
     public void payPlayer(Player propertyOwner, int cash) {
         currPlayerMoneyInfluence(-cash);
         propertyOwner.moneyInfluence(cash);
+    }
+
+    public void currPlayerGoBankrupt() {
+        this.currPlayer.goBankrupt();
     }
 }

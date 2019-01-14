@@ -35,7 +35,7 @@ class PropertyControllerTest {
 //        assertEquals(player, square.getOwner());
 //        assertTrue(square.getIsOwned());
 //        assertTrue(playerBalanceAfterBuying < playerBalanceBeforeBuying);
-//        assertEquals(square, playerController.getCurrPlayerPropertie()[0]);
+//        assertEquals(square, playerController.getCurrPlayerProperties()[0]);
 
 
     }

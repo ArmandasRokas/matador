@@ -59,8 +59,8 @@ public class Player {
         return properties;
     }
 
-    public void setBankrupt(boolean isBankrupt){
-        this.isBankrupt = isBankrupt;
+    public void goBankrupt(){
+        this.isBankrupt = true;
     }
 
     public boolean getBankrupt(){
