@@ -22,11 +22,14 @@ public class StreetSquare extends PropertySquare {
 
         if(super.getIsOwned() && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
             //TODO pay rent to owner. Do not forget overwrite setCurrScenarioForPlayer
-        } else if (super.getIsOwned() && playerController.getCurrPlayer().equals(super.getOwner())){
+            propertyController.payRent(this, playerController);
+
+
+        } else if (super.getIsOwned() && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
             super.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + super.getSquareName() +
                     " som " + playerController.getCurrPlayerName() + " ejer selv.");
 
-        } else if(!super.getIsOwned()){ //
+        } else if(!super.getIsOwned()){ //buy property
             propertyController.buyProperty(this, playerController);
         }
     }

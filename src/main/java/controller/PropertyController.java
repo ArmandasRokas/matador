@@ -25,7 +25,7 @@ public class PropertyController {
 
             int price = square.getBuyPrice();
 
-            playerController.moneyInfluence(-price);
+            playerController.currPlayerMoneyInfluence(-price);
             playerController.addCurrPlayerProperty(square);
 
             square.setIsOwned(true);
@@ -37,6 +37,14 @@ public class PropertyController {
         } else{
             square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square.getSquareName());
         }
+
+
+    }
+
+    public void payRent(PropertySquare propertySquare, PlayerController playerController) {
+
+        //TODO tjek om daværende spiller har penge nok til at betale rente
+
 
 
     }

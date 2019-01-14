@@ -1,7 +1,6 @@
 package controller;
 
 import model.Player;
-import model.square.Square;
 import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
@@ -38,7 +37,7 @@ public class PlayerController {
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
         if(newPosition < currPosition) {
-            moneyInfluence(200);
+            currPlayerMoneyInfluence(200);
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
     }
@@ -49,7 +48,7 @@ public class PlayerController {
         currPlayer = playerList[currID];
     }
 
-    public void moneyInfluence(int cash) {
+    public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
     }
 
@@ -85,5 +84,9 @@ public class PlayerController {
 
     public PropertySquare[] getCurrPlayerPropertie(){
         return currPlayer.getProperties();
+    }
+
+    public void payPlayer(Player player, int cash) {
+        player.moneyInfluence(cash);
     }
 }
