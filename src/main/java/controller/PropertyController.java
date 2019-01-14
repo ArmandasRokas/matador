@@ -25,7 +25,7 @@ public class PropertyController {
 
             int price = square.getBuyPrice();
 
-            playerController.moneyInfluence(-price);
+            playerController.currPlayerMoneyInfluence(-price);
             playerController.addCurrPlayerProperty(square);
 
             square.setIsOwned(true);
@@ -39,5 +39,23 @@ public class PropertyController {
         }
 
 
+    }
+
+    public void payRent(PropertySquare propertySquare, PlayerController playerController) {
+
+        if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
+            propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
+        //TODO naviger til pantsætningsside, hvor yderligere valg foretages
+        } else {
+            playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
+            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+            guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
+
+            propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+                    + " er landet på " + propertySquare.getSquareName() + " som er ejet af " + propertySquare.getOwner() +
+                    ". " + playerController.getCurrPlayerName() + " har betalt " + propertySquare.getRentPrice() + "kr til " +
+                    propertySquare.getOwner());
+        }
+        //TODO hvis daværende spiller går fallit med mindre pantsætning- og husværdi skal alt hvad spilleren ejer overgå til ejeren af grunden
     }
 }
