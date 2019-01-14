@@ -86,7 +86,8 @@ public class PlayerController {
         return currPlayer.getProperties();
     }
 
-    public void payPlayer(Player player, int cash) {
-        player.moneyInfluence(cash);
+    public void payPlayer(Player propertyOwner, int cash) {
+        currPlayerMoneyInfluence(-cash);
+        propertyOwner.moneyInfluence(cash);
     }
 }

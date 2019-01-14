@@ -43,8 +43,9 @@ public class PropertyController {
 
     public void payRent(PropertySquare propertySquare, PlayerController playerController) {
 
-        //TODO tjek om daværende spiller har penge nok til at betale rente
+        //TODO tjek om daværende spiller har penge nok til at betale leje
 
+        playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
 
 
     }
