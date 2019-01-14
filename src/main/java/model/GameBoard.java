@@ -11,72 +11,60 @@ public class GameBoard {
 
     private Square[] squareList;
 
-    public GameBoard(PropertyController propertyController, ChanceCardController cardController){
+    public GameBoard(PropertyController propertyController, ChanceCardController cardController) {
 
         squareList = new Square[40];
         setBoard(propertyController, cardController);
 
 
-
     }
 
-    public Square[] getSquareList(){
+    public Square[] getSquareList() {
         return squareList;
     }
 
     private void setBoard(PropertyController propertyController, ChanceCardController cardController) {
 
-        //    ChanceSquare CSReference = new ChanceSquare("Chance", gameController.getPlayers(), this);
-
-        //TODO fix prices
-        //    squareList [0] = new StartSquare("Start");
-        squareList [1] = new StreetSquare("Rødovrevej", new int[]{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 1, 2,propertyController);
+        squareList[0] = new StartSquare("Start");
+        squareList[1] = new StreetSquare("Rødovrevej", new int[]{2, 10, 30, 90, 160, 250}, 60, 0, 1, 2, propertyController);
         //     squareList [2] = new ChanceSquare("Prøv lykken", 0, gui_boundary);
-        squareList [2] = new StreetSquare("Hvidovrevej", new int []{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 3, 2, propertyController);
-        //      squareList [3] = new PropertySquare("Hvidovrevej", new int []{50, 250, 750, 2250, 4000, 6000}, 1200, 0, 3, gui_boundary);
-        //      squareList [4] = new Tax("Indkomstskat", 4000, 10, gui_boundary);
-        //      squareList [5] = new Fleet("Helsingør/Helsingborg",  new int []{500, 1000, 2000, 4000},4000, gui_boundary);
-//        squareList [6] = new PropertySquare("Roskildevej", new int []{100, 600, 1800, 5400, 8000, 11000}, 2000, 1, 6, propertyController);
-//        //      squareList [7] = new ChanceSquare("Prøv lykken", 1, gui_boundary);
-//        squareList [8] = new PropertySquare("Valby Langgade", new int []{100, 600, 1800, 5400, 8000, 11000}, 2000, 1, 8, propertyController);
-//        squareList [9] = new PropertySquare("Allégade", new int []{150, 800, 2000, 6000, 9000, 12000}, 2400, 1, 9, propertyController);
-//        //       squareList [10] = new Parking("'I fængslet'", gui_boundary);
-//        squareList [11] = new PropertySquare("Frederiksberg Allé", new int []{200, 1000, 3000, 9000, 12500, 15000}, 2800, 2, 11, propertyController);
-//        //      squareList [12] = new Brewery("Tuborg Squash", 3000, gui_boundary);
-//        squareList [13] = new PropertySquare("Bülowsvej", new int []{200, 1000, 3000, 9000, 12500, 15000}, 2800, 2, 13, propertyController);
-//        squareList [14] = new PropertySquare("Gl. Kongevej", new int []{250, 1250, 3750, 10000, 14000, 18000}, 3200, 2, 14, propertyController);
-//        //      squareList [15] = new Fleet("Mols-linien", new int []{500, 1000, 2000, 4000},4000, gui_boundary);
-//        squareList [16] = new PropertySquare("Bernstoffsvej", new int []{300, 1400, 4000, 11000, 15000, 19000}, 3600, 3, 16, propertyController);
-//        //       squareList [17] = new ChanceSquare("Prøv lykken", 2, gui_boundary);
-//        squareList [18] = new PropertySquare("Hellerupvej", new int []{300, 1400, 4000, 11000, 15000, 19000}, 3600, 3, 18, propertyController);
-//        squareList [19] = new PropertySquare("Strandvejen", new int []{350, 1600, 4400, 12000, 16000, 20000}, 4000, 3, 19, propertyController);
-//        //      squareList [20] = new Parking("'Parkering'", gui_boundary);
-//        squareList [21] = new PropertySquare("Trianglen", new int []{350, 1800, 5000, 14000, 17500, 21000}, 4400, 4, 21, propertyController);
-//        //      squareList [22] = new ChanceSquare("Prøv lykken", 3, gui_boundary);
-//        squareList [23] = new PropertySquare("Østerbrogade", new int []{350, 1800, 5000, 14000, 17500, 21000}, 4400, 4, 23, propertyController);
-//        squareList [24] = new PropertySquare("Grønningen", new int []{400, 2000, 6000, 15000, 18500, 22000}, 4800, 4, 24, propertyController);
-//        //      squareList [25] = new Fleet("Gedser/Rostock", new int []{500, 1000, 2000, 4000},4000, gui_boundary);
-//        squareList [26] = new PropertySquare("Bredgade", new int []{450, 2200, 6600, 16000, 19500, 23000}, 5200, 5, 26, propertyController);
-//        squareList [27] = new PropertySquare("Kgs. Nytorv", new int []{450, 2200, 6600, 16000, 19500, 23000}, 5200, 5, 27, propertyController);
-//        //      squareList [28] = new Brewery("Coca Cola", 3000, gui_boundary);
-//        squareList [29] = new PropertySquare("Østergade", new int []{500, 2400, 7200, 17000, 20500, 24000}, 5600, 5, 29, propertyController);
-//        //      squareList [30] = new Jail("De fængsles", gui_boundary);
-//        squareList [31] = new PropertySquare("Amagertorv", new int []{550, 2600, 7800, 18000, 22000, 25000}, 6000, 6, 31, propertyController);
-//        squareList [32] = new PropertySquare("Vimmelskaftet", new int []{550, 2600, 7800, 18000, 22000, 25000}, 6000, 6, 32, propertyController);
-//        //      squareList [33] = new ChanceSquare("Prøv lykken", 4, gui_boundary);
-//        squareList [34] = new PropertySquare("Nygade", new int []{600, 3000, 9000, 20000, 24000, 28000}, 6400, 6, 34, propertyController);
-//        //       squareList [35] = new Fleet("Rødby/Puttgarten", new int []{500, 1000, 2000, 4000},4000, gui_boundary);
-//        //       squareList [36] = new ChanceSquare("Prøv lykken", 5, gui_boundary);
-//        squareList [37] = new PropertySquare("Frederiksberggade", new int []{700, 3500, 10000, 22000, 26000 ,30000}, 7000, 7, 37, propertyController);
-//        //     squareList [38] = new Tax("Statsskat", 2000, 0, gui_boundary);
-//        squareList [39] = new PropertySquare("Rådhuspladsen", new int[]{1000, 4000, 12000, 28000, 34000, 40000}, 8000, 7, 39, propertyController);
-//
-//        setPropertySquareSiblings();
+        squareList[3] = new StreetSquare("Hvidovrevej", new int[]{4, 20, 60, 180, 320, 540}, 60, 0, 3, 2, propertyController);
+        //      squareList [4] = new Tax("Indkomstskat", 200, 10, gui_boundary);
+        //      squareList [5] = new TravelSquare("Øresund",  new int []{25, 50, 100, 200},200, gui_boundary);
+        squareList[6] = new StreetSquare("Roskildevej", new int[]{6, 30, 90, 270, 400, 550}, 100, 1, 6, 3, propertyController);
+        //      squareList [7] = new ChanceSquare("Prøv lykken", 1, gui_boundary);
+        squareList[8] = new StreetSquare("Valby Langgade", new int[]{6, 30, 90, 270, 400, 550}, 100, 1, 8, 3, propertyController);
+        squareList[9] = new StreetSquare("Allégade", new int[]{8, 40, 100, 300, 450, 600}, 120, 1, 9, 3, propertyController);
+        //       squareList [10] = new Parking("'I fængslet'", gui_boundary);
+        squareList[11] = new StreetSquare("Frederiksberg Allé", new int[]{10, 50, 150, 450, 625, 750}, 140, 2, 11, 3, propertyController);
+        //      squareList [12] = new Company("Tuborg", 150, gui_boundary);
+        squareList[13] = new StreetSquare("Bülowsvej", new int[]{10, 50, 150, 450, 625, 750}, 140, 2, 13, 3, propertyController);
+        squareList[14] = new StreetSquare("Gl. Kongevej", new int[]{12, 60, 180, 500, 700, 900}, 160, 2, 14, 3, propertyController);
+        //      squareList [15] = new TravelSquare("D.F.D.S", new int []{25, 50, 100, 200},200, gui_boundary);
+        squareList[16] = new StreetSquare("Bernstoffsvej", new int[]{14, 70, 200, 550, 750, 950}, 180, 3, 16, 3, propertyController);
+        //       squareList [17] = new ChanceSquare("Prøv lykken", 2, gui_boundary);
+        squareList[18] = new StreetSquare("Hellerupvej", new int[]{14, 70, 200, 550, 750, 950}, 180, 3, 18, 3, propertyController);
+        squareList[19] = new StreetSquare("Strandvejen", new int[]{16, 80, 220, 600, 800, 1000}, 200, 3, 19, 3, propertyController);
+        //      squareList [20] = new Parking("'Parkering'", gui_boundary);
+        squareList[21] = new StreetSquare("Trianglen", new int[]{18, 90, 250, 700, 875, 1050}, 220, 4, 21, 3, propertyController);
+        //      squareList [22] = new ChanceSquare("Prøv lykken", 3, gui_boundary);
+        squareList[23] = new StreetSquare("Østerbrogade", new int[]{18, 90, 250, 700, 875, 1050}, 220, 4, 23, 3, propertyController);
+        squareList[24] = new StreetSquare("Grønningen", new int[]{20, 100, 300, 750, 925, 1100}, 240, 4, 24, 3, propertyController);
+        //      squareList [25] = new TravelSquare("Ø.K.", new int []{25, 50, 100, 200},200, gui_boundary);
+        squareList[26] = new StreetSquare("Bredgade", new int[]{22, 110, 330, 800, 975, 1150}, 260, 5, 26, 3, propertyController);
+        squareList[27] = new StreetSquare("Kgs. Nytorv", new int[]{22, 110, 330, 800, 975, 1050}, 260, 5, 27, 3, propertyController);
+        //      squareList [28] = new Company("Carlsberg", 150, gui_boundary);
+        squareList[29] = new StreetSquare("Østergade", new int[]{22, 120, 360, 850, 1025, 1200}, 280, 5, 29, 3, propertyController);
+        //      squareList [30] = new Jail("De fængsles", gui_boundary);
+        squareList[31] = new StreetSquare("Amagertorv", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 31, 3, propertyController);
+        squareList[32] = new StreetSquare("Vimmelskaftet", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 32, 3, propertyController);
+        //      squareList [33] = new ChanceSquare("Prøv lykken", 4, gui_boundary);
+        squareList[34] = new StreetSquare("Nygade", new int[]{28, 150, 450, 1000, 1200, 1400}, 320, 6, 34, 3, propertyController);
+        //       squareList [35] = new TravelSquare("D/S Bornholm 1866", new int []{25, 50, 100, 200},200, gui_boundary);
+        //       squareList [36] = new ChanceSquare("Prøv lykken", 5, gui_boundary);
+        squareList[37] = new StreetSquare("Frederiksberggade", new int[]{35, 175, 500, 1100, 1300, 1500}, 350, 7, 37, 1, propertyController);
+        //     squareList [38] = new Tax("Statsskat", 100, 0, gui_boundary);
+        squareList[39] = new StreetSquare("Rådhuspladsen", new int[]{50, 200, 600, 1400, 1700, 2000}, 400, 7, 39, 2, propertyController);
+
     }
-
-
-
-
-
-
 }
