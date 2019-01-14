@@ -35,7 +35,7 @@ public class StreetSquare extends PropertySquare {
     public int getRentPrice() {
         //TODO ckecks how many houses is build on the square
 
-        return super.getRentPriceList()[0];
+        return super.getRentPriceList()[numberOfHouses];
     }
 }
 

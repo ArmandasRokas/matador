@@ -34,7 +34,7 @@ public class MockGUI extends GUIBoundary {
         return true;
     }
     @Override
-    public void setOwnerOnSquare(int playerID, int squareIndex){
+    public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){
 
     }
 

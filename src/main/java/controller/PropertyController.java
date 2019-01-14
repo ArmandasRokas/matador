@@ -32,7 +32,7 @@ public class PropertyController {
             square.setOwner(playerController.getCurrPlayer());
             square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square.getSquareName());
 
-            guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex());
+            guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
         } else{
             square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square.getSquareName());

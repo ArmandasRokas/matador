@@ -37,7 +37,7 @@ public abstract class PropertySquare extends Square {
         return groupID;
     }
 
-    protected abstract int getRentPrice();
+    public abstract int getRentPrice();
 
     public int getBuyPrice() {
         return price;

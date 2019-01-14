@@ -77,12 +77,13 @@ public class GUIBoundary {
 
     }
 
-    public void setOwnerOnSquare(int playerID, int squareIndex){
+    public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){
 
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
         ownable.setOwnerName(playerList[playerID].getName());
-        ownable.setSubText(playerList[playerID].getName());
+        ownable.setSubText("Leje: " + Integer.toString(rentPrice));
         ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
         ownable.setRentLabel("");
+        ownable.setRent(Integer.toString(rentPrice));
     }
 }
