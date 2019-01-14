@@ -22,7 +22,8 @@ public class BankruptController {
             // overføre grunde, penge til kreditor og
 
             // setCurrentPlayerScenario(" du er gået falit.
-            // slette spiller fra remaining/ boolean er gået falit/ slet bilen fra spillerpladen.
+            // boolean isBankrupt is true
+            // slet bilen fra spillerpladen.
 
 
     }

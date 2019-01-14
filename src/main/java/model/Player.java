@@ -1,18 +1,19 @@
 package model;
 
 
-import model.square.Square;
 import model.square.property.PropertySquare;
 
 public class Player {
     private String name;
     private int playerID, balance, currentPosition, getOutOfPrisonCards;
     private PropertySquare[] properties;
+    private boolean isBankrupt;
 
     public Player(int playerID, String name, int balance) {
         this.playerID = playerID;
         this.name = name;
         this.balance = balance;
+        this.isBankrupt = false;
         currentPosition = 0;
         getOutOfPrisonCards = 0;
         properties = new PropertySquare[28];
@@ -56,5 +57,13 @@ public class Player {
 
     public PropertySquare[] getProperties(){
         return properties;
+    }
+
+    public void setBankrupt(boolean isBankrupt){
+        this.isBankrupt = isBankrupt;
+    }
+
+    public boolean getBankrupt(){
+        return this.isBankrupt;
     }
 }
