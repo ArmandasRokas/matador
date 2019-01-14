@@ -37,7 +37,7 @@ public class GameController {
     private void runGame() {
         //TODO Fix kommunikation med spiller
         while (true) {
-            int res = guiB.takeTurn();
+            int res = guiB.takeTurn(plCtrl);
             switch (res) {
                 case 1:
                     throwDices();

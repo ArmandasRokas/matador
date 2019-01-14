@@ -1,5 +1,6 @@
 package ui;
 
+import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
@@ -39,9 +40,10 @@ public class GUIBoundary {
         fieldList[newPosition].setCar(playerList[playerID],true);
     }
 
-    public int takeTurn() {
+    public int takeTurn(PlayerController plCtrl) {
         //FIXME show which player has a turn.
-        String res = gui.getUserButtonPressed("Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
+        String message = "Det er " + plCtrl.getCurrPlayerName() + "s tur. ";
+        String res = gui.getUserButtonPressed(message + "Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
         int switchRes = 0;
         switch (res){
             case "Kast terninger":
