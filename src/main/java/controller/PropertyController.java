@@ -47,6 +47,10 @@ public class PropertyController {
 
         playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
 
+        propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+                + " er landet på " + propertySquare.getSquareName() + " som er ejet af " + propertySquare.getOwner() +
+        ". Du skal betale " + propertySquare.getRentPrice() + "kr til " + propertySquare.getOwner());
+
 
     }
 }

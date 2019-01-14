@@ -42,6 +42,10 @@ public class Player {
         balance += cash;
     }
 
+    public String toString() {
+        return name;
+    }
+
     public void addProperty(PropertySquare square){
         for(int i = 0; i<28; i++){
             if(properties[i] == null){
