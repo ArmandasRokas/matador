@@ -30,12 +30,12 @@ public class PropertyController {
             playerController.addCurrPlayerProperty(square);
 
             square.setOwner(playerController.getCurrPlayer());
-            square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square.getSquareName());
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square);
 
             guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
         } else{
-            square.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square.getSquareName());
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
         }
 
 
@@ -44,7 +44,7 @@ public class PropertyController {
     public void payRent(PropertySquare propertySquare, PlayerController playerController) {
 
         if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
-            propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
             bankruptCtrl.handleNegativeBalance(propertySquare, playerController);
         //TODO naviger til pantsætningsside, hvor yderligere valg foretages
         } else {
@@ -52,8 +52,8 @@ public class PropertyController {
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
             guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
 
-            propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
-                    + " er landet på " + propertySquare.getSquareName() + " som er ejet af " + propertySquare.getOwner() +
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+                    + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
                     ". " + playerController.getCurrPlayerName() + " har betalt " + propertySquare.getRentPrice() + "kr til " +
                     propertySquare.getOwner());
         }

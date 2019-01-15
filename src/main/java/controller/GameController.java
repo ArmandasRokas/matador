@@ -47,7 +47,7 @@ public class GameController {
                 case 1:
                     throwDices();
                     boardCtrl.actOnSquare(plCtrl);
-                    guiB.showCurrScenarioForPlayer(boardCtrl.getCurrSquareToString());
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
             }
             Player p = gL.winnerFound(plCtrl.getPlayerList());

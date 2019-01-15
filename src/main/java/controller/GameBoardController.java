@@ -24,9 +24,6 @@ public class GameBoardController {
         currSquare.landedOn(playerCtrl);
     }
 
-    public String getCurrSquareToString(){
-        return currSquare.toString();
-    }
 }
 
 

@@ -11,6 +11,7 @@ public class PlayerController {
     private GameLogic gL;
     private GUIBoundary guiB;
     private Player currPlayer;
+    private String currScenarioForPlayer;
 
     public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers) {
         this.guiB = guiB;
@@ -101,5 +102,13 @@ public class PlayerController {
 
     public void setCurrPlayerBalance(int balance) {
         currPlayer.setBalance(balance);
+    }
+
+    public void setCurrScenarioForPlayer(String currScenario) {
+        this.currScenarioForPlayer = currScenario;
+    }
+
+    public String getCurrScenarioForPlayer(){
+        return currScenarioForPlayer;
     }
 }

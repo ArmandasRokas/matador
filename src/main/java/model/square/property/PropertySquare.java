@@ -35,7 +35,7 @@ public abstract class PropertySquare extends Square {
     }
 
     @Override
-    public String getSquareName() {
+    public String toString() {
 
         if (super.getOwner() == null) {
             return super.squareName + " for " + price + "dkk";

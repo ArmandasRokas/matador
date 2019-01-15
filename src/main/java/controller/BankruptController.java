@@ -27,7 +27,7 @@ public class BankruptController {
             // slet bilen fra spillerpladen.
 
         transferPropertyToCreditor(playerController, propertySquare.getOwner());
-        propertySquare.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
         + " har gået fallit. Bye bye. ");
         guiBoundary.removePlayer(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
 
