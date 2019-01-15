@@ -19,6 +19,7 @@ public class GameBoard {
         setBoard(propertyController, cardController);
 
 
+
     }
 
     public Square[] getSquareList() {

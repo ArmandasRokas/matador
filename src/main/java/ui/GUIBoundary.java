@@ -3,7 +3,9 @@ package ui;
 import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
+import model.GameBoard;
 import model.Player;
+import model.square.Square;
 
 import java.awt.Color;
 
@@ -12,13 +14,37 @@ public class GUIBoundary {
     protected GUI_Player[] playerList;
     private GUI_Field[] fieldList = gui.getFields();
 
+    public void setupGUIFields(int index, String name) {
+            fieldList[index].setTitle(name);
+            fieldList[index].setDescription(name);
+
+            if(index == 2 || index == 7 || index == 17 || index == 22 || index == 33 || index == 36) {
+                fieldList[index].setSubText("");
+            }else if(index == 10){
+                fieldList[index].setSubText("På besøg");
+            }else if(index == 30){
+                fieldList[index].setSubText("Til Fængsel");
+            }
+
+    }
+//    public void setupGUIFields(int index, String name, int cash) {
+//            fieldList[index].setTitle(name);
+//            fieldList[index].setDescription(name);
+//            fieldList[index].setSubText(Integer.toString(cash));
+//    }
+
+
+//    public void updateGUIFields() {
+//
+//    }
+
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
         playerList = new GUI_Player[playerCount];
         return playerCount;
     }
 
-    public void setUpPlayer(int playerID, String name, int balance, Color color) {
+    public void setupPlayer(int playerID, String name, int balance, Color color) {
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);
         GUI_Player guiPlayer = new GUI_Player(name, balance, car);

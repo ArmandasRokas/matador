@@ -30,6 +30,10 @@ public abstract class Square {
         return squareName;
     }
 
+    public String getSquareName(){
+        return squareName;
+    }
+
     public int getIndex(){
         return index;
     }

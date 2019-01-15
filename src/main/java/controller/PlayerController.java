@@ -25,7 +25,7 @@ public class PlayerController {
 
         for(int i = 0; i < playerList.length; i++){
             playerList[i] = new Player(i, names[i], gL.getStartBalance());
-            guiB.setUpPlayer(playerList[i].getPlayerID(), playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
+            guiB.setupPlayer(playerList[i].getPlayerID(), playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
         }
 
         currPlayer = playerList[0];
