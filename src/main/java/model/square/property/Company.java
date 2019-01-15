@@ -15,7 +15,7 @@ public class Company extends PropertySquare {
     }
 
     @Override
-    public void landedOn(PlayerController p) {
-
+    public void landedOn(PlayerController playerController) {
+        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
     }
 }

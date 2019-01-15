@@ -38,9 +38,9 @@ public abstract class PropertySquare extends Square {
     public String toString() {
 
         if (super.getOwner() == null) {
-            return super.squareName + " for " + price + "dkk";
+            return super.toString() + " for " + price + "dkk";
         } else {
-            return super.squareName;
+            return super.toString();
         }
 
     }
