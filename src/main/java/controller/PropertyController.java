@@ -17,28 +17,27 @@ public class PropertyController {
 
     public void buyProperty(PropertySquare square, PlayerController playerController) {
 
-        boolean answer = false;
-        //TODO if player have enough money run line 21. else setCurrentScenario. Do not have enought money to buy square.getSquareName().
-        answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
+        if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){
 
+            boolean answer;
+            answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
+            if(answer){
 
-        if(answer){
+                int price = square.getBuyPrice();
+                playerController.currPlayerMoneyInfluence(-price);
+                playerController.addCurrPlayerProperty(square);
+                playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har købt " + square);
 
-            int price = square.getBuyPrice();
+                square.setOwner(playerController.getCurrPlayer());
 
-            playerController.currPlayerMoneyInfluence(-price);
-            playerController.addCurrPlayerProperty(square);
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square);
-
-            square.setOwner(playerController.getCurrPlayer());
-
-            guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
-            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+                guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
+                guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+            } else{
+                playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
+            }
         } else{
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke nok penge til at købe " + square);
         }
-
-
     }
 
     public void payRent(PropertySquare propertySquare, PlayerController playerController) {
