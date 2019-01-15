@@ -24,7 +24,7 @@ public class MockGUI extends GUIBoundary {
     }
 
     @Override
-    public void setUpPlayer(int playerID, String name, int balance, Color color) { }
+    public void setupPlayer(int playerID, String name, int balance, Color color) { }
 
     @Override
     public void movePlayer(int previousPosition, int newPosition, int playerID) { }
