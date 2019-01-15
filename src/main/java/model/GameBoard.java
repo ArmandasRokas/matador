@@ -34,7 +34,7 @@ public class GameBoard {
         squareList[3] = new StreetSquare("Hvidovrevej", new int[]{4, 20, 60, 180, 320, 540}, 60, 0, 3, 1, propertyController);
         squareList[4] = new IncomeTax("Indkomstskat", 4);
         squareList[5] = new Transport("Øresund",  new int []{25, 50, 100, 200},200,8,5,3, propertyController);
-        squareList[6] = new StreetSquare("Roskildevej", new int[]{6, 30, 90, 270, 400, 550}, 100, 1, 6, 2, propertyController);
+        squareList[6] = new StreetSquare("Roskildevej", new int[]{10000, 30, 90, 270, 400, 550}, 100, 1, 6, 2, propertyController);
         squareList[7] = new ChanceSquare("Prøv lykken", 7, cardController);
         squareList[8] = new StreetSquare("Valby Langgade", new int[]{6, 30, 90, 270, 400, 550}, 100, 1, 8, 2, propertyController);
         squareList[9] = new StreetSquare("Allégade", new int[]{8, 40, 100, 300, 450, 600}, 120, 1, 9, 2, propertyController);
