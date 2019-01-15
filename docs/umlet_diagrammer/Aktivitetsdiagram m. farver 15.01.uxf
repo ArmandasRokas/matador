@@ -3125,4 +3125,16 @@ bg=red</panel_attributes>
 [for 1. eller 2. gang i træk]</panel_attributes>
     <additional_attributes>10.0;20.0;430.0;20.0;430.0;80.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>912</x>
+      <y>128</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Mangler:
+- Auktion</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
