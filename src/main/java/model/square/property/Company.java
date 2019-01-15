@@ -11,11 +11,12 @@ public class Company extends PropertySquare {
 
     @Override
     public int getRentPrice() {
-        return 0;
+        return super.getRentPriceList()[0];
+        //TODO Hvis man ejer flere firmafelter stiger lejeprisen
     }
 
-    @Override
-    public void landedOn(PlayerController playerController) {
-        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
-    }
+//    @Override
+//    public void landedOn(PlayerController playerController) {
+//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
+//    }
 }

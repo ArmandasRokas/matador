@@ -15,22 +15,19 @@ public class StreetSquare extends PropertySquare {
     }
 
 
-    @Override
-    public void landedOn(PlayerController playerController) {
-
-
-
-        if(super.getOwner() != null && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
-            //TODO pay rent to owner. Do not forget overwrite setCurrScenarioForPlayer
-            propertyController.payRent(this, playerController);
-        } else if (super.getOwner() != null && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + this +
-                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
-
-        } else if(super.getOwner() == null){ //buy property
-            propertyController.buyProperty(this, playerController);
-        }
-    }
+//    @Override
+//    public void landedOn(PlayerController playerController) {
+//
+//        if(super.getOwner() != null && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
+//            propertyController.payRent(this, playerController);
+//        } else if (super.getOwner() != null && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
+//            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + this +
+//                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
+//
+//        } else if(super.getOwner() == null){ //buy property
+//            propertyController.buyProperty(this, playerController);
+//        }
+//    }
 
     @Override
     public int getRentPrice() {

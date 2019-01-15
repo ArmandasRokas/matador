@@ -20,7 +20,7 @@ public class PropertyController {
         if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){
 
             boolean answer;
-            answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
+            answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.toString());
             if(answer){
 
                 int price = square.getBuyPrice();

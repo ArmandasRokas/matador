@@ -95,11 +95,11 @@ public class GUIBoundary {
         playerList[playerID].setBalance(balance);
     }
 
-    public boolean askToBuyProperty(int playerID, int fieldID){
+    public boolean askToBuyProperty(int playerID, String squareName){
 
         boolean answer = gui.getUserLeftButtonPressed(
                 playerList[playerID].getName() + ", du har mulighed at købe " +
-                        fieldList[fieldID].getTitle() + ". Vil du det?",
+                        squareName + ". Vil du det?",
                 "ja", "nej");
 
         return answer;
