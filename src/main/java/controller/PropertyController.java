@@ -28,9 +28,9 @@ public class PropertyController {
 
             playerController.currPlayerMoneyInfluence(-price);
             playerController.addCurrPlayerProperty(square);
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square);
 
             square.setOwner(playerController.getCurrPlayer());
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square);
 
             guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
