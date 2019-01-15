@@ -15,28 +15,13 @@ public class GUIBoundary {
     private GUI_Field[] fieldList = gui.getFields();
 
     public void setupGUIFields(int index, String name) {
+        fieldList[index].setDescription(name);
+        if(fieldList[index] instanceof GUI_Chance || fieldList[index] instanceof GUI_Jail || fieldList[index] instanceof GUI_Refuge) {
+            fieldList[index].setSubText(name);
+        } else {
             fieldList[index].setTitle(name);
-            fieldList[index].setDescription(name);
-
-            if(index == 2 || index == 7 || index == 17 || index == 22 || index == 33 || index == 36) {
-                fieldList[index].setSubText("");
-            }else if(index == 10){
-                fieldList[index].setSubText("På besøg");
-            }else if(index == 30){
-                fieldList[index].setSubText("Til Fængsel");
-            }
-
+        }
     }
-//    public void setupGUIFields(int index, String name, int cash) {
-//            fieldList[index].setTitle(name);
-//            fieldList[index].setDescription(name);
-//            fieldList[index].setSubText(Integer.toString(cash));
-//    }
-
-
-//    public void updateGUIFields() {
-//
-//    }
 
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
