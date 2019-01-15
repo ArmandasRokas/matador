@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>0</x>
+      <y>60</y>
+      <w>1060</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>title=SD: payRent(square,playerController) on PropertyController
+obj=:PropertyController ~a 
+obj=playerCtrl\n:PlayerController ~b 
+obj=currPlayer :Player~c
+obj=owner :Player~d
+obj=square :PropertySquare~e
+found-&gt;&gt;&gt;a ; on=a
+a-&gt;&gt;&gt;e  :getRentPrice()  ; on=e
+e.&gt;a : rentPrice; off=e
+a-&gt;&gt;&gt;d  :getOwner()  ; on=e
+e.&gt;a : owner; off=e
+a-&gt;&gt;&gt;b :payPlayer(owner, rentPrice)  ; on=b;
+b-&gt;&gt;&gt;c :moneyInfluence(-price)  ; on=c
+off=c;
+b-&gt;&gt;&gt;d :moneyInfluence(price)  ; on=d; off=b
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

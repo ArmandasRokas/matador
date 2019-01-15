@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>10</x>
+      <y>0</y>
+      <w>860</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>title=SD: buyProperty(square,playerController) on PropertyController
+obj=:PropertyController ~a 
+obj=playerCtrl\n:PlayerController ~b 
+obj=currPlayer :Player~c
+obj=square :PropertySquare~d
+found-&gt;&gt;&gt;a ; on=a
+a-&gt;&gt;&gt;d :getBuyPrice()  ; on=d
+d.&gt;a : price; off=d
+a-&gt;&gt;&gt;b :currPlayerMoney\nInfluence(-price)  ; on=b;
+b-&gt;&gt;&gt;c :moneyInfluence(-price)  ; on=c; off=b
+a-&gt;&gt;&gt;b :addCurrPlayer\nProperty(square)  ; on=b; off=c
+b-&gt;&gt;&gt;c :addProperty(square)  ; on=c; off=b
+off=c;
+a-&gt;&gt;&gt;d :setOwner(currPlayer)  ; on=d; 
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

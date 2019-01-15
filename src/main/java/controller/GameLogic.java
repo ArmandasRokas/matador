@@ -1,5 +1,7 @@
 package controller;
 
+import model.Player;
+
 import java.awt.Color;
 
 public class GameLogic {
@@ -36,5 +38,21 @@ public class GameLogic {
 
     public Color[] getColors() {
         return colors;
+    }
+
+    public Player winnerFound(Player[] playerList) {
+        int activePlayerCount = 0;
+        Player latestPlayer = null;
+
+        for(Player p : playerList) {
+            if(!p.getBankrupt()) {
+                activePlayerCount++;
+                latestPlayer = p;
+            }
+        }
+        if(activePlayerCount > 1) {
+            latestPlayer = null;
+        }
+        return latestPlayer;
     }
 }
