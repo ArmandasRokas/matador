@@ -25,6 +25,7 @@ public abstract class Square {
 
     public abstract void landedOn(PlayerController p);
 
+    @Override
     public String toString(){
         return squareName;
     }
