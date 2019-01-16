@@ -3,7 +3,6 @@ package controller;
 import model.Cup;
 import model.GameBoard;
 import model.Player;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class GameController {
@@ -49,7 +48,7 @@ public class GameController {
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
                 case 2:
-                    administrateProperties();
+                    buyHousing();
                     break;
             }
             Player p = gL.winnerFound(plCtrl.getPlayerList());
@@ -69,20 +68,21 @@ public class GameController {
 
     }
 
-    private void administrateProperties() {
-        boolean administrating = true;
+    private void buyHousing() {
+        boolean stillBuying = true;
         GameBoard gameBoard = boardCtrl.getGameBoard();
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
-        while(administrating) {
+        while(stillBuying) {
             int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
             String res = guiB.administrateProperties(possibleStreets);
             switch (res) {
                 case "exit": //exit
-                    administrating = false;
+                    stillBuying = false;
                     break;
                 default:
                     //køb hus (hvis spilleren har råd)
-                    mbCtrl.buyHouse(res);
+                    mbCtrl.buyHouse(plCtrl, res); //FixMe boolean to tell player if action has gone through?
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
             }
         }

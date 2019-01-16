@@ -16,11 +16,20 @@ public class ManageBuildingsController {
         this.gui = gui;
     }
 
-    public void buyHouse(String squareName) {
+    public void buyHouse(PlayerController plCtrl, String squareName) {
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
         StreetSquare street = (StreetSquare)squareList[squareIndex];
-        street.buyAHouse();
-        int numberOfHouses = street.getNumberOfHouses();
-        gui.setAHouse(squareIndex, numberOfHouses);
+
+        if(plCtrl.getCurrPlayerBalance() >= street.getHousePrice() && street.getNumberOfHouses() < 5) {
+            plCtrl.currPlayerMoneyInfluence(-street.getHousePrice());
+            street.buyAHouse();
+            int numberOfHouses = street.getNumberOfHouses();
+            gui.setHousing(squareIndex, numberOfHouses);
+            gui.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+            plCtrl.setCurrScenarioForPlayer("Tillykke, " + plCtrl.getCurrPlayerName() + "! Du har udvidet " + squareName);
+        } else {
+            plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har ikke penge nok.");
+        }
+
     }
 }

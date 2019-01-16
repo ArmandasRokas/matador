@@ -6,12 +6,13 @@ import controller.PropertyController;
 public class StreetSquare extends PropertySquare {
 
     private int numberOfHouses;
+    private int housePrice;
 
 
-
-    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController){
+    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController, int housePrice){
         super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares, propertyController);
         this.numberOfHouses = 0;
+        this.housePrice = housePrice;
     }
 
 
@@ -46,6 +47,10 @@ public class StreetSquare extends PropertySquare {
 
     public int getNumberOfHouses() {
         return  numberOfHouses;
+    }
+
+    public int getHousePrice() {
+        return housePrice;
     }
 }
 
