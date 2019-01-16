@@ -74,14 +74,14 @@ public class GameController {
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
         while(stillBuying) {
             int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
-            String res = guiB.administrateProperties(possibleStreets);
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
             switch (res) {
                 case "exit": //exit
                     stillBuying = false;
                     break;
                 default:
                     //køb hus (hvis spilleren har råd)
-                    mbCtrl.buyHouse(plCtrl, res); //FixMe boolean to tell player if action has gone through?
+                    mbCtrl.buyHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
             }
