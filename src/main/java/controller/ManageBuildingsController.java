@@ -20,7 +20,12 @@ public class ManageBuildingsController {
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
         StreetSquare street = (StreetSquare)squareList[squareIndex];
 
-        if(plCtrl.getCurrPlayerBalance() >= street.getHousePrice() && street.getNumberOfHouses() < 5) {
+        if(street.getNumberOfHouses() == 5) {
+            plCtrl.setCurrScenarioForPlayer("Der er allerede ét hotel på denne grund!");
+        } else if(!street.isBuildingEvenly()) {
+            plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " kan ikke udvide denne grund før de andre er på samme niveau");
+        }
+        else if(plCtrl.getCurrPlayerBalance() >= street.getHousePrice() && street.getNumberOfHouses() < 5) {
             plCtrl.currPlayerMoneyInfluence(-street.getHousePrice());
             street.buyAHouse();
             int numberOfHouses = street.getNumberOfHouses();
@@ -28,8 +33,10 @@ public class ManageBuildingsController {
             gui.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
             gui.updateRentPrice(squareIndex, street.getRentPrice());
             plCtrl.setCurrScenarioForPlayer("Tillykke, " + plCtrl.getCurrPlayerName() + "! Du har udvidet " + squareName);
-        } else {
+        } else if(plCtrl.getCurrPlayerBalance() < street.getHousePrice()) {
             plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har ikke penge nok.");
+        } else {
+            plCtrl.setCurrScenarioForPlayer("Der er sket en fejl, kontakt tekniker");
         }
 
     }

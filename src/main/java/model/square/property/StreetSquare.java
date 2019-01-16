@@ -52,5 +52,17 @@ public class StreetSquare extends PropertySquare {
     public int getHousePrice() {
         return housePrice;
     }
+
+    public boolean isBuildingEvenly() {
+        boolean res = true;
+        for(PropertySquare siblingSquare : getSiblingsSquares()) {
+            StreetSquare streetSquare = (StreetSquare)siblingSquare;
+            if(getNumberOfHouses() > streetSquare.getNumberOfHouses()) {
+                res = false;
+                break;
+            }
+        }
+        return res;
+    }
 }
 
