@@ -5,6 +5,7 @@ import controller.ChanceCardController;
 import controller.PropertyController;
 import model.square.*;
 import model.square.property.Company;
+import model.square.property.PropertySquare;
 import model.square.property.StreetSquare;
 import model.square.property.Transport;
 
@@ -69,5 +70,26 @@ public class GameBoard {
         squareList[38] = new LuxuryTax("Statsskat", 38);
         squareList[39] = new StreetSquare("Rådhuspladsen", new int[]{50, 200, 600, 1400, 1700, 2000}, 400, 7, 39, 1, propertyController);
 
+    }
+
+
+    private void setPropertySquareSiblings() {
+        for(Square square: squareList) {
+
+            if(square instanceof PropertySquare) {
+                PropertySquare ps = (PropertySquare) square;
+                int groupID = ps.getGroupID();
+
+                for(Square square2 : squareList) {
+                    if(square2 instanceof PropertySquare && !square2.equals(ps)) {
+                        PropertySquare ps2 = (PropertySquare) square2;
+
+                        if(ps2.getGroupID() == groupID) {
+                            ps.setSiblingSquare(ps2);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
