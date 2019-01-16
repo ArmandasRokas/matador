@@ -39,6 +39,9 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
+        if(plCtrl.getIsCurrPlayerInJail() == true) {
+            guiB.getOutOfJail(plCtrl);
+        }else {
             int res = guiB.takeTurn(plCtrl);
             switch (res) {
                 case 1:
@@ -57,7 +60,7 @@ public class GameController {
                 plCtrl.changePlayer();
             }
 
-
+        }
         }
 
         askForNewGame();

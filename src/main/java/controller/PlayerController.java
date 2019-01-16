@@ -125,4 +125,12 @@ public class PlayerController {
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
     }
+
+    public boolean getIsCurrPlayerInJail() {
+        return currPlayer.setIsCurrPlayerInJail();
+    }
+
+    public boolean setCurrPlayerIsInJail(boolean b) {
+        return true;
+    }
 }

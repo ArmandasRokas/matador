@@ -8,14 +8,14 @@ public class Player {
     private int playerID, balance, currentPosition, getOutOfPrisonCards;
     private PropertySquare[] properties;
     private boolean isBankrupt;
-    private boolean isInJail;
+    private boolean isCurrPlayerInJail;
 
     public Player(int playerID, String name, int balance) {
         this.playerID = playerID;
         this.name = name;
         this.balance = balance;
         this.isBankrupt = false;
-        this.isInJail = false;
+        this.isCurrPlayerInJail = false;
         currentPosition = 0;
         getOutOfPrisonCards = 0;
         properties = new PropertySquare[28];
@@ -72,5 +72,11 @@ public class Player {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public boolean setIsCurrPlayerInJail(){
+
+        return this.isCurrPlayerInJail;
+
     }
 }

@@ -74,7 +74,7 @@ public class GUIBoundary {
     }
 
     public int takeTurn(PlayerController plCtrl) {
-        //FIXME show which player has a turn.
+
         String message = "Det er " + plCtrl.getCurrPlayerName() + "s tur. ";
         String res = gui.getUserButtonPressed(message + "Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
         int switchRes = 0;
@@ -90,7 +90,16 @@ public class GUIBoundary {
     public int getOutOfJail(PlayerController plCtrl){
 
     String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge 2 muligheder for at blive løsladt";
-
+    String res = gui.getUserButtonPressed(message + " Tryk for at betale dig ud af fængslet for 50kr. eller Tryk på [Kast terninger] for at slå dig ud af ", "Betal dig ud","Kast terninger");
+    int switchRes = 0;
+    switch (res){
+        case"Kast terninger":
+            switchRes = 1;
+            break;
+        case"Betal dig ud":
+            switchRes = 2;
+    }
+    return switchRes;
     }
 
 
