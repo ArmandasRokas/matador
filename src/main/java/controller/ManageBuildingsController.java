@@ -26,6 +26,7 @@ public class ManageBuildingsController {
             int numberOfHouses = street.getNumberOfHouses();
             gui.setHousing(squareIndex, numberOfHouses);
             gui.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+            gui.updateRentPrice(squareIndex, street.getRentPrice());
             plCtrl.setCurrScenarioForPlayer("Tillykke, " + plCtrl.getCurrPlayerName() + "! Du har udvidet " + squareName);
         } else {
             plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har ikke penge nok.");

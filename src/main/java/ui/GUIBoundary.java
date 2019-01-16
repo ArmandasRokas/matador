@@ -169,4 +169,10 @@ public class GUIBoundary {
             street.setHotel(true);
         }
     }
+
+    public void updateRentPrice(int squareIndex, int rentPrice) {
+        GUI_Street street = (GUI_Street)fieldList[squareIndex];
+        street.setRent(""+rentPrice);
+        street.setSubText("Leje: " + rentPrice);
+    }
 }
