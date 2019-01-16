@@ -42,6 +42,13 @@ public class PlayerController {
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
     }
+    public void movePlayerToSquare(int index){
+
+        currPlayer.setPosition(index);
+        guiB.movePlayer(30,10,getCurrPlayerID());
+
+    }
+
 
     public void changePlayer() {
             do{
