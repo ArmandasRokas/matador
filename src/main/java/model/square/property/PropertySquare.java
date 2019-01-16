@@ -73,6 +73,22 @@ public abstract class PropertySquare extends Square {
         }
     }
 
+    public boolean isSetOwned(){
+
+        boolean res = false;
+        int siblingsOwned = 0;
+        for(PropertySquare propertySquare: siblingSquares){
+            if(propertySquare.getOwner().equals(this.getOwner())){
+                siblingsOwned++;
+            }
+        }
+        if(siblingsOwned == siblingSquares.length){
+            res = true;
+        }
+
+        return res;
+    }
+
     /**
      * The method is used for testing purposes
      */
