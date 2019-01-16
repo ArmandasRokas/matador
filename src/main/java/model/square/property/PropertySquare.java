@@ -64,5 +64,13 @@ public abstract class PropertySquare extends Square {
         return rentPriceList;
     }
 
+    public void setSiblingSquare(PropertySquare propertySquare) {
+        for (int i = 0; i < siblingSquares.length; i++){
+            if(siblingSquares[i] == null){
+                siblingSquares[i] = propertySquare;
+                break;
+            }
+        }
+    }
 }
 
