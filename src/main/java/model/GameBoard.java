@@ -93,4 +93,15 @@ public class GameBoard {
             }
         }
     }
+
+    public int findSquareIndexByName(String squareName) {
+        int res = -1;
+        for(Square square : squareList) {
+            if(square.getSquareName().equals(squareName)) {
+                res = square.getIndex();
+                break;
+            }
+        }
+        return res;
+    }
 }

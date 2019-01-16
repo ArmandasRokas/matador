@@ -161,4 +161,12 @@ public class GUIBoundary {
         return input;
     }
 
+    public void setAHouse(int squareIndex, int numberOfHouses) {
+        GUI_Street street = (GUI_Street)fieldList[squareIndex];
+        if(numberOfHouses <= 4) {
+            street.setHouses(numberOfHouses);
+        } else if(numberOfHouses == 5) {
+            street.setHotel(true);
+        }
+    }
 }

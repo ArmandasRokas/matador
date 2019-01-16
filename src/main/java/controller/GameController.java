@@ -1,6 +1,7 @@
 package controller;
 
 import model.Cup;
+import model.GameBoard;
 import model.Player;
 import model.square.property.StreetSquare;
 import ui.GUIBoundary;
@@ -70,6 +71,8 @@ public class GameController {
 
     private void administrateProperties() {
         boolean administrating = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
         while(administrating) {
             int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
             String res = guiB.administrateProperties(possibleStreets);
@@ -79,6 +82,7 @@ public class GameController {
                     break;
                 default:
                     //køb hus (hvis spilleren har råd)
+                    mbCtrl.buyHouse(res);
                     break;
             }
         }

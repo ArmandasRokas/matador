@@ -39,5 +39,13 @@ public class StreetSquare extends PropertySquare {
         }
         return rentPrice;
     }
+
+    public void buyAHouse() {
+        numberOfHouses++;
+    }
+
+    public int getNumberOfHouses() {
+        return  numberOfHouses;
+    }
 }
 
