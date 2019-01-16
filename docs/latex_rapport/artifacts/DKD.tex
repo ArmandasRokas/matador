@@ -1,0 +1,16 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{graphicx,wrapfig,lipsum}
+
+\begin{document}
+På figur~\ref{fig:DKD} kan man se designklassediagram.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.2]{diagrams/DKD.pdf}
+        \caption{Desingklassediagram}\label{fig:DKD}
+    \end{figure}
+\end{document}

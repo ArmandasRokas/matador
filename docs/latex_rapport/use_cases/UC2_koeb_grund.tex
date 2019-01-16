@@ -1,0 +1,72 @@
+
+    \documentclass[class=article, crop=false]{standalone}
+    \usepackage[subpreambles=true]{standalone}
+    \usepackage{import}
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage[english, danish]{babel}
+    \usepackage{tgbonum}
+    \usepackage{tabularx}
+    \usepackage{booktabs}
+    \usepackage{enumitem}
+    \newlist{tabenum}{enumerate}{1}
+    \setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+    \usepackage{array, booktabs}
+    \makeatletter
+    \newcommand*{\compress}{\@minipagetrue}
+    \makeatother
+    \usepackage{paralist}
+    \makeatletter
+    \let\savespace\@minipagetrue
+    \makeatother
+
+
+
+    % Document
+    \begin{document}
+
+        \begin{table}[H]
+            \caption{Use case. UC2: Køb grund}
+            \begin{tabularx}{\textwidth}{|l|X|}
+                \hline
+                & \textbf{[UC2]: Køb grund}   \\ \hline
+                \textbf{Preconditions}       & Spiller er landet på feltet 'Grund'\\ \hline
+                \textbf{Postconditions}      & Grunden kan ejes af en spiller.\\ \hline
+
+
+                \textbf{Basic Flow} & \begin{tabenum}
+                                          \item Spiller accepterer at købe en grund
+                                          \item Systemet tilføjer skødet til spilleren, som har købt grunden.
+                \end{tabenum}   \\ \hline
+
+
+
+
+                \textbf{Alternate Flow}   & \textbf{1.a.} Spiller afvise til at købe en grund.
+                \begin{enumerate} \begin{tabenum}
+                                      \item Systemet afholder en auktion
+                                      \item Spillere giver deres bud
+                                      \item Systemet tilføjer skødet til den højestbydende
+                \end{tabenum} \end{enumerate}
+                \\
+
+
+                                            & \textbf{1.b.} Spiller afvise til at købe en grund.
+                \begin{enumerate} \begin{tabenum}
+                                      \item Systemet afholder en auktion
+                                      \item Ingen af spillerne byder
+                                      \item Fortsættes videre fra trin 7 i UC1.
+                \end{tabenum} \end{enumerate}
+                \\
+
+
+
+                \hline
+
+            \end{tabularx}
+
+
+        \end{table}
+
+    \end{document}
+

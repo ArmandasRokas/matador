@@ -1,0 +1,86 @@
+
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{tgbonum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+\usepackage{array, booktabs}
+\makeatletter
+\newcommand*{\compress}{\@minipagetrue}
+\makeatother
+\usepackage{paralist}
+\makeatletter
+\let\savespace\@minipagetrue
+\makeatother
+
+
+
+% Document
+\begin{document}
+
+    \begin{table}[H]
+        \caption{Use case. UC3: Kom ud af fængsel}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            & \textbf{[UC3]: Kom ud af fængsel}   \\ \hline
+            \textbf{Preconditions}       & Spiller er 'i fængsel'. \\ \hline
+            \textbf{Postconditions}      & Spiller er ude af fængsel \\ \hline
+
+
+            \textbf{Basic Flow} & \begin{tabenum}
+                                      \item Spiller betaler 50kr
+                                      \item Fortsættes videre fra Trin 3 i UC1
+            \end{tabenum}   \\ \hline
+
+
+            \textbf{Alternate Flow}  & \textbf{1.a.} Spiller benytter et løsladelseskort fra lykkekortene
+                                    \begin{enumerate} \begin{tabenum}
+                                                          \item Fortsættes videre fra Trin 3 i UC1
+                                    \end{tabenum} \end{enumerate}
+                                    \\
+
+
+                                   & \textbf{1.b.} Spiller kaster terninger og slår to ens. Dette er kun tilladt, hvis spiller har været i fængsel maks. i tre omgange.
+            \begin{enumerate} \begin{tabenum}
+                                  \item Fortsættes videre fra Trin 4 i UC1 med det antal af øjne, som spiller fik i det sidste kast.
+            \end{tabenum} \end{enumerate}
+            \\
+
+                                    & \textbf{1.c.} Spiller kaster ikke 2 af samme slags i 1. eller 2. omgang.
+                                    \begin{enumerate} \begin{tabenum}
+                                                          \item Turen går direkte til næste spiller.
+                                    \end{tabenum} \end{enumerate}
+                                    \\
+
+
+
+                                    & \textbf{1.d.} Spiller kaster ikke 2 af samme slags i den 3. omgang.
+                                    \begin{enumerate} \begin{tabenum}
+                                      \item Spiller betaler 50kr.
+                                      \item Fortsættes videre fra trin 4 i UC1 med det antal af øjne, som spiller fik i det sidste kast.
+                                    \end{tabenum} \end{enumerate}
+                                    \\
+
+
+
+
+            \hline
+
+        \end{tabularx}
+
+
+    \end{table}
+
+\end{document}
+
+
+
+
+\end{document}

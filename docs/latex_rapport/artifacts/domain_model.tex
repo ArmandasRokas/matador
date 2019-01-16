@@ -1,0 +1,19 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{graphicx,wrapfig,lipsum}
+
+\begin{document}
+    På figur~\ref{fig:domain_model} kan man se domænemodel.
+
+            \begin{figure}[H]
+
+                \hbox{\hspace{-2cm} \includegraphics[scale=0.7]{diagrams/domain_model.pdf}}
+
+                \caption{Domænemodellen over systemet}\label{fig:domain_model}
+            \end{figure}
+
+\end{document}

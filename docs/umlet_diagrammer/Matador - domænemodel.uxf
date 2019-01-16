@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>32</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Terning
+-
+øjne</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>416</x>
+      <y>168</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Spiller
+-
+navn
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>168</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Spil
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>832</x>
+      <y>304</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Felt
+-
+scenarieBeskrivelse
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>832</x>
+      <y>168</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Bræt
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>192</y>
+      <w>144</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=3..6
+m2=1
+spiller
+</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>96</y>
+      <w>72</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=2
+bruges af
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>192</y>
+      <w>112</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+spilles på
+</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>232</y>
+      <w>64</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=40
+består af 
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>416</x>
+      <y>32</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Konto
+-
+saldo</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>96</y>
+      <w>56</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+ejes af
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>824</x>
+      <y>584</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>LykkeKort
+-
+scenarie</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>864</x>
+      <y>512</y>
+      <w>56</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=23..31
+m2=1
+har
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>416</x>
+      <y>304</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Brik
+-
+farve</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>232</y>
+      <w>40</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+har
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>328</y>
+      <w>336</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=3..6
+m2=1
+står på
+</panel_attributes>
+    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>456</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Start
+-
+pengeIndflydelse
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>456</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TilFængsel
+-
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>456</y>
+      <w>104</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Grund
+-
+købePris
+lejePris
+pantsætningsværdi</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>456</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Fængsel
+-
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>824</x>
+      <y>456</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PrøvLykken
+-
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>928</x>
+      <y>456</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Helle
+-
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>368</y>
+      <w>472</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>570.0;10.0;570.0;70.0;10.0;70.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>192</y>
+      <w>80</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..28
+ejer
+</panel_attributes>
+    <additional_attributes>80.0;10.0;30.0;10.0;30.0;370.0;60.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>416</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>656</x>
+      <y>416</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>416</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>864</x>
+      <y>416</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>408</y>
+      <w>104</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0;110.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>584</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Bygning
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>512</y>
+      <w>72</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..5
+indeholder
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+</diagram>

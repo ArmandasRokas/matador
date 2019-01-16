@@ -1,0 +1,67 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{tgbonum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+\usepackage{array, booktabs}
+\makeatletter
+\newcommand*{\compress}{\@minipagetrue}
+\makeatother
+\usepackage{paralist}
+\makeatletter
+\let\savespace\@minipagetrue
+\makeatother
+
+
+
+% Document
+\begin{document}
+
+    \begin{table}[H]
+        \caption{Test case: TC1}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Test Case ID }       & \textbf{[TC1]: getNewPositionTest()}   \\ \hline
+            \textbf{Opsummering}         & Formålet med testen er at kontrollere om getNewPosition
+            metoden starter tælling forfra hver gang,
+            der er nået den sidste position.\\ \hline
+            \textbf{Relateret krav }     &      \\ \hline
+            \textbf{Forudsætning}& Test GameBoard er oprettet med 12 felter og startpositionen er sat til 0\\ \hline
+            \textbf{Udførsel}            & \begin{tabenum}
+                                               \item Kalde getNewPosition metode med en defineret værdien
+            \end{tabenum} \\ \hline
+            \textbf{Test data}           & \begin{tabenum}
+                                               \item Første tilfælde: 11
+                                               \item Anden tilfælde: 12
+            \end{tabenum}  \\ \hline
+            \textbf{Forventet} & \begin{tabenum}
+                                     \item I første tilfælde skal metoden returnere det sidste position
+                                     \item Anden tilfælde skal den returenere position 0 (start position)
+            \end{tabenum}  \\ \hline
+            \textbf{Aktuel} & \begin{tabenum}
+                                  \item Det sidste position
+                                  \item Position 0 (start position)
+            \end{tabenum}   \\ \hline
+            \textbf{Status} & \textbf{Pass} \\ \hline
+            \textbf{Lavet af} & Armandas Rokas \\ \hline
+            \textbf{Dato} & 02/12/2018 \\ \hline
+            \textbf{Udført af } & Armandas Rokas \\ \hline
+            \textbf{Udførselses dato}  & 02/12/2018 \\ \hline
+            \textbf{Test miljø}  &  \savespace \begin{compactitem}
+                                                   \item IntelliJ IDEA 2018.2.2 (Ultimate Edition)
+                                                   \item Build IU-182.4129.33, built on August 21, 2018
+                                                   \item JRE: 1.8.0-152-release-1248-b8 amd64
+                                                   \item JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
+                                                   \item Windows 10 10.0
+            \end{compactitem} \\ \hline
+        \end{tabularx}
+    \end{table}
+
+\end{document}

@@ -1,0 +1,121 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage[shortlabels]{enumitem}
+% Initializing the counters and define a custom label
+\newcommand{\reqinit}{
+% Create a new counter for keeping track of the last number
+\newcounter{reqcountbackup}
+% Create a new counter for the custom label
+\newcounter{reqcount}
+% Redefine the command for the last counter so when it is called
+% it prints the number like this in a bold font: R<number>
+\renewcommand{\thereqcount}{\textbf{K\arabic{reqcount}}}
+}
+
+% Used to define the start of the requirements
+\newcommand{\reqstart}{
+% Indicate the start of a new list and tell it to use the redefined
+% command and corresponding counter for every item
+\begin{list}{\thereqcount}{\usecounter{reqcount}}
+% Important part: set the value of the used counter to the
+% same value of the backup counter.
+\setcounter{reqcount}{\value{reqcountbackup}}
+}
+
+% Used to define the end of the requirements
+\newcommand{\reqend}{
+% Important part: take the value of the used counter (after
+% being incremented by the requirement items) and store it
+% in the backup counter.
+\setcounter{reqcountbackup}{\value{reqcount}}
+% Mark the end of the list environment
+\end{list}
+}
+
+
+
+
+
+
+
+\begin{document}
+\reqinit
+\paragraph{Prioriteret funktional-krav liste \cite{spilleregler}}
+\subparagraph{Must have}
+\reqstart
+\item Der skal kun være 3-6 spillere.
+\item En spiller får 1500kr. i starten af spillet.
+\item En spiller starter på 'Start' felt.
+\item En spiller får 200kr, hver gang spiller kommer til, eller passerer 'Start'.
+\item En spiller kaster terning og flytter sin brik så mange felter frem (med uret), som øjnene viser.
+\item En spiller skal kunne få en ekstra tur, hvis spilleren kaster 2 ens.
+\item Hver spiller skal kunne købe en grund til prisen, som står på feltet, hver gang spilleren lander på en grund, som ikke ejes af nogen.
+\item Når en spiller lander på en grund, der ejes af en anden spiller, skal spilleren betale leje til ejeren af feltet.
+\item Når en spiller lander på 'Til Fængsel', rykkes der videre til 'Fængsel'. Spilleren modtager yderligere ikke 200kr, når 'Start' passeres.
+\item Hvis en spiller lander på feltet 'Fængsel', er spilleren på besøg og kan fortsætte uden straf.
+\item En spiller skal kunne komme ud af fængslet ved at kaste 2 ens, og spilleren får derved også en ekstra tur.
+\item En spiller kan komme ud af fængslet ved at betale en bøde på 50kr, inden spiller kaster.
+\item En spiller skal kunne lande på 'Helle' og fortsætter derfra ved næste kast.
+\item Når en spiller skylder mere end han ejer, går spilleren fallit, og må forlade spillet.
+\item En spiller har ret til når som helst at bygge huse, når spilleren ejer alle grundene i samme farvegruppe. Husene skal bygges jævnt, dvs. det første hus kan spilleren opføre på hvilken grund i gruppen, spiller ønsker. Men inden hus nr. 2 opføres på en grund, skal der være bygget ét på hver af de andre grunde i farvegruppen osv.
+\item En spiller skal kunne bygge et hotel, når spilleren har fire huse på hver grund i samme farve. Spilleren skal aflevere disse fire huse til banken. Spilleren må kun bygge ét hotel på hver grund. Prisen for et hotel er den samme som for et hus.
+\item Lejesummen forøges betydeligt ved opførelse af hus og hotel.
+\item Ejer en spiller alle grundene i samme farvegruppe, får man dobbelt leje af de ubebyggede grunde
+\item Når en spiller går fallit, skal spilleren overdrage alt til banken.
+\reqend
+\subparagraph{Should have}
+\reqstart
+\item En spiller skal kunne trække et lykkekort når der landes på feltet 'Prøv Lykken'.
+\item En spiller skal kunne komme ud af fængslet ved at benytte et løsladelseskort fra lykkekortene.
+\item En spiller kan ikke blive i fængslet mere end tre omgange. Slår spilleren ikke to ens når der kastes tredje gang, må spilleren betale en bøde på 50kr og flytte som øjnene viser.
+\item En spiller skal rykkes direkte i fængsel, hvis spilleren slår 2 ens 3 gange i træk.
+\item Når en spiller lander på 'Indkomstskatten', skal spilleren betale 200kr eller 10\% . af sine værdier: Kontanter, bygninger eller værdien på skøderne for pantsætning. Spilleren skal vælge betalingsmåde inden vedkommende kender sine værdier.
+\item Når en spiller lander på 'Ekstraordinær statsskat', skal spilleren betale 100kr.
+\reqend
+\subparagraph{Could have}
+\reqstart
+\item Banken skal kunne sætte en grund på auktion, hvis spilleren der lander på grunden ikke vil købe den.
+\item En spiller skal kunne pantsætte en eller flere grunde til banken, for at modtage pantsætningsværdien. Hvis spilleren har bygninger på grundene, skal spilleren først sælge disse til banken. Af pantsat ejendom kan der ikke kræves leje. Renten er 10\%, der betales sammen med lånet, når pantsætningen ophæves.
+\item Hvis en pantsat ejendom sælges, og køberen ikke straks hæver pantsætningen, skal vedkommende alligevel betale 10\%. Hvis han senere ophæver pantsætningen, skal spilleren betale 10\% oven i ophævningsprisen som normalt.
+\item En spiller skal kunne sælge huse til banken til halv pris, når som helst en spiller ønsker, under sin egen tur.
+\item En spiller får udleveret skødet, når spilleren køber en grund. Skødet skal være synligt for alle spillere.
+\item Den fængslede spiller har ret til at købe grunde, der sættes til salg via auktion.
+\item Når en spiller går fallit, skal spilleren overdrage alt til sin kreditor, efter at have solgt eventuelle bygninger tilbage til banken. Er det banken der er kreditor, sælger han straks modtagne grunde ved auktion.
+\reqend
+\subparagraph{Wont have}
+\reqstart
+\item Spillet skal indholde 32 grønne huse og 12 røde hoteller, hvilket betyder, at hvis banken ikke har nogen bygninger, når en spiller vil købe, så må spilleren vente til der kommer nogen tilbage. Er der flere, der vil købe, og banken ikke har nok bygninger, sætter den bygningerne til auktion.
+\reqend
+
+\paragraph{Supplerende specifikationer}
+
+\subparagraph{Supportability}
+\reqstart
+\item Skal kunne ændres til andre sprog (Lav prioritet)
+\reqend
+
+\subparagraph{Usability}
+\reqstart
+\item Spillets sprog skal være på dansk (Høj prioritet)
+\reqend
+
+\subparagraph{Extensibility}
+\reqstart
+\item Skal overholde GRASP (Høj prioritet)
+\reqend
+
+\subparagraph{Hardware}
+\reqstart
+\item Spillet skal kunne køres på maskinerne i DTU's databarer (Høj prioritet)
+\reqend
+
+\subparagraph{Software}
+\reqstart
+\item Skal virke på Java version 8(Høj prioritet)
+\reqend
+
+\end{document}

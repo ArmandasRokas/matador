@@ -1,0 +1,47 @@
+
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{tgbonum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+\usepackage{array, booktabs}
+\makeatletter
+\newcommand*{\compress}{\@minipagetrue}
+\makeatother
+\usepackage{paralist}
+\makeatletter
+\let\savespace\@minipagetrue
+\makeatother
+
+
+
+% Document
+\begin{document}
+
+    \begin{table}[H]
+        \caption{Use case. UC7: Sælg bygning}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            & \textbf{[UC7]: Sælg bygning}   \\ \hline
+            \textbf{Preconditions}       & Spiller har en bygninger på en grund\\ \hline
+            \textbf{Postconditions}      & Spiller har solgt en bygning\\ \hline
+
+
+            \textbf{Basic Flow} & \begin{tabenum}
+                                      \item Spiller vælger en bygning, som skal sælges.
+                                      \item Systemet tilføjer 50\% af bygningens værdi til spilleren's konto.
+            \end{tabenum}   \\ \hline
+
+        \end{tabularx}
+
+
+    \end{table}
+
+\end{document}
