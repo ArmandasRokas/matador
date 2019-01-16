@@ -70,6 +70,7 @@ public class GameBoard {
         squareList[38] = new LuxuryTax("Statsskat", 38);
         squareList[39] = new StreetSquare("Rådhuspladsen", new int[]{50, 200, 600, 1400, 1700, 2000}, 400, 7, 39, 1, propertyController);
 
+        setPropertySquareSiblings();
     }
 
 

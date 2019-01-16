@@ -10,7 +10,7 @@ public abstract class PropertySquare extends Square {
     private int price;                      //Price of the property
     private int[] rentPriceList;                  //Price of landing on the property
     private final int groupID;
-    private Square[] siblingSquares;   //Reference to the other property of same color
+    private PropertySquare[] siblingSquares;   //Reference to the other property of same color
     private final int index;
     protected PropertyController propertyController;
 
@@ -21,7 +21,7 @@ public abstract class PropertySquare extends Square {
         this.rentPriceList= rentPriceList;
         this.groupID = groupID;
         this.index = index;
-        siblingSquares = new Square[numberOfSiblingsSqaures];
+        siblingSquares = new PropertySquare[numberOfSiblingsSqaures];
         this.propertyController = propertyController;
     }
 
@@ -71,6 +71,13 @@ public abstract class PropertySquare extends Square {
                 break;
             }
         }
+    }
+
+    /**
+     * The method is used for testing purposes
+     */
+    public PropertySquare[] getSiblingsSquares(){
+        return siblingSquares;
     }
 }
 
