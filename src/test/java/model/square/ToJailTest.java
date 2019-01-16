@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToJailTest {
 
     @Test
-    public void testToJail(){
+    void testToJail(){
         //Arrange
         MockGUI mockGUI = new MockGUI();
         GameLogic gL = new GameLogic();
@@ -22,6 +22,11 @@ class ToJailTest {
         GameBoard gameBoard = new GameBoard(propCtrl, cdCtrl);
 
         //Act
+
+        playerController.movePlayerToSquare(10);
+
+
+        assertEquals(10,playerController.getCurrPlayerPos());
 
     }
 

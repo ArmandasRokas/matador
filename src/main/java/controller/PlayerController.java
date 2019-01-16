@@ -5,6 +5,7 @@ import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
+import java.text.FieldPosition;
 
 public class PlayerController {
     private Player[] playerList;
@@ -43,9 +44,9 @@ public class PlayerController {
         }
     }
     public void movePlayerToSquare(int index){
-
+        int currPosition = currPlayer.getCurrentPosition();
         currPlayer.setPosition(index);
-        guiB.movePlayer(30,10,getCurrPlayerID());
+        guiB.movePlayer(currPosition, index, getCurrPlayerID());
 
     }
 
