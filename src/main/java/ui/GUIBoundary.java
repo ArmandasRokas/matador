@@ -6,6 +6,7 @@ import gui_main.GUI;
 import model.GameBoard;
 import model.Player;
 import model.square.Square;
+import model.square.property.StreetSquare;
 
 import java.awt.Color;
 
@@ -68,6 +69,7 @@ public class GUIBoundary {
         fieldList[newPosition].setCar(playerList[playerID],true);
     }
 
+
     public void removePlayer(int position, int playerID) {
         fieldList[position].setCar(playerList[playerID],false);
         playerList[playerID].setName(playerList[playerID].getName() + " (gået fallit)");
@@ -76,15 +78,44 @@ public class GUIBoundary {
     public int takeTurn(PlayerController plCtrl) {
         //FIXME show which player has a turn.
         String message = "Det er " + plCtrl.getCurrPlayerName() + "s tur. ";
-        String res = gui.getUserButtonPressed(message + "Tryk på [Kast terninger] for at kaste terningerne","Kast terninger");
+        String res = gui.getUserButtonPressed(message + "Vælg om du vil kaste terningerne eller administerer dine grunde","Kast terninger", "Køb huse");
         int switchRes = 0;
         switch (res){
             case "Kast terninger":
                 switchRes = 1;
                 break;
+            case "Køb huse":
+                switchRes = 2;
+                break;
         }
 
         return switchRes;
+    }
+
+    public String administrateProperties(int[] possibleStreets) {
+        int count = 0;
+        for(int possibleStreet : possibleStreets) {
+            if(possibleStreet != 0) {
+                count++;
+            }
+        }
+        String[] possibleStreetNames = new String[count+1];
+        for(int possibleStreet : possibleStreets) {
+            if(possibleStreet != 0) {
+
+                for(int i = 0 ; i < possibleStreetNames.length ; i++) {
+                    if(possibleStreetNames[i] == null) {
+                        possibleStreetNames[i] = fieldList[possibleStreet].getDescription();
+                        break;
+                    }
+                }
+
+            }
+        }
+        possibleStreetNames[count] = "exit";
+        String message = "Vælg din ejendom fra dropdown menuen og klik på [OK] for at bygge et hus på den.";
+        String res = gui.getUserSelection(message, possibleStreetNames);
+        return res;
     }
 
     public void setDices(int eyesDie1, int eyesDie2) {
@@ -129,4 +160,5 @@ public class GUIBoundary {
         String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
         return input;
     }
+
 }

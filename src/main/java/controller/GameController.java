@@ -2,6 +2,7 @@ package controller;
 
 import model.Cup;
 import model.Player;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class GameController {
@@ -46,6 +47,9 @@ public class GameController {
                     boardCtrl.actOnSquare(plCtrl);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
+                case 2:
+                    administrateProperties();
+                    break;
             }
             Player p = gL.winnerFound(plCtrl.getPlayerList());
             if(p != null) {
@@ -62,6 +66,22 @@ public class GameController {
 
         askForNewGame();
 
+    }
+
+    private void administrateProperties() {
+        boolean administrating = true;
+        while(administrating) {
+            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            String res = guiB.administrateProperties(possibleStreets);
+            switch (res) {
+                case "exit": //exit
+                    administrating = false;
+                    break;
+                default:
+                    //køb hus (hvis spilleren har råd)
+                    break;
+            }
+        }
     }
 
 

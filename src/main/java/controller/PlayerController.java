@@ -45,15 +45,18 @@ public class PlayerController {
         }
     }
 
-    public StreetSquare[] getCurrPlayerSquarePossibleToBuild(){
-        StreetSquare[] squaresPossibleToBuild = new StreetSquare[28];
+    public int[] getCurrPlayerSquarePossibleToBuild(){
+        int[] squaresPossibleToBuild = new int[28];
 
-        for(StreetSquare street: (StreetSquare[]) currPlayer.getProperties()){
-            if(street.isSetOwned()){
-                for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
-                    if(squaresPossibleToBuild[i] == null){
-                            squaresPossibleToBuild[i] = street;
+        for(PropertySquare property: currPlayer.getProperties()){
+            if(property instanceof StreetSquare) {
+                StreetSquare street = (StreetSquare) property;
+                if(street.isSetOwned()){
+                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
+                        if(squaresPossibleToBuild[i] == 0){
+                            squaresPossibleToBuild[i] = street.getIndex();
                             break;
+                        }
                     }
                 }
             }
