@@ -74,9 +74,7 @@ public class Player {
         this.balance = balance;
     }
 
-    public boolean setIsCurrPlayerInJail(){
+    public void setIsCurrPlayerInJail(){ this.isCurrPlayerInJail = true;}
 
-        return this.isCurrPlayerInJail;
-
-    }
+    public boolean getIsCurrPlayerInJail(){return this.isCurrPlayerInJail;}
 }

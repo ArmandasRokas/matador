@@ -127,10 +127,11 @@ public class PlayerController {
     }
 
     public boolean getIsCurrPlayerInJail() {
-        return currPlayer.setIsCurrPlayerInJail();
+        return currPlayer.getIsCurrPlayerInJail();
     }
 
-    public boolean setCurrPlayerIsInJail(boolean b) {
-        return true;
+
+    public void setCurrPlayerIsInJail() {
+        getCurrPlayer().setIsCurrPlayerInJail();
     }
 }
