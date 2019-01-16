@@ -23,6 +23,7 @@ public abstract class PropertySquare extends Square {
         this.index = index;
         siblingSquares = new PropertySquare[numberOfSiblingsSqaures];
         this.propertyController = propertyController;
+
     }
 
     @Override
@@ -78,8 +79,8 @@ public abstract class PropertySquare extends Square {
         boolean res = false;
         int siblingsOwned = 0;
         for(PropertySquare propertySquare: siblingSquares){
-            if(propertySquare.getOwner().equals(this.getOwner())){
-                siblingsOwned++;
+            if(this.getOwner().equals(propertySquare.getOwner())){
+                    siblingsOwned++;
             }
         }
         if(siblingsOwned == siblingSquares.length){
