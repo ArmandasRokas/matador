@@ -50,6 +50,12 @@ public class PlayerController {
 
     }
 
+    public void takeJailTurn() {
+    }
+
+    public void setIsInJail() {
+    }
+
 
     public void changePlayer() {
             do{

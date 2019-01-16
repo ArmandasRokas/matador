@@ -87,6 +87,13 @@ public class GUIBoundary {
         return switchRes;
     }
 
+    public int getOutOfJail(PlayerController plCtrl){
+
+    String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge 2 muligheder for at blive løsladt";
+
+    }
+
+
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);
     }
