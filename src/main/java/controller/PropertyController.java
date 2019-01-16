@@ -58,4 +58,5 @@ public class PropertyController {
         }
         //TODO hvis daværende spiller går fallit med mindre pantsætning- og husværdi skal alt hvad spilleren ejer overgå til ejeren af grunden
     }
+
 }

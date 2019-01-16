@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="CDIO_matador" />
         <module name="matador" />
+        <module name="matador_16_1" />
         <module name="matador_ver_1_11" />
         <module name="Semester1_Matador" />
       </profile>

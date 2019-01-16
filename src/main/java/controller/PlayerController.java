@@ -1,7 +1,9 @@
 package controller;
 
+import jdk.nashorn.internal.objects.annotations.Property;
 import model.Player;
 import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
@@ -41,6 +43,22 @@ public class PlayerController {
             currPlayerMoneyInfluence(200);
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
+    }
+
+    public StreetSquare[] getCurrPlayerSquarePossibleToBuild(){
+        StreetSquare[] squaresPossibleToBuild = new StreetSquare[28];
+
+        for(StreetSquare street: (StreetSquare[]) currPlayer.getProperties()){
+            if(street.isSetOwned()){
+                for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
+                    if(squaresPossibleToBuild[i] == null){
+                            squaresPossibleToBuild[i] = street;
+                            break;
+                    }
+                }
+            }
+        }
+        return squaresPossibleToBuild;
     }
 
     public void changePlayer() {
