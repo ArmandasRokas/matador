@@ -50,11 +50,9 @@ public class PlayerController {
 
     }
 
-    public void takeJailTurn() {
-    }
 
-    public void setIsInJail() {
-    }
+
+
 
 
     public void changePlayer() {
@@ -131,7 +129,7 @@ public class PlayerController {
     }
 
 
-    public void setCurrPlayerIsInJail() {
-        getCurrPlayer().setIsCurrPlayerInJail();
+    public void setCurrPlayerIsInJail(boolean isInJail) {
+        getCurrPlayer().setIsCurrPlayerInJail(isInJail);
     }
 }

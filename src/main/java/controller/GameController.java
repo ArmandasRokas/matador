@@ -40,7 +40,18 @@ public class GameController {
         boolean activeGame = true;
         while (activeGame) {
         if(plCtrl.getIsCurrPlayerInJail()) {
-            guiB.getOutOfJail(plCtrl);
+            int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
+            switch (getOutOfJailAnswer){
+                case 1:
+                    throwDices();
+                    if(cup.getEyesDie1() == cup.getEyesDie2()) {
+                        plCtrl.setCurrPlayerIsInJail(false);
+                    }else plCtrl.changePlayer();{
+
+                    }
+                break;
+                case 2:
+            }
         }else {
             int res = guiB.takeTurn(plCtrl);
             switch (res) {
@@ -56,7 +67,7 @@ public class GameController {
                 activeGame = false;
             }
 
-            if(!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
+            if(!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt() || plCtrl.getCurrPlayer().getIsCurrPlayerInJail()) {
                 plCtrl.changePlayer();
             }
 
