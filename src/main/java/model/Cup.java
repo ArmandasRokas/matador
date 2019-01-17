@@ -44,4 +44,25 @@ public class Cup {
     public int getEyesDie2() {
         return d2.getEyes();
     }
+
+    public boolean getIfSameFacevaluePrevious2Turns() {
+        boolean[] extraTurnList = new boolean[2];
+        int i = 0;
+
+        while(i < extraTurnList.length){
+           if(getEyesDie1() == getEyesDie2()){
+               extraTurnList[i] = true;
+               i++;
+           } else{
+               extraTurnList[i] = false;
+               break;
+           }
+        }
+
+        if(extraTurnList[0] && extraTurnList[1]){
+
+        }
+
+
+    }
 }
