@@ -13,7 +13,7 @@ public class GameController {
     private GameBoardController boardCtrl;
     private BankruptController bankruptController;
     private PropertyController propertyController;
-    private ChanceCardController cardController;
+    private ChanceCardController chanceCardCtrl;
 
     public GameController() {
     //    gL = new GameLogic();
@@ -31,7 +31,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyController);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyController, chanceCardCtrl);
 
         plCtrl.createPlayers();
 
@@ -42,6 +42,7 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
+            guiB.showChanceCard("");
             int res = guiB.takeTurn(plCtrl);
             switch (res) {
                 case 1:
@@ -96,7 +97,7 @@ public class GameController {
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
 
         int rollScore = cup.getCurrentRollScore();
-        plCtrl.movePlayer(rollScore);
+        plCtrl.movePlayer(rollScore, true);
 
 
     }
@@ -118,7 +119,7 @@ public class GameController {
         this.bankruptController = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyController = new PropertyController(guiB, bankruptController);
-        this.cardController = new ChanceCardController(guiB);
+        this.chanceCardCtrl = new ChanceCardController(guiB);
 
         //        ...loadBoard();
 //        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?

@@ -1,13 +1,22 @@
 package model.chanceCards;
 
-import model.ChanceCard;
+import controller.ChanceCardController;
+import controller.PlayerController;
 
 public class MoneyInfluenceCC extends ChanceCard {
-    private int monneyInfluence;
+    private int moneyInfluence;
 
 
     public MoneyInfluenceCC(String message, int moneyInfluence) {
         super(message);
-        this.monneyInfluence = moneyInfluence;
+        this.moneyInfluence = moneyInfluence;
+    }
+    @Override
+    public void pickedCard(ChanceCardController cardCtrl, PlayerController playerCtrl) {
+        cardCtrl.handleChanceCard(this, playerCtrl);
+    }
+
+    public int getMoneyInfluence() {
+        return moneyInfluence;
     }
 }

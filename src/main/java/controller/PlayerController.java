@@ -1,7 +1,7 @@
 package controller;
 
-import jdk.nashorn.internal.objects.annotations.Property;
 import model.Player;
+import model.square.ChanceSquare;
 import model.square.property.PropertySquare;
 import model.square.property.StreetSquare;
 import ui.GUIBoundary;
@@ -15,12 +15,16 @@ public class PlayerController {
     private Player currPlayer;
     private String currScenarioForPlayer;
     private PropertyController propertyCtrl;
+    private ChanceCardController chanceCardCtrl;
+    private int outOfJailCards;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl, ChanceCardController chanceCardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         playerList = new Player[numberOfPlayers];
+        this.chanceCardCtrl = chanceCardCtrl;
+        this.outOfJailCards = 0;
     }
 
     public void createPlayers() {
@@ -35,16 +39,24 @@ public class PlayerController {
         currPlayer = playerList[0];
     }
 
-    public void movePlayer(int rollScore) {
+    public void movePlayer(int rollScore, boolean canPassStart) {
         int currPosition = currPlayer.getCurrentPosition();
         int newPosition = (rollScore + currPosition) % 40;
+
+        if(newPosition < 0) {
+            newPosition = 40 + newPosition;
+        }
         currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
-        if(newPosition < currPosition) {
-            currPlayerMoneyInfluence(200);
-            guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+        if(canPassStart && gL.passStart(currPosition, newPosition)) {
+            havePassedStart();
         }
+    }
+
+    private void havePassedStart() {
+        currPlayerMoneyInfluence(200);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
 
     public int[] getCurrPlayerSquarePossibleToBuild(){
@@ -76,6 +88,7 @@ public class PlayerController {
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
     }
 
 
@@ -137,5 +150,13 @@ public class PlayerController {
 
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);
+    }
+
+    public void handleSquare(ChanceSquare chanceSquare) {
+        chanceCardCtrl.handleChanceCards(this);
+    }
+
+    public void giveOutOfJailCard() {
+        this.outOfJailCards++;
     }
 }

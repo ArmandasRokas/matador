@@ -1,6 +1,7 @@
 package model.chanceCards;
 
-import model.ChanceCard;
+import controller.ChanceCardController;
+import controller.PlayerController;
 
 public class MovePlayer3SquaresBackCC extends ChanceCard {
     private int squaresToMove;
@@ -9,5 +10,9 @@ public class MovePlayer3SquaresBackCC extends ChanceCard {
         super(message);
         this.squaresToMove = i;
 
+    }
+    @Override
+    public void pickedCard(ChanceCardController cardCtrl, PlayerController playerCtrl) {
+        cardCtrl.handleChanceCard(this, playerCtrl);
     }
 }

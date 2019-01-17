@@ -1,24 +1,24 @@
 package controller;
 
-import model.ChanceCard;
+import model.chanceCards.ChanceCard;
 import model.chanceCards.GetOutOfJailCC;
 import model.chanceCards.MoneyInfluenceCC;
 import model.chanceCards.MovePlayer3SquaresBackCC;
 import model.chanceCards.MovePlayerToSquareCC;
-import model.square.ChanceSquare;
 import ui.GUIBoundary;
 
 import java.util.Random;
 
 public class ChanceCardController {
-    private GUIBoundary guiBoundary;
+    private GUIBoundary guiB;
     private ChanceCard cardDeck[];
+    private int cardsPicked;
 
-    public ChanceCardController(GUIBoundary guiBoundary, GameBoardController boardCtrl){
+    public ChanceCardController(GUIBoundary guiB){
 
-        this.guiBoundary = guiBoundary;
-
+        this.guiB = guiB;
         createDeck();
+        cardsPicked = 0;
     }
 
     private void createDeck() {
@@ -28,13 +28,13 @@ public class ChanceCardController {
         cardDeck[1] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
         cardDeck[2] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. Behold dette kort indtil De får brug for det.");
         cardDeck[3] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. Behold dette kort indtil De får brug for det.");
-        cardDeck[4] = new MovePlayerToSquareCC("Tag med Øresundsbåden - Hvis de passerer 'Start' indkasserer de 200kr", false);
-        cardDeck[5] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false);
-        cardDeck[6] = new MovePlayerToSquareCC("Ryk frem til Frederiksbergálle . Hvis de passerer 'Start' indkasserer de 200kr", false);
-        cardDeck[7] = new MovePlayerToSquareCC("Ryk frem til Grønningen. Hvis de passerer 'Start' indkasserer de 200kr", false);
-        cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false);
-        cardDeck[9] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true);
-        cardDeck[10] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true);
+        cardDeck[4] = new MovePlayerToSquareCC("Tag med Øresundsbåden - Hvis de passerer 'Start' indkasserer de 200kr", false, 5);
+        cardDeck[5] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false, 40);
+        cardDeck[6] = new MovePlayerToSquareCC("Ryk frem til Frederiksbergálle . Hvis de passerer 'Start' indkasserer de 200kr", false, 11);
+        cardDeck[7] = new MovePlayerToSquareCC("Ryk frem til Grønningen. Hvis de passerer 'Start' indkasserer de 200kr", false, 24);
+        cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
+        cardDeck[9] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
+        cardDeck[10] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
         cardDeck[11] = new MoneyInfluenceCC("De har fået en parkeingsbøde. Betal 60kr til banken", -60);
         cardDeck[12] = new MoneyInfluenceCC("Grundet på dyrtiden har De fået gageforhøjelse, Modtag 50kr", 50);
         cardDeck[13] = new MoneyInfluenceCC("Deres præmieobligation er kommet ud. De modtager 100kr", 100);
@@ -53,6 +53,14 @@ public class ChanceCardController {
         shuffleDeck();
     }
 
+    public ChanceCard pickCard() {
+        if(cardsPicked == cardDeck.length) {
+            shuffleDeck();
+            cardsPicked = 0;
+        }
+        return cardDeck[cardsPicked++];
+    }
+
     private void shuffleDeck() {
         ChanceCard[] newDeck = new ChanceCard[cardDeck.length];
         Random r = new Random();
@@ -69,13 +77,60 @@ public class ChanceCardController {
                 }
             }
         }
-        System.out.println("");
         this.cardDeck = newDeck;
     }
 
-    public void handleChanceSquare(ChanceSquare chanceSquare, PlayerController playerController) {
+//    public void handleChanceSquare(PlayerController playerCtrl) {
+////        ChanceCard chanceCard = pickCard();
+//        playerCtrl.pickCard();
+//        handleChanceCard(chanceCard, playerCtrl);
+//    }
+    public void handleChanceCards(PlayerController playerCtrl){
+        ChanceCard chanceCard = pickCard();
+
+        chanceCard.pickedCard(this, playerCtrl);
+    }
+
+    public void handleChanceCard(GetOutOfJailCC chanceCard, PlayerController playerCtrl) {
+        playerCtrl.setCurrScenarioForPlayer("");
+        guiB.showChanceCard(chanceCard.getCardText());
+        //TODO
+        playerCtrl.giveOutOfJailCard();
+    }
+
+    public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
+        playerCtrl.setCurrScenarioForPlayer("");
+        guiB.showChanceCard(chanceCard.getCardText());
+        //TODO
+        playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
+    }
+
+    public void handleChanceCard(MovePlayerToSquareCC chanceCard, PlayerController playerCtrl) {
+        playerCtrl.setCurrScenarioForPlayer("");
+        guiB.showChanceCard(chanceCard.getCardText());
+        //TODO
 
     }
 
+    public void handleChanceCard(MovePlayer3SquaresBackCC chanceCard, PlayerController playerCtrl) {
+        playerCtrl.setCurrScenarioForPlayer("");
+        guiB.showChanceCard(chanceCard.getCardText());
+        //
+        playerCtrl.movePlayer(-3, false);
+    }
 
+//    if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
+//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
+//        bankruptCtrl.handleNegativeBalance(propertySquare, playerController);
+//        //TODO naviger til pantsætningsside, hvor yderligere valg foretages
+//    } else {
+//        playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
+//        guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+//        guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
+//
+//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
+//                + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
+//                ". " + playerController.getCurrPlayerName() + " har betalt " + propertySquare.getRentPrice() + "kr til " +
+//                propertySquare.getOwner());
+//    }
 }

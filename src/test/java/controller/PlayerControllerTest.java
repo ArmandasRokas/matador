@@ -25,7 +25,7 @@ class PlayerControllerTest {
         cardController = new ChanceCardController(mockGUI);
         gameBoard = new GameBoard();
         propertyController = new PropertyController(mockGUI,bankruptController);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);
         playerController.createPlayers();
 
 
@@ -36,7 +36,7 @@ class PlayerControllerTest {
     void movePlayer() {
         //TODO add test if player can go in a circle correctly. Check for off-by-one bug
         Player[] players = playerController.getPlayerList();
-        playerController.movePlayer(1);
+        playerController.movePlayer(1, true);
 
         assertEquals(1, players[0].getCurrentPosition());
     }
