@@ -1,6 +1,7 @@
 package controller;
 
 import model.Cup;
+import model.GameBoard;
 import model.Player;
 import ui.GUIBoundary;
 
@@ -46,6 +47,9 @@ public class GameController {
                     boardCtrl.actOnSquare(plCtrl);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
+                case 2:
+                    buyHousing();
+                    break;
             }
             Player p = gL.winnerFound(plCtrl.getPlayerList());
             if(p != null) {
@@ -62,6 +66,26 @@ public class GameController {
 
         askForNewGame();
 
+    }
+
+    private void buyHousing() {
+        boolean stillBuying = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        while(stillBuying) {
+            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
+            switch (res) {
+                case "exit": //exit
+                    stillBuying = false;
+                    break;
+                default:
+                    //køb hus (hvis spilleren har råd)
+                    mbCtrl.buyHouse(plCtrl, res);
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    break;
+            }
+        }
     }
 
 

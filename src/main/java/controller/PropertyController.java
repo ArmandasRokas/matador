@@ -1,6 +1,7 @@
 package controller;
 
 import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class PropertyController {
@@ -31,6 +32,11 @@ public class PropertyController {
                 square.setOwner(playerController.getCurrPlayer());
 
                 guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
+                for (PropertySquare siblingSquare : square.getSiblingsSquares()) {
+                    if(siblingSquare.isSetOwned()) {
+                        guiB.updateRentPrice(siblingSquare.getIndex(), siblingSquare.getRentPrice());
+                    }
+                }
                 guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
             } else{
                 playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
@@ -58,4 +64,5 @@ public class PropertyController {
         }
         //TODO hvis daværende spiller går fallit med mindre pantsætning- og husværdi skal alt hvad spilleren ejer overgå til ejeren af grunden
     }
+
 }

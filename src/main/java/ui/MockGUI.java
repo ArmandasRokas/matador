@@ -29,7 +29,8 @@ public class MockGUI extends GUIBoundary {
     @Override
     public void movePlayer(int previousPosition, int newPosition, int playerID) { }
 
-    public boolean askToBuyProperty(int playerID, int fieldID){
+    @Override
+    public boolean askToBuyProperty(int playerID, String name){
 
         return true;
     }
@@ -40,5 +41,7 @@ public class MockGUI extends GUIBoundary {
 
     public void updateBalance(int playerID, int balance) {
     }
+
+
 
 }

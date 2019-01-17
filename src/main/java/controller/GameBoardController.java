@@ -33,6 +33,9 @@ public class GameBoardController {
         }
     }
 
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
 }
 
 

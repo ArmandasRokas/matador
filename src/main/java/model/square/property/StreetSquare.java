@@ -6,12 +6,13 @@ import controller.PropertyController;
 public class StreetSquare extends PropertySquare {
 
     private int numberOfHouses;
+    private int housePrice;
 
 
-
-    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController){
+    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController, int housePrice){
         super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares, propertyController);
         this.numberOfHouses = 0;
+        this.housePrice = housePrice;
     }
 
 
@@ -33,7 +34,35 @@ public class StreetSquare extends PropertySquare {
     public int getRentPrice() {
         //TODO ckecks how many houses is build on the square
 
-        return super.getRentPriceList()[numberOfHouses];
+        int rentPrice = getRentPriceList()[numberOfHouses];
+        if(isSetOwned() && numberOfHouses < 1){
+            rentPrice = rentPrice*2;
+        }
+        return rentPrice;
+    }
+
+    public void buyAHouse() {
+        numberOfHouses++;
+    }
+
+    public int getNumberOfHouses() {
+        return  numberOfHouses;
+    }
+
+    public int getHousePrice() {
+        return housePrice;
+    }
+
+    public boolean isBuildingEvenly() {
+        boolean res = true;
+        for(PropertySquare siblingSquare : getSiblingsSquares()) {
+            StreetSquare streetSquare = (StreetSquare)siblingSquare;
+            if(getNumberOfHouses() > streetSquare.getNumberOfHouses()) {
+                res = false;
+                break;
+            }
+        }
+        return res;
     }
 }
 
