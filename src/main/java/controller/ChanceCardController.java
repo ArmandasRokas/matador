@@ -14,7 +14,7 @@ public class ChanceCardController {
     private ChanceCard cardDeck[];
     private int cardsPicked;
 
-    public ChanceCardController(GUIBoundary guiB){
+    public ChanceCardController(GUIBoundary guiB) {
 
         this.guiB = guiB;
         createDeck();
@@ -54,7 +54,7 @@ public class ChanceCardController {
     }
 
     public ChanceCard pickCard() {
-        if(cardsPicked == cardDeck.length) {
+        if (cardsPicked == cardDeck.length) {
             shuffleDeck();
             cardsPicked = 0;
         }
@@ -65,13 +65,13 @@ public class ChanceCardController {
         ChanceCard[] newDeck = new ChanceCard[cardDeck.length];
         Random r = new Random();
 
-        for(ChanceCard chanceCard : cardDeck) {
+        for (ChanceCard chanceCard : cardDeck) {
             boolean cardPlaced = false;
 
-            while(!cardPlaced) {
+            while (!cardPlaced) {
                 int randomPlacement = r.nextInt(cardDeck.length);
 
-                if(newDeck[randomPlacement] == null) {
+                if (newDeck[randomPlacement] == null) {
                     newDeck[randomPlacement] = chanceCard;
                     cardPlaced = true;
                 }
@@ -80,12 +80,12 @@ public class ChanceCardController {
         this.cardDeck = newDeck;
     }
 
-//    public void handleChanceSquare(PlayerController playerCtrl) {
+    //    public void handleChanceSquare(PlayerController playerCtrl) {
 ////        ChanceCard chanceCard = pickCard();
 //        playerCtrl.pickCard();
 //        handleChanceCard(chanceCard, playerCtrl);
 //    }
-    public void handleChanceCards(PlayerController playerCtrl){
+    public void handleChanceCards(PlayerController playerCtrl) {
         ChanceCard chanceCard = pickCard();
 
         chanceCard.pickedCard(this, playerCtrl);
@@ -118,3 +118,4 @@ public class ChanceCardController {
         //
         playerCtrl.movePlayer(-3, false);
     }
+}
