@@ -44,12 +44,8 @@ public class PropertyController {
                 square.setOwner(playerController.getCurrPlayer());
 
                 guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
-                for (PropertySquare siblingSquare : square.getSiblingsSquares()) {
-                    if(siblingSquare.isSetOwned()) {
-                        guiB.updateRentPrice(siblingSquare.getIndex(), siblingSquare.getRentPrice());
-                    }
-                }
                 guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+                updateSiblingSquaresRentPrice(square);
             } else{
                 playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
             }
@@ -62,7 +58,7 @@ public class PropertyController {
 
         if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-            bankruptCtrl.handleNegativeBalance(propertySquare, playerController);
+            bankruptCtrl.handleNegativeBalance(propertySquare, playerController, this);
         //TODO naviger til pantsætningsside, hvor yderligere valg foretages
         } else {
             playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
@@ -75,5 +71,17 @@ public class PropertyController {
                     propertySquare.getOwner());
         }
         //TODO hvis daværende spiller går fallit med mindre pantsætning- og husværdi skal alt hvad spilleren ejer overgå til ejeren af grunden
+    }
+
+    /**
+     * Updates sibling squares rent price after a player buys or receives a property by another player going bankrupt.
+     * @param propertySquare
+     */
+    public void updateSiblingSquaresRentPrice(PropertySquare propertySquare){
+        for (PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
+            if(siblingSquare.isSetOwned()) {
+                guiB.updateRentPrice(siblingSquare.getIndex(), siblingSquare.getRentPrice());
+            }
+        }
     }
 }

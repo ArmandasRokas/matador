@@ -12,7 +12,7 @@ public class BankruptController {
         this.guiBoundary = guiBoundary;
     }
 
-    public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController){
+    public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController, PropertyController propertyController){
 
 
             // vis muligheder til at sælge huse
@@ -26,7 +26,7 @@ public class BankruptController {
             // boolean isBankrupt is true
             // slet bilen fra spillerpladen.
 
-        transferPropertyToCreditor(playerController, propertySquare.getOwner());
+        transferPropertyToCreditor(playerController, propertySquare.getOwner(), propertyController);
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
         + " har gået fallit. Bye bye. ");
         guiBoundary.removePlayer(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
@@ -34,7 +34,7 @@ public class BankruptController {
 
     }
 
-    public void transferPropertyToCreditor(PlayerController playerController, Player owner) {
+    public void transferPropertyToCreditor(PlayerController playerController, Player owner, PropertyController propertyController) {
             PropertySquare[] currentPlayerProperties = playerController.getCurrPlayerProperties();
 
             for(PropertySquare square: currentPlayerProperties) {
@@ -50,12 +50,11 @@ public class BankruptController {
             guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
             guiBoundary.updateBalance(owner.getPlayerID(), owner.getBalance());
             for(PropertySquare square: currentPlayerProperties) {
-
                 if(square != null){
                     guiBoundary.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
+                    propertyController.updateSiblingSquaresRentPrice(square);
                 }
             }
-
             playerController.currPlayerGoBankrupt();
     }
 
