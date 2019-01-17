@@ -63,22 +63,15 @@ public class GameController {
                             plCtrl.currPlayerMoneyInfluence(-50);
                             guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
                             guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har betalt 50 kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
-                            throwDices();
+                            int rollScore = cup.getCurrentRollScore();
+                            guiB.tellPlayer(plCtrl.getCurrPlayerName() + " rykker " + cup.getCurrentRollScore() + " felter, og giver turen videre");
+                            plCtrl.movePlayer(rollScore);
+
                             plCtrl.changePlayer();
 
                         }   else  { plCtrl.changePlayer(); }
 
                         }
-
-//                    } else if(plCtrl.getCurrPlayer().getTurnsTakenInJail() > 2) {
-//                        //TODO go to case 2 if getTurnsTakenInJail > 2
-//                        plCtrl.setCurrPlayerIsInJail(false);
-//                        throwDices();
-//                        plCtrl.getCurrPlayer().resetTurnsTakenInJail();
-//                        plCtrl.currPlayerMoneyInfluence(-50);
-//                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-//                        guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har betalt 50 kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
-//                    }
                 break;
 
                 case 2:
@@ -87,12 +80,8 @@ public class GameController {
                     plCtrl.setCurrPlayerIsInJail(false);
                     plCtrl.getCurrPlayer().resetTurnsTakenInJail();
                     guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-                    guiB.takeTurn(plCtrl);
-
 
                     break;
-
-
 
             }
         }else {
