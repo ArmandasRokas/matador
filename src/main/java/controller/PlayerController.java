@@ -1,6 +1,5 @@
 package controller;
 
-import jdk.nashorn.internal.objects.annotations.Property;
 import model.Player;
 import model.square.property.PropertySquare;
 import model.square.property.StreetSquare;
@@ -15,11 +14,14 @@ public class PlayerController {
     private Player currPlayer;
     private String currScenarioForPlayer;
     private PropertyController propertyCtrl;
+    private int turnsTakenInJail;
 
     public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
+        this.turnsTakenInJail = 0;
+
         playerList = new Player[numberOfPlayers];
     }
 
@@ -45,6 +47,12 @@ public class PlayerController {
             currPlayerMoneyInfluence(200);
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
+    }
+    public void movePlayerToSquare(int index){
+        int currPosition = currPlayer.getCurrentPosition();
+        currPlayer.setPosition(index);
+        guiB.movePlayer(currPosition, index, getCurrPlayerID());
+
     }
 
     public int[] getCurrPlayerSquarePossibleToBuild(){
@@ -133,6 +141,17 @@ public class PlayerController {
 
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
+    }
+
+    public boolean getIsCurrPlayerInJail() {
+        return currPlayer.getIsCurrPlayerInJail();
+    }
+
+    public void setCurrPlayerIsInJail(boolean isInJail) {
+        if(!isInJail) {
+            currPlayer.resetTurnsTakenInJail();
+        }
+        currPlayer.setIsCurrPlayerInJail(isInJail);
     }
 
     public void handleSquare(PropertySquare propertySquare){

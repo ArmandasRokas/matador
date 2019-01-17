@@ -12,8 +12,6 @@ public class GameController {
     private Cup cup;
     private GameBoardController boardCtrl;
     private BankruptController bankruptController;
-    private PropertyController propertyController;
-    private ChanceCardController cardController;
 
     public GameController() {
     //    gL = new GameLogic();
@@ -31,7 +29,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyController);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
 
         plCtrl.createPlayers();
 
@@ -42,30 +40,40 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
-            showMenu();
-            Player p = gL.winnerFound(plCtrl.getPlayerList());
-            if(p != null) {
-                guiB.declareWinner(p.getPlayerID());
-                activeGame = false;
-            }
 
-            if(!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
-                plCtrl.changePlayer();
-            }
+            if (plCtrl.getIsCurrPlayerInJail()) {
+                inPrison();
+            } else {
+                showMenu();
+//                int res = guiB.takeTurn(plCtrl);
+//                switch (res) {
+//                    case 1:
+//                        throwDices();
+//                        boardCtrl.actOnSquare(plCtrl);
+//                        guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+//                        break;
+//                }
+                Player p = gL.winnerFound(plCtrl.getPlayerList());
+                if (p != null) {
+                    guiB.declareWinner(p.getPlayerID());
+                    activeGame = false;
+                }
 
+                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
+                    plCtrl.changePlayer();
+                }
+            }
 
         }
-
         askForNewGame();
-
     }
+
     private void showMenu(){
         int res = guiB.takeTurn(plCtrl);
         switch (res) {
             case 1:
                 throwDices();
-                boardCtrl.actOnSquare(plCtrl);
-                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                takeTurn();
                 break;
             case 2:
                 buyHousing();
@@ -91,43 +99,79 @@ public class GameController {
                     break;
             }
         }
-        showMenu();
+        showMenu(); //FixMe KNA vil gerne have den her droppet
     }
 
+    private void inPrison() {
+        int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
 
-    private void throwDices() {
+        switch (getOutOfJailAnswer) {
+            case 1:
+                throwDices();
+                if (cup.getEyesDie1() == cup.getEyesDie2()) {
+                    plCtrl.setCurrPlayerIsInJail(false);
+                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    plCtrl.movePlayer(cup.getCurrentRollScore());
+                } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
+                    plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
+                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fængsel. Det var dit " +
+                            plCtrl.getCurrPlayer().getTurnsTakenInJail() + ". forsøg!");
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                }
+
+                if (plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
+                    plCtrl.setCurrPlayerIsInJail(false);
+                    plCtrl.currPlayerMoneyInfluence(-50);
+                    guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //TODO Kontrol af fallit
+                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
+                            + cup.getCurrentRollScore() + " felter.");
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    plCtrl.movePlayer(cup.getCurrentRollScore());
+                    plCtrl.changePlayer();
+                } else {
+                    plCtrl.changePlayer();
+                }
+                break;
+
+            case 2:
+                plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
+                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                plCtrl.currPlayerMoneyInfluence(-50);
+                plCtrl.setCurrPlayerIsInJail(false);
+                guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //FixMe
+                takeTurn();
+                break;
+        }
+    }
+
+    private int throwDices() { //FixMe Skal være void?
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
+        return cup.getCurrentRollScore();
+    }
 
-        int rollScore = cup.getCurrentRollScore();
-        plCtrl.movePlayer(rollScore);
-
-
+    private void takeTurn() {
+        plCtrl.movePlayer(cup.getCurrentRollScore());
+        boardCtrl.actOnSquare(plCtrl);
+        guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
     }
 
     private void askForNewGame() {
         String input = guiB.endGame();
 
-        switch(input) {
+        switch (input) {
             case "Ja":
                 setupGame();
                 startGame();
         }
     }
 
-    private void setupGame(){
+    private void setupGame() {
         gL = new GameLogic();
-        guiB = new GUIBoundary(); //FixMe Ask professor if possible to shutdown/restart GUI or implement a better reset method
+        guiB = new GUIBoundary();
         cup = new Cup();
         this.bankruptController = new BankruptController(guiB);
-        this.boardCtrl = new GameBoardController(guiB);
-        this.propertyController = new PropertyController(guiB, bankruptController);
-        this.cardController = new ChanceCardController(guiB);
-
-        //        ...loadBoard();
-//        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?
-        //TODO ARM setGUIBoard(String[] gameBoardController.getSquaresNames()) in order to fix danish letters bug.
-
-//        guiB.setUpGUIFields(boardCtrl.getSquareNames());
+        this.boardCtrl = new GameBoardController(guiB, bankruptController);
     }
 }

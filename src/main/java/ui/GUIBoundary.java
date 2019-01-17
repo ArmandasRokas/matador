@@ -54,7 +54,6 @@ public class GUIBoundary {
         fieldList[newPosition].setCar(playerList[playerID],true);
     }
 
-
     public void removePlayer(int position, int playerID) {
         fieldList[position].setCar(playerList[playerID],false);
         playerList[playerID].setName(playerList[playerID].getName() + " (gået fallit)");
@@ -76,6 +75,7 @@ public class GUIBoundary {
 
         return switchRes;
     }
+
 
     public String administrateProperties(int[] possibleStreets) {
         int count = 0;
@@ -103,6 +103,22 @@ public class GUIBoundary {
         return res;
     }
 
+    public int getOutOfJail(PlayerController plCtrl){
+        String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge mellem 2 muligheder for at blive løsladt";
+        String buttonChoice = gui.getUserButtonPressed(message + " Tryk for at betale dig ud af fængslet for 50kr. eller Tryk på [Kast terninger] for at slå dig ud af fængslet ", "Betal dig ud","Kast terninger");
+        int jailRes = 0;
+
+        switch (buttonChoice){
+            case"Kast terninger":
+                jailRes = 1;
+                break;
+
+            case"Betal dig ud":
+                jailRes = 2;
+        }
+        return jailRes;
+    }
+
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);
     }
@@ -125,7 +141,6 @@ public class GUIBoundary {
 
         //TODO switch statment show player action, when player do something else than buy or rent property.
         gui.getUserButtonPressed(scenario, "OK");
-
     }
 
     public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){
