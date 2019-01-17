@@ -14,8 +14,10 @@ public class PlayerController {
     private GUIBoundary guiB;
     private Player currPlayer;
     private String currScenarioForPlayer;
+    private PropertyController propertyCtrl;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
+        this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         playerList = new Player[numberOfPlayers];
@@ -131,5 +133,9 @@ public class PlayerController {
 
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
+    }
+
+    public void handleSquare(PropertySquare propertySquare){
+        propertyCtrl.handleProperty(propertySquare, this);
     }
 }

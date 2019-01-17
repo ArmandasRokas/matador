@@ -9,26 +9,13 @@ public class StreetSquare extends PropertySquare {
     private int housePrice;
 
 
-    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController, int housePrice){
-        super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares, propertyController);
+    public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, int housePrice){
+        super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares);
         this.numberOfHouses = 0;
         this.housePrice = housePrice;
     }
 
 
-//    @Override
-//    public void landedOn(PlayerController playerController) {
-//
-//        if(super.getOwner() != null && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
-//            propertyController.payRent(this, playerController);
-//        } else if (super.getOwner() != null && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
-//            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + this +
-//                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
-//
-//        } else if(super.getOwner() == null){ //buy property
-//            propertyController.buyProperty(this, playerController);
-//        }
-//    }
 
     @Override
     public int getRentPrice() {

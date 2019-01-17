@@ -29,7 +29,7 @@ class GameBoardTest {
         chanceCardController = new ChanceCardController(mockGUI);
         propertyController = new PropertyController(mockGUI, bankruptController);
 
-        gameBoard = new GameBoard(propertyController, chanceCardController);
+        gameBoard = new GameBoard();
 
         squares = gameBoard.getSquareList();
     }

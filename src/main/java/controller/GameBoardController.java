@@ -12,9 +12,9 @@ public class GameBoardController {
     private GUIBoundary guiBoundary;
 
 
-    public GameBoardController(GUIBoundary guiBoundary, BankruptController bankruptController){
+    public GameBoardController(GUIBoundary guiBoundary){
 
-        gameBoard = new GameBoard(new PropertyController(guiBoundary, bankruptController), new ChanceCardController(guiBoundary));
+        gameBoard = new GameBoard();
         this.guiBoundary = guiBoundary;
         setupGUISquareNames();
     }

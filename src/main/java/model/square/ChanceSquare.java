@@ -4,7 +4,7 @@ import controller.ChanceCardController;
 import controller.PlayerController;
 
 public class ChanceSquare extends Square {
-    public ChanceSquare(String name, int index, ChanceCardController cardController) {
+    public ChanceSquare(String name, int index) {
         super(name, index);
     }
 

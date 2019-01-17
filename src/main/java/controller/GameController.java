@@ -12,6 +12,8 @@ public class GameController {
     private Cup cup;
     private GameBoardController boardCtrl;
     private BankruptController bankruptController;
+    private PropertyController propertyController;
+    private ChanceCardController cardController;
 
     public GameController() {
     //    gL = new GameLogic();
@@ -29,7 +31,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyController);
 
         plCtrl.createPlayers();
 
@@ -114,7 +116,9 @@ public class GameController {
         guiB = new GUIBoundary(); //FixMe Ask professor if possible to shutdown/restart GUI or implement a better reset method
         cup = new Cup();
         this.bankruptController = new BankruptController(guiB);
-        this.boardCtrl = new GameBoardController(guiB, bankruptController);
+        this.boardCtrl = new GameBoardController(guiB);
+        this.propertyController = new PropertyController(guiB, bankruptController);
+        this.cardController = new ChanceCardController(guiB);
 
         //        ...loadBoard();
 //        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?

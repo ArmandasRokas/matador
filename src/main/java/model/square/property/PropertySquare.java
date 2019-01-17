@@ -15,29 +15,19 @@ public abstract class PropertySquare extends Square {
     protected PropertyController propertyController;
 
 
-    public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures, PropertyController propertyController) {
+    public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures) {
         super(scenario, index);
         this.price = price;
         this.rentPriceList= rentPriceList;
         this.groupID = groupID;
         this.index = index;
         siblingSquares = new PropertySquare[numberOfSiblingsSqaures];
-        this.propertyController = propertyController;
 
     }
 
     @Override
     public void landedOn(PlayerController playerController) {
-
-        if(super.getOwner() != null && !playerController.getCurrPlayer().equals(super.getOwner())){ //pay rent.
-            propertyController.payRent(this, playerController);
-        } else if (super.getOwner() != null && playerController.getCurrPlayer().equals(super.getOwner())){ //owned by current player
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + this +
-                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
-
-        } else if(super.getOwner() == null){ //buy property
-            propertyController.buyProperty(this, playerController);
-        }
+        playerController.handleSquare(this);
     }
 
     public int getGroupID() {
