@@ -15,7 +15,6 @@ public class ChanceCardController {
     private int cardsPicked;
 
     public ChanceCardController(GUIBoundary guiB) {
-
         this.guiB = guiB;
         createDeck();
         cardsPicked = 0;
@@ -80,11 +79,6 @@ public class ChanceCardController {
         this.cardDeck = newDeck;
     }
 
-    //    public void handleChanceSquare(PlayerController playerCtrl) {
-////        ChanceCard chanceCard = pickCard();
-//        playerCtrl.pickCard();
-//        handleChanceCard(chanceCard, playerCtrl);
-//    }
     public void handleChanceCards(PlayerController playerCtrl) {
         ChanceCard chanceCard = pickCard();
 
