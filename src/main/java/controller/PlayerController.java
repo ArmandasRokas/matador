@@ -57,16 +57,15 @@ public class PlayerController {
         }
     }
 
-    private void havePassedStart() {
-        currPlayerMoneyInfluence(200);
-        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
-    }
-
     public void movePlayerToSquare(int index){
         int currPosition = currPlayer.getCurrentPosition();
         currPlayer.setPosition(index);
         guiB.movePlayer(currPosition, index, getCurrPlayerID());
+    }
 
+    private void havePassedStart() {
+        currPlayerMoneyInfluence(200);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
 
     public int[] getCurrPlayerSquarePossibleToBuild(){
@@ -168,5 +167,16 @@ public class PlayerController {
 
     public void giveOutOfJailCard() {
         this.outOfJailCards++;
+    }
+
+    public void setCurrPlayerIsInJail(boolean isInJail) {
+        if(!isInJail) {
+            currPlayer.resetTurnsTakenInJail();
+        }
+        currPlayer.setIsCurrPlayerInJail(isInJail);
+    }
+
+    public boolean getIsCurrPlayerInJail() {
+        return currPlayer.getIsCurrPlayerInJail();
     }
 }

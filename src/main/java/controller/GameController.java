@@ -25,7 +25,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl, chanceCardCtrl);
         plCtrl.createPlayers();
         runGame();
     }
@@ -99,7 +99,7 @@ public class GameController {
                     plCtrl.setCurrPlayerIsInJail(false);
                     plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    plCtrl.movePlayer(cup.getCurrentRollScore());
+                    plCtrl.movePlayer(cup.getCurrentRollScore(), true);
                 } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
                     plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
                     plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fængsel. Det var dit " +
@@ -114,7 +114,7 @@ public class GameController {
                     plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
                             + cup.getCurrentRollScore() + " felter.");
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    plCtrl.movePlayer(cup.getCurrentRollScore());
+                    plCtrl.movePlayer(cup.getCurrentRollScore(), true);
                     plCtrl.changePlayer();
                 } else {
                     plCtrl.changePlayer();
@@ -139,7 +139,7 @@ public class GameController {
     }
 
     private void takeTurn() {
-        plCtrl.movePlayer(cup.getCurrentRollScore());
+        plCtrl.movePlayer(cup.getCurrentRollScore(), true);
         boardCtrl.actOnSquare(plCtrl);
         guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
     }
