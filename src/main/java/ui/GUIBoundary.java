@@ -142,6 +142,10 @@ public class GUIBoundary {
         gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
     }
 
+    public void tellPlayer(String message)  {
+        gui.showMessage(message);
+    }
+
     public String endGame() {
         String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
         return input;

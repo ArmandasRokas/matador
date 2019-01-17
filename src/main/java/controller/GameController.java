@@ -48,33 +48,47 @@ public class GameController {
                         if (cup.getEyesDie1() == cup.getEyesDie2()) {
                             plCtrl.setCurrPlayerIsInJail(false);
                             plCtrl.getCurrPlayer().resetTurnsTakenInJail();
-                            System.out.println(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
+                            guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
+                            int rollScore = cup.getCurrentRollScore();
+                            plCtrl.movePlayer(rollScore);
 
                         } else if(cup.getEyesDie1() != cup.getEyesDie2()) {
-                            System.out.println(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fægnsel.");
-                        plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
-                        System.out.println(plCtrl.getCurrPlayer().getTurnsTakenInJail() + " ud af 3 ture har du brugt");
-                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                            guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fængsel");
+                            plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
+                            guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har brugt " + plCtrl.getCurrPlayer().getTurnsTakenInJail() + " ud af sine 3 forsøg, for at prøve at slå 2 ens");
+
+                        }    if(plCtrl.getCurrPlayer().getTurnsTakenInJail() > 2) {
+                            plCtrl.setCurrPlayerIsInJail(false);
+                            plCtrl.getCurrPlayer().resetTurnsTakenInJail();
+                            plCtrl.currPlayerMoneyInfluence(-50);
+                            guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                            guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har betalt 50 kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
+                            throwDices();
                             plCtrl.changePlayer();
+
+                        }   else  { plCtrl.changePlayer(); }
+
                         }
 
-                    } else if(plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
-                        plCtrl.setCurrPlayerIsInJail(false);
-                        plCtrl.getCurrPlayer().resetTurnsTakenInJail();
-                        plCtrl.currPlayerMoneyInfluence(-200);
-                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-
-                        System.out.println("Spiller har betalt 200kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
+//                    } else if(plCtrl.getCurrPlayer().getTurnsTakenInJail() > 2) {
+//                        //TODO go to case 2 if getTurnsTakenInJail > 2
+//                        plCtrl.setCurrPlayerIsInJail(false);
+//                        throwDices();
+//                        plCtrl.getCurrPlayer().resetTurnsTakenInJail();
+//                        plCtrl.currPlayerMoneyInfluence(-50);
+//                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+//                        guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har betalt 50 kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
+//                    }
                 break;
-                    }
 
                 case 2:
-                    System.out.println(plCtrl.getCurrPlayerBalance() + " Du har valgt at betale 200kr");
-                    plCtrl.currPlayerMoneyInfluence(-200);
+                    guiB.tellPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
+                    plCtrl.currPlayerMoneyInfluence(-50);
                     plCtrl.setCurrPlayerIsInJail(false);
                     plCtrl.getCurrPlayer().resetTurnsTakenInJail();
                     guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-                    System.out.println(plCtrl.getCurrPlayerBalance()+ "Har betalt 200kr for at slippe ud af fængsel");
+                    guiB.takeTurn(plCtrl);
+
 
                     break;
 
