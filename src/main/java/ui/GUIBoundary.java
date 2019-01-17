@@ -89,13 +89,14 @@ public class GUIBoundary {
 
     public int getOutOfJail(PlayerController plCtrl){
 
-    String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge 2 muligheder for at blive løsladt";
-    String res = gui.getUserButtonPressed(message + " Tryk for at betale dig ud af fængslet for 50kr. eller Tryk på [Kast terninger] for at slå dig ud af fængslet ", "Betal dig ud","Kast terninger");
+    String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge mellem 2 muligheder for at blive løsladt";
+    String buttonChoice = gui.getUserButtonPressed(message + " Tryk for at betale dig ud af fængslet for 50kr. eller Tryk på [Kast terninger] for at slå dig ud af fængslet ", "Betal dig ud","Kast terninger");
     int jailRes = 0;
-    switch (res){
+    switch (buttonChoice){
         case"Kast terninger":
             jailRes = 1;
             break;
+
         case"Betal dig ud":
             jailRes = 2;
     }

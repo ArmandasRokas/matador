@@ -9,7 +9,7 @@ public class GameLogic {
     private Color[] colors;
 
     public GameLogic() {
-        minPlayers = 3;
+        minPlayers = 2;
         maxPlayers = 6;
         startBalance = 1500;
         this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA}; //Virker kun for 6 spillere

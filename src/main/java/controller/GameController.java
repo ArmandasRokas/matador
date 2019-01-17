@@ -43,23 +43,55 @@ public class GameController {
             int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
             switch (getOutOfJailAnswer){
                 case 1:
-                    throwDices();
-                    if(cup.getEyesDie1() == cup.getEyesDie2()) {
-                        plCtrl.setCurrPlayerIsInJail(false);
-                    }else plCtrl.changePlayer();{
+                    if(plCtrl.getCurrPlayer().getTurnsTakenInJail() < 3) {
+                        throwDicesInJail();
+                        if (cup.getEyesDie1() == cup.getEyesDie2()) {
+                            plCtrl.setCurrPlayerIsInJail(false);
+                            plCtrl.getCurrPlayer().resetTurnsTakenInJail();
+                            System.out.println(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
 
-                    }
+                        } else if(cup.getEyesDie1() != cup.getEyesDie2()) {
+                            System.out.println(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fægnsel.");
+                        plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
+                        System.out.println(plCtrl.getCurrPlayer().getTurnsTakenInJail() + " ud af 3 ture har du brugt");
+                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                            plCtrl.changePlayer();
+                        }
+
+                    } else if(plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
+                        plCtrl.setCurrPlayerIsInJail(false);
+                        plCtrl.getCurrPlayer().resetTurnsTakenInJail();
+                        plCtrl.currPlayerMoneyInfluence(-200);
+                        guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+
+                        System.out.println("Spiller har betalt 200kr for at komme ud af fængsel, efter 3 mislykkedes terningekast");
                 break;
+                    }
+
                 case 2:
+                    System.out.println(plCtrl.getCurrPlayerBalance() + " Du har valgt at betale 200kr");
+                    plCtrl.currPlayerMoneyInfluence(-200);
+                    plCtrl.setCurrPlayerIsInJail(false);
+                    plCtrl.getCurrPlayer().resetTurnsTakenInJail();
+                    guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                    System.out.println(plCtrl.getCurrPlayerBalance()+ "Har betalt 200kr for at slippe ud af fængsel");
+
+                    break;
+
+
+
             }
         }else {
             int res = guiB.takeTurn(plCtrl);
             switch (res) {
                 case 1:
-                    throwDices();
-                    boardCtrl.actOnSquare(plCtrl);
-                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    break;
+
+                        throwDices();
+                        boardCtrl.actOnSquare(plCtrl);
+                        guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                        break;
+
+
             }
             Player p = gL.winnerFound(plCtrl.getPlayerList());
             if(p != null) {
@@ -86,6 +118,11 @@ public class GameController {
         int rollScore = cup.getCurrentRollScore();
         plCtrl.movePlayer(rollScore);
 
+    }
+
+    private void throwDicesInJail() {
+        cup.roll();
+        guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
 
     }
 

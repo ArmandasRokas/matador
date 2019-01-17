@@ -13,10 +13,13 @@ public class PlayerController {
     private GUIBoundary guiB;
     private Player currPlayer;
     private String currScenarioForPlayer;
+    private int turnsTakenInJail;
 
     public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers) {
         this.guiB = guiB;
         this.gL = gL;
+        this.turnsTakenInJail = 0;
+
         playerList = new Player[numberOfPlayers];
     }
 
@@ -132,4 +135,11 @@ public class PlayerController {
     public void setCurrPlayerIsInJail(boolean isInJail) {
         getCurrPlayer().setIsCurrPlayerInJail(isInJail);
     }
+    public int getTurnsTakenInJail() {
+        return turnsTakenInJail;
+    }
+
+
+
+    public void resetTurnsTakenInJail() { turnsTakenInJail = 0; }
 }

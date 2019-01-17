@@ -9,6 +9,7 @@ public class Player {
     private PropertySquare[] properties;
     private boolean isBankrupt;
     private boolean isCurrPlayerInJail;
+    private int turnsTakenInJail;
 
     public Player(int playerID, String name, int balance) {
         this.playerID = playerID;
@@ -16,14 +17,15 @@ public class Player {
         this.balance = balance;
         this.isBankrupt = false;
         this.isCurrPlayerInJail = false;
+        this.turnsTakenInJail = 0;
         currentPosition = 0;
         getOutOfPrisonCards = 0;
         properties = new PropertySquare[28];
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+
+
 
     public int getBalance() {
         return balance;
@@ -77,4 +79,16 @@ public class Player {
     public void setIsCurrPlayerInJail(boolean isInJail){ this.isCurrPlayerInJail = isInJail;}
 
     public boolean getIsCurrPlayerInJail(){return this.isCurrPlayerInJail;}
+
+
+    public void resetTurnsTakenInJail() {
+        turnsTakenInJail = 0;
+    }
+
+    public void increaseTurnsTakenInJail() { turnsTakenInJail++; }
+
+
+    public int getTurnsTakenInJail() {
+        return turnsTakenInJail;
+    }
 }
