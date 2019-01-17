@@ -1,6 +1,7 @@
 package controller;
 
 import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class PropertyController {
@@ -15,30 +16,46 @@ public class PropertyController {
 
     }
 
+    public void handleProperty(PropertySquare propertySquare, PlayerController playerController) {
+        if(propertySquare.getOwner() != null && !playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //pay rent.
+            this.payRent(propertySquare, playerController);
+        } else if (propertySquare.getOwner() != null && playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //owned by current player
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + propertySquare.toString() +
+                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
+
+        } else if(propertySquare.getOwner() == null){ //buy property
+            this.buyProperty(propertySquare, playerController);
+        }
+    }
+
     public void buyProperty(PropertySquare square, PlayerController playerController) {
 
-        boolean answer = false;
-        //TODO if player have enough money run line 21. else setCurrentScenario. Do not have enought money to buy square.getSquareName().
-        answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.getIndex());
+        if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){
 
+            boolean answer;
+            answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.toString());
+            if(answer){
 
-        if(answer){
+                int price = square.getBuyPrice();
+                playerController.currPlayerMoneyInfluence(-price);
+                playerController.addCurrPlayerProperty(square);
+                playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har købt " + square);
 
-            int price = square.getBuyPrice();
+                square.setOwner(playerController.getCurrPlayer());
 
-            playerController.currPlayerMoneyInfluence(-price);
-            playerController.addCurrPlayerProperty(square);
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " købt " + square);
-
-            square.setOwner(playerController.getCurrPlayer());
-
-            guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
-            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+                guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
+                for (PropertySquare siblingSquare : square.getSiblingsSquares()) {
+                    if(siblingSquare.isSetOwned()) {
+                        guiB.updateRentPrice(siblingSquare.getIndex(), siblingSquare.getRentPrice());
+                    }
+                }
+                guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+            } else{
+                playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
+            }
         } else{
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke nok penge til at købe " + square);
         }
-
-
     }
 
     public void payRent(PropertySquare propertySquare, PlayerController playerController) {

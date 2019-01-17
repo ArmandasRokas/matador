@@ -1,7 +1,9 @@
 package controller;
 
+import jdk.nashorn.internal.objects.annotations.Property;
 import model.Player;
 import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
@@ -12,8 +14,10 @@ public class PlayerController {
     private GUIBoundary guiB;
     private Player currPlayer;
     private String currScenarioForPlayer;
+    private PropertyController propertyCtrl;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
+        this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         playerList = new Player[numberOfPlayers];
@@ -41,6 +45,25 @@ public class PlayerController {
             currPlayerMoneyInfluence(200);
             guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
         }
+    }
+
+    public int[] getCurrPlayerSquarePossibleToBuild(){
+        int[] squaresPossibleToBuild = new int[28];
+
+        for(PropertySquare property: currPlayer.getProperties()){
+            if(property instanceof StreetSquare) {
+                StreetSquare street = (StreetSquare) property;
+                if(street.isSetOwned()){
+                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
+                        if(squaresPossibleToBuild[i] == 0){
+                            squaresPossibleToBuild[i] = street.getIndex();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return squaresPossibleToBuild;
     }
 
     public void changePlayer() {
@@ -110,5 +133,9 @@ public class PlayerController {
 
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
+    }
+
+    public void handleSquare(PropertySquare propertySquare){
+        propertyCtrl.handleProperty(propertySquare, this);
     }
 }

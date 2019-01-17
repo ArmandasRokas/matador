@@ -1,6 +1,7 @@
 package controller;
 
 import model.Cup;
+import model.GameBoard;
 import model.Player;
 import ui.GUIBoundary;
 
@@ -11,6 +12,8 @@ public class GameController {
     private Cup cup;
     private GameBoardController boardCtrl;
     private BankruptController bankruptController;
+    private PropertyController propertyController;
+    private ChanceCardController cardController;
 
     public GameController() {
     //    gL = new GameLogic();
@@ -28,7 +31,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyController);
 
         plCtrl.createPlayers();
 
@@ -39,14 +42,7 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
-            int res = guiB.takeTurn(plCtrl);
-            switch (res) {
-                case 1:
-                    throwDices();
-                    boardCtrl.actOnSquare(plCtrl);
-                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    break;
-            }
+            showMenu();
             Player p = gL.winnerFound(plCtrl.getPlayerList());
             if(p != null) {
                 guiB.declareWinner(p.getPlayerID());
@@ -62,6 +58,40 @@ public class GameController {
 
         askForNewGame();
 
+    }
+    private void showMenu(){
+        int res = guiB.takeTurn(plCtrl);
+        switch (res) {
+            case 1:
+                throwDices();
+                boardCtrl.actOnSquare(plCtrl);
+                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                break;
+            case 2:
+                buyHousing();
+                break;
+        }
+    }
+
+    private void buyHousing() {
+        boolean stillBuying = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        while(stillBuying) {
+            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
+            switch (res) {
+                case "exit": //exit
+                    stillBuying = false;
+                    break;
+                default:
+                    //køb hus (hvis spilleren har råd)
+                    mbCtrl.buyHouse(plCtrl, res);
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    break;
+            }
+        }
+        showMenu();
     }
 
 
@@ -90,7 +120,9 @@ public class GameController {
         guiB = new GUIBoundary(); //FixMe Ask professor if possible to shutdown/restart GUI or implement a better reset method
         cup = new Cup();
         this.bankruptController = new BankruptController(guiB);
-        this.boardCtrl = new GameBoardController(guiB, bankruptController);
+        this.boardCtrl = new GameBoardController(guiB);
+        this.propertyController = new PropertyController(guiB, bankruptController);
+        this.cardController = new ChanceCardController(guiB);
 
         //        ...loadBoard();
 //        guiB.setGUIBoard(); /TODO Convert GUI_Board to our board (names, prices etc.)?

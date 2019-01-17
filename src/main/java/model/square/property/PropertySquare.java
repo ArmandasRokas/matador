@@ -1,5 +1,6 @@
 package model.square.property;
 
+import controller.PlayerController;
 import controller.PropertyController;
 import model.Player;
 import model.square.Square;
@@ -9,19 +10,24 @@ public abstract class PropertySquare extends Square {
     private int price;                      //Price of the property
     private int[] rentPriceList;                  //Price of landing on the property
     private final int groupID;
-    private Square[] siblingSquares;   //Reference to the other property of same color
+    private PropertySquare[] siblingSquares;   //Reference to the other property of same color
     private final int index;
     protected PropertyController propertyController;
 
 
-    public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures, PropertyController propertyController) {
+    public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures) {
         super(scenario, index);
         this.price = price;
         this.rentPriceList= rentPriceList;
         this.groupID = groupID;
         this.index = index;
-        siblingSquares = new Square[numberOfSiblingsSqaures];
-        this.propertyController = propertyController;
+        siblingSquares = new PropertySquare[numberOfSiblingsSqaures];
+
+    }
+
+    @Override
+    public void landedOn(PlayerController playerController) {
+        playerController.handleSquare(this);
     }
 
     public int getGroupID() {
@@ -49,5 +55,36 @@ public abstract class PropertySquare extends Square {
         return rentPriceList;
     }
 
+    public void setSiblingSquare(PropertySquare propertySquare) {
+        for (int i = 0; i < siblingSquares.length; i++){
+            if(siblingSquares[i] == null){
+                siblingSquares[i] = propertySquare;
+                break;
+            }
+        }
+    }
+
+    public boolean isSetOwned(){
+
+        boolean res = false;
+        int siblingsOwned = 0;
+        for(PropertySquare propertySquare: siblingSquares){
+            if(this.getOwner() != null && this.getOwner().equals(propertySquare.getOwner())){
+                    siblingsOwned++;
+            }
+        }
+        if(siblingsOwned == siblingSquares.length){
+            res = true;
+        }
+
+        return res;
+    }
+
+    /**
+     * The method is used for testing purposes
+     */
+    public PropertySquare[] getSiblingsSquares(){
+        return siblingSquares;
+    }
 }
 
