@@ -10,12 +10,14 @@ public class GameBoardController {
     private GameBoard gameBoard;
     private Square currSquare;
     private GUIBoundary guiBoundary;
-
+    private BankruptController bankruptCtrl; //FixMe Skal fjernes? Test ved at kører
 
     public GameBoardController(GUIBoundary guiBoundary){
+//    public GameBoardController(GUIBoundary guiBoundary, BankruptController bankruptCtrl){
 
         gameBoard = new GameBoard();
         this.guiBoundary = guiBoundary;
+//        this.bankruptCtrl = bankruptCtrl;
         setupGUISquareNames();
     }
 

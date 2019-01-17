@@ -11,16 +11,11 @@ public class GameController {
     private GUIBoundary guiB;
     private Cup cup;
     private GameBoardController boardCtrl;
-    private BankruptController bankruptController;
+    private BankruptController bankruptCtrl;
+    private PropertyController propertyCtrl;
 
     public GameController() {
-    //    gL = new GameLogic();
-    //    guiB = new GUIBoundary();
-    //    cup = new Cup();
-    //    this.bankruptController = new BankruptController(guiB);
-    //    this.boardCtrl = new GameBoardController(guiB, bankruptController);
         setupGame();
-
     }
 
     public void startGame() {
@@ -29,10 +24,8 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers);
-
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl);
         plCtrl.createPlayers();
-
         runGame();
     }
 
@@ -45,15 +38,8 @@ public class GameController {
                 inPrison();
             } else {
                 showMenu();
-//                int res = guiB.takeTurn(plCtrl);
-//                switch (res) {
-//                    case 1:
-//                        throwDices();
-//                        boardCtrl.actOnSquare(plCtrl);
-//                        guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-//                        break;
-//                }
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
+
                 if (p != null) {
                     guiB.declareWinner(p.getPlayerID());
                     activeGame = false;
@@ -145,10 +131,9 @@ public class GameController {
         }
     }
 
-    private int throwDices() { //FixMe Skal være void?
+    private void throwDices() { //FixMe Skal være void?
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
-        return cup.getCurrentRollScore();
     }
 
     private void takeTurn() {
@@ -171,7 +156,9 @@ public class GameController {
         gL = new GameLogic();
         guiB = new GUIBoundary();
         cup = new Cup();
-        this.bankruptController = new BankruptController(guiB);
-        this.boardCtrl = new GameBoardController(guiB, bankruptController);
+        this.bankruptCtrl = new BankruptController(guiB);
+        this.boardCtrl = new GameBoardController(guiB);
+//        this.boardCtrl = new GameBoardController(guiB, bankruptCtrl);
+        this.propertyCtrl = new PropertyController(guiB, bankruptCtrl);
     }
 }
