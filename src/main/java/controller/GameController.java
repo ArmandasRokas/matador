@@ -38,7 +38,8 @@ public class GameController {
             if (plCtrl.getIsCurrPlayerInJail()) {
                 inPrison();
             } else {
-                showMenu();
+                showBeforeTurnMenu();
+                showAfterTurnMenu();
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
 
                 if (p != null) {
@@ -48,6 +49,8 @@ public class GameController {
 
                 if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
                     plCtrl.changePlayer();
+                } else {
+                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
                 }
             }
 
@@ -55,16 +58,37 @@ public class GameController {
         askForNewGame();
     }
 
-    private void showMenu(){
-        int res = guiB.takeTurn(plCtrl);
-        switch (res) {
-            case 1:
-                throwDices();
-                takeTurn();
-                break;
-            case 2:
-                buyHousing();
-                break;
+    private void showBeforeTurnMenu(){
+        boolean takenTurn = false;
+
+        while(!takenTurn) {
+            int res = guiB.takeTurn(plCtrl);
+            switch (res) {
+                case 0:
+                    throwDices();
+                    takeTurn();
+                    takenTurn = true;
+                    break;
+                case 1:
+                    buyHousing();
+                    break;
+            }
+        }
+    }
+
+    private void showAfterTurnMenu() {
+        boolean endTurn = false;
+
+        while(!endTurn) {
+            int res = guiB.endTurn(plCtrl);
+            switch (res) {
+                case 0:
+                    endTurn = true;
+                    break;
+                case 1:
+                    buyHousing();
+                    break;
+            }
         }
     }
 
@@ -86,7 +110,6 @@ public class GameController {
                     break;
             }
         }
-        showMenu(); //FixMe KNA vil gerne have den her droppet
     }
 
     private void inPrison() {
