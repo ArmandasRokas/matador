@@ -16,6 +16,18 @@ public class PropertyController {
 
     }
 
+    public void handleProperty(PropertySquare propertySquare, PlayerController playerController) {
+        if(propertySquare.getOwner() != null && !playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //pay rent.
+            this.payRent(propertySquare, playerController);
+        } else if (propertySquare.getOwner() != null && playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //owned by current player
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + propertySquare.toString() +
+                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
+
+        } else if(propertySquare.getOwner() == null){ //buy property
+            this.buyProperty(propertySquare, playerController);
+        }
+    }
+
     public void buyProperty(PropertySquare square, PlayerController playerController) {
 
         if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){
@@ -63,17 +75,5 @@ public class PropertyController {
                     propertySquare.getOwner());
         }
         //TODO hvis daværende spiller går fallit med mindre pantsætning- og husværdi skal alt hvad spilleren ejer overgå til ejeren af grunden
-    }
-
-    public void handleProperty(PropertySquare propertySquare, PlayerController playerController) {
-                if(propertySquare.getOwner() != null && !playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //pay rent.
-            this.payRent(propertySquare, playerController);
-        } else if (propertySquare.getOwner() != null && playerController.getCurrPlayer().equals(propertySquare.getOwner())){ //owned by current player
-            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " står på " + propertySquare.toString() +
-                    " som " + playerController.getCurrPlayerName() + " ejer selv.");
-
-        } else if(propertySquare.getOwner() == null){ //buy property
-            this.buyProperty(propertySquare, playerController);
-        }
     }
 }
