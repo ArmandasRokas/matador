@@ -13,6 +13,7 @@ public class GameController {
     private GameBoardController boardCtrl;
     private BankruptController bankruptCtrl;
     private PropertyController propertyCtrl;
+    private ChanceCardController chanceCardCtrl;
 
     public GameController() {
         setupGame();
@@ -33,7 +34,7 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
-
+            guiB.showChanceCard("");
             if (plCtrl.getIsCurrPlayerInJail()) {
                 inPrison();
             } else {
@@ -131,6 +132,7 @@ public class GameController {
         }
     }
 
+
     private void throwDices() { //FixMe Skal være void?
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
@@ -158,7 +160,7 @@ public class GameController {
         cup = new Cup();
         this.bankruptCtrl = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
-//        this.boardCtrl = new GameBoardController(guiB, bankruptCtrl);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl);
+        this.chanceCardCtrl = new ChanceCardController(guiB);
     }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Player;
+import model.square.ChanceSquare;
 import model.square.property.PropertySquare;
 import model.square.property.StreetSquare;
 import ui.GUIBoundary;
@@ -15,12 +16,16 @@ public class PlayerController {
     private String currScenarioForPlayer;
     private PropertyController propertyCtrl;
     private int turnsTakenInJail;
+    private ChanceCardController chanceCardCtrl;
+    private int outOfJailCards;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl, ChanceCardController chanceCardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         this.turnsTakenInJail = 0;
+        this.chanceCardCtrl = chanceCardCtrl;
+        this.outOfJailCards = 0;
 
         playerList = new Player[numberOfPlayers];
     }
@@ -37,17 +42,26 @@ public class PlayerController {
         currPlayer = playerList[0];
     }
 
-    public void movePlayer(int rollScore) {
+    public void movePlayer(int rollScore, boolean canPassStart) {
         int currPosition = currPlayer.getCurrentPosition();
         int newPosition = (rollScore + currPosition) % 40;
+
+        if(newPosition < 0) {
+            newPosition = 40 + newPosition;
+        }
         currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
-        if(newPosition < currPosition) {
-            currPlayerMoneyInfluence(200);
-            guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+        if(canPassStart && gL.passStart(currPosition, newPosition)) {
+            havePassedStart();
         }
     }
+
+    private void havePassedStart() {
+        currPlayerMoneyInfluence(200);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+    }
+
     public void movePlayerToSquare(int index){
         int currPosition = currPlayer.getCurrentPosition();
         currPlayer.setPosition(index);
@@ -84,6 +98,7 @@ public class PlayerController {
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
     }
 
 
@@ -143,18 +158,15 @@ public class PlayerController {
         return currScenarioForPlayer;
     }
 
-    public boolean getIsCurrPlayerInJail() {
-        return currPlayer.getIsCurrPlayerInJail();
-    }
-
-    public void setCurrPlayerIsInJail(boolean isInJail) {
-        if(!isInJail) {
-            currPlayer.resetTurnsTakenInJail();
-        }
-        currPlayer.setIsCurrPlayerInJail(isInJail);
-    }
-
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);
+    }
+
+    public void handleSquare(ChanceSquare chanceSquare) {
+        chanceCardCtrl.handleChanceCards(this);
+    }
+
+    public void giveOutOfJailCard() {
+        this.outOfJailCards++;
     }
 }

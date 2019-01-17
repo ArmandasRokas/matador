@@ -175,4 +175,8 @@ public class GUIBoundary {
         street.setRent(""+rentPrice);
         street.setSubText("Leje: " + rentPrice);
     }
+
+    public void showChanceCard(String cardText) {
+        gui.displayChanceCard(cardText);
+    }
 }

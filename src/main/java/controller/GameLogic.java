@@ -55,4 +55,8 @@ public class GameLogic {
         }
         return latestPlayer;
     }
+
+    public boolean passStart(int currPosition, int newPosition) {
+        return newPosition < currPosition;
+    }
 }
