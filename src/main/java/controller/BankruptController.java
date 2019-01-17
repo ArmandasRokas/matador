@@ -49,6 +49,12 @@ public class BankruptController {
 
             guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
             guiBoundary.updateBalance(owner.getPlayerID(), owner.getBalance());
+            for(PropertySquare square: currentPlayerProperties) {
+
+                if(square != null){
+                    guiBoundary.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
+                }
+            }
 
             playerController.currPlayerGoBankrupt();
     }
