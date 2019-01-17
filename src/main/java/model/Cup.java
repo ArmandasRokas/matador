@@ -60,9 +60,9 @@ public class Cup {
         }
 
         if(extraTurnList[0] && extraTurnList[1]){
-
+            return true;
+        }else{
+            return false;
         }
-
-
     }
 }
