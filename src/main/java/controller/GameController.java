@@ -42,17 +42,7 @@ public class GameController {
         //TODO Fix kommunikation med spiller
         boolean activeGame = true;
         while (activeGame) {
-            int res = guiB.takeTurn(plCtrl);
-            switch (res) {
-                case 1:
-                    throwDices();
-                    boardCtrl.actOnSquare(plCtrl);
-                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    break;
-                case 2:
-                    buyHousing();
-                    break;
-            }
+            showMenu();
             Player p = gL.winnerFound(plCtrl.getPlayerList());
             if(p != null) {
                 guiB.declareWinner(p.getPlayerID());
@@ -68,6 +58,19 @@ public class GameController {
 
         askForNewGame();
 
+    }
+    private void showMenu(){
+        int res = guiB.takeTurn(plCtrl);
+        switch (res) {
+            case 1:
+                throwDices();
+                boardCtrl.actOnSquare(plCtrl);
+                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                break;
+            case 2:
+                buyHousing();
+                break;
+        }
     }
 
     private void buyHousing() {
@@ -88,6 +91,7 @@ public class GameController {
                     break;
             }
         }
+        showMenu();
     }
 
 
