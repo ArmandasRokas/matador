@@ -1,0 +1,65 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{tgbonum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+\usepackage{array, booktabs}
+\makeatletter
+\newcommand*{\compress}{\@minipagetrue}
+\makeatother
+\usepackage{paralist}
+\makeatletter
+\let\savespace\@minipagetrue
+\makeatother
+
+
+
+% Document
+\begin{document}
+
+    \begin{table}[H]
+        \caption{Test case: [TC1]: setNumberOfSiblings()}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Test Case ID }       & \textbf{[TC1]: setNumberOfSiblings()}   \\ \hline
+            \textbf{Opsummering}         & Formålet med testen er at kontrollere om alle grunde har et korrekt nummer af søstrefelter.
+                                            Altså tages der ikke højde for om det har korrekte søstrefelter. \\ \hline
+            \textbf{Relateret Use cases}     & UC8: Byg hus, UC9: Byg hotel      \\ \hline
+            \textbf{Forudsætning}& GameBoard er oprettet.\\ \hline
+            \textbf{Udførsel}            & \begin{tabenum}
+                                               \item Oprettes test boolean, som sættes til true
+                                               \item Fås alle felterne fra GameBoard
+                                               \item Kontrolleres om et grundfelt har korrekt nummer af søstrefelter en ad gangen
+                                               \item Sættes test bollean til at være falsk, hvis der er et felt, som ikke har et søstrefelt.
+            \end{tabenum} \\ \hline
+            \textbf{Test data}           &  Ikke defineret
+            \end{compactitem}  \\ \hline
+            \textbf{Forventet} & \savespace \begin{compactitem}
+                                     \item Test boolean bliver ikke ændret til falsk undervejs af udførselen af løkken.
+                                     \end{compactitem} \savespace \\    \hline
+            \textbf{Aktuel} & \begin{tabenum}
+                                  \item Test boolean forbliver sandt.
+            \end{tabenum}   \\ \hline
+            \textbf{Status} & \textbf{Pass} \\ \hline
+            \textbf{Lavet af} & Gruppe 44\\ \hline
+            \textbf{Dato} & 17/01/2019 \\ \hline
+            \textbf{Udført af } & Gruppe 44\\ \hline
+            \textbf{Udførselses dato}  & 17/01/2019\\ \hline
+            \textbf{Test miljø}  &  \savespace \begin{compactitem}
+                                                   \item IntelliJ IDEA 2018.2.2 (Ultimate Edition)
+                                                   \item Build IU-182.4129.33, built on August 21, 2018
+                                                   \item JRE: 1.8.0-152-release-1248-b8 amd64
+                                                   \item JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
+                                                   \item Windows 10 10.0
+            \end{compactitem} \\ \hline
+        \end{tabularx}
+    \end{table}
+
+\end{document}
