@@ -118,19 +118,3 @@ public class ChanceCardController {
         //
         playerCtrl.movePlayer(-3, false);
     }
-
-//    if(playerController.getCurrPlayerBalance() < propertySquare.getRentPrice()) {
-//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-//        bankruptCtrl.handleNegativeBalance(propertySquare, playerController);
-//        //TODO naviger til pantsætningsside, hvor yderligere valg foretages
-//    } else {
-//        playerController.payPlayer(propertySquare.getOwner(), propertySquare.getRentPrice());
-//        guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
-//        guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
-//
-//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
-//                + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
-//                ". " + playerController.getCurrPlayerName() + " har betalt " + propertySquare.getRentPrice() + "kr til " +
-//                propertySquare.getOwner());
-//    }
-}
