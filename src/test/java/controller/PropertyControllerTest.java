@@ -1,22 +1,23 @@
-package controller;
-
-import model.GameBoard;
-import model.Player;
-import model.square.Square;
-import model.square.property.PropertySquare;
-import org.junit.jupiter.api.Test;
-import ui.MockGUI;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class PropertyControllerTest {
-
-    @Test
-    void buyPropertyTest() {
-
+//package controller;
+//
+//import model.GameBoard;
+//import model.Player;
+//import model.square.Square;
+//import model.square.property.PropertySquare;
+//import org.junit.jupiter.api.Test;
+//import ui.MockGUI;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//class PropertyControllerTest {
+//
+//    @Test
+//    void buyPropertyTest() {
+//
 //        //Arrange
 //        MockGUI gui = new MockGUI();
-//        PropertyController propertyController = new PropertyController(gui);
+//        BankruptController bankruptController = new BankruptController(gui);
+//        PropertyController propertyController = new PropertyController(gui, bankruptController);
 //
 //        PlayerController playerController = new PlayerController(gui, new GameLogic(), 1);
 //        playerController.createPlayers();
@@ -36,7 +37,7 @@ class PropertyControllerTest {
 //        assertTrue(square.getIsOwned());
 //        assertTrue(playerBalanceAfterBuying < playerBalanceBeforeBuying);
 //        assertEquals(square, playerController.getCurrPlayerProperties()[0]);
-
-
-    }
-}
+//
+//
+//    }
+//}

@@ -5,8 +5,8 @@ import controller.PropertyController;
 import model.square.property.PropertySquare;
 
 public class Transport extends PropertySquare {
-    public Transport(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, PropertyController propertyController){
-        super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares, propertyController);
+    public Transport(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares){
+        super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares);
     }
 
     @Override
@@ -15,8 +15,4 @@ public class Transport extends PropertySquare {
         //TODO Hvis man ejer flere transportfelter stiger lejeprisen
     }
 
-//    @Override
-//    public void landedOn(PlayerController playerController) {
-//        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
-//    }
 }
