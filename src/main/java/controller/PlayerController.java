@@ -131,15 +131,10 @@ public class PlayerController {
         return currPlayer.getIsCurrPlayerInJail();
     }
 
-
     public void setCurrPlayerIsInJail(boolean isInJail) {
-        getCurrPlayer().setIsCurrPlayerInJail(isInJail);
+        if(!isInJail) {
+            currPlayer.resetTurnsTakenInJail();
+        }
+        currPlayer.setIsCurrPlayerInJail(isInJail);
     }
-    public int getTurnsTakenInJail() {
-        return turnsTakenInJail;
-    }
-
-
-
-    public void resetTurnsTakenInJail() { turnsTakenInJail = 0; }
 }
