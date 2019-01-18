@@ -30,6 +30,9 @@ public class StreetSquare extends PropertySquare {
         numberOfHouses++;
     }
 
+    public void sellAHouse(){
+        numberOfHouses--;
+    }
     public int getNumberOfHouses() {
         return  numberOfHouses;
     }
