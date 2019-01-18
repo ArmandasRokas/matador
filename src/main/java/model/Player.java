@@ -92,4 +92,8 @@ public class Player {
     public int getTurnsTakenInJail() {
         return turnsTakenInJail;
     }
+
+    public void useGetOutOfJailCard() {
+        this.getOutOfJailCards = getOutOfJailCards - 1;
+    }
 }

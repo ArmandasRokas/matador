@@ -37,13 +37,17 @@ public class Cup {
 
     public int getCurrentRollScore() {
         int currRollScore = getEyesDie1() + getEyesDie2();
-        return 2;
+        return 30;
 //        return currRollScore;
     }
 
 
-    public int getEyesDie1() { return d1.getEyes(); }
+    public int getEyesDie1() {
+        return d1.getEyes();
+//        return 1;
+    }
     public int getEyesDie2() {
         return d2.getEyes();
+//        return 1;
     }
 }

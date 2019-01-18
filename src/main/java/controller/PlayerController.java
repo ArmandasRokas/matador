@@ -191,4 +191,8 @@ public class PlayerController {
     public int getTurnsInJail() {
         return currPlayer.getTurnsTakenInJail();
     }
+
+    public void useGetOutOfJailCard() {
+        currPlayer.useGetOutOfJailCard();
+    }
 }

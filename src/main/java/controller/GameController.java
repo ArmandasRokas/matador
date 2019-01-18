@@ -35,7 +35,7 @@ public class GameController {
         boolean activeGame = true;
         while (activeGame) {
             guiB.showChanceCard("");
-            if (plCtrl.getIsCurrPlayerInJail()) {
+            if (plCtrl.getIsCurrPlayerInJail()) { //FixMe Skal denne flyttes til showBeforeTurnMenu()??? - KNA
                 inPrison();
             } else {
                 showBeforeTurnMenu();
@@ -47,7 +47,7 @@ public class GameController {
                     activeGame = false;
                 }
 
-                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
+                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt() || plCtrl.getCurrPlayer().getIsCurrPlayerInJail()) {
                     plCtrl.changePlayer();
                 } else {
                     guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
@@ -119,10 +119,11 @@ public class GameController {
             case 0:
                 throwDices();
                 if (cup.getEyesDie1() == cup.getEyesDie2()) {
-                    plCtrl.setCurrPlayerIsInJail(false);
-                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
-                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    plCtrl.movePlayer(cup.getCurrentRollScore(), true);
+//                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
+//                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+//                    plCtrl.setCurrPlayerIsInJail(false);
+                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
+                    takeTurn();
                 } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
                     plCtrl.getCurrPlayer().increaseTurnsTakenInJail();
                     plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har desværre ikke slået 2 ens, du må blive i fængsel. Det var dit " +
@@ -131,28 +132,44 @@ public class GameController {
                 }
 
                 if (plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
-                    plCtrl.setCurrPlayerIsInJail(false);
                     plCtrl.currPlayerMoneyInfluence(-50);
                     guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //TODO Kontrol af fallit
-                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
+//                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
+//                            + cup.getCurrentRollScore() + " felter.");
+//                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+//                    plCtrl.setCurrPlayerIsInJail(false);
+                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
                             + cup.getCurrentRollScore() + " felter.");
-                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-                    plCtrl.movePlayer(cup.getCurrentRollScore(), true);
+                    takeTurn();
                     plCtrl.changePlayer();
-                } else {
+                } else if (cup.getEyesDie1() != cup.getEyesDie2()){
                     plCtrl.changePlayer();
                 }
                 break;
 
             case 1:
-                plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
-                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+//                plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
+//                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                 plCtrl.currPlayerMoneyInfluence(-50);
-                plCtrl.setCurrPlayerIsInJail(false);
+//                plCtrl.setCurrPlayerIsInJail(false);
+                getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
                 guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //FixMe
-                takeTurn();
+                break;
+
+            case 2:
+//                plCtrl.setCurrScenarioForPlayer("De har valgt at bruge deres kort fra Kongen til at komme ud, velkommen tilbage til spillet!");
+//                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+//                plCtrl.setCurrPlayerIsInJail(false);
+                plCtrl.useGetOutOfJailCard();
+                getOutOfPrison(plCtrl.getCurrPlayerName() + " at bruge deres kort fra Kongen til at komme ud, velkommen tilbage til spillet!");
                 break;
         }
+    }
+
+    public void getOutOfPrison(String message) {
+        plCtrl.setCurrScenarioForPlayer(message);
+        guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+        plCtrl.setCurrPlayerIsInJail(false);
     }
 
 
