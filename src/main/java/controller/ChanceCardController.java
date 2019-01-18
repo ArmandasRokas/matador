@@ -40,7 +40,7 @@ public class ChanceCardController {
         cardDeck[12] = new MoneyInfluenceCC("Grundet på dyrtiden har De fået gageforhøjelse, De har modtaget 50kr", 50);
         cardDeck[13] = new MoneyInfluenceCC("Deres præmieobligation er kommet ud. De har modtaget 100kr", 100);
         cardDeck[14] = new MoneyInfluenceCC("Efter auktionen på Assistentshuset, hvor De havde pantsat Deres tøj, og modtaget de 108kr", 108);
-        cardDeck[15] = new MoneyInfluenceCC("De harrettidigt afleveret Deres abonnementskort. De har modtaget deres depositum på 5kr", 5);
+        cardDeck[15] = new MoneyInfluenceCC("De har rettidigt afleveret Deres abonnementskort. De har modtaget deres depositum på 5kr", 5);
         cardDeck[16] = new MoneyInfluenceCC("De har kørt frem for 'Fuld Stop' og har betalt en bøde på 150kr", -150);
         cardDeck[17] = new MoneyInfluenceCC("De har anskaffet et nyt dæk til deres vogn. De har betalt 120kr", -120);
         cardDeck[18] = new MoneyInfluenceCC("Betal for vognvask og smøring. De har betalt 15kr", -15);
