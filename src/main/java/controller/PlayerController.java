@@ -166,12 +166,20 @@ public class PlayerController {
     }
 
     public void payIncomeTax() {
+
+        int payPercent = (getCurrPlayerBalance() / 100) * 10;
         int incomeTaxAnswer  = guiB.incomeTax(this);
         switch (incomeTaxAnswer){
             case 0:
+                currPlayerMoneyInfluence(-payPercent);
+                setCurrScenarioForPlayer(payPercent + " er 10% af " + getCurrPlayerName() + "'s værdi");
+                guiB.showCurrScenarioForPlayer(getCurrScenarioForPlayer());
+                //guiB.showCurrScenarioForPlayer(getCurrPlayerName() + " har betalt 10% af sin totale værdi");
 
                 break;
-            case 1:  currPlayerMoneyInfluence(-200);
+            case 1:
+                currPlayerMoneyInfluence(-200);
+                break;
         }
 
     }
