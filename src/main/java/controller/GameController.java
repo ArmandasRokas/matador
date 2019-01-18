@@ -72,6 +72,9 @@ public class GameController {
                 case 1:
                     buyHousing();
                     break;
+                case 2:
+                    sellHousing();
+                    break;
             }
         }
     }
@@ -88,6 +91,9 @@ public class GameController {
                 case 1:
                     buyHousing();
                     break;
+                case 2:
+                    sellHousing();
+                    break;
             }
         }
     }
@@ -97,7 +103,7 @@ public class GameController {
         GameBoard gameBoard = boardCtrl.getGameBoard();
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
         while(stillBuying) {
-            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
             String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
             switch (res) {
                 case "exit": //exit
@@ -106,6 +112,26 @@ public class GameController {
                 default:
                     //køb hus (hvis spilleren har råd)
                     mbCtrl.buyHouse(plCtrl, res);
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    break;
+            }
+        }
+    }
+
+    private void sellHousing(){
+        boolean stillSelling = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        while(stillSelling) {
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
+            switch (res) {
+                case "exit": //exit
+                    stillSelling = false;
+                    break;
+                default:
+                    //sælge hus
+                    mbCtrl.sellHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
             }
