@@ -7,27 +7,29 @@ import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 public class PlayerController {
     private Player[] playerList;
     private GameLogic gL;
     private GUIBoundary guiB;
     private Player currPlayer;
-    private String currScenarioForPlayer;
+    private String currScenarioForPlayer = "[NO SCENARIO SET]";
     private PropertyController propertyCtrl;
     private int turnsTakenInJail;
     private ChanceCardController chanceCardCtrl;
     private int outOfJailCards;
+    private GameBoardController gameBoardCtrl;
     private int currPlayerExtraTurnCount;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl, ChanceCardController chanceCardCtrl) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl,
+                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         this.turnsTakenInJail = 0;
         this.chanceCardCtrl = chanceCardCtrl;
         this.outOfJailCards = 0;
+        this.gameBoardCtrl = gameBoardCtrl;
         this.currPlayerExtraTurnCount = 0;
 
         playerList = new Player[numberOfPlayers];
@@ -201,5 +203,9 @@ public class PlayerController {
 
     public void useGetOutOfJailCard() {
         currPlayer.useGetOutOfJailCard();
+    }
+
+    public void payIncomeTax() {
+        gameBoardCtrl.payIncomeTax(this);
     }
 }

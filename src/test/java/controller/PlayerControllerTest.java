@@ -2,7 +2,6 @@ package controller;
 
 import model.GameBoard;
 import model.Player;
-import model.square.property.StreetSquare;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.MockGUI;
@@ -17,6 +16,7 @@ class PlayerControllerTest {
     PropertyController propertyController;
     GameBoardController gameBoardCtrl;
     ChanceCardController cardController;
+    GameBoardController gameBoardController;
     GameBoard gameBoard ;
 
     @BeforeEach
@@ -28,7 +28,7 @@ class PlayerControllerTest {
         cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
         propertyController = new PropertyController(mockGUI,bankruptController);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController, gameBoardController);
         playerController.createPlayers();
     }
 

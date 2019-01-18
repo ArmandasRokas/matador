@@ -120,6 +120,20 @@ public class GUIBoundary {
         }
         return getUserChoice(buttons, res);
     }
+    public int incomeTax(PlayerController plCtrl    ){
+        String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
+        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200kr");
+        int taxRes = -1;
+        switch (buttonChoice){
+            case "Betal 10%":
+                taxRes = 0;
+                break;
+            case "Betal 200kr":
+                taxRes = 1;
+                break;
+        }
+        return taxRes;
+    }
 
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);
@@ -143,6 +157,7 @@ public class GUIBoundary {
 
         //TODO switch statment show player action, when player do something else than buy or rent property.
         gui.getUserButtonPressed(scenario, "OK");
+
     }
 
     public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){

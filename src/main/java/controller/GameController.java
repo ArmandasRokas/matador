@@ -25,7 +25,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
         } while(!gL.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl, chanceCardCtrl);
+        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl);
         plCtrl.createPlayers();
         runGame();
     }
