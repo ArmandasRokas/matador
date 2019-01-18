@@ -126,7 +126,7 @@ public class GUIBoundary {
     }
     public int incomeTax(PlayerController plCtrl    ){
         String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
-        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200");
+        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200kr");
         int taxRes = -1;
         switch (buttonChoice){
             case "Betal 10%":

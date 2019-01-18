@@ -16,6 +16,7 @@ class ManageBuildingsControllerTest {
     BankruptController bankruptController;
     PropertyController propertyController;
     ChanceCardController cardController;
+    GameBoardController gameBoardCtrl;
     GameBoard gameBoard ;
     @BeforeEach
     void setUp() {
@@ -25,7 +26,8 @@ class ManageBuildingsControllerTest {
         cardController = new ChanceCardController(mockGUI);
         gameBoard = new GameBoard();
         propertyController = new PropertyController(mockGUI, bankruptController);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);
+        gameBoardCtrl = new GameBoardController(mockGUI);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController, gameBoardCtrl);
         playerController.createPlayers();
 
     }

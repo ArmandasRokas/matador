@@ -3,11 +3,9 @@ package controller;
 import model.Player;
 import model.square.ChanceSquare;
 import model.square.property.PropertySquare;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 public class PlayerController {
     private Player[] playerList;
@@ -19,14 +17,17 @@ public class PlayerController {
     private int turnsTakenInJail;
     private ChanceCardController chanceCardCtrl;
     private int outOfJailCards;
+    private GameBoardController gameBoardCtrl;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl, ChanceCardController chanceCardCtrl) {
+    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl,
+                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gL = gL;
         this.turnsTakenInJail = 0;
         this.chanceCardCtrl = chanceCardCtrl;
         this.outOfJailCards = 0;
+        this.gameBoardCtrl = gameBoardCtrl;
 
         playerList = new Player[numberOfPlayers];
     }
@@ -166,21 +167,6 @@ public class PlayerController {
     }
 
     public void payIncomeTax() {
-
-        int payPercent = (getCurrPlayerBalance() / 100) * 10;
-        int incomeTaxAnswer  = guiB.incomeTax(this);
-        switch (incomeTaxAnswer){
-            case 0:
-                currPlayerMoneyInfluence(-payPercent);
-                setCurrScenarioForPlayer(payPercent + " er 10% af " + getCurrPlayerName() + "'s værdi");
-                guiB.showCurrScenarioForPlayer(getCurrScenarioForPlayer());
-                //guiB.showCurrScenarioForPlayer(getCurrPlayerName() + " har betalt 10% af sin totale værdi");
-
-                break;
-            case 1:
-                currPlayerMoneyInfluence(-200);
-                break;
-        }
-
+        gameBoardCtrl.payIncomeTax(this);
     }
 }
