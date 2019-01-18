@@ -35,27 +35,44 @@ public class GameController {
         boolean activeGame = true;
         while (activeGame) {
             guiB.showChanceCard("");
-            if (plCtrl.getIsCurrPlayerInJail()) { //FixMe Skal denne flyttes til showBeforeTurnMenu()??? - KNA
-                inPrison();
+            if (plCtrl.getIsCurrPlayerInJail()) {
+                inJail();
             } else {
                 showBeforeTurnMenu();
-                showAfterTurnMenu();
+                if(!plCtrl.getIsCurrPlayerInJail()){
+                    showAfterTurnMenu();
+                }
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
 
                 if (p != null) {
                     guiB.declareWinner(p.getPlayerID());
                     activeGame = false;
                 }
-
-                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt() || plCtrl.getCurrPlayer().getIsCurrPlayerInJail()) {
-                    plCtrl.changePlayer();
-                } else {
-                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-                }
+                checkForExtraRoundOrChangePlayer();
+//                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt() || plCtrl.getCurrPlayer().getIsCurrPlayerInJail()) {
+//                    plCtrl.changePlayer();
+//                } else {
+//                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
+//                } //TODO Kontroller om der er noget der mangler i metoden under
             }
 
         }
         askForNewGame();
+    }
+
+    private void checkForExtraRoundOrChangePlayer() {
+        if (plCtrl.getCurrPlayer().getBankrupt()){
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 3){
+            guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
+        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 3){
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        }
     }
 
     private void showBeforeTurnMenu(){
@@ -66,6 +83,11 @@ public class GameController {
             switch (res) {
                 case 0:
                     throwDices();
+                    if(plCtrl.checkForSpeeding()){
+                        plCtrl.setCurrPlayerToJail();
+                        takenTurn = true;
+                        break;
+                    }
                     takeTurn();
                     takenTurn = true;
                     break;
@@ -138,16 +160,13 @@ public class GameController {
         }
     }
 
-    private void inPrison() {
+    private void inJail() {
         int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
 
         switch (getOutOfJailAnswer) {
             case 0:
                 throwDices();
                 if (cup.getEyesDie1() == cup.getEyesDie2()) {
-//                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
-//                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-//                    plCtrl.setCurrPlayerIsInJail(false);
                     getOutOfPrison(plCtrl.getCurrPlayerName() + " har slået 2 ens og er kommet ud af fængsel");
                     takeTurn();
                 } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
@@ -160,10 +179,6 @@ public class GameController {
                 if (plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
                     plCtrl.currPlayerMoneyInfluence(-50);
                     guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //TODO Kontrol af fallit
-//                    plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
-//                            + cup.getCurrentRollScore() + " felter.");
-//                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-//                    plCtrl.setCurrPlayerIsInJail(false);
                     getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
                             + cup.getCurrentRollScore() + " felter.");
                     takeTurn();
@@ -174,18 +189,12 @@ public class GameController {
                 break;
 
             case 1:
-//                plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
-//                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                 plCtrl.currPlayerMoneyInfluence(-50);
-//                plCtrl.setCurrPlayerIsInJail(false);
                 getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
                 guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance()); //FixMe
                 break;
 
             case 2:
-//                plCtrl.setCurrScenarioForPlayer("De har valgt at bruge deres kort fra Kongen til at komme ud, velkommen tilbage til spillet!");
-//                guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
-//                plCtrl.setCurrPlayerIsInJail(false);
                 plCtrl.useGetOutOfJailCard();
                 getOutOfPrison(plCtrl.getCurrPlayerName() + " at bruge deres kort fra Kongen til at komme ud, velkommen tilbage til spillet!");
                 break;
@@ -198,10 +207,12 @@ public class GameController {
         plCtrl.setCurrPlayerIsInJail(false);
     }
 
-
     private void throwDices() {
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
+        if (cup.getEyesDie1() == cup.getEyesDie2()) {
+            plCtrl.addOneCurrPlayerExtraTurnCount();
+        }
     }
 
     private void takeTurn() {

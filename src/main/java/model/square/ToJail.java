@@ -14,8 +14,5 @@ public class ToJail extends Square {
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er landet på " + this);
         playerController.setCurrPlayerIsInJail(true);
         playerController.movePlayerToSquare(10, false);
-
-
-
     }
 }

@@ -19,6 +19,7 @@ public class PlayerController {
     private int turnsTakenInJail;
     private ChanceCardController chanceCardCtrl;
     private int outOfJailCards;
+    private int currPlayerExtraTurnCount;
 
     public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl, ChanceCardController chanceCardCtrl) {
         this.propertyCtrl = propertyCtrl;
@@ -27,6 +28,7 @@ public class PlayerController {
         this.turnsTakenInJail = 0;
         this.chanceCardCtrl = chanceCardCtrl;
         this.outOfJailCards = 0;
+        this.currPlayerExtraTurnCount = 0;
 
         playerList = new Player[numberOfPlayers];
     }
@@ -74,7 +76,15 @@ public class PlayerController {
     }
 
 
+    public void setCurrPlayerToJail(){
+        guiB.informPlayerGoingToJail(getCurrPlayerID());
+        this.setCurrPlayerIsInJail(true);
+        this.movePlayerToSquare(10, false);
+    }
 
+    public boolean checkForSpeeding(){
+        return currPlayerExtraTurnCount == 3;
+    }
 
     public void changePlayer() {
             do{
@@ -167,6 +177,18 @@ public class PlayerController {
 
     public boolean getIsCurrPlayerInJail() {
         return currPlayer.getIsCurrPlayerInJail();
+    }
+
+    public int getCurrPlayerExtraTurnCount(){
+        return currPlayerExtraTurnCount;
+    }
+
+    public void addOneCurrPlayerExtraTurnCount(){
+        currPlayerExtraTurnCount++;
+    }
+
+    public void resetCurrPlayerExtraTurnCount(){
+        currPlayerExtraTurnCount = 0;
     }
 
     public boolean hasGetOutOfJailCard() {

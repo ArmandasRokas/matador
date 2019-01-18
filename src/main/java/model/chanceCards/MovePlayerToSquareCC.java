@@ -7,7 +7,6 @@ public class MovePlayerToSquareCC extends ChanceCard {
     private boolean toPrison;
     private int squareIndex;
 
-
     public MovePlayerToSquareCC(String message, boolean goingToPrison, int squareIndex) {
         super(message);
         this.toPrison = goingToPrison;
