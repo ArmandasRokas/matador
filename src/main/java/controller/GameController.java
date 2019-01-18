@@ -156,7 +156,7 @@ public class GameController {
     }
 
 
-    private void throwDices() { //FixMe Skal være void?
+    private void throwDices() {
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
     }
