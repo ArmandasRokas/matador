@@ -58,10 +58,13 @@ public class PlayerController {
         }
     }
 
-    public void movePlayerToSquare(int index){
+    public void movePlayerToSquare(int newPosition, boolean goingToPrison){
         int currPosition = currPlayer.getCurrentPosition();
-        currPlayer.setPosition(index);
-        guiB.movePlayer(currPosition, index, getCurrPlayerID());
+        currPlayer.setPosition(newPosition);
+        guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
+        if(!goingToPrison && gL.passStart(currPosition, newPosition)) {
+            havePassedStart();
+        }
     }
 
     private void havePassedStart() {
