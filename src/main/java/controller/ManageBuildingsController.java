@@ -2,8 +2,11 @@ package controller;
 
 import model.GameBoard;
 import model.square.Square;
+import model.square.property.PropertySquare;
 import model.square.property.StreetSquare;
 import ui.GUIBoundary;
+
+import java.util.ArrayList;
 
 public class ManageBuildingsController {
     private Square[] squareList;
@@ -39,5 +42,43 @@ public class ManageBuildingsController {
             plCtrl.setCurrScenarioForPlayer("Der er sket en fejl, kontakt tekniker");
         }
 
+    }
+
+    public int[] getCurrPlayerSquarePossibleToBuild(PlayerController playerCtrl){
+        int[] squaresPossibleToBuild = new int[28];
+
+        for(PropertySquare property: playerCtrl.getCurrPlayerProperties()){
+            if(property instanceof StreetSquare) {
+                StreetSquare street = (StreetSquare) property;
+                if(street.isSetOwned()){
+                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
+                        if(squaresPossibleToBuild[i] == 0){
+                            squaresPossibleToBuild[i] = street.getIndex();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return squaresPossibleToBuild;
+    }
+
+    public int[] getCurrPlayerSquarePossibleToSellHousing(PlayerController playerCtrl){
+        ArrayList<Integer> squaresPossibleToSellHousing = new ArrayList<>();
+
+        for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
+            if(propertySquare instanceof StreetSquare){
+                StreetSquare street = (StreetSquare) propertySquare;
+                if(street.getNumberOfHouses() > 0 ){
+                    squaresPossibleToSellHousing.add(street.getIndex());
+                }
+            }
+        }
+
+        int[] convertToIntArray = new int[squaresPossibleToSellHousing.size()];
+        for(int i=0; i < convertToIntArray.length; i++ ){
+            convertToIntArray[i] = squaresPossibleToSellHousing.get(i);
+        }
+        return convertToIntArray;
     }
 }
