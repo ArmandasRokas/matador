@@ -12,7 +12,7 @@ public class PlayerController {
     private GameLogic gL;
     private GUIBoundary guiB;
     private Player currPlayer;
-    private String currScenarioForPlayer;
+    private String currScenarioForPlayer = "[NO SCENARIO SET]";
     private PropertyController propertyCtrl;
     private int turnsTakenInJail;
     private ChanceCardController chanceCardCtrl;
