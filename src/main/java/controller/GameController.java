@@ -113,7 +113,23 @@ public class GameController {
     }
 
     private void sellHousing(){
-
+        boolean stillSelling = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        while(stillSelling) {
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
+            switch (res) {
+                case "exit": //exit
+                    stillSelling = false;
+                    break;
+                default:
+                    //sælge hus
+                    mbCtrl.sellHouse(plCtrl, res);
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    break;
+            }
+        }
     }
 
     private void inPrison() {
