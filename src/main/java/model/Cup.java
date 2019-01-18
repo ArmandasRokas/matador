@@ -14,8 +14,8 @@ public class Cup {
      * Constructor of Cup
      */
     public Cup(){
-        this.d1 = new Die(1,6);
-        this.d2 = new Die(1,6);
+        this.d1 = new Die(6,6);
+        this.d2 = new Die(6,6);
     }
 
     /**

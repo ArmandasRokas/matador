@@ -36,7 +36,7 @@ public class GameController {
         while (activeGame) {
             guiB.showChanceCard("");
             if (plCtrl.getIsCurrPlayerInJail()) {
-                inPrison();
+                inJail();
             } else {
                 showBeforeTurnMenu();
                 showAfterTurnMenu();
@@ -46,16 +46,28 @@ public class GameController {
                     guiB.declareWinner(p.getPlayerID());
                     activeGame = false;
                 }
-
-                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
-                    plCtrl.changePlayer();
-                } else {
-                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-                }
+                checkForExtraRoundOrChangePlayer();
             }
-
         }
         askForNewGame();
+    }
+
+    private void checkForExtraRoundOrChangePlayer() {
+        if (plCtrl.getCurrPlayer().getBankrupt()){
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 2) {
+            guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
+            plCtrl.addOneCurrPlayerExtraTurnCount();
+        } else if(cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 2){
+            guiB.informPlayerGoingToJail(plCtrl.getCurrPlayerID());
+            plCtrl.setCurrPlayerIsInJail(true);
+            plCtrl.changePlayer();
+            plCtrl.resetCurrPlayerExtraTurnCount();
+        }
     }
 
     private void showBeforeTurnMenu(){
@@ -138,7 +150,7 @@ public class GameController {
         }
     }
 
-    private void inPrison() {
+    private void inJail() {
         int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
 
         switch (getOutOfJailAnswer) {

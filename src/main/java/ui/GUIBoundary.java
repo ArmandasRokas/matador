@@ -189,4 +189,8 @@ public class GUIBoundary {
     public void tellPlayerExtraTurn(int playerID) {
         gui.showMessage("Flyt dem ikke " + playerList[playerID].getName() + "! De har slået dobbelt og fået en ekstra tur!");
     }
+
+    public void informPlayerGoingToJail(int playerID){
+        gui.showMessage(playerList[playerID].getName() + " er blevet taget i at køre for hurtigt, og bliver sat i fængsel!");
+    }
 }
