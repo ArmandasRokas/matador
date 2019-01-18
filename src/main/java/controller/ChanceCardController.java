@@ -54,7 +54,7 @@ public class ChanceCardController {
         shuffleDeck();
     }
 
-    public ChanceCard pickCard() {
+    public ChanceCard pickCard() { //TODO Control if GetOutOfJailCC's are on the hand of a player, skip to next card if it is
         if (cardsPicked == cardDeck.length) {
             shuffleDeck();
             cardsPicked = 0;
@@ -90,6 +90,7 @@ public class ChanceCardController {
     public void handleChanceCard(GetOutOfJailCC chanceCard, PlayerController playerCtrl) {
         guiB.showChanceCard(chanceCard.getCardText());
         playerCtrl.giveOutOfJailCard();
+        chanceCard.setInDeck(false);
     }
 
     public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
@@ -100,7 +101,7 @@ public class ChanceCardController {
     public void handleChanceCard(MovePlayerToSquareCC chanceCard, PlayerController playerCtrl) {
         guiB.showChanceCard(chanceCard.getCardText());
         guiB.showCurrScenarioForPlayer(playerCtrl.getCurrScenarioForPlayer());
-        playerCtrl.movePlayerToSquare(chanceCard.getSquarePosition());
+        playerCtrl.movePlayerToSquare(chanceCard.getSquarePosition(), chanceCard.isToPrison());
         gameBoardCtrl.actOnSquare(playerCtrl);
     }
 

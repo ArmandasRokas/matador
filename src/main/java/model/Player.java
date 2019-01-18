@@ -5,7 +5,7 @@ import model.square.property.PropertySquare;
 
 public class Player {
     private String name;
-    private int playerID, balance, currentPosition, getOutOfPrisonCards;
+    private int playerID, balance, currentPosition, getOutOfJailCards;
     private PropertySquare[] properties;
     private boolean isBankrupt;
     private boolean isCurrPlayerInJail;
@@ -19,7 +19,7 @@ public class Player {
         this.isCurrPlayerInJail = false;
         this.turnsTakenInJail = 0;
         currentPosition = 0;
-        getOutOfPrisonCards = 0;
+        getOutOfJailCards = 0;
         properties = new PropertySquare[28];
     }
 
@@ -87,6 +87,7 @@ public class Player {
 
     public void increaseTurnsTakenInJail() { turnsTakenInJail++; }
 
+    public int getGetOutOfJailCards() { return getOutOfJailCards; }
 
     public int getTurnsTakenInJail() {
         return turnsTakenInJail;

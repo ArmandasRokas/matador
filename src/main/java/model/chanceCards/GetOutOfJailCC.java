@@ -15,4 +15,12 @@ public class GetOutOfJailCC extends ChanceCard {
     public void pickedCard(ChanceCardController cardCtrl, PlayerController playerCtrl) {
         cardCtrl.handleChanceCard(this, playerCtrl);
     }
+
+    public boolean isInDeck() {
+        return inDeck;
+    }
+
+    public void setInDeck(boolean inDeck) {
+        this.inDeck = inDeck;
+    }
 }

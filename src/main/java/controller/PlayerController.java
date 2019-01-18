@@ -49,7 +49,7 @@ public class PlayerController {
         if(newPosition < 0) {
             newPosition = 40 + newPosition;
         }
-        currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
+        currPlayer.setPosition(newPosition);
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
         if(canPassStart && gL.passStart(currPosition, newPosition)) {
@@ -57,10 +57,14 @@ public class PlayerController {
         }
     }
 
-    public void movePlayerToSquare(int index){
+    public void movePlayerToSquare(int newPosition, boolean canPassStart){
         int currPosition = currPlayer.getCurrentPosition();
-        currPlayer.setPosition(index);
-        guiB.movePlayer(currPosition, index, getCurrPlayerID());
+        currPlayer.setPosition(newPosition);
+        guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
+
+        if(canPassStart && gL.passStart(currPosition, newPosition)) {
+            havePassedStart();
+        }
     }
 
     private void havePassedStart() {
@@ -178,5 +182,13 @@ public class PlayerController {
 
     public boolean getIsCurrPlayerInJail() {
         return currPlayer.getIsCurrPlayerInJail();
+    }
+
+    public boolean hasGetOutOfJailCard() {
+        return currPlayer.getGetOutOfJailCards() > 0;
+    }
+
+    public int getTurnsInJail() {
+        return currPlayer.getTurnsTakenInJail();
     }
 }

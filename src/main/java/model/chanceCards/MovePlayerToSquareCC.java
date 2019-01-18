@@ -4,7 +4,6 @@ import controller.ChanceCardController;
 import controller.PlayerController;
 
 public class MovePlayerToSquareCC extends ChanceCard {
-//    private String destinationName;
     private boolean toPrison;
     private int squareIndex;
 
@@ -21,5 +20,9 @@ public class MovePlayerToSquareCC extends ChanceCard {
 
     public int getSquarePosition() {
         return squareIndex;
+    }
+
+    public boolean isToPrison() {
+        return toPrison;
     }
 }
