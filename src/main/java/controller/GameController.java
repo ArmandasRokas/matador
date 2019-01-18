@@ -72,6 +72,9 @@ public class GameController {
                 case 1:
                     buyHousing();
                     break;
+                case 2:
+                    sellHousing();
+                    break;
             }
         }
     }
@@ -87,6 +90,9 @@ public class GameController {
                     break;
                 case 1:
                     buyHousing();
+                    break;
+                case 2:
+                    sellHousing();
                     break;
             }
         }
