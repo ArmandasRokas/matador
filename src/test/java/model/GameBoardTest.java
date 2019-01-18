@@ -2,6 +2,7 @@ package model;
 
 import controller.BankruptController;
 import controller.ChanceCardController;
+import controller.GameBoardController;
 import controller.PropertyController;
 import model.square.Square;
 import model.square.property.PropertySquare;
@@ -17,6 +18,7 @@ class GameBoardTest {
     private ChanceCardController chanceCardController;
     private PropertyController propertyController;
     private BankruptController bankruptController;
+    private GameBoardController gameBoardCtrl;
     private MockGUI mockGUI;
     private GameBoard gameBoard;
     private Square[] squares;
@@ -26,7 +28,8 @@ class GameBoardTest {
         //Arrange
         mockGUI = new MockGUI();
         bankruptController = new BankruptController(mockGUI);
-        chanceCardController = new ChanceCardController(mockGUI);
+        gameBoardCtrl = new GameBoardController(mockGUI);
+        chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         propertyController = new PropertyController(mockGUI, bankruptController);
 
         gameBoard = new GameBoard();

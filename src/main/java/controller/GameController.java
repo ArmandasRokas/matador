@@ -184,6 +184,6 @@ public class GameController {
         this.bankruptCtrl = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl);
-        this.chanceCardCtrl = new ChanceCardController(guiB);
+        this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl);
     }
 }

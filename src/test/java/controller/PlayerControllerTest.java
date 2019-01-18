@@ -15,14 +15,17 @@ class PlayerControllerTest {
     PlayerController playerController;
     BankruptController bankruptController;
     PropertyController propertyController;
+    GameBoardController gameBoardCtrl;
     ChanceCardController cardController;
     GameBoard gameBoard ;
+
     @BeforeEach
     void setUp(){
         mockGUI = new MockGUI();
         gameLogic = new GameLogic();
         bankruptController = new BankruptController(mockGUI);
-        cardController = new ChanceCardController(mockGUI);
+        gameBoardCtrl = new GameBoardController(mockGUI);
+        cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
         propertyController = new PropertyController(mockGUI,bankruptController);
         playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);

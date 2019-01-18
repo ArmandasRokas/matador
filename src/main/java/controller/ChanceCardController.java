@@ -11,11 +11,13 @@ import java.util.Random;
 
 public class ChanceCardController {
     private GUIBoundary guiB;
+    private GameBoardController gameBoardCtrl;
     private ChanceCard cardDeck[];
     private int cardsPicked;
 
-    public ChanceCardController(GUIBoundary guiB) {
+    public ChanceCardController(GUIBoundary guiB, GameBoardController gameBoardCtrl) {
         this.guiB = guiB;
+        this.gameBoardCtrl = gameBoardCtrl;
         createDeck();
         cardsPicked = 0;
     }
@@ -28,7 +30,7 @@ public class ChanceCardController {
         cardDeck[2] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. Behold dette kort indtil De får brug for det.");
         cardDeck[3] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. Behold dette kort indtil De får brug for det.");
         cardDeck[4] = new MovePlayerToSquareCC("Tag med Øresundsbåden - Hvis de passerer 'Start' indkasserer de 200kr", false, 5);
-        cardDeck[5] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false, 40);
+        cardDeck[5] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false, 39);
         cardDeck[6] = new MovePlayerToSquareCC("Ryk frem til Frederiksbergálle . Hvis de passerer 'Start' indkasserer de 200kr", false, 11);
         cardDeck[7] = new MovePlayerToSquareCC("Ryk frem til Grønningen. Hvis de passerer 'Start' indkasserer de 200kr", false, 24);
         cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
@@ -49,7 +51,7 @@ public class ChanceCardController {
         cardDeck[23] = new MoneyInfluenceCC("De har solgt Deres gamle klude. Modtag 20kr", 20);
         cardDeck[24] = new MoneyInfluenceCC("Kommunen har eftergivet et kvartals skat. Hæv i banken til en glad aften 200kr", 200);
 
-        shuffleDeck();
+//        shuffleDeck();
     }
 
     public ChanceCard pickCard() {
@@ -103,7 +105,8 @@ public class ChanceCardController {
         playerCtrl.setCurrScenarioForPlayer("");
         guiB.showChanceCard(chanceCard.getCardText());
         //TODO
-
+        playerCtrl.movePlayerToSquare(chanceCard.getSquarePosition());
+        gameBoardCtrl.actOnSquare(playerCtrl);
     }
 
     public void handleChanceCard(MovePlayer3SquaresBackCC chanceCard, PlayerController playerCtrl) {
