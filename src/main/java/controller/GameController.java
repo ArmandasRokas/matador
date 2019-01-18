@@ -116,7 +116,7 @@ public class GameController {
         int getOutOfJailAnswer = guiB.getOutOfJail(plCtrl);
 
         switch (getOutOfJailAnswer) {
-            case 1:
+            case 0:
                 throwDices();
                 if (cup.getEyesDie1() == cup.getEyesDie2()) {
                     plCtrl.setCurrPlayerIsInJail(false);
@@ -144,7 +144,7 @@ public class GameController {
                 }
                 break;
 
-            case 2:
+            case 1:
                 plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
                 guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                 plCtrl.currPlayerMoneyInfluence(-50);
