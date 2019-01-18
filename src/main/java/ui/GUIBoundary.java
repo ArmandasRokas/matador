@@ -61,14 +61,14 @@ public class GUIBoundary {
     public int takeTurn(PlayerController plCtrl) {
         String[] buttons = mainMenuButtons();
         buttons[0] = "Kast Terninger";
-        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil kaste terningerne eller administerer dine grunde", buttons[0], buttons[1]);
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil kaste terningerne eller administerer dine grunde", buttons[0], buttons[1],buttons[2] );
         return getUserChoice(buttons, res);
     }
 
     public int endTurn(PlayerController plCtrl) {
         String[] buttons = mainMenuButtons();
         buttons[0] = "Afslut Tur";
-        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil afslutte din tur eller administerer dine grunde",buttons[0], buttons[1]);
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil afslutte din tur eller administerer dine grunde",buttons[0], buttons[1], buttons[2]);
         return getUserChoice(buttons, res);
     }
 

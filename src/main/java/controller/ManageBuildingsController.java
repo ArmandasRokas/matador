@@ -21,14 +21,7 @@ public class ManageBuildingsController {
 
     public boolean buyHouse(PlayerController plCtrl, String squareName) {
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
-        Square square = squareList[squareIndex];
-        StreetSquare street;
-        if(square instanceof StreetSquare){
-            street = (StreetSquare) square;
-        } else {
-            plCtrl.setCurrScenarioForPlayer("Der er sket en fejl, kontakt tekniker");
-            return false;
-        }
+        StreetSquare street = (StreetSquare) squareList[squareIndex];
 
         if(street.getNumberOfHouses() == 5) {
             plCtrl.setCurrScenarioForPlayer("Der er allerede ét hotel på denne grund!");
@@ -54,14 +47,7 @@ public class ManageBuildingsController {
 
     public boolean sellHouse(PlayerController plCtrl, String squareName){
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
-        Square square = squareList[squareIndex];
-        StreetSquare street;
-        if(square instanceof StreetSquare){
-            street = (StreetSquare) square;
-        } else {
-            plCtrl.setCurrScenarioForPlayer("Der er sket en fejl, kontakt tekniker");
-            return false;
-        }
+        StreetSquare street = (StreetSquare) squareList[squareIndex];
 
         street.sellAHouse();
 
@@ -69,6 +55,7 @@ public class ManageBuildingsController {
         plCtrl.currPlayerMoneyInfluence(sellPrice);
         plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + ", du får " + sellPrice + " for at sælge din bygning på " + squareName);
         gui.setHousing(squareIndex, street.getNumberOfHouses());
+        gui.updateRentPrice(street.getIndex(), street.getRentPrice());
         return true;
     }
 
