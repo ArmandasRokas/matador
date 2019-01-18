@@ -7,6 +7,7 @@ import model.GameBoard;
 import model.Player;
 import model.square.Square;
 import model.square.property.StreetSquare;
+import controller.GameController;
 
 import java.awt.Color;
 
@@ -93,9 +94,11 @@ public class GUIBoundary {
                 break;
         }
 
-//        if (extraTurnCount == 2 %% cup.getEyesDie1() == cup.getEyesDie2()){
-//            playerCtrl.moveToJail(playerCtrl.currPlayer());
-//        }
+        GameController gmCtrl = new GameController();
+        if(extraTurnCount == 2) {
+            gmCtrl.movePlayerToPrison();
+        }
+
 
         return switchRes;
     }

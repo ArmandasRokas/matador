@@ -14,8 +14,8 @@ public class Cup {
      * Constructor of Cup
      */
     public Cup(){
-        this.d1 = new Die(1,6);
-        this.d2 = new Die(1,6);
+        this.d1 = new Die(1,1);
+        this.d2 = new Die(1,1);
     }
 
     /**
@@ -47,16 +47,14 @@ public class Cup {
 
     public boolean getIfSameFacevaluePrevious2Turns() {
         boolean[] extraTurnList = new boolean[2];
-        int i = 0;
 
-        while(i < extraTurnList.length){
-           if(getEyesDie1() == getEyesDie2()){
-               extraTurnList[i] = true;
-               i++;
-           } else{
-               extraTurnList[i] = false;
-               break;
-           }
+        for(int i = 0; i < extraTurnList.length; i++){
+            if(getEyesDie1() == getEyesDie2()){
+                extraTurnList[i] = true;
+            } else{
+                extraTurnList[i] = false;
+                break;
+            }
         }
 
         if(extraTurnList[0] && extraTurnList[1]){

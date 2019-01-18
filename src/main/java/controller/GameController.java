@@ -25,6 +25,8 @@ public class GameController {
 
     }
 
+
+
     public void startGame() {
         int numberOfPlayers;
         do {
@@ -129,5 +131,22 @@ public class GameController {
         //TODO ARM setGUIBoard(String[] gameBoardController.getSquaresNames()) in order to fix danish letters bug.
 
 //        guiB.setUpGUIFields(boardCtrl.getSquareNames());
+    }
+
+    public boolean getTrueIfsameFacevalue() {
+        if(cup.getEyesDie1() == cup.getEyesDie2()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public void movePlayerToPrison(){
+        if (getTrueIfsameFacevalue()){
+            plCtrl.currPlayerMoneyInfluence(50000);
+        } else {
+            plCtrl.currPlayerMoneyInfluence(-300);
+        }
+
     }
 }
