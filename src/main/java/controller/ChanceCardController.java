@@ -51,7 +51,7 @@ public class ChanceCardController {
         cardDeck[23] = new MoneyInfluenceCC("De har solgt Deres gamle klude. De har modtaget 20kr", 20);
         cardDeck[24] = new MoneyInfluenceCC("Kommunen har eftergivet et kvartals skat. De har hævet 200kr i banken til en glad aften", 200);
 
-//        shuffleDeck();
+        shuffleDeck();
     }
 
     public ChanceCard pickCard() {
