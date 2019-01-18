@@ -177,9 +177,9 @@ public class GUIBoundary {
     }
 
     public void updateRentPrice(int squareIndex, int rentPrice) {
-        GUI_Street street = (GUI_Street)fieldList[squareIndex];
-        street.setRent(""+rentPrice);
-        street.setSubText("Leje: " + rentPrice);
+        GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
+        ownable.setRent(""+rentPrice);
+        ownable.setSubText("Leje: " + rentPrice);
     }
 
     public void showChanceCard(String cardText) {
