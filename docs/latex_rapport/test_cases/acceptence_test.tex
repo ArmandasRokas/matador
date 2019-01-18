@@ -1,0 +1,70 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{tgbonum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\newlist{tabenum}{enumerate}{1}
+\setlist[tabenum]{label=\arabic*. ,wide=0pt, leftmargin=*, nosep, itemsep=2pt, font = \bfseries, after=\vspace{-\baselineskip}, before=\compress}
+\usepackage{array, booktabs}
+\makeatletter
+\newcommand*{\compress}{\@minipagetrue}
+\makeatother
+\usepackage{paralist}
+\makeatletter
+\let\savespace\@minipagetrue
+\makeatother
+
+
+
+% Document
+\begin{document}
+
+    \begin{table}[H]
+        \caption{Acceptance test på UC7: Sælg bygning }
+        \begin{tabularx}{\textwidth}{|X|l|}
+            \hline
+            \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
+            Indsætter et korrekt beløb på spillerens konto ved salg af hus     & JA \\ \hline
+            Må ikke kunne sælges, så der er ujævn fordeling     & JA \\ \hline
+            Huset fjernes fra grunden på spillepladen     & JA \\ \hline
+            Lejeprisen opdateres     & JA \\ \hline
+        \end{tabularx}
+    \end{table}
+
+    \begin{table}[H]
+        \caption{Acceptance test på UC8: byg hus}
+        \begin{tabularx}{\textwidth}{|X|l|}
+            \hline
+            \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
+            Må kun bygges på grunde, hvor alle ejendomme i gruppen er ejer af den samme spiller     & JA \\ \hline
+            Tilføjer en hus på grunden på spillepladen     & JA \\ \hline
+            Maksimum 4 huse må bygges på en grund     & JA \\ \hline
+            Må ikke kunne bygges ujævnt     & JA \\ \hline
+            Trækkes et korrekt beløb fra spillerens konto ved køb af hus     & JA \\ \hline
+            Lejeprisen opdateres     & JA \\ \hline
+        \end{tabularx}
+    \end{table}
+
+
+
+
+
+
+    \begin{table}[H]
+        \caption{Acceptance test på UC10: Gå fallit }
+        \begin{tabularx}{\textwidth}{|X|l|}
+            \hline
+            \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
+            Overføres grundene, som er ejet af spilleren til en kreditor (enten den anden spiller, som spilleren, der går fallit skylder penge, eller banken)     & JA \\ \hline
+            Grundenes rammefarve opdateres til den nye ejers farve på spillepladen     & JA \\ \hline
+            Lejeprisen på felter updates, hvis de overførte grunde fra en spiller, der er gået fallit gør at alle felter i en gruppe ejes (opdateres også på spillepladen)     & JA \\ \hline
+            Hvis alle undtagen en spiller er gået fallit, udnævnes en vinder    & JA \\ \hline
+        \end{tabularx}
+    \end{table}
+
+\end{document}
