@@ -52,9 +52,9 @@ class PlayerControllerTest {
         propertyController.buyProperty(rødovrevej, playerController);
         propertyController.buyProperty(hvidovrevej, playerController);
 
-
+        ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameBoard);
         //Act
-        int[] streetSquaresPossibleToBuildIndexes = playerController.getCurrPlayerSquarePossibleToBuild();
+        int[] streetSquaresPossibleToBuildIndexes = mbController.getCurrPlayerSquarePossibleToBuild(playerController);
 
 
         StreetSquare[] streetSquaresPossibleToBuild = new StreetSquare[2];

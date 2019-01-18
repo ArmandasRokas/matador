@@ -97,7 +97,7 @@ public class GameController {
         GameBoard gameBoard = boardCtrl.getGameBoard();
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
         while(stillBuying) {
-            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
             String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
             switch (res) {
                 case "exit": //exit
@@ -110,6 +110,10 @@ public class GameController {
                     break;
             }
         }
+    }
+
+    private void sellHousing(){
+
     }
 
     private void inPrison() {
