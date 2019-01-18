@@ -179,4 +179,15 @@ public class PlayerController {
     public boolean getIsCurrPlayerInJail() {
         return currPlayer.getIsCurrPlayerInJail();
     }
+
+    public void payIncomeTax() {
+        int incomeTaxAnswer  = guiB.incomeTax(this);
+        switch (incomeTaxAnswer){
+            case 0:
+
+                break;
+            case 1:  currPlayerMoneyInfluence(-200);
+        }
+
+    }
 }

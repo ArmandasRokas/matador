@@ -118,6 +118,20 @@ public class GUIBoundary {
         }
         return jailRes;
     }
+    public int incomeTax(PlayerController plCtrl    ){
+        String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af hans værdier, eller betale 200kr.";
+        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200");
+        int taxRes = 0;
+        switch (buttonChoice){
+            case "Betal 10%":
+                taxRes = 0;
+                break;
+            case "Betal 200kr":
+                taxRes = 1;
+            break;
+        }
+        return taxRes;
+    }
 
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);

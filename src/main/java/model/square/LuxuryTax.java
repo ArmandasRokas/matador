@@ -11,6 +11,6 @@ public class LuxuryTax extends Square {
     public void landedOn(PlayerController playerController) {
 
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
-
+        playerController.currPlayerMoneyInfluence(-100);
     }
 }
