@@ -38,7 +38,8 @@ public class GameController {
             if (plCtrl.getIsCurrPlayerInJail()) {
                 inPrison();
             } else {
-                showMenu();
+                showBeforeTurnMenu();
+                showAfterTurnMenu();
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
 
                 if (p != null) {
@@ -48,6 +49,8 @@ public class GameController {
 
                 if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt()) {
                     plCtrl.changePlayer();
+                } else {
+                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
                 }
             }
 
@@ -55,16 +58,43 @@ public class GameController {
         askForNewGame();
     }
 
-    private void showMenu(){
-        int res = guiB.takeTurn(plCtrl);
-        switch (res) {
-            case 1:
-                throwDices();
-                takeTurn();
-                break;
-            case 2:
-                buyHousing();
-                break;
+    private void showBeforeTurnMenu(){
+        boolean takenTurn = false;
+
+        while(!takenTurn) {
+            int res = guiB.takeTurn(plCtrl);
+            switch (res) {
+                case 0:
+                    throwDices();
+                    takeTurn();
+                    takenTurn = true;
+                    break;
+                case 1:
+                    buyHousing();
+                    break;
+                case 2:
+                    sellHousing();
+                    break;
+            }
+        }
+    }
+
+    private void showAfterTurnMenu() {
+        boolean endTurn = false;
+
+        while(!endTurn) {
+            int res = guiB.endTurn(plCtrl);
+            switch (res) {
+                case 0:
+                    endTurn = true;
+                    break;
+                case 1:
+                    buyHousing();
+                    break;
+                case 2:
+                    sellHousing();
+                    break;
+            }
         }
     }
 
@@ -73,7 +103,7 @@ public class GameController {
         GameBoard gameBoard = boardCtrl.getGameBoard();
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
         while(stillBuying) {
-            int[] possibleStreets = plCtrl.getCurrPlayerSquarePossibleToBuild();
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
             String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
             switch (res) {
                 case "exit": //exit
@@ -86,7 +116,26 @@ public class GameController {
                     break;
             }
         }
-        showMenu(); //FixMe KNA vil gerne have den her droppet
+    }
+
+    private void sellHousing(){
+        boolean stillSelling = true;
+        GameBoard gameBoard = boardCtrl.getGameBoard();
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        while(stillSelling) {
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
+            String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
+            switch (res) {
+                case "exit": //exit
+                    stillSelling = false;
+                    break;
+                default:
+                    //sælge hus
+                    mbCtrl.sellHouse(plCtrl, res);
+                    guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
+                    break;
+            }
+        }
     }
 
     private void inPrison() {

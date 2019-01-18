@@ -3,11 +3,6 @@ package ui;
 import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
-import model.GameBoard;
-import model.Player;
-import model.square.Square;
-import model.square.property.StreetSquare;
-
 import java.awt.Color;
 
 public class GUIBoundary {
@@ -59,23 +54,34 @@ public class GUIBoundary {
         playerList[playerID].setName(playerList[playerID].getName() + " (gået fallit)");
     }
 
-    public int takeTurn(PlayerController plCtrl) {
-        //FIXME show which player has a turn.
-        String message = "Det er " + plCtrl.getCurrPlayerName() + "s tur. ";
-        String res = gui.getUserButtonPressed(message + "Vælg om du vil kaste terningerne eller administerer dine grunde","Kast terninger", "Køb huse");
-        int switchRes = 0;
-        switch (res){
-            case "Kast terninger":
-                switchRes = 1;
-                break;
-            case "Køb huse":
-                switchRes = 2;
-                break;
-        }
-
-        return switchRes;
+    private String[] mainMenuButtons() {
+        return new String[]{"[FIRST OPTION]", "Køb Huse", "Sælg Huse", "Pantsæt Grunde"};
     }
 
+    public int takeTurn(PlayerController plCtrl) {
+        String[] buttons = mainMenuButtons();
+        buttons[0] = "Kast Terninger";
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil kaste terningerne eller administerer dine grunde", buttons[0], buttons[1],buttons[2] );
+        return getUserChoice(buttons, res);
+    }
+
+    public int endTurn(PlayerController plCtrl) {
+        String[] buttons = mainMenuButtons();
+        buttons[0] = "Afslut Tur";
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil afslutte din tur eller administerer dine grunde",buttons[0], buttons[1], buttons[2]);
+        return getUserChoice(buttons, res);
+    }
+
+    public int getUserChoice(String[] buttons, String res) {
+        int choice = -1;
+
+        for(int i = 0 ; i < buttons.length ; i++) {
+            if(buttons[i].equals(res)) {
+                choice = i;
+            }
+        }
+        return choice;
+    }
 
     public String administrateProperties(int[] possibleStreets) {
         int count = 0;
@@ -185,12 +191,16 @@ public class GUIBoundary {
     }
 
     public void updateRentPrice(int squareIndex, int rentPrice) {
-        GUI_Street street = (GUI_Street)fieldList[squareIndex];
-        street.setRent(""+rentPrice);
-        street.setSubText("Leje: " + rentPrice);
+        GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
+        ownable.setRent(""+rentPrice);
+        ownable.setSubText("Leje: " + rentPrice);
     }
 
     public void showChanceCard(String cardText) {
         gui.displayChanceCard(cardText);
+    }
+
+    public void tellPlayerExtraTurn(int playerID) {
+        gui.showMessage("Flyt dem ikke " + playerList[playerID].getName() + "! De har slået dobbelt og fået en ekstra tur!");
     }
 }

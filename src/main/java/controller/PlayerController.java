@@ -7,6 +7,7 @@ import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class PlayerController {
     private Player[] playerList;
@@ -68,24 +69,8 @@ public class PlayerController {
         guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
 
-    public int[] getCurrPlayerSquarePossibleToBuild(){
-        int[] squaresPossibleToBuild = new int[28];
 
-        for(PropertySquare property: currPlayer.getProperties()){
-            if(property instanceof StreetSquare) {
-                StreetSquare street = (StreetSquare) property;
-                if(street.isSetOwned()){
-                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
-                        if(squaresPossibleToBuild[i] == 0){
-                            squaresPossibleToBuild[i] = street.getIndex();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return squaresPossibleToBuild;
-    }
+
 
     public void changePlayer() {
             do{
