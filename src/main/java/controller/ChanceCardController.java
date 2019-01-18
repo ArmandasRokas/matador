@@ -88,14 +88,12 @@ public class ChanceCardController {
     public void handleChanceCard(GetOutOfJailCC chanceCard, PlayerController playerCtrl) {
         playerCtrl.setCurrScenarioForPlayer("");
         guiB.showChanceCard(chanceCard.getCardText());
-        //TODO
         playerCtrl.giveOutOfJailCard();
     }
 
     public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
         playerCtrl.setCurrScenarioForPlayer("");
         guiB.showChanceCard(chanceCard.getCardText());
-        //TODO
         playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
     }
 
@@ -103,13 +101,13 @@ public class ChanceCardController {
         playerCtrl.setCurrScenarioForPlayer("");
         guiB.showChanceCard(chanceCard.getCardText());
         //TODO
+        playerCtrl.movePlayerToSquare(chanceCard.getDestinationIndex(), chanceCard.goingToPrison());
 
     }
 
     public void handleChanceCard(MovePlayer3SquaresBackCC chanceCard, PlayerController playerCtrl) {
         playerCtrl.setCurrScenarioForPlayer("");
         guiB.showChanceCard(chanceCard.getCardText());
-        //
         playerCtrl.movePlayer(-3, false);
     }
 }

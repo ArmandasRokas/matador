@@ -37,7 +37,7 @@ public class Cup {
 
     public int getCurrentRollScore() {
         int currRollScore = getEyesDie1() + getEyesDie2();
-        return 1;
+        return 2;
 //        return currRollScore;
     }
 
