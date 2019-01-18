@@ -79,7 +79,7 @@ public class PropertyController {
      */
     public void updateSiblingSquaresRentPrice(PropertySquare propertySquare){
         for (PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
-            if(siblingSquare.isSetOwned()) {
+            if(siblingSquare.getOwner() != null) {
                 guiB.updateRentPrice(siblingSquare.getIndex(), siblingSquare.getRentPrice());
             }
         }

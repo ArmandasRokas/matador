@@ -9,6 +9,8 @@ package model;
  */
 public class Cup {
     private Die d1, d2; //Instances of dices
+    private int nextCupRoll = 0;
+    private int nextDieRoll = 0;
 
     /**
      * Constructor of Cup
@@ -37,17 +39,31 @@ public class Cup {
 
     public int getCurrentRollScore() {
         int currRollScore = getEyesDie1() + getEyesDie2();
-        return 30;
+//        return 30;
+        return nextIntCup();
 //        return currRollScore;
+    }
+
+    private int nextIntCup() {
+        int[] rolls = new int[]{5, 10, 5, 5, 5, 5};
+        int i = rolls[nextCupRoll++];
+        return i;
     }
 
 
     public int getEyesDie1() {
-        return d1.getEyes();
-//        return 1;
+//        return d1.getEyes();
+        return 1;
     }
     public int getEyesDie2() {
-        return d2.getEyes();
+//        return d2.getEyes();
 //        return 1;
+        return nextIntDie();
+    }
+
+    private int nextIntDie() {
+        int[] rolls = new int[]{1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,};
+        int i = rolls[nextDieRoll++];
+        return i;
     }
 }
