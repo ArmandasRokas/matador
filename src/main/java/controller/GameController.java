@@ -39,7 +39,9 @@ public class GameController {
                 inJail();
             } else {
                 showBeforeTurnMenu();
-                showAfterTurnMenu();
+                if(!plCtrl.getIsCurrPlayerInJail()){
+                    showAfterTurnMenu();
+                }
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
 
                 if (p != null) {

@@ -82,11 +82,7 @@ public class PlayerController {
     }
 
     public boolean checkForSpeeding(){
-        boolean res = false;
-        if(currPlayerExtraTurnCount == 3){
-            res = true;
-        }
-        return res;
+        return currPlayerExtraTurnCount == 3;
     }
 
     public void changePlayer() {
