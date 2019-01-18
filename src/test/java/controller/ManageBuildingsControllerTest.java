@@ -13,19 +13,21 @@ class ManageBuildingsControllerTest {
     MockGUI mockGUI ;
     GameLogic gameLogic ;
     PlayerController playerController;
-    BankruptController bankruptController;
-    PropertyController propertyController;
+    BankruptController bankruptCtrl;
+    PropertyController propertyCtrl;
     ChanceCardController cardController;
+    GameBoardController gameBoardCtrl;
     GameBoard gameBoard ;
     @BeforeEach
     void setUp() {
         mockGUI = new MockGUI();
         gameLogic = new GameLogic();
-        bankruptController = new BankruptController(mockGUI);
-        cardController = new ChanceCardController(mockGUI);
+        bankruptCtrl = new BankruptController(mockGUI);
+        gameBoardCtrl = new GameBoardController(mockGUI);
+        cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
-        propertyController = new PropertyController(mockGUI, bankruptController);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);
+        propertyCtrl = new PropertyController(mockGUI, bankruptCtrl);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyCtrl, cardController);
         playerController.createPlayers();
 
     }
@@ -37,8 +39,8 @@ class ManageBuildingsControllerTest {
         StreetSquare hvidovrevej = (StreetSquare) gameBoard.getSquareList()[3];
 
 
-        propertyController.buyProperty(rødovrevej, playerController);
-        propertyController.buyProperty(hvidovrevej, playerController);
+        propertyCtrl.buyProperty(rødovrevej, playerController);
+        propertyCtrl.buyProperty(hvidovrevej, playerController);
 
         ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameBoard);
         //Act
