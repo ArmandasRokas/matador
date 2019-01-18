@@ -80,14 +80,22 @@ public class GUIBoundary {
         String message = "Det er " + plCtrl.getCurrPlayerName() + "s tur. ";
         String res = gui.getUserButtonPressed(message + "Vælg om du vil kaste terningerne eller administerer dine grunde","Kast terninger", "Køb huse");
         int switchRes = 0;
+
+        int extraTurnCount = 0;
+
         switch (res){
             case "Kast terninger":
                 switchRes = 1;
+                extraTurnCount++;
                 break;
             case "Køb huse":
                 switchRes = 2;
                 break;
         }
+
+//        if (extraTurnCount == 2 %% cup.getEyesDie1() == cup.getEyesDie2()){
+//            playerCtrl.moveToJail(playerCtrl.currPlayer());
+//        }
 
         return switchRes;
     }
