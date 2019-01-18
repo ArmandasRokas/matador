@@ -51,6 +51,16 @@ public class GameController {
         }
         askForNewGame();
     }
+    private boolean checkForSpeeding(){
+        boolean res = false;
+        if(plCtrl.getCurrPlayerExtraTurnCount() == 3){
+            guiB.informPlayerGoingToJail(plCtrl.getCurrPlayerID());
+            plCtrl.setCurrPlayerIsInJail(true);
+            plCtrl.movePlayerToSquare(10, false);
+            res = true;
+        }
+        return res;
+    }
 
     private void checkForExtraRoundOrChangePlayer() {
         if (plCtrl.getCurrPlayer().getBankrupt()){
@@ -59,12 +69,10 @@ public class GameController {
         } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
             plCtrl.changePlayer();
             plCtrl.resetCurrPlayerExtraTurnCount();
-        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 2) {
+        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 3){
             guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-            plCtrl.addOneCurrPlayerExtraTurnCount();
-        } else if(cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 2){
-            guiB.informPlayerGoingToJail(plCtrl.getCurrPlayerID());
-            plCtrl.setCurrPlayerIsInJail(true);
+
+        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 3){
             plCtrl.changePlayer();
             plCtrl.resetCurrPlayerExtraTurnCount();
         }
@@ -78,6 +86,10 @@ public class GameController {
             switch (res) {
                 case 0:
                     throwDices();
+                    if(checkForSpeeding()){
+                        takenTurn = true;
+                        break;
+                    }
                     takeTurn();
                     takenTurn = true;
                     break;
@@ -109,6 +121,7 @@ public class GameController {
             }
         }
     }
+
 
     private void buyHousing() {
         boolean stillBuying = true;
@@ -197,6 +210,10 @@ public class GameController {
     private void throwDices() { //FixMe Skal være void?
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
+
+        if (cup.getEyesDie1() == cup.getEyesDie2()) {
+            plCtrl.addOneCurrPlayerExtraTurnCount();
+        }
     }
 
     private void takeTurn() {
