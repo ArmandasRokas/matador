@@ -76,7 +76,7 @@ public class GUIBoundary {
         int choice = -1;
 
         for(int i = 0 ; i < buttons.length ; i++) {
-            if(buttons[i].matches(res)) {
+            if(buttons[i].equals(res)) {
                 choice = i;
             }
         }
