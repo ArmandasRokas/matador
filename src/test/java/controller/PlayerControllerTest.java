@@ -1,5 +1,6 @@
 package controller;
 
+import model.Cup;
 import model.GameBoard;
 import model.Player;
 import model.square.property.StreetSquare;
@@ -18,6 +19,7 @@ class PlayerControllerTest {
     GameBoardController gameBoardCtrl;
     ChanceCardController cardController;
     GameBoard gameBoard ;
+    Cup cup;
 
     @BeforeEach
     void setUp(){
@@ -27,7 +29,8 @@ class PlayerControllerTest {
         gameBoardCtrl = new GameBoardController(mockGUI);
         cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
-        propertyController = new PropertyController(mockGUI,bankruptController);
+        cup = new Cup();
+        propertyController = new PropertyController(mockGUI,bankruptController, cup);
         playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController);
         playerController.createPlayers();
     }

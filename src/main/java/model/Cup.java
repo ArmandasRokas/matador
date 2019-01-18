@@ -45,7 +45,7 @@ public class Cup {
     }
 
     private int nextIntCup() {
-        int[] rolls = new int[]{5, 10, 5, 5, 5, 5};
+        int[] rolls = new int[]{12, 16, 12, 10, 5, 5};
         int i = rolls[nextCupRoll++];
         return i;
     }
@@ -62,7 +62,7 @@ public class Cup {
     }
 
     private int nextIntDie() {
-        int[] rolls = new int[]{1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,};
+        int[] rolls = new int[]{1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,};
         int i = rolls[nextDieRoll++];
         return i;
     }

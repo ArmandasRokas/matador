@@ -18,8 +18,5 @@ public class Transport extends PropertySquare {
             }
         }
         return rentPrice;
-//        return super.getRentPriceList()[0];
-        //TODO Hvis man ejer flere transportfelter stiger lejeprisen
     }
-
 }
