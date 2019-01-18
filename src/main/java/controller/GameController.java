@@ -51,16 +51,7 @@ public class GameController {
         }
         askForNewGame();
     }
-    private boolean checkForSpeeding(){
-        boolean res = false;
-        if(plCtrl.getCurrPlayerExtraTurnCount() == 3){
-            guiB.informPlayerGoingToJail(plCtrl.getCurrPlayerID());
-            plCtrl.setCurrPlayerIsInJail(true);
-            plCtrl.movePlayerToSquare(10, false);
-            res = true;
-        }
-        return res;
-    }
+
 
     private void checkForExtraRoundOrChangePlayer() {
         if (plCtrl.getCurrPlayer().getBankrupt()){
@@ -86,7 +77,8 @@ public class GameController {
             switch (res) {
                 case 0:
                     throwDices();
-                    if(checkForSpeeding()){
+                    if(plCtrl.checkForSpeeding()){
+                        plCtrl.setCurrPlayerToJail();
                         takenTurn = true;
                         break;
                     }

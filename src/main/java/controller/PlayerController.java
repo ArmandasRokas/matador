@@ -75,7 +75,19 @@ public class PlayerController {
     }
 
 
+    public void setCurrPlayerToJail(){
+        guiB.informPlayerGoingToJail(getCurrPlayerID());
+        this.setCurrPlayerIsInJail(true);
+        this.movePlayerToSquare(10, false);
+    }
 
+    public boolean checkForSpeeding(){
+        boolean res = false;
+        if(currPlayerExtraTurnCount == 3){
+            res = true;
+        }
+        return res;
+    }
 
     public void changePlayer() {
             do{
