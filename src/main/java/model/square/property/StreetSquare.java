@@ -41,7 +41,7 @@ public class StreetSquare extends PropertySquare {
         return housePrice;
     }
 
-    public boolean isBuildingEvenly() {
+    public boolean isBuyingBuildingsEvenly() {
         boolean res = true;
         for(PropertySquare siblingSquare : getSiblingsSquares()) {
             StreetSquare streetSquare = (StreetSquare)siblingSquare;
@@ -52,5 +52,17 @@ public class StreetSquare extends PropertySquare {
         }
         return res;
     }
+    public boolean isSellingBuildingsEvenly() {
+        boolean res = true;
+        for(PropertySquare siblingSquare : getSiblingsSquares()) {
+            StreetSquare streetSquare = (StreetSquare)siblingSquare;
+            if(getNumberOfHouses() < streetSquare.getNumberOfHouses()) {
+                res = false;
+                break;
+            }
+        }
+        return res;
+    }
+
 }
 

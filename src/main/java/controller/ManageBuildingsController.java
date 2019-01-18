@@ -19,13 +19,13 @@ public class ManageBuildingsController {
         this.gui = gui;
     }
 
-    public boolean buyHouse(PlayerController plCtrl, String squareName) {
+    public void buyHouse(PlayerController plCtrl, String squareName) {
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
         StreetSquare street = (StreetSquare) squareList[squareIndex];
 
         if(street.getNumberOfHouses() == 5) {
             plCtrl.setCurrScenarioForPlayer("Der er allerede ét hotel på denne grund!");
-        } else if(!street.isBuildingEvenly()) {
+        } else if(!street.isBuyingBuildingsEvenly()) {
             plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " kan ikke udvide denne grund før de andre er på samme niveau");
         }
         else if(plCtrl.getCurrPlayerBalance() >= street.getHousePrice() && street.getNumberOfHouses() < 5) {
@@ -41,22 +41,22 @@ public class ManageBuildingsController {
         } else {
             plCtrl.setCurrScenarioForPlayer("Der er sket en fejl, kontakt tekniker");
         }
-
-        return true;
     }
 
-    public boolean sellHouse(PlayerController plCtrl, String squareName){
+    public void sellHouse(PlayerController plCtrl, String squareName){
         int squareIndex = gameBoard.findSquareIndexByName(squareName);
         StreetSquare street = (StreetSquare) squareList[squareIndex];
 
-        street.sellAHouse();
-
-        int sellPrice = street.getHousePrice()/2;
-        plCtrl.currPlayerMoneyInfluence(sellPrice);
-        plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + ", du får " + sellPrice + " for at sælge din bygning på " + squareName);
-        gui.setHousing(squareIndex, street.getNumberOfHouses());
-        gui.updateRentPrice(street.getIndex(), street.getRentPrice());
-        return true;
+        if(!street.isSellingBuildingsEvenly()){
+            plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " kan ikke sælge byggning på denne grund før de andre er på samme niveau.");
+        } else {
+            street.sellAHouse();
+            int sellPrice = street.getHousePrice()/2;
+            plCtrl.currPlayerMoneyInfluence(sellPrice);
+            plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + ", du får " + sellPrice + " for at sælge din bygning på " + squareName);
+            gui.setHousing(squareIndex, street.getNumberOfHouses());
+            gui.updateRentPrice(street.getIndex(), street.getRentPrice());
+        }
     }
 
 
