@@ -62,7 +62,6 @@ public class GameController {
             plCtrl.resetCurrPlayerExtraTurnCount();
         } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 3){
             guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-
         } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 3){
             plCtrl.changePlayer();
             plCtrl.resetCurrPlayerExtraTurnCount();
@@ -202,7 +201,6 @@ public class GameController {
     private void throwDices() { //FixMe Skal være void?
         cup.roll();
         guiB.setDices(cup.getEyesDie1(), cup.getEyesDie2());
-
         if (cup.getEyesDie1() == cup.getEyesDie2()) {
             plCtrl.addOneCurrPlayerExtraTurnCount();
         }
