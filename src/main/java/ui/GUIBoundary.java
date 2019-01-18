@@ -110,19 +110,15 @@ public class GUIBoundary {
     }
 
     public int getOutOfJail(PlayerController plCtrl){
-        String message = plCtrl.getCurrPlayerName() + " er i fængsel og må vælge mellem 2 muligheder for at blive løsladt";
-        String buttonChoice = gui.getUserButtonPressed(message + " Tryk for at betale dig ud af fængslet for 50kr. eller Tryk på [Kast terninger] for at slå dig ud af fængslet ", "Betal dig ud","Kast terninger");
-        int jailRes = 0;
-
-        switch (buttonChoice){
-            case"Kast terninger":
-                jailRes = 1;
-                break;
-
-            case"Betal dig ud":
-                jailRes = 2;
+        String[] buttons = new String[]{"Kast For 2 ens", "Betal 50kr", "Brug Frikort"};
+        String message = "Det er " + plCtrl.getCurrPlayerName() + "s " + plCtrl.getTurnsInJail()+1 + ". tur i fængsel. Vælg hvordan du vil komme ud.";
+        String res;
+        if(plCtrl.hasGetOutOfJailCard()) {
+            res = gui.getUserButtonPressed(message, buttons[0], buttons[1], buttons[2]);
+        } else {
+            res = gui.getUserButtonPressed(message, buttons[0], buttons[1]);
         }
-        return jailRes;
+        return getUserChoice(buttons, res);
     }
 
     public void setDices(int eyesDie1, int eyesDie2) {
