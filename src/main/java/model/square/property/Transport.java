@@ -11,8 +11,12 @@ public class Transport extends PropertySquare {
 
     @Override
     public int getRentPrice() {
-        return super.getRentPriceList()[0];
-        //TODO Hvis man ejer flere transportfelter stiger lejeprisen
+        int rentPrice = super.getRentPriceList()[0];
+        for(PropertySquare sibling : super.getSiblingsSquares()) {
+            if(this.getOwner().equals(sibling.getOwner())) {
+                rentPrice = rentPrice * 2;
+            }
+        }
+        return rentPrice;
     }
-
 }

@@ -11,7 +11,13 @@ public class Company extends PropertySquare {
 
     @Override
     public int getRentPrice() {
-        return super.getRentPriceList()[0];
+        int siblingsOwned = 0;
+        for(PropertySquare sibling : super.getSiblingsSquares()) {
+            if(this.getOwner().equals(sibling.getOwner())) {
+                siblingsOwned = 1;
+            }
+        }
+        return super.getRentPriceList()[siblingsOwned];
         //TODO Hvis man ejer flere firmafelter stiger lejeprisen
     }
 }

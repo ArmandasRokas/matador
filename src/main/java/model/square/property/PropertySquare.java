@@ -68,6 +68,7 @@ public abstract class PropertySquare extends Square {
 
         boolean res = false;
         int siblingsOwned = 0;
+
         for(PropertySquare propertySquare: siblingSquares){
             if(this.getOwner() != null && this.getOwner().equals(propertySquare.getOwner())){
                     siblingsOwned++;

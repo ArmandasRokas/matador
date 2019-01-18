@@ -1,5 +1,6 @@
 package controller;
 
+import model.Cup;
 import model.GameBoard;
 import model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ class PlayerControllerTest {
     ChanceCardController cardController;
     GameBoardController gameBoardController;
     GameBoard gameBoard ;
+    Cup cup;
 
     @BeforeEach
     void setUp(){
@@ -27,8 +29,9 @@ class PlayerControllerTest {
         gameBoardCtrl = new GameBoardController(mockGUI);
         cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
-        propertyController = new PropertyController(mockGUI,bankruptController);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController, gameBoardController);
+        cup = new Cup();
+        propertyController = new PropertyController(mockGUI,bankruptController, cup);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController, gameBoardCtrl);
         playerController.createPlayers();
     }
 

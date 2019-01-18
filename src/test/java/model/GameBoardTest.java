@@ -22,6 +22,7 @@ class GameBoardTest {
     private MockGUI mockGUI;
     private GameBoard gameBoard;
     private Square[] squares;
+    private Cup cup;
 
     @BeforeEach
     void setup() {
@@ -30,7 +31,8 @@ class GameBoardTest {
         bankruptController = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
         chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl);
-        propertyController = new PropertyController(mockGUI, bankruptController);
+        cup = new Cup();
+        propertyController = new PropertyController(mockGUI, bankruptController, cup);
 
         gameBoard = new GameBoard();
 

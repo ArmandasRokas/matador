@@ -1,5 +1,6 @@
 package controller;
 
+import model.Cup;
 import model.GameBoard;
 import model.square.property.StreetSquare;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,21 +14,24 @@ class ManageBuildingsControllerTest {
     MockGUI mockGUI ;
     GameLogic gameLogic ;
     PlayerController playerController;
-    BankruptController bankruptController;
-    PropertyController propertyController;
+    BankruptController bankruptCtrl;
+    PropertyController propertyCtrl;
     ChanceCardController cardController;
     GameBoardController gameBoardCtrl;
     GameBoard gameBoard ;
+    Cup cup;
+
     @BeforeEach
     void setUp() {
         mockGUI = new MockGUI();
         gameLogic = new GameLogic();
-        bankruptController = new BankruptController(mockGUI);
-        cardController = new ChanceCardController(mockGUI);
-        gameBoard = new GameBoard();
-        propertyController = new PropertyController(mockGUI, bankruptController);
+        bankruptCtrl = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyController, cardController, gameBoardCtrl);
+        cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
+        gameBoard = new GameBoard();
+        cup = new Cup();
+        propertyCtrl = new PropertyController(mockGUI, bankruptCtrl, cup);
+        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyCtrl, cardController, gameBoardCtrl);
         playerController.createPlayers();
 
     }
@@ -39,8 +43,8 @@ class ManageBuildingsControllerTest {
         StreetSquare hvidovrevej = (StreetSquare) gameBoard.getSquareList()[3];
 
 
-        propertyController.buyProperty(rødovrevej, playerController);
-        propertyController.buyProperty(hvidovrevej, playerController);
+        propertyCtrl.buyProperty(rødovrevej, playerController);
+        propertyCtrl.buyProperty(hvidovrevej, playerController);
 
         ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameBoard);
         //Act
