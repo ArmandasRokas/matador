@@ -57,12 +57,12 @@ public class PlayerController {
         }
     }
 
-    public void movePlayerToSquare(int newPosition, boolean canPassStart){
+    public void movePlayerToSquare(int newPosition, boolean goingToPrison){
         int currPosition = currPlayer.getCurrentPosition();
         currPlayer.setPosition(newPosition);
         guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
 
-        if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
+        if(!goingToPrison && gameRules.passStart(currPosition, newPosition)) {
             giveStartIncome();
         }
     }
