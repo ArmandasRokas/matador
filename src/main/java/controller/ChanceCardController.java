@@ -1,10 +1,10 @@
 package controller;
 
-import model.chanceCards.ChanceCard;
-import model.chanceCards.GetOutOfJailCC;
-import model.chanceCards.MoneyInfluenceCC;
-import model.chanceCards.MovePlayer3SquaresBackCC;
-import model.chanceCards.MovePlayerToSquareCC;
+import model.chanceCard.ChanceCard;
+import model.chanceCard.GetOutOfJailCC;
+import model.chanceCard.MoneyInfluenceCC;
+import model.chanceCard.MovePlayer3SquaresBackCC;
+import model.chanceCard.MovePlayerToSquareCC;
 import ui.GUIBoundary;
 
 import java.util.Random;

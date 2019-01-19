@@ -1,4 +1,4 @@
-package model.chanceCards;
+package model.chanceCard;
 
 import controller.ChanceCardController;
 import controller.PlayerController;
