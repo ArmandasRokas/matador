@@ -45,7 +45,7 @@ public class Cup {
 
     public int getCurrentRollScore() {
 //        return 36;
-        int[] array = new int[]{36, 10, 36, 36, 36, 36};
+        int[] array = new int[]{1, 2, 36, 36, 36, 36};
         return array[testInt++];
     }
 

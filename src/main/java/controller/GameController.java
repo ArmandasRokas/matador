@@ -125,7 +125,7 @@ public class GameController {
 
         while(stillBuying) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
-            String res = guiB.administrateProperties(possibleStreets);
+            String res = guiB.buyBuildings(possibleStreets);
 
             switch (res.toLowerCase()) {
                 case "exit": //Exit menu
@@ -146,7 +146,7 @@ public class GameController {
 
         while(stillSelling) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
-            String res = guiB.administrateProperties(possibleStreets);
+            String res = guiB.sellBuildings(possibleStreets);
 
             switch (res.toLowerCase()) {
                 case "exit": //Exit menu

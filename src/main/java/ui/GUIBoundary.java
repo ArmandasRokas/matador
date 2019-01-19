@@ -62,7 +62,19 @@ public class GUIBoundary {
         return getUserChoice(buttons, res);
     }
 
-    public String administrateProperties(int[] possibleStreets) {
+    public String buyBuildings(int[] possibleStreets) {
+        String[] possibleStreetNames = getPossibleSquareNamesForBuilding(possibleStreets);
+        String res = gui.getUserSelection("Vælg din ejendom fra dropdown menuen og klik på [OK] for at bygge et hus eller hotel på den.", possibleStreetNames);
+        return res;
+    }
+
+    public String sellBuildings(int[] possibleStreets) {
+        String[] possibleStreetNames = getPossibleSquareNamesForBuilding(possibleStreets);
+        String res = gui.getUserSelection("Vælg din ejendom fra dropdown menuen og klik på [OK] for at sælge et hus eller hotel på den.", possibleStreetNames);
+        return res;
+    }
+
+    private String[] getPossibleSquareNamesForBuilding(int[] possibleStreets) {
         int count = 0;
 
         for(int possibleStreet : possibleStreets) {
@@ -84,8 +96,7 @@ public class GUIBoundary {
             }
         }
         possibleStreetNames[count] = "Exit";
-        String res = gui.getUserSelection("Vælg din ejendom fra dropdown menuen og klik på [OK] for at bygge et hus på den.", possibleStreetNames);
-        return res;
+        return possibleStreetNames;
     }
 
     public int getOutOfJail(PlayerController plCtrl){
