@@ -1,10 +1,6 @@
 package model.square.property;
 
-import controller.PlayerController;
-import controller.PropertyController;
-
 public class StreetSquare extends PropertySquare {
-
     private int numberOfHouses;
     private int housePrice;
 
@@ -15,7 +11,7 @@ public class StreetSquare extends PropertySquare {
         this.housePrice = housePrice;
     }
 
-//    @Override
+    @Override
     public int getRentPrice() {
         //TODO ckecks how many houses is build on the square
 

@@ -194,7 +194,7 @@ public class GUIBoundary {
     public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
         ownable.setOwnerName(playerList[playerID].getName());
-        ownable.setSubText("Leje: " + Integer.toString(rentPrice));
+        updateRentPrice(squareIndex, rentPrice);
         ownable.setBorder(playerList[playerID].getCar().getPrimaryColor());
         ownable.setRent(Integer.toString(rentPrice));
     }
@@ -211,7 +211,10 @@ public class GUIBoundary {
 
     public void updateRentPrice(int squareIndex, int rentPrice) {
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
-        ownable.setRent(""+rentPrice);
-        ownable.setSubText("Leje: " + rentPrice);
+        if(ownable instanceof GUI_Brewery) {    //Different subtext if a brewery
+            ownable.setSubText("Leje: *" + rentPrice + "*");
+        } else {    //General subtext
+            ownable.setSubText("Leje: " + rentPrice);
+        }
     }
 }
