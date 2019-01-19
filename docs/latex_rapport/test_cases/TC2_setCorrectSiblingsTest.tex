@@ -25,23 +25,21 @@
 \begin{document}
 
     \begin{table}[H]
-        \caption{Test case: [TC1]: setNumberOfSiblings()}
+        \caption{Test case: [TC2]: setCorrectSiblingsTest()}
         \begin{tabularx}{\textwidth}{|l|X|}
             \hline
-            \textbf{Test Case ID }       & \textbf{[TC1]: setNumberOfSiblings()}   \\ \hline
-            \textbf{Opsummering}         & Formålet med testen er at kontrollere om alle ejendoms-grunde har et korrekt nummer af søstrefelter.
-                                            Der tages til gengæld ikke højde for om felterne har de rigtigt søstrefelter i denne test. \\ \hline
+            \textbf{Test Case ID }       & \textbf{[TC2]: setCorrectSiblingsTest()}   \\ \hline
+            \textbf{Opsummering}         & Formålet med testen er at lave en stikprøve på et af ejendoms-felter, om der blev tilføjet de korrekte søstrefelter til feltet.  \\ \hline
             \textbf{Relateret Use cases}     & UC8: Byg hus \\ \hline
             \textbf{Forudsætning}& GameBoard er oprettet med felterne og deres søstrefelter.\\ \hline
             \textbf{Udførsel}            & \begin{tabenum}
-                                               \item Oprettes test boolean, som sættes til at være sandt
-                                               \item Fås alle felter fra GameBoard
-                                               \item Kontrolleres om et ejendoms-felt har korrekt nummer af søstrefelter et ad gangen
-                                               \item Sættes test boolean til at være falsk, hvis der er et felt, som ikke har et rigtigt nummer af søstrefelter.
+                                               \item Udvægles feltet "bernstoffsvej", som vil bruges til stikprøven.
+                                               \item Udvælges "hellerupvej" og "strandvejen" felterne, som der regnes med at være feltets "bernstoffsvej" søstrefelter.
+                                               \item Kontrolleres om "strandvejen" og "hellerup" er feltets "hellerupvej" søstrefelter.
             \end{tabenum} \\ \hline
-            \textbf{Test data}           &  Felterne  fra GameBoard\\ \hline
-            \textbf{Forventet} & Test boolean bliver ikke ændret til falsk undervejs af udførselen af løkken.\\    \hline
-            \textbf{Aktuel} &  Test boolean forbliver sandt.\\ \hline
+            \textbf{Test data}           &  Ejendoms-felter: "brenstoffsvej", "strandvejen", "hellerup" \\ \hline
+            \textbf{Forventet} & Felter "hellerupvej" og "strandvejen" er feltets "hellerupvej" søstrefelter\\    \hline
+            \textbf{Aktuel} & Felter "hellerupvej" og "strandvejen" er feltets "hellerupvej" søstrefelter  \\ \hline
             \textbf{Status} & \textbf{Pass} \\ \hline
             \textbf{Lavet af} & Gruppe 44\\ \hline
             \textbf{Udførselses dato}  & 17/01/2019\\ \hline
