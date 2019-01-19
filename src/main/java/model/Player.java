@@ -96,4 +96,8 @@ public class Player {
     public void useGetOutOfJailCard() {
         this.getOutOfJailCards = getOutOfJailCards - 1;
     }
+
+    public void addOutOfJailCard() {
+        this.getOutOfJailCards++;
+    }
 }

@@ -14,9 +14,7 @@ public class PlayerController {
     private Player currPlayer;
     private String currScenarioForPlayer = "[NO SCENARIO SET]";
     private PropertyController propertyCtrl;
-    private int turnsTakenInJail;
     private ChanceCardController chanceCardCtrl;
-    private int outOfJailCards;
     private GameBoardController gameBoardCtrl;
     private int currPlayerExtraTurnCount;
 
@@ -25,9 +23,7 @@ public class PlayerController {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gameRules = gameRules;
-        this.turnsTakenInJail = 0;
         this.chanceCardCtrl = chanceCardCtrl;
-        this.outOfJailCards = 0;
         this.gameBoardCtrl = gameBoardCtrl;
         this.currPlayerExtraTurnCount = 0;
 
@@ -57,7 +53,7 @@ public class PlayerController {
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
         if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
-            havePassedStart();
+            giveStartIncome();
         }
     }
 
@@ -67,15 +63,14 @@ public class PlayerController {
         guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
 
         if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
-            havePassedStart();
+            giveStartIncome();
         }
     }
 
-    private void havePassedStart() {
+    private void giveStartIncome() {
         currPlayerMoneyInfluence(200);
         guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
-
 
     public void setCurrPlayerToJail(){
         guiB.informPlayerGoingToJail(getCurrPlayerID());
@@ -100,22 +95,20 @@ public class PlayerController {
         guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
     }
 
-
     public Player[] getPlayerList() {
         return playerList;
     }
 
     public int getCurrPlayerPos() {
-        int currPos = currPlayer.getCurrentPosition();
-        return currPos;
-    }
-
-    public String getCurrPlayerName(){
-        return currPlayer.getName();
+        return currPlayer.getCurrentPosition();
     }
 
     public Player getCurrPlayer() {
         return currPlayer;
+    }
+
+    public String getCurrPlayerName(){
+        return currPlayer.getName();
     }
 
     public void addCurrPlayerProperty(PropertySquare square) {
@@ -126,6 +119,9 @@ public class PlayerController {
         return currPlayer.getPlayerID();
     }
 
+    public void setCurrPlayerBalance(int balance) {
+        currPlayer.setBalance(balance);
+    }
     public int getCurrPlayerBalance(){
         return currPlayer.getBalance();
     }
@@ -136,6 +132,7 @@ public class PlayerController {
 
     public void payPlayer(Player propertyOwner, int cash) {
         currPlayerMoneyInfluence(-cash);
+
         if(propertyOwner != null){
             propertyOwner.moneyInfluence(cash);
         }
@@ -145,14 +142,9 @@ public class PlayerController {
         this.currPlayer.goBankrupt();
     }
 
-    public void setCurrPlayerBalance(int balance) {
-        currPlayer.setBalance(balance);
-    }
-
     public void setCurrScenarioForPlayer(String currScenario) {
         this.currScenarioForPlayer = currScenario;
     }
-
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
     }
@@ -160,13 +152,8 @@ public class PlayerController {
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);
     }
-
     public void handleSquare(ChanceSquare chanceSquare) {
         chanceCardCtrl.handleChanceCards(this);
-    }
-
-    public void giveOutOfJailCard() {
-        this.outOfJailCards++;
     }
 
     public void setCurrPlayerIsInJail(boolean isInJail) {
@@ -179,7 +166,6 @@ public class PlayerController {
     public boolean getIsCurrPlayerInJail() {
         return currPlayer.getIsCurrPlayerInJail();
     }
-
     public int getCurrPlayerExtraTurnCount(){
         return currPlayerExtraTurnCount;
     }
@@ -187,21 +173,22 @@ public class PlayerController {
     public void addOneCurrPlayerExtraTurnCount(){
         currPlayerExtraTurnCount++;
     }
-
     public void resetCurrPlayerExtraTurnCount(){
         currPlayerExtraTurnCount = 0;
     }
 
+    public void giveOutOfJailCard() {
+        currPlayer.addOutOfJailCard();
+    }
     public boolean hasGetOutOfJailCard() {
         return currPlayer.getGetOutOfJailCards() > 0;
+    }
+    public void useGetOutOfJailCard() {
+        currPlayer.useGetOutOfJailCard();
     }
 
     public int getTurnsInJail() {
         return currPlayer.getTurnsTakenInJail();
-    }
-
-    public void useGetOutOfJailCard() {
-        currPlayer.useGetOutOfJailCard();
     }
 
     public void payIncomeTax() {
