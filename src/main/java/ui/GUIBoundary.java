@@ -19,9 +19,13 @@ public class GUIBoundary {
 
     public String[] askForNames(int playerCount) { //TODO Fix at man ikke kan hedde det samme, da det overwriter den forrige GUI_Player
         String[] names = new String[playerCount];
+        String name;
 
         for(int i = 0 ; i < playerCount ; i++) {
-            names[i] = gui.getUserString("Skriv navn for spiller nr. " + (i + 1));
+            do{
+                name = gui.getUserString("Skriv navn for spiller nr. " + (i + 1));
+            } while(!controlName(names, name));
+            names[i] = name;
         }
         return names;
     }
@@ -131,10 +135,10 @@ public class GUIBoundary {
     }
 
     //General communication (information, no choice) //TODO CurrPlayerScenario?
+
     public void showCurrScenarioForPlayer(String scenario) {
         gui.getUserButtonPressed(scenario, "OK");
     }
-
     public void declareWinner(int playerID) {
         gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
     }
@@ -153,6 +157,7 @@ public class GUIBoundary {
 
     //Practical methods
         //Sets and removes
+
     public void setupGUIFields(int index, String name) {
         fieldList[index].setDescription(name);
 
@@ -162,7 +167,6 @@ public class GUIBoundary {
             fieldList[index].setTitle(name);
         }
     }
-
     public void setupPlayer(int playerID, String name, int balance, Color color) {
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);
@@ -178,11 +182,11 @@ public class GUIBoundary {
     }
 
         //Updates
+
     public void movePlayer(int previousPosition, int newPosition, int playerID) {
         fieldList[previousPosition].setCar(playerList[playerID],false);
         fieldList[newPosition].setCar(playerList[playerID],true);
     }
-
     public void setDices(int eyesDie1, int eyesDie2) {
         gui.setDice(eyesDie1, eyesDie2);
     }
@@ -216,5 +220,20 @@ public class GUIBoundary {
         } else {    //General subtext
             ownable.setSubText("Leje: " + rentPrice);
         }
+    }
+
+    //Control
+    private boolean controlName(String[] names, String name) {
+        boolean res = true;
+
+        if(!name.isEmpty()) {
+            for(String previousName : names) {
+                if(name.equals(previousName)) {
+                    res = false;
+                    break;
+                }
+            }
+        }
+        return res;
     }
 }
