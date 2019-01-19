@@ -1,6 +1,8 @@
 package controller;
 
 import model.Player;
+import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 
 import java.awt.Color;
 
@@ -58,5 +60,35 @@ public class GameRules {
 
     public Color[] getColors() {
         return colors;
+    }
+
+    public boolean isBuyingBuildingsEvenly(PropertySquare propertySquare) {
+        boolean res = true;
+        StreetSquare streetSquare = (StreetSquare)propertySquare;
+
+        for(PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
+            StreetSquare streetStreetSquare = (StreetSquare)siblingSquare;
+
+            if(streetSquare.getNumberOfHouses() > streetStreetSquare.getNumberOfHouses()) {
+                res = false;
+                break;
+            }
+        }
+        return res;
+    }
+
+    public boolean isSellingBuildingsEvenly(PropertySquare propertySquare) {
+        boolean res = true;
+        StreetSquare streetSquare = (StreetSquare)propertySquare;
+
+        for(PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
+            StreetSquare streetStreetSquare = (StreetSquare)siblingSquare;
+
+            if(streetSquare.getNumberOfHouses() < streetStreetSquare.getNumberOfHouses()) {
+                res = false;
+                break;
+            }
+        }
+        return res;
     }
 }

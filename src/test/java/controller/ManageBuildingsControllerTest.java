@@ -46,7 +46,7 @@ class ManageBuildingsControllerTest {
         propertyCtrl.buyProperty(rødovrevej, playerController);
         propertyCtrl.buyProperty(hvidovrevej, playerController);
 
-        ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameBoard);
+        ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameRules, gameBoard);
         //Act
         int[] streetSquaresPossibleToBuildIndexes = mbController.getCurrPlayerSquarePossibleToBuild(playerController);
 

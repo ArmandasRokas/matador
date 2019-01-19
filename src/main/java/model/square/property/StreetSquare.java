@@ -4,7 +4,6 @@ public class StreetSquare extends PropertySquare {
     private int numberOfHouses;
     private int housePrice;
 
-
     public StreetSquare(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares, int housePrice){
         super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares);
         this.numberOfHouses = 0;
@@ -13,9 +12,8 @@ public class StreetSquare extends PropertySquare {
 
     @Override
     public int getRentPrice() {
-        //TODO ckecks how many houses is build on the square
-
         int rentPrice = getRentPriceList()[numberOfHouses];
+
         if(isSetOwned() && numberOfHouses < 1){
             rentPrice = rentPrice*2;
         }
@@ -34,28 +32,5 @@ public class StreetSquare extends PropertySquare {
 
     public int getHousePrice() {
         return housePrice;
-    }
-
-    public boolean isBuyingBuildingsEvenly() { //TODO Flyt til controller
-        boolean res = true;
-        for(PropertySquare siblingSquare : getSiblingsSquares()) {
-            StreetSquare streetSquare = (StreetSquare)siblingSquare;
-            if(getNumberOfHouses() > streetSquare.getNumberOfHouses()) {
-                res = false;
-                break;
-            }
-        }
-        return res;
-    }
-    public boolean isSellingBuildingsEvenly() { //TODO Flyt til controller
-        boolean res = true;
-        for(PropertySquare siblingSquare : getSiblingsSquares()) {
-            StreetSquare streetSquare = (StreetSquare)siblingSquare;
-            if(getNumberOfHouses() < streetSquare.getNumberOfHouses()) {
-                res = false;
-                break;
-            }
-        }
-        return res;
     }
 }

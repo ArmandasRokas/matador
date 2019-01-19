@@ -126,7 +126,7 @@ public class GameController {
     private void buyHousing() {
         boolean stillBuying = true;
         GameBoard gameBoard = boardCtrl.getGameBoard();
-        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameRules, gameBoard);
 
         while(stillBuying) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
@@ -147,7 +147,7 @@ public class GameController {
     private void sellHousing(){
         boolean stillSelling = true;
         GameBoard gameBoard = boardCtrl.getGameBoard();
-        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+        ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameRules, gameBoard);
 
         while(stillSelling) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
