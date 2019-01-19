@@ -13,9 +13,7 @@ public class GUIBoundary {
     //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount;
-        do{
-            playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
-        } while((Object)playerCount instanceof Integer);
+        playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
         playerList = new GUI_Player[playerCount];
         return playerCount;
     }
