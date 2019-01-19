@@ -38,7 +38,7 @@ public class GUIBoundary {
     }
 
     private String[] mainMenuButtons() {
-        return new String[]{"[FIRST OPTION]", "Køb Huse", "Sælg Huse", "Pantsæt Grunde"};
+        return new String[]{"[FIRST OPTION]", "Køb Huse", "Sælg Huse"};
     }
 
     public int takeTurn(PlayerController plCtrl) {
