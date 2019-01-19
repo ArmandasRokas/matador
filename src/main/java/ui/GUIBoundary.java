@@ -124,9 +124,10 @@ public class GUIBoundary {
         return answer;
     }
 
-    public String endGame() { //TODO Will get implemented "No" button when GUI allows it
-        String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
-        return input;
+    public int endGame() { //TODO Will get implemented "No" button when GUI allows it
+        String[] buttons = new String[]{"Ja", "Nej"};
+        String res = gui.getUserButtonPressed("Vil De spille igen?", buttons[0]);
+        return getUserChoice(buttons, res);
     }
 
     //General communication (information, no choice) //TODO CurrPlayerScenario?
