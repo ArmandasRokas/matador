@@ -77,6 +77,7 @@ public class GameController {
 
         while(!takenTurn) {
             int res = guiB.takeTurn(plCtrl);
+
             switch (res) {
                 case 0: //Take turn
                     throwDices();
