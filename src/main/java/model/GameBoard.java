@@ -1,8 +1,5 @@
 package model;
 
-
-import controller.ChanceCardController;
-import controller.PropertyController;
 import model.square.*;
 import model.square.property.Company;
 import model.square.property.PropertySquare;
@@ -10,25 +7,50 @@ import model.square.property.StreetSquare;
 import model.square.property.Transport;
 
 public class GameBoard {
-
-
     private Square[] squareList;
 
     public GameBoard() {
-
         squareList = new Square[40];
         setBoard();
-
-
-
     }
 
     public Square[] getSquareList() {
         return squareList;
     }
 
-    private void setBoard() {
+    private void setPropertySquareSiblings() {
+        for(Square square: squareList) {
 
+            if(square instanceof PropertySquare) {
+                PropertySquare ps = (PropertySquare) square;
+                int groupID = ps.getGroupID();
+
+                for(Square square2 : squareList) {
+                    if(square2 instanceof PropertySquare && !square2.equals(ps)) {
+                        PropertySquare ps2 = (PropertySquare) square2;
+
+                        if(ps2.getGroupID() == groupID) {
+                            ps.setSiblingSquare(ps2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public int findSquareIndexByName(String squareName) {
+        int res = -1;
+
+        for(Square square : squareList) {
+            if(square.getSquareName().equals(squareName)) {
+                res = square.getIndex();
+                break;
+            }
+        }
+        return res;
+    }
+
+    private void setBoard() {
         squareList[0] = new StartSquare("Start", 0);
         squareList[1] = new StreetSquare("Rødovrevej", new int[]{2, 10, 30, 90, 160, 250}, 60, 0, 1, 1, 50);
         squareList[2] = new ChanceSquare("Prøv lykken", 2);
@@ -71,37 +93,5 @@ public class GameBoard {
         squareList[39] = new StreetSquare("Rådhuspladsen", new int[]{50, 200, 600, 1400, 1700, 2000}, 400, 7, 39, 1, 200);
 
         setPropertySquareSiblings();
-    }
-
-
-    private void setPropertySquareSiblings() {
-        for(Square square: squareList) {
-
-            if(square instanceof PropertySquare) {
-                PropertySquare ps = (PropertySquare) square;
-                int groupID = ps.getGroupID();
-
-                for(Square square2 : squareList) {
-                    if(square2 instanceof PropertySquare && !square2.equals(ps)) {
-                        PropertySquare ps2 = (PropertySquare) square2;
-
-                        if(ps2.getGroupID() == groupID) {
-                            ps.setSiblingSquare(ps2);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public int findSquareIndexByName(String squareName) {
-        int res = -1;
-        for(Square square : squareList) {
-            if(square.getSquareName().equals(squareName)) {
-                res = square.getIndex();
-                break;
-            }
-        }
-        return res;
     }
 }
