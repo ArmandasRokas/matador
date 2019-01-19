@@ -64,15 +64,9 @@ public class GameController {
     }
 
     private void checkForExtraRoundOrChangePlayer() {
-        if (plCtrl.getCurrPlayer().isBankrupt()){
-            plCtrl.changePlayer();
-            plCtrl.resetCurrPlayerExtraTurnCount();
-        } else if (cup.getEyesDie1() != cup.getEyesDie2()) {
-            plCtrl.changePlayer();
-            plCtrl.resetCurrPlayerExtraTurnCount();
-        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 3){
+        if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() < 3 && !plCtrl.getCurrPlayer().getIsCurrPlayerInJail()){
             guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-        } else if (cup.getEyesDie1() == cup.getEyesDie2() && plCtrl.getCurrPlayerExtraTurnCount() == 3){
+        } else {
             plCtrl.changePlayer();
             plCtrl.resetCurrPlayerExtraTurnCount();
         }
