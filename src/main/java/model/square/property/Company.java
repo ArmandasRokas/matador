@@ -1,9 +1,5 @@
 package model.square.property;
 
-import controller.PlayerController;
-import controller.PropertyController;
-import model.square.property.PropertySquare;
-
 public class Company extends PropertySquare {
     public Company(String squareName, int[] rentPrice, int price, int groupID, int index, int numberOfSiblingSquares){
         super(squareName, rentPrice, price,groupID, index, numberOfSiblingSquares);
@@ -18,6 +14,5 @@ public class Company extends PropertySquare {
             }
         }
         return super.getRentPriceList()[siblingsOwned];
-        //TODO Hvis man ejer flere firmafelter stiger lejeprisen
     }
 }

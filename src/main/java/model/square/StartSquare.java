@@ -9,8 +9,6 @@ public class  StartSquare extends Square {
 
     @Override
     public void landedOn(PlayerController playerController) {
-
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
-
     }
 }
