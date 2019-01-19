@@ -6,24 +6,17 @@ import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 public class GameBoardController {
-
-
     private GameBoard gameBoard;
     private Square currSquare;
     private GUIBoundary guiB;
-    private BankruptController bankruptCtrl; //FixMe Skal fjernes? Test ved at kører
 
     public GameBoardController(GUIBoundary guiB){
-//    public GameBoardController(GUIBoundary guiB, BankruptController bankruptCtrl){
-
         gameBoard = new GameBoard();
         this.guiB = guiB;
-//        this.bankruptCtrl = bankruptCtrl;
         setupGUISquareNames();
     }
 
     public void actOnSquare(PlayerController playerCtrl) {
-
         int currPosition = playerCtrl.getCurrPlayerPos();
         currSquare = gameBoard.getSquareList()[currPosition];
         currSquare.landedOn(playerCtrl);
@@ -41,8 +34,8 @@ public class GameBoardController {
     }
 
     public void payIncomeTax(PlayerController playerCtrl) {
-
         double sumFromHisProperties = 0;
+
         for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
             if (propertySquare != null) {
                 sumFromHisProperties += propertySquare.getBuyPrice();
@@ -50,6 +43,7 @@ public class GameBoardController {
         }
         double payPercent = (((double)playerCtrl.getCurrPlayerBalance()+ sumFromHisProperties) / 100) * 10;
         int incomeTaxAnswer  = guiB.incomeTax(playerCtrl);
+
         switch (incomeTaxAnswer){
             case 0:
                 playerCtrl.currPlayerMoneyInfluence((int) -payPercent);
@@ -61,7 +55,6 @@ public class GameBoardController {
                 playerCtrl.currPlayerMoneyInfluence(-200);
                 break;
         }
-
     }
 }
 
