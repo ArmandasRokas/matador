@@ -29,7 +29,6 @@ public class StreetSquare extends PropertySquare {
     public void buyAHouse() {
         numberOfHouses++;
     }
-
     public void sellAHouse(){
         numberOfHouses--;
     }
@@ -41,7 +40,7 @@ public class StreetSquare extends PropertySquare {
         return housePrice;
     }
 
-    public boolean isBuyingBuildingsEvenly() {
+    public boolean isBuyingBuildingsEvenly() { //TODO Flyt til controller
         boolean res = true;
         for(PropertySquare siblingSquare : getSiblingsSquares()) {
             StreetSquare streetSquare = (StreetSquare)siblingSquare;
@@ -52,7 +51,7 @@ public class StreetSquare extends PropertySquare {
         }
         return res;
     }
-    public boolean isSellingBuildingsEvenly() {
+    public boolean isSellingBuildingsEvenly() { //TODO Flyt til controller
         boolean res = true;
         for(PropertySquare siblingSquare : getSiblingsSquares()) {
             StreetSquare streetSquare = (StreetSquare)siblingSquare;
@@ -63,6 +62,4 @@ public class StreetSquare extends PropertySquare {
         }
         return res;
     }
-
 }
-

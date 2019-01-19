@@ -30,11 +30,11 @@ public class PropertyController {
     }
 
     public void buyProperty(PropertySquare square, PlayerController playerController) {
-        if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){
+        if(playerController.getCurrPlayerBalance() >= square.getBuyPrice()){    //Able to buy property
             boolean answer;
             answer = guiB.askToBuyProperty(playerController.getCurrPlayerID(), square.toString());
 
-            if(answer){
+            if(answer){ //Buying property
                 int price = square.getBuyPrice();
                 playerController.currPlayerMoneyInfluence(-price);
                 playerController.addCurrPlayerProperty(square);
@@ -45,36 +45,37 @@ public class PropertyController {
                 guiB.setOwnerOnSquare(playerController.getCurrPlayerID(), square.getIndex(), square.getRentPrice());
                 guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
                 updateSiblingSquaresRentPrice(square);
-            } else{
+            } else{ //Declining to buy property
                 playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " afviste at købe " + square);
             }
-        } else{
+
+        } else{ //Not able to buy property
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke nok penge til at købe " + square);
         }
     }
 
     public void payRent(PropertySquare propertySquare, PlayerController playerController) {
-        int rentPrice;
+        int rent;
 
-        if (propertySquare instanceof Company) {
-            rentPrice = propertySquare.getRentPrice() * cup.getCurrentRollScore();
-        } else {
-            rentPrice = propertySquare.getRentPrice();
+        if (propertySquare instanceof Company) {    //Sets rent for companies with rollscore
+            rent = propertySquare.getRentPrice() * cup.getCurrentRollScore();
+        } else {    //Sets rent normally
+            rent = propertySquare.getRentPrice();
         }
 
-        if(playerController.getCurrPlayerBalance() < rentPrice) {
+        if(playerController.getCurrPlayerBalance() < rent) {    //Not able to pay rent
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
             bankruptCtrl.handleNegativeBalance(propertySquare, playerController, this);
-        } else {
-            playerController.payPlayer(propertySquare.getOwner(), rentPrice);
+        } else {    //Able to pay rent
+            playerController.payPlayer(propertySquare.getOwner(), rent);
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
             guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
-                    ". " + playerController.getCurrPlayerName() + " har betalt " + rentPrice + "kr til " + propertySquare.getOwner());
+                    ". " + playerController.getCurrPlayerName() + " har betalt " + rent + "kr til " + propertySquare.getOwner());
         }
     }
 
-    /**
+    /** //TODO Slet hvis vi ikke laver java doc
      * Updates sibling squares rent price after a player buys or receives a property by another player going bankrupt.
      * @param propertySquare
      */
