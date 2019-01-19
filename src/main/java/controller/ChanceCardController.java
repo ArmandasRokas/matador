@@ -73,7 +73,7 @@ public class ChanceCardController {
     }
 
     private void createDeck() {
-        cardDeck = new ChanceCard[26];
+        cardDeck = new ChanceCard[25];
 
         cardDeck[0] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
         cardDeck[1] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
