@@ -1,6 +1,5 @@
 package ui;
 
-import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
 
 import java.awt.*;

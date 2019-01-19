@@ -1,6 +1,5 @@
 package model;
 
-
 import model.square.property.PropertySquare;
 
 public class Player {
