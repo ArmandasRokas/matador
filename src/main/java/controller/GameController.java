@@ -48,7 +48,7 @@ public class GameController {
                 inJail();
             } else {
                 showBeforeTurnMenu();
-                if(!plCtrl.getIsCurrPlayerInJail() && plCtrl.getCurrPlayer().isBankrupt()){
+                if(!plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()){
                     showAfterTurnMenu();
                 }
                 Player p = gameRules.winnerFound(plCtrl.getPlayerList());
