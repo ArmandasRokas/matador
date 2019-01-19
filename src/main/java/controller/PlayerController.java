@@ -87,7 +87,7 @@ public class PlayerController {
                 int currID = currPlayer.getPlayerID();
                 currID = (currID + 1) % playerList.length;
                 currPlayer = playerList[currID];
-            } while (currPlayer.getBankrupt());
+            } while (currPlayer.isBankrupt());
     }
 
     public void currPlayerMoneyInfluence(int cash) {

@@ -48,7 +48,7 @@ public class GameController {
                 inJail();
             } else {
                 showBeforeTurnMenu();
-                if(!plCtrl.getIsCurrPlayerInJail() && plCtrl.getCurrPlayer().getBankrupt()){
+                if(!plCtrl.getIsCurrPlayerInJail() && plCtrl.getCurrPlayer().isBankrupt()){
                     showAfterTurnMenu();
                 }
                 Player p = gameRules.winnerFound(plCtrl.getPlayerList());
@@ -64,7 +64,7 @@ public class GameController {
     }
 
     private void checkForExtraRoundOrChangePlayer() {
-        if (plCtrl.getCurrPlayer().getBankrupt()){
+        if (plCtrl.getCurrPlayer().isBankrupt()){
             plCtrl.changePlayer();
             plCtrl.resetCurrPlayerExtraTurnCount();
         } else if (cup.getEyesDie1() != cup.getEyesDie2()) {

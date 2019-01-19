@@ -29,7 +29,7 @@ public class GameRules {
         Player latestPlayer = null;
 
         for(Player p : playerList) {
-            if(!p.getBankrupt()) {
+            if(!p.isBankrupt()) {
                 activePlayerCount++;
                 latestPlayer = p;
             }
