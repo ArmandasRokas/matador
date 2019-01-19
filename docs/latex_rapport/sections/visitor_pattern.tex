@@ -13,21 +13,30 @@
         Dette ville dog medføre, at felterne i programmet, som er en del af model-laget i vores projektstruktur, indeholdt mere logik end vi foretrækker, altså en eller anden grad af en kontrolstruktur. Det er generelt uønsket med logik i model-laget, når et projekt er opbygget efter Model-View-Controller arkitekturen, som vi har valgt at benytte. \par
         For at undgå dette har vi besluttet at tage Visitor pattern i brug, som er et af de velkendte GoF designprincipper. Med Visitor pattern er det muligt at flytte logikken ud fra model-laget til controller-laget. Dette medfører også, at felterne ikke længere behøver at have “instance variable”, som holder referencer til controllers, som bl.a. styrer købet af grund (PropertyController) eller opførsel af lykke kortene (ChanceCardController). Dette giver lavere coupling og en mere forståelig kode.\par
 \paragraph{Implementering af Visitor pattern \newline}
-        Vi har valgt PlayerController til at være en “Visitor” for felterne. Det betyder, at der blev tilføjet handleSquare metoder i PlayerController, som alle sammen har det samme metodenavn, men tager imod forskellige parameter for enhver type af felter( kan ses i Figur~\ref{fig:handle_square} nedenfor). Dette kaldes for method overloading, når metoder har det samme navn, men forskellige parameter.
+        Vi har valgt PlayerController til at være en “Visitor” for felterne. Det betyder, at der blev tilføjet handleSquare metoder i PlayerController, som alle sammen har det samme metodenavn, men tager imod forskellige parameter for enhver type af felter, som kan ses i Figur~\ref{fig:handle_square} nedenfor. Dette kaldes for method overloading, når metoder har det samme navn, men forskellige parameter.
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{pics/handle_square.png}
+        \caption{Kode over handleSquare()}\label{fig:handle_square}
+    \end{figure}
+        Disse handleSquare metoder bliver kaldt fra landedOn() metoden i felterne, som har en lokal reference til PlayerController (Visitor), som kan ses i Figur~\ref{fig:landed_on} nedenfor. Feltet sender sig selv som et argument ved at bruge “this”. På den måde bliver der valgt og udført den rigtige handleSquare metode i ud fra hvilken type argument der blev sendt. Med andre ord, når der kaldes handleSquare(this), så der udføres den metode, som tager imod den type af felt, der sendes som argument og programmets videre forløb fortsættes i forhold til det. Man kan sige, at det er en anden måde at kontrollere programmets “workflow ”.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.6]{pics/landed_on.PNG}
+            \caption{Kode over landedOn()}\label{fig:landed_on}
+        \end{figure}
+
+        Sekvensdiagrammet på figur~\ref{fig:SD_landed_on} er vist nedenstående for overskuelighed:
+
 
         \begin{figure}[H]
         \centering
 
-        \includegraphics[scale=0.5]{pics/handle_square.png}
-        \caption{Kode over handleSquare()}\label{fig:handle_square}
-    \end{figure}
-
-
-    \begin{figure}[H]
-        \centering
-
         \hbox{\hspace{-1cm}\includegraphics[scale=0.6]{diagrams/SD_landed_on.pdf}}
-        \caption{Sekvensdiagram over Visitor pattern}\label{fig:SD_landed_on}
+        \caption{Sekvensdiagrammet over Visitor pattern}\label{fig:SD_landed_on}
     \end{figure}
 
+       \paragraph{Bagside \newline}
+        Det er dog en bagside ved at bruge Visitor pattern, at der skal tilføjes en ny handleSquare() metode, hver gang der tilføjes en ny felt-type, som kommer til at være som en parameter i denne handleSquare() metode. Det er dog ret usandsynligt, at der kommer flere felter, da felterne i et matador-regelsæt er ret universale.
 \end{document}
