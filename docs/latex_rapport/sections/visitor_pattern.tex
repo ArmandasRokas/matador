@@ -1,0 +1,19 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, danish]{babel}
+\usepackage{graphicx,wrapfig,lipsum}
+
+\begin{document}
+    På figur~\ref{fig:SD_landed_on}.
+
+    \begin{figure}[H]
+        \centering
+
+        \hbox{\hspace{-1cm}\includegraphics[scale=0.6]{diagrams/SD_landed_on.pdf}}
+        \caption{Sekvensdiagram over Visitor pattern}\label{fig:SD_landed_on}
+    \end{figure}
+
+\end{document}

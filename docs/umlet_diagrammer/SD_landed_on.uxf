@@ -5,24 +5,26 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>20</x>
-      <y>20</y>
-      <w>860</w>
-      <h>540</h>
+      <y>0</y>
+      <w>880</w>
+      <h>500</h>
     </coordinates>
-    <panel_attributes>title=SD: landedOn(playerCtrl) on PropertySquare
-obj=propertySquare\n:PropertySquare~a 
-obj=playerCtrl\n:PlayerController ~b 
-obj=propertyController :PropertyController~c
-obj=square :PropertySquare~d
+    <panel_attributes>title=SD:  Visitor pattern
+obj=:BoardController~a 
+obj=propertySquare\n:PropertySquare~b 
+obj=playerCtrl\n:PlayerController ~c 
+obj=propertyController :PropertyController~d
+
 found-&gt;&gt;&gt;a ; on=a
-a-&gt;&gt;&gt;b :()  ; on=d
-d.&gt;a : price; off=d
-a-&gt;&gt;&gt;b :currPlayerMoney\nInfluence(-price)  ; on=b;
-b-&gt;&gt;&gt;c :moneyInfluence(-price)  ; on=c; off=b
-a-&gt;&gt;&gt;b :addCurrPlayer\nProperty(square)  ; on=b; off=c
-b-&gt;&gt;&gt;c :addProperty(square)  ; on=c; off=b
-off=c;
-a-&gt;&gt;&gt;d :setOwner(currPlayer)  ; on=d; 
+a-&gt;&gt;&gt;b : landedOn(playerCtrl); on=b
+b-&gt;&gt;&gt;c :handleSquare(this)  ; on=c
+c-&gt;&gt;&gt;d :handleProperty\n(propertySquare, this) ; on=d
+d-&gt;&gt;&gt;b : getOwner(); on=b
+b.&gt;&gt;&gt;d :  owner; off=b;
+
+combinedFragment=alt~alt1 b d ;  b:[owner == null];
+ref=id2 d: SD_buy_property
+--;
 
 
 
