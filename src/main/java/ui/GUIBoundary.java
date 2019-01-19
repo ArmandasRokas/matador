@@ -12,12 +12,15 @@ public class GUIBoundary {
 
     //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
-        int playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
+        int playerCount;
+        do{
+            playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
+        } while((Object)playerCount instanceof Integer);
         playerList = new GUI_Player[playerCount];
         return playerCount;
     }
 
-    public String[] askForNames(int playerCount) { //TODO Fix at man ikke kan hedde det samme, da det overwriter den forrige GUI_Player
+    public String[] askForNames(int playerCount) {
         String[] names = new String[playerCount];
         String name;
 
@@ -135,7 +138,6 @@ public class GUIBoundary {
     }
 
     //General communication (information, no choice) //TODO CurrPlayerScenario?
-
     public void showCurrScenarioForPlayer(String scenario) {
         gui.getUserButtonPressed(scenario, "OK");
     }
