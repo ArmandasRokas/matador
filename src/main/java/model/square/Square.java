@@ -3,7 +3,7 @@ package model.square;
 import controller.PlayerController;
 import model.Player;
 
-/**@author Hold 44
+/**@author Hold 44 //TODO java doc
  * @version
  *
  * Defines the abstract Square class and all of its fields and methods
@@ -12,12 +12,9 @@ import model.Player;
 public abstract class Square {
     protected String squareName;  //Name of square, used to describe the scenario of the turn
     private int index;
-    private Player owner;                   //Reference to the player that owns the property, or null if property is owned by bank
-
-
+    private Player owner;         //Reference to the player that owns the property, or null if property is owned by bank
 
     public Square(String squareName, int index){
-
         this.squareName = squareName;
         this.index = index;
         this.owner = null;
@@ -38,11 +35,10 @@ public abstract class Square {
         return index;
     }
 
-    public Player getOwner() {
-        return owner;
-    }
-
     public void setOwner(Player p) {
         this.owner = p;
+    }
+    public Player getOwner() {
+        return owner;
     }
 }

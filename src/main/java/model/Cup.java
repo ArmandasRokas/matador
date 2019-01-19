@@ -1,6 +1,6 @@
 package model;
 
-//TODO Gennemlæs kommentarene - Slet hvis vi ikke laver java doc
+//TODO java doc
 /**@author Hold 44
  * @version 08/11-2018
  *

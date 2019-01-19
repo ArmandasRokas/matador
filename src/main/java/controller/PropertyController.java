@@ -75,7 +75,7 @@ public class PropertyController {
         }
     }
 
-    /** //TODO Slet hvis vi ikke laver java doc
+    /** //TODO java doc
      * Updates sibling squares rent price after a player buys or receives a property by another player going bankrupt.
      * @param propertySquare
      */

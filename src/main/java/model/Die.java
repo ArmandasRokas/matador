@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-//TODO Gennemlæs kommentare - Slet hvis vi ikke laver java doc
+//TODO java doc
 /**@author
  * @version
  *
