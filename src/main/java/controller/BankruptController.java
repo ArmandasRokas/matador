@@ -14,7 +14,7 @@ public class BankruptController {
     public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController, PropertyController propertyController){
         transferPropertyToCreditor(playerController, propertySquare.getOwner(), propertyController);
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har gået fallit. Bye bye. ");
-        guiB.removePlayer(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
+        guiB.removePlayerByBankrupt(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
     }
 
     public void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {

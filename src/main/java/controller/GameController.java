@@ -31,15 +31,15 @@ public class GameController {
     }
 
     private void runGame() {
-        //TODO Fix kommunikation med spiller
         boolean activeGame = true;
+
         while (activeGame) {
             guiB.showChanceCard("");
             if (plCtrl.getIsCurrPlayerInJail()) {
                 inJail();
             } else {
                 showBeforeTurnMenu();
-                if(!plCtrl.getIsCurrPlayerInJail()){
+                if(!plCtrl.getIsCurrPlayerInJail() && plCtrl.getCurrPlayer().getBankrupt()){
                     showAfterTurnMenu();
                 }
                 Player p = gL.winnerFound(plCtrl.getPlayerList());
@@ -49,13 +49,7 @@ public class GameController {
                     activeGame = false;
                 }
                 checkForExtraRoundOrChangePlayer();
-//                if (!(cup.getEyesDie1() == cup.getEyesDie2()) || plCtrl.getCurrPlayer().getBankrupt() || plCtrl.getCurrPlayer().getIsCurrPlayerInJail()) {
-//                    plCtrl.changePlayer();
-//                } else {
-//                    guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
-//                } //TODO Kontroller om der er noget der mangler i metoden under
             }
-
         }
         askForNewGame();
     }
@@ -124,15 +118,16 @@ public class GameController {
         boolean stillBuying = true;
         GameBoard gameBoard = boardCtrl.getGameBoard();
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameBoard);
+
         while(stillBuying) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
             String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
-            switch (res) {
+
+            switch (res.toLowerCase()) {
                 case "exit": //exit
                     stillBuying = false;
                     break;
                 default:
-                    //køb hus (hvis spilleren har råd)
                     mbCtrl.buyHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -147,12 +142,11 @@ public class GameController {
         while(stillSelling) {
             int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToSellHousing(plCtrl);
             String res = guiB.administrateProperties(possibleStreets); //FixMe Show building prices? As in: "Rødovervej - 50kr"
-            switch (res) {
+            switch (res.toLowerCase()) {
                 case "exit": //exit
                     stillSelling = false;
                     break;
                 default:
-                    //sælge hus
                     mbCtrl.sellHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -239,5 +233,6 @@ public class GameController {
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl, cup);
         this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl);
+
     }
 }

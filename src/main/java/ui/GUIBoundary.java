@@ -10,28 +10,11 @@ public class GUIBoundary {
     protected GUI_Player[] playerList;
     private GUI_Field[] fieldList = gui.getFields();
 
-    public void setupGUIFields(int index, String name) {
-        fieldList[index].setDescription(name);
-        if(fieldList[index] instanceof GUI_Chance || fieldList[index] instanceof GUI_Jail || fieldList[index] instanceof GUI_Refuge) {
-            fieldList[index].setSubText(name);
-        } else {
-            fieldList[index].setTitle(name);
-        }
-    }
-
+    //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
         playerList = new GUI_Player[playerCount];
         return playerCount;
-    }
-
-    public void setupPlayer(int playerID, String name, int balance, Color color) {
-        GUI_Car car = new GUI_Car();
-        car.setPrimaryColor(color);
-        GUI_Player guiPlayer = new GUI_Player(name, balance, car);
-        playerList[playerID] = guiPlayer;
-        gui.addPlayer(playerList[playerID]);
-        fieldList[0].setCar(playerList[playerID], true);
     }
 
     public String[] askForNames(int playerCount) { //TODO Fix at man ikke kan hedde det samme, da det overwriter den forrige GUI_Player
@@ -40,36 +23,7 @@ public class GUIBoundary {
         for(int i = 0 ; i < playerCount ; i++) {
             names[i] = gui.getUserString("Skriv navn for spiller nr. " + (i + 1));
         }
-
         return names;
-    }
-
-    public void movePlayer(int previousPosition, int newPosition, int playerID) {
-        fieldList[previousPosition].setCar(playerList[playerID],false);
-        fieldList[newPosition].setCar(playerList[playerID],true);
-    }
-
-    public void removePlayer(int position, int playerID) {
-        fieldList[position].setCar(playerList[playerID],false);
-        playerList[playerID].setName(playerList[playerID].getName() + " (gået fallit)");
-    }
-
-    private String[] mainMenuButtons() {
-        return new String[]{"[FIRST OPTION]", "Køb Huse", "Sælg Huse", "Pantsæt Grunde"};
-    }
-
-    public int takeTurn(PlayerController plCtrl) {
-        String[] buttons = mainMenuButtons();
-        buttons[0] = "Kast Terninger";
-        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil kaste terningerne eller administerer dine grunde", buttons[0], buttons[1],buttons[2] );
-        return getUserChoice(buttons, res);
-    }
-
-    public int endTurn(PlayerController plCtrl) {
-        String[] buttons = mainMenuButtons();
-        buttons[0] = "Afslut Tur";
-        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil afslutte din tur eller administerer dine grunde",buttons[0], buttons[1], buttons[2]);
-        return getUserChoice(buttons, res);
     }
 
     public int getUserChoice(String[] buttons, String res) {
@@ -83,15 +37,37 @@ public class GUIBoundary {
         return choice;
     }
 
+    private String[] mainMenuButtons() {
+        return new String[]{"[FIRST OPTION]", "Køb Huse", "Sælg Huse", "Pantsæt Grunde"};
+    }
+
+    public int takeTurn(PlayerController plCtrl) {
+        String[] buttons = mainMenuButtons();
+        buttons[0] = "Kast Terninger";
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil kaste terningerne eller administerer dine grunde",
+                buttons[0], buttons[1],buttons[2] );
+        return getUserChoice(buttons, res);
+    }
+
+    public int endTurn(PlayerController plCtrl) {
+        String[] buttons = mainMenuButtons();
+        buttons[0] = "Afslut Tur";
+        String res = gui.getUserButtonPressed("Det er " + plCtrl.getCurrPlayerName() + "s tur. Vælg om du vil afslutte din tur eller administerer dine grunde",
+                buttons[0], buttons[1], buttons[2]);
+        return getUserChoice(buttons, res);
+    }
+
     public String administrateProperties(int[] possibleStreets) {
         int count = 0;
+
         for(int possibleStreet : possibleStreets) {
             if(possibleStreet != 0) {
                 count++;
             }
         }
         String[] possibleStreetNames = new String[count+1];
-        for(int possibleStreet : possibleStreets) {
+
+        for(int possibleStreet : possibleStreets) { //TODO ArrayList
             if(possibleStreet != 0) {
 
                 for(int i = 0 ; i < possibleStreetNames.length ; i++) {
@@ -100,12 +76,10 @@ public class GUIBoundary {
                         break;
                     }
                 }
-
             }
         }
-        possibleStreetNames[count] = "exit";
-        String message = "Vælg din ejendom fra dropdown menuen og klik på [OK] for at bygge et hus på den.";
-        String res = gui.getUserSelection(message, possibleStreetNames);
+        possibleStreetNames[count] = "Exit";
+        String res = gui.getUserSelection("Vælg din ejendom fra dropdown menuen og klik på [OK] for at bygge et hus på den.", possibleStreetNames);
         return res;
     }
 
@@ -113,6 +87,7 @@ public class GUIBoundary {
         String[] buttons = new String[]{"Kast For 2 ens", "Betal 50kr", "Brug Frikort"};
         String message = "Det er " + plCtrl.getCurrPlayerName() + "s " + plCtrl.getTurnsInJail()+1 + ". tur i fængsel. Vælg hvordan du vil komme ud.";
         String res;
+
         if(plCtrl.hasGetOutOfJailCard()) {
             res = gui.getUserButtonPressed(message, buttons[0], buttons[1], buttons[2]);
         } else {
@@ -120,19 +95,91 @@ public class GUIBoundary {
         }
         return getUserChoice(buttons, res);
     }
-    public int incomeTax(PlayerController plCtrl    ){
+
+    public int incomeTax(PlayerController plCtrl){
+        String[] buttons = new String[]{"Betal 10%", "Betal 200kr"};
         String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
-        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200kr");
-        int taxRes = -1;
-        switch (buttonChoice){
-            case "Betal 10%":
-                taxRes = 0;
-                break;
-            case "Betal 200kr":
-                taxRes = 1;
-                break;
+        String res = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", buttons[0], buttons[1]);
+        return getUserChoice(buttons, res);
+
+        //TODO Delete when checked works
+//        String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
+//        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200kr");
+//        int taxRes = -1;
+//
+//        switch (buttonChoice){
+//            case "Betal 10%":
+//                taxRes = 0;
+//                break;
+//            case "Betal 200kr":
+//                taxRes = 1;
+//                break;
+//        }
+//        return taxRes;
+    }
+
+    public boolean askToBuyProperty(int playerID, String squareName){
+        boolean answer = gui.getUserLeftButtonPressed(playerList[playerID].getName() + ", du har mulighed at købe " + squareName + ". Vil du det?",
+                "Ja", "Nej");
+        return answer;
+    }
+
+    public String endGame() { //TODO Will get implemented "No" button when GUI allows it
+        String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
+        return input;
+    }
+
+    //General communication (information, no choice) //TODO CurrPlayerScenario?
+    public void showCurrScenarioForPlayer(String scenario) {
+        gui.getUserButtonPressed(scenario, "OK");
+    }
+
+    public void declareWinner(int playerID) {
+        gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
+    }
+
+    public void tellPlayerExtraTurn(int playerID) {
+        gui.showMessage("Du har været heldig, " + playerList[playerID].getName() + "! De har slået dobbelt og  får en ekstra tur!");
+    }
+
+    public void informPlayerGoingToJail(int playerID){
+        gui.showMessage(playerList[playerID].getName() + " er blevet taget i at køre for hurtigt, og bliver sat i fængsel!");
+    }
+
+    public void showChanceCard(String cardText) {
+        gui.displayChanceCard(cardText);
+    }
+
+    //Practical methods
+        //Sets and removes
+    public void setupGUIFields(int index, String name) {
+        fieldList[index].setDescription(name);
+
+        if(fieldList[index] instanceof GUI_Chance || fieldList[index] instanceof GUI_Jail || fieldList[index] instanceof GUI_Refuge) {
+            fieldList[index].setSubText(name);
+        } else {
+            fieldList[index].setTitle(name);
         }
-        return taxRes;
+    }
+
+    public void setupPlayer(int playerID, String name, int balance, Color color) {
+        GUI_Car car = new GUI_Car();
+        car.setPrimaryColor(color);
+        GUI_Player guiPlayer = new GUI_Player(name, balance, car);
+        playerList[playerID] = guiPlayer;
+        gui.addPlayer(playerList[playerID]);
+        fieldList[0].setCar(playerList[playerID], true);
+    }
+
+    public void removePlayerByBankrupt(int position, int playerID) {
+        fieldList[position].setCar(playerList[playerID],false);
+        playerList[playerID].setName(playerList[playerID].getName() + " (Gået fallit)");
+    }
+
+        //Updates
+    public void movePlayer(int previousPosition, int newPosition, int playerID) {
+        fieldList[previousPosition].setCar(playerList[playerID],false);
+        fieldList[newPosition].setCar(playerList[playerID],true);
     }
 
     public void setDices(int eyesDie1, int eyesDie2) {
@@ -143,25 +190,7 @@ public class GUIBoundary {
         playerList[playerID].setBalance(balance);
     }
 
-    public boolean askToBuyProperty(int playerID, String squareName){
-
-        boolean answer = gui.getUserLeftButtonPressed(
-                playerList[playerID].getName() + ", du har mulighed at købe " +
-                        squareName + ". Vil du det?",
-                "ja", "nej");
-
-        return answer;
-    }
-
-    public void showCurrScenarioForPlayer(String scenario) {
-
-        //TODO switch statment show player action, when player do something else than buy or rent property.
-        gui.getUserButtonPressed(scenario, "OK");
-
-    }
-
     public void setOwnerOnSquare(int playerID, int squareIndex, int rentPrice){
-
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
         ownable.setOwnerName(playerList[playerID].getName());
         ownable.setSubText("Leje: " + Integer.toString(rentPrice));
@@ -169,17 +198,9 @@ public class GUIBoundary {
         ownable.setRent(Integer.toString(rentPrice));
     }
 
-    public void declareWinner(int playerID) {
-        gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
-    }
-
-    public String endGame() {
-        String input = gui.getUserButtonPressed("Vil du spille igen?", "Ja");
-        return input;
-    }
-
     public void setHousing(int squareIndex, int numberOfHouses) {
         GUI_Street street = (GUI_Street)fieldList[squareIndex];
+
         if(numberOfHouses <= 4) {
             street.setHouses(numberOfHouses);
         } else if(numberOfHouses == 5) {
@@ -191,17 +212,5 @@ public class GUIBoundary {
         GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
         ownable.setRent(""+rentPrice);
         ownable.setSubText("Leje: " + rentPrice);
-    }
-
-    public void showChanceCard(String cardText) {
-        gui.displayChanceCard(cardText);
-    }
-
-    public void tellPlayerExtraTurn(int playerID) {
-        gui.showMessage("Du har været heldig, " + playerList[playerID].getName() + "! De har slået dobbelt og  får en ekstra tur!");
-    }
-
-    public void informPlayerGoingToJail(int playerID){
-        gui.showMessage(playerList[playerID].getName() + " er blevet taget i at køre for hurtigt, og bliver sat i fængsel!");
     }
 }
