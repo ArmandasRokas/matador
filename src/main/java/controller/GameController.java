@@ -7,7 +7,7 @@ import ui.GUIBoundary;
 
 public class GameController {
     private PlayerController plCtrl;
-    private GameLogic gL;
+    private GameRules gameRules;
     private GUIBoundary guiB;
     private Cup cup;
     private GameBoardController boardCtrl;
@@ -19,7 +19,7 @@ public class GameController {
     }
 
     private void setupGame() {
-        gL = new GameLogic();
+        gameRules = new GameRules();
         guiB = new GUIBoundary();
         cup = new Cup();
         BankruptController bankruptCtrl = new BankruptController(guiB);
@@ -31,10 +31,10 @@ public class GameController {
     public void startGame() {
         int numberOfPlayers;
         do {
-            numberOfPlayers = guiB.askForPlayerCount(gL.getMinPlayers() ,gL.getMaxPlayers());
-        } while(!gL.controlPlayerCount(numberOfPlayers));
+            numberOfPlayers = guiB.askForPlayerCount(gameRules.getMinPlayers() , gameRules.getMaxPlayers());
+        } while(!gameRules.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gL, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl);
+        plCtrl = new PlayerController(guiB, gameRules, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl);
         plCtrl.createPlayers();
         runGame();
     }
@@ -51,7 +51,7 @@ public class GameController {
                 if(!plCtrl.getIsCurrPlayerInJail() && plCtrl.getCurrPlayer().getBankrupt()){
                     showAfterTurnMenu();
                 }
-                Player p = gL.winnerFound(plCtrl.getPlayerList());
+                Player p = gameRules.winnerFound(plCtrl.getPlayerList());
 
                 if (p != null) {
                     guiB.declareWinner(p.getPlayerID());

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ManageBuildingsControllerTest {
 
     MockGUI mockGUI ;
-    GameLogic gameLogic ;
+    GameRules gameRules;
     PlayerController playerController;
     BankruptController bankruptCtrl;
     PropertyController propertyCtrl;
@@ -24,14 +24,14 @@ class ManageBuildingsControllerTest {
     @BeforeEach
     void setUp() {
         mockGUI = new MockGUI();
-        gameLogic = new GameLogic();
+        gameRules = new GameRules();
         bankruptCtrl = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
         cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
         cup = new Cup();
         propertyCtrl = new PropertyController(mockGUI, bankruptCtrl, cup);
-        playerController = new PlayerController(mockGUI, gameLogic, 3, propertyCtrl, cardController, gameBoardCtrl);
+        playerController = new PlayerController(mockGUI, gameRules, 3, propertyCtrl, cardController, gameBoardCtrl);
         playerController.createPlayers();
 
     }

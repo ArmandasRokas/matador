@@ -3,14 +3,13 @@ package controller;
 import model.Player;
 import model.square.ChanceSquare;
 import model.square.property.PropertySquare;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
 
 public class PlayerController {
     private Player[] playerList;
-    private GameLogic gL;
+    private GameRules gameRules;
     private GUIBoundary guiB;
     private Player currPlayer;
     private String currScenarioForPlayer = "[NO SCENARIO SET]";
@@ -21,11 +20,11 @@ public class PlayerController {
     private GameBoardController gameBoardCtrl;
     private int currPlayerExtraTurnCount;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl,
+    public PlayerController(GUIBoundary guiB, GameRules gameRules, int numberOfPlayers, PropertyController propertyCtrl,
                             ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
-        this.gL = gL;
+        this.gameRules = gameRules;
         this.turnsTakenInJail = 0;
         this.chanceCardCtrl = chanceCardCtrl;
         this.outOfJailCards = 0;
@@ -37,10 +36,10 @@ public class PlayerController {
 
     public void createPlayers() {
         String[] names = guiB.askForNames(playerList.length);
-        Color[] carColors = gL.getColors();
+        Color[] carColors = gameRules.getColors();
 
         for(int i = 0; i < playerList.length; i++){
-            playerList[i] = new Player(i, names[i], gL.getStartBalance());
+            playerList[i] = new Player(i, names[i], gameRules.getStartBalance());
             guiB.setupPlayer(playerList[i].getPlayerID(), playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
         }
 
@@ -57,7 +56,7 @@ public class PlayerController {
         currPlayer.setPosition(newPosition);
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
-        if(canPassStart && gL.passStart(currPosition, newPosition)) {
+        if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
             havePassedStart();
         }
     }
@@ -67,7 +66,7 @@ public class PlayerController {
         currPlayer.setPosition(newPosition);
         guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
 
-        if(canPassStart && gL.passStart(currPosition, newPosition)) {
+        if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
             havePassedStart();
         }
     }

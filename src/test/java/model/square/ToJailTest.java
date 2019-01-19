@@ -14,7 +14,7 @@ class ToJailTest {
     void testToJail(){ //FixMe
 //        //Arrange
 //        MockGUI mockGUI = new MockGUI();
-//        GameLogic gL = new GameLogic();
+//        GameRules gL = new GameRules();
 //        ChanceCardController cdCtrl = new ChanceCardController(mockGUI);
 //        BankruptController bCtrl = new BankruptController(mockGUI);
 //        PropertyController propCtrl = new PropertyController(mockGUI, bCtrl);

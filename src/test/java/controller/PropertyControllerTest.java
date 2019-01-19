@@ -19,7 +19,7 @@
 //        BankruptController bankruptCtrl = new BankruptController(gui);
 //        PropertyController propertyCtrl = new PropertyController(gui, bankruptCtrl);
 //
-//        PlayerController playerController = new PlayerController(gui, new GameLogic(), 1);
+//        PlayerController playerController = new PlayerController(gui, new GameRules(), 1);
 //        playerController.createPlayers();
 //        Player player = playerController.getCurrPlayer();
 //        int playerBalanceBeforeBuying = playerController.getCurrPlayerBalance();

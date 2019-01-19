@@ -18,7 +18,7 @@
 //    private GameBoard gameBoard;
 //    private Square[] squares;
 //    private PlayerController playerController;
-//    private GameLogic gameLogic;
+//    private GameRules gameLogic;
 //
 //    @BeforeEach
 //    void setup() {
@@ -31,7 +31,7 @@
 //        gameBoard = new GameBoard();
 //
 //        squares = gameBoard.getSquareList();
-//        GameLogic gameLogic = new GameLogic();
+//        GameRules gameLogic = new GameRules();
 //        playerController = new PlayerController(mockGUI, gameLogic, 3);
 //        playerController.createPlayers();
 //    }

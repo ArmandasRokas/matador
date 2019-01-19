@@ -4,23 +4,15 @@ import model.Player;
 
 import java.awt.Color;
 
-public class GameLogic {
+public class GameRules {
     private int minPlayers, maxPlayers, startBalance;
     private Color[] colors;
 
-    public GameLogic() {
+    public GameRules() {
         minPlayers = 2;
         maxPlayers = 6;
         startBalance = 1500;
-        this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA}; //Virker kun for 6 spillere
-    }
-
-    public int getMinPlayers() {
-        return minPlayers;
-    }
-
-    public int getMaxPlayers() {
-        return maxPlayers;
+        this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA};
     }
 
     public boolean controlPlayerCount(int numberOfPlayers) {
@@ -30,14 +22,6 @@ public class GameLogic {
             res = true;
         }
         return res;
-    }
-
-    public int getStartBalance() {
-        return startBalance;
-    }
-
-    public Color[] getColors() {
-        return colors;
     }
 
     public Player winnerFound(Player[] playerList) {
@@ -58,5 +42,21 @@ public class GameLogic {
 
     public boolean passStart(int currPosition, int newPosition) {
         return newPosition < currPosition;
+    }
+
+    //Getters and Setters
+    public int getMinPlayers() {
+        return minPlayers;
+    }
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public int getStartBalance() {
+        return startBalance;
+    }
+
+    public Color[] getColors() {
+        return colors;
     }
 }
