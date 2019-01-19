@@ -9,7 +9,7 @@ package model;
  */
 public class Cup {
     private Die d1, d2; //Instances of dices
-    int testInt = 0;
+    int testInt = 0;    //TODO SLET FØR AFLEVERING
 
     /**
      * Constructor of Cup
@@ -32,14 +32,27 @@ public class Cup {
      *
      * @return  Sum of the two dices
      */
+//    public int getCurrentRollScore() {
+//        return getEyesDie1() + getEyesDie2();
+//    }
+
+//    public int getEyesDie1() {
+//        return d1.getEyes();
+//    }
+//    public int getEyesDie2() {
+//        return d2.getEyes();
+//    }
+
     public int getCurrentRollScore() {
-        return getEyesDie1() + getEyesDie2();
+//        return 36;
+        int[] array = new int[]{36, 10, 36, 36, 36, 36};
+        return array[testInt++];
     }
 
     public int getEyesDie1() {
-        return d1.getEyes();
+        return 1;
     }
     public int getEyesDie2() {
-        return d2.getEyes();
+        return 1;
     }
 }

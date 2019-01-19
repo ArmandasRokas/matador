@@ -10,6 +10,10 @@ public class Jail extends Square {
 
     @Override
     public void landedOn(PlayerController playerController) {
-        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er landet på " + this);
+        if(playerController.getIsCurrPlayerInJail()) {
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er i Fængsel");
+        } else {
+            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er " + this);
+        }
     }
 }

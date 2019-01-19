@@ -62,6 +62,7 @@ public class ChanceCardController {
         guiB.showChanceCard(chanceCard.getCardText());
         guiB.showCurrScenarioForPlayer(playerCtrl.getCurrScenarioForPlayer());
         playerCtrl.movePlayerToSquare(chanceCard.getSquarePosition(), chanceCard.isToPrison());
+        playerCtrl.setCurrPlayerIsInJail(chanceCard.isToPrison());
         gameBoardCtrl.actOnSquare(playerCtrl);
     }
 

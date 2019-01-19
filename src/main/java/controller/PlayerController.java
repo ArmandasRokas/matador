@@ -75,7 +75,7 @@ public class PlayerController {
     public void setCurrPlayerToJail(){
         guiB.informPlayerGoingToJail(getCurrPlayerID());
         this.setCurrPlayerIsInJail(true);
-        this.movePlayerToSquare(10, false);
+        this.movePlayerToSquare(10, true);
     }
 
     public boolean checkForSpeeding(){
