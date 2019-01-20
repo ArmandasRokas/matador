@@ -5,52 +5,38 @@ import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 public class BankruptController {
+    private GUIBoundary guiB;
 
-    private GUIBoundary guiBoundary;
-
-    public BankruptController(GUIBoundary guiBoundary){
-        this.guiBoundary = guiBoundary;
+    public BankruptController(GUIBoundary guiB){
+        this.guiB = guiB;
     }
 
-    public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController){
-
-
-            // vis muligheder til at sælge huse
-            // vis mulighder til at pansætte grund
-
-
-        // hvis ingen mulighder
-
-
-            // setCurrentPlayerScenario(" du er gået falit.
-            // boolean isBankrupt is true
-            // slet bilen fra spillerpladen.
-
-        transferPropertyToCreditor(playerController, propertySquare.getOwner());
-        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName()
-        + " har gået fallit. Bye bye. ");
-        guiBoundary.removePlayer(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
-
-
+    public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController, PropertyController propertyController){
+        transferPropertyToCreditor(playerController, propertySquare.getOwner(), propertyController);
+        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har gået fallit. Bye bye. ");
+        guiB.removePlayerByBankrupt(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
     }
 
-    public void transferPropertyToCreditor(PlayerController playerController, Player owner) {
-            PropertySquare[] currentPlayerProperties = playerController.getCurrPlayerProperties();
+    public void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {
+            PropertySquare[] currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
 
             for(PropertySquare square: currentPlayerProperties) {
-
                 if(square != null){
                     square.setOwner(owner);
                 }
             }
-            playerController.payPlayer(owner, playerController.getCurrPlayerBalance());
-            playerController.setCurrPlayerBalance(0);
-            //TODO chancekort gives også til banken
+            playerCtrl.payPlayer(owner, playerCtrl.getCurrPlayerBalance());
+            playerCtrl.setCurrPlayerBalance(0);
 
-            guiBoundary.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
-            guiBoundary.updateBalance(owner.getPlayerID(), owner.getBalance());
+            guiB.updateBalance(playerCtrl.getCurrPlayerID(), playerCtrl.getCurrPlayerBalance());
+            guiB.updateBalance(owner.getPlayerID(), owner.getBalance());
 
-            playerController.currPlayerGoBankrupt();
+            for(PropertySquare square: currentPlayerProperties) {
+                if(square != null){
+                    guiB.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
+                    propertyCtrl.updateSiblingSquaresRentPrice(square);
+                }
+            }
+            playerCtrl.currPlayerGoBankrupt();
     }
-
 }

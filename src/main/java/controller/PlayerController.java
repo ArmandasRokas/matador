@@ -1,69 +1,85 @@
 package controller;
 
-import jdk.nashorn.internal.objects.annotations.Property;
 import model.Player;
+import model.square.ChanceSquare;
 import model.square.property.PropertySquare;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
 
 public class PlayerController {
     private Player[] playerList;
-    private GameLogic gL;
+    private GameRules gameRules;
     private GUIBoundary guiB;
     private Player currPlayer;
-    private String currScenarioForPlayer;
+    private String currScenarioForPlayer = "[NO SCENARIO SET]";
     private PropertyController propertyCtrl;
+    private ChanceCardController chanceCardCtrl;
+    private GameBoardController gameBoardCtrl;
+    private int currPlayerExtraTurnCount;
 
-    public PlayerController(GUIBoundary guiB, GameLogic gL, int numberOfPlayers, PropertyController propertyCtrl) {
+    public PlayerController(GUIBoundary guiB, GameRules gameRules, int numberOfPlayers, PropertyController propertyCtrl,
+                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
-        this.gL = gL;
+        this.gameRules = gameRules;
+        this.chanceCardCtrl = chanceCardCtrl;
+        this.gameBoardCtrl = gameBoardCtrl;
+        this.currPlayerExtraTurnCount = 0;
+
         playerList = new Player[numberOfPlayers];
     }
 
     public void createPlayers() {
         String[] names = guiB.askForNames(playerList.length);
-        Color[] carColors = gL.getColors();
+        Color[] carColors = gameRules.getColors();
 
         for(int i = 0; i < playerList.length; i++){
-            playerList[i] = new Player(i, names[i], gL.getStartBalance());
+            playerList[i] = new Player(i, names[i], gameRules.getStartBalance());
             guiB.setupPlayer(playerList[i].getPlayerID(), playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
         }
 
         currPlayer = playerList[0];
     }
 
-    public void movePlayer(int rollScore) {
+    public void movePlayer(int rollScore, boolean canPassStart) {
         int currPosition = currPlayer.getCurrentPosition();
         int newPosition = (rollScore + currPosition) % 40;
-        currPlayer.setPosition(newPosition);                                    //TODO Fix start indkomst
+
+        if(newPosition < 0) {
+            newPosition = 40 + newPosition;
+        }
+        currPlayer.setPosition(newPosition);
         guiB.movePlayer(currPosition, newPosition,currPlayer.getPlayerID());
 
-        if(newPosition < currPosition) {
-            currPlayerMoneyInfluence(200);
-            guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+        if(canPassStart && gameRules.passStart(currPosition, newPosition)) {
+            giveStartIncome();
         }
     }
 
-    public int[] getCurrPlayerSquarePossibleToBuild(){
-        int[] squaresPossibleToBuild = new int[28];
+    public void movePlayerToSquare(int newPosition, boolean goingToPrison){
+        int currPosition = currPlayer.getCurrentPosition();
+        currPlayer.setPosition(newPosition);
+        guiB.movePlayer(currPosition, newPosition, getCurrPlayerID());
 
-        for(PropertySquare property: currPlayer.getProperties()){
-            if(property instanceof StreetSquare) {
-                StreetSquare street = (StreetSquare) property;
-                if(street.isSetOwned()){
-                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
-                        if(squaresPossibleToBuild[i] == 0){
-                            squaresPossibleToBuild[i] = street.getIndex();
-                            break;
-                        }
-                    }
-                }
-            }
+        if(!goingToPrison && gameRules.passStart(currPosition, newPosition)) {
+            giveStartIncome();
         }
-        return squaresPossibleToBuild;
+    }
+
+    private void giveStartIncome() {
+        currPlayerMoneyInfluence(200);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
+    }
+
+    public void setCurrPlayerToJail(){
+        guiB.informPlayerGoingToJail(getCurrPlayerID());
+        this.setCurrPlayerIsInJail(true);
+        this.movePlayerToSquare(10, true);
+    }
+
+    public boolean checkForSpeeding(){
+        return currPlayerExtraTurnCount == 3;
     }
 
     public void changePlayer() {
@@ -71,29 +87,28 @@ public class PlayerController {
                 int currID = currPlayer.getPlayerID();
                 currID = (currID + 1) % playerList.length;
                 currPlayer = playerList[currID];
-            } while (currPlayer.getBankrupt());
+            } while (currPlayer.isBankrupt());
     }
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
     }
-
 
     public Player[] getPlayerList() {
         return playerList;
     }
 
     public int getCurrPlayerPos() {
-        int currPos = currPlayer.getCurrentPosition();
-        return currPos;
-    }
-
-    public String getCurrPlayerName(){
-        return currPlayer.getName();
+        return currPlayer.getCurrentPosition();
     }
 
     public Player getCurrPlayer() {
         return currPlayer;
+    }
+
+    public String getCurrPlayerName(){
+        return currPlayer.getName();
     }
 
     public void addCurrPlayerProperty(PropertySquare square) {
@@ -104,6 +119,9 @@ public class PlayerController {
         return currPlayer.getPlayerID();
     }
 
+    public void setCurrPlayerBalance(int balance) {
+        currPlayer.setBalance(balance);
+    }
     public int getCurrPlayerBalance(){
         return currPlayer.getBalance();
     }
@@ -114,6 +132,7 @@ public class PlayerController {
 
     public void payPlayer(Player propertyOwner, int cash) {
         currPlayerMoneyInfluence(-cash);
+
         if(propertyOwner != null){
             propertyOwner.moneyInfluence(cash);
         }
@@ -123,19 +142,56 @@ public class PlayerController {
         this.currPlayer.goBankrupt();
     }
 
-    public void setCurrPlayerBalance(int balance) {
-        currPlayer.setBalance(balance);
-    }
-
     public void setCurrScenarioForPlayer(String currScenario) {
         this.currScenarioForPlayer = currScenario;
     }
-
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
     }
 
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);
+    }
+    public void handleSquare(ChanceSquare chanceSquare) {
+        chanceCardCtrl.handleChanceCards(this);
+    }
+
+    public void setCurrPlayerIsInJail(boolean isInJail) {
+        if(!isInJail) {
+            currPlayer.resetTurnsTakenInJail();
+        }
+        currPlayer.setIsCurrPlayerInJail(isInJail);
+    }
+
+    public boolean getIsCurrPlayerInJail() {
+        return currPlayer.getIsCurrPlayerInJail();
+    }
+    public int getCurrPlayerExtraTurnCount(){
+        return currPlayerExtraTurnCount;
+    }
+
+    public void addOneCurrPlayerExtraTurnCount(){
+        currPlayerExtraTurnCount++;
+    }
+    public void resetCurrPlayerExtraTurnCount(){
+        currPlayerExtraTurnCount = 0;
+    }
+
+    public void giveOutOfJailCard() {
+        currPlayer.addOutOfJailCard();
+    }
+    public boolean hasGetOutOfJailCard() {
+        return currPlayer.getGetOutOfJailCards() > 0;
+    }
+    public void useGetOutOfJailCard() {
+        currPlayer.useGetOutOfJailCard();
+    }
+
+    public int getTurnsInJail() {
+        return currPlayer.getTurnsTakenInJail();
+    }
+
+    public void payIncomeTax() {
+        gameBoardCtrl.payIncomeTax(this);
     }
 }

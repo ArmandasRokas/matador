@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-//FixMe Gennemlæs kommentarene
+//TODO java doc
 /**@author
  * @version
  *

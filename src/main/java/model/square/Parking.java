@@ -10,8 +10,6 @@ public class Parking extends Square {
 
     @Override
     public void landedOn(PlayerController playerController) {
-
         playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " landet på " + this);
-
     }
 }

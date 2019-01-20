@@ -16,20 +16,20 @@
 //
 //        //Arrange
 //        MockGUI gui = new MockGUI();
-//        BankruptController bankruptController = new BankruptController(gui);
-//        PropertyController propertyController = new PropertyController(gui, bankruptController);
+//        BankruptController bankruptCtrl = new BankruptController(gui);
+//        PropertyController propertyCtrl = new PropertyController(gui, bankruptCtrl);
 //
-//        PlayerController playerController = new PlayerController(gui, new GameLogic(), 1);
+//        PlayerController playerController = new PlayerController(gui, new GameRules(), 1);
 //        playerController.createPlayers();
 //        Player player = playerController.getCurrPlayer();
 //        int playerBalanceBeforeBuying = playerController.getCurrPlayerBalance();
 //
-//        GameBoard gameBoard = new GameBoard(propertyController, new ChanceCardController(gui));
+//        GameBoard gameBoard = new GameBoard(propertyCtrl, new ChanceCardController(gui));
 //        PropertySquare square = (PropertySquare) gameBoard.getSquareList()[1];
 //
 //        //Act
 //
-//        propertyController.buyProperty(square, playerController);
+//        propertyCtrl.buyProperty(square, playerController);
 //        int playerBalanceAfterBuying = playerController.getCurrPlayerBalance();
 //
 //        //Assert

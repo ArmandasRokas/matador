@@ -6,23 +6,17 @@ import model.Player;
 import model.square.Square;
 
 public abstract class PropertySquare extends Square {
-
-    private int price;                      //Price of the property
-    private int[] rentPriceList;                  //Price of landing on the property
+    private int price;                          //Price of the property
+    private int[] rentPriceList;                //Price of landing on the property
     private final int groupID;
-    private PropertySquare[] siblingSquares;   //Reference to the other property of same color
-    private final int index;
-    protected PropertyController propertyController;
-
+    private PropertySquare[] siblingSquares;    //Reference to the other property of same color
 
     public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures) {
         super(scenario, index);
         this.price = price;
         this.rentPriceList= rentPriceList;
         this.groupID = groupID;
-        this.index = index;
         siblingSquares = new PropertySquare[numberOfSiblingsSqaures];
-
     }
 
     @Override
@@ -42,13 +36,11 @@ public abstract class PropertySquare extends Square {
 
     @Override
     public String toString() {
-
         if (super.getOwner() == null) {
             return super.toString() + " for " + price + "dkk";
         } else {
             return super.toString();
         }
-
     }
 
     public int[] getRentPriceList(){
@@ -65,18 +57,18 @@ public abstract class PropertySquare extends Square {
     }
 
     public boolean isSetOwned(){
-
         boolean res = false;
         int siblingsOwned = 0;
+
         for(PropertySquare propertySquare: siblingSquares){
             if(this.getOwner() != null && this.getOwner().equals(propertySquare.getOwner())){
                     siblingsOwned++;
             }
         }
+
         if(siblingsOwned == siblingSquares.length){
             res = true;
         }
-
         return res;
     }
 

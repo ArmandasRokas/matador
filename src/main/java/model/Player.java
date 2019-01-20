@@ -1,50 +1,46 @@
 package model;
 
-
 import model.square.property.PropertySquare;
 
 public class Player {
     private String name;
-    private int playerID, balance, currentPosition, getOutOfPrisonCards;
-    private PropertySquare[] properties;
+    private int playerID, balance, currentPosition, getOutOfJailCards;
+    private PropertySquare[] properties; //TODO ArrayList?
     private boolean isBankrupt;
+    private boolean isCurrPlayerInJail;
+    private int turnsTakenInJail;
 
     public Player(int playerID, String name, int balance) {
         this.playerID = playerID;
         this.name = name;
         this.balance = balance;
         this.isBankrupt = false;
+        this.isCurrPlayerInJail = false;
+        this.turnsTakenInJail = 0;
         currentPosition = 0;
-        getOutOfPrisonCards = 0;
+        getOutOfJailCards = 0;
         properties = new PropertySquare[28];
     }
 
-    public String getName() {
+    public String toString() {
         return name;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public int getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public void setPosition(int newPosition) {
-        this.currentPosition = newPosition;
-    }
-
-    public int getPlayerID() {
-        return playerID;
     }
 
     public void moneyInfluence(int cash) {
         balance += cash;
     }
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+    public int getBalance() {
+        return balance;
+    }
 
-    public String toString() {
-        return name;
+    public void setPosition(int newPosition) {
+        this.currentPosition = newPosition;
+    }
+    public int getCurrentPosition() {
+        return currentPosition;
     }
 
     public void addProperty(PropertySquare square){
@@ -55,7 +51,6 @@ public class Player {
             }
         }
     }
-
     public PropertySquare[] getProperties(){
         return properties;
     }
@@ -63,12 +58,33 @@ public class Player {
     public void goBankrupt(){
         this.isBankrupt = true;
     }
-
-    public boolean getBankrupt(){
+    public boolean isBankrupt(){
         return this.isBankrupt;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setIsCurrPlayerInJail(boolean isInJail){ this.isCurrPlayerInJail = isInJail;}
+
+    public boolean getIsCurrPlayerInJail(){return this.isCurrPlayerInJail;}
+    public void increaseTurnsTakenInJail() { turnsTakenInJail++; }
+
+    public void resetTurnsTakenInJail() {
+        turnsTakenInJail = 0;
+    }
+    public int getTurnsTakenInJail() {
+        return turnsTakenInJail;
+    }
+    public void addOutOfJailCard() {
+        this.getOutOfJailCards++;
+    }
+
+    public void useGetOutOfJailCard() {
+        this.getOutOfJailCards = getOutOfJailCards - 1;
+    }
+    public int getGetOutOfJailCards() { return getOutOfJailCards; }
+
+    public String getName() { return name; }
+
+    public int getPlayerID() {
+        return playerID;
     }
 }
