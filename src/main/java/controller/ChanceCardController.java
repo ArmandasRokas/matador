@@ -58,20 +58,12 @@ public class ChanceCardController {
     public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
         guiB.showChanceCard(chanceCard.getCardText());
 
-        if(playerCtrl.getCurrPlayerBalance() < -chanceCard.getMoneyInfluence()) {    //Not able to pay  for chance card.
-            guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale " + chanceCard.getMoneyInfluence() + ".");
+        if(!bankruptCtrl.playerCanPay(playerCtrl, chanceCard.getMoneyInfluence())) {    //Not able to pay  for chance card.
+            guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale " + chanceCard.getMoneyInfluence() + "kr.");
             bankruptCtrl.goBankrupt(playerCtrl);
+        } else {    //Able to pay for chance card.
+            playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
         }
-// else {    //Able to pay for chance card.
-//            playerController.payPlayer(propertySquare.getOwner(), rent);
-//            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
-//            guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
-//            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
-//                    ". " + playerController.getCurrPlayerName() + " har betalt " + rent + "kr til " + propertySquare.getOwner());
-//        }
-
-
-        playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
     }
 
     public void handleChanceCard(MovePlayerToSquareCC chanceCard, PlayerController playerCtrl) {
@@ -103,7 +95,7 @@ public class ChanceCardController {
         cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
         cardDeck[9] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
         cardDeck[10] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
-        cardDeck[11] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 60kr til banken", -60);
+        cardDeck[0] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 60kr til banken", -10000);
         cardDeck[12] = new MoneyInfluenceCC("Grundet på dyrtiden har De fået gageforhøjelse, De har modtaget 50kr", 50);
         cardDeck[13] = new MoneyInfluenceCC("Deres præmieobligation er kommet ud. De har modtaget 100kr", 100);
         cardDeck[14] = new MoneyInfluenceCC("Efter auktionen på Assistentshuset, hvor De havde pantsat Deres tøj, og modtaget de 108kr", 108);
@@ -118,7 +110,7 @@ public class ChanceCardController {
         cardDeck[23] = new MoneyInfluenceCC("De har solgt Deres gamle klude. De har modtaget 20kr", 20);
         cardDeck[24] = new MoneyInfluenceCC("Kommunen har eftergivet et kvartals skat. De har hævet 200kr i banken til en glad aften", 200);
 
-        shuffleDeck();
+     //   shuffleDeck();
     }
 
     public ChanceCard pickCard() {
