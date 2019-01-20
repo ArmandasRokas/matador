@@ -2,6 +2,7 @@ package controller;
 
 import model.Player;
 import model.square.ChanceSquare;
+import model.square.IncomeTax;
 import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
@@ -196,8 +197,7 @@ public class PlayerController {
     public void handleSquare(ChanceSquare chanceSquare) {
         chanceCardCtrl.handleChanceCards(this);
     }
-
-    public void payIncomeTax() {
+    public void handleSquare(IncomeTax incomeTax){
         gameBoardCtrl.payIncomeTax(this, bankruptCtrl, propertyCtrl);
     }
 

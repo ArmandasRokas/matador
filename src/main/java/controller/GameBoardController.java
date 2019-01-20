@@ -56,8 +56,8 @@ public class GameBoardController {
                 break;
             case 1:
                 playerCtrl.setCurrScenarioForPlayer("Du har valgt at betale 200kr");
-                if(bankruptCtrl.playerCanPay(playerCtrl, -2000)) {
-                    playerCtrl.currPlayerMoneyInfluence(-2000);
+                if(bankruptCtrl.playerCanPay(playerCtrl, -200)) {
+                    playerCtrl.currPlayerMoneyInfluence(-200);
                 } else {
                     bankruptCtrl.goBankrupt(playerCtrl);
                 }
