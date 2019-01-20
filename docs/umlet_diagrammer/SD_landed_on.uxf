@@ -6,24 +6,27 @@
     <coordinates>
       <x>20</x>
       <y>0</y>
-      <w>880</w>
-      <h>500</h>
+      <w>620</w>
+      <h>600</h>
     </coordinates>
-    <panel_attributes>title=SD:  Visitor pattern
-obj=:BoardController~a 
-obj=propertySquare\n:PropertySquare~b 
-obj=playerCtrl\n:PlayerController ~c 
-obj=propertyController :PropertyController~d
+    <panel_attributes>title=SD:  landedOn(playerCtrl) on PropertuSquare
+obj=propertySquare\n:PropertySquare~a 
+obj=playerCtrl\n:PlayerController ~b 
+obj=propertyController :PropertyController~c
 
 found-&gt;&gt;&gt;a ; on=a
-a-&gt;&gt;&gt;b : landedOn(playerCtrl); on=b
-b-&gt;&gt;&gt;c :handleSquare(this)  ; on=c
-c-&gt;&gt;&gt;d :handleProperty\n(propertySquare, this) ; on=d
-d-&gt;&gt;&gt;b : getOwner(); on=b
-b.&gt;&gt;&gt;d :  owner; off=b;
 
-combinedFragment=alt~alt1 b d ;  b:[owner == null];
-ref=b d: SD_buyProperty
+a-&gt;&gt;&gt;b :handleSquare(this); on=b; 
+b-&gt;&gt;&gt;c :handleProperty\n(propertySquare, this); on=c;
+c-&gt;&gt;&gt;a : getOwner(); on=a
+a.&gt;&gt;&gt;c :  owner; off=a
+
+combinedFragment=alt~alt1 a c ;  a:[owner == null];
+ref=a c: SD_buyProperty
+tick=
+..
+a:[owner =! null];
+ref=a c: SD_pay_rent
 --;
 
 
