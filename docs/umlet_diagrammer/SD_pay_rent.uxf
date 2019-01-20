@@ -7,7 +7,7 @@
       <x>130</x>
       <y>0</y>
       <w>1160</w>
-      <h>970</h>
+      <h>880</h>
     </coordinates>
     <panel_attributes>title=SD: payRent(square,playerController) on PropertyController
 obj=:PropertyController ~a 
@@ -29,10 +29,7 @@ a-&gt;&gt;&gt;b :getCurrPlayerBalance(); on=b
 b-&gt;&gt;&gt;c : getBalance(); on=c
 c.&gt;b : balance; off=c
 b.&gt;a : balance; off=b
-combinedFragment=alt~alt1 a e ;  a:[balance &lt; rent];
-ref=b e: SD_handleNegativeBalance
-tick=
-.. ; a:[else]
+combinedFragment=alt~alt1 a e ;  a:[balance &gt; rent];
 a-&gt;&gt;&gt;e  :getOwner()  ; on=e
 e.&gt;a : owner; off=e
 a-&gt;&gt;&gt;b :payPlayer(owner, rent)  ; on=b;
@@ -41,7 +38,7 @@ on=b;
 b-&gt;&gt;&gt;c :moneyInfluence(-rent)  ; on=c; off=b
 off=c;
 b-&gt;&gt;&gt;d :moneyInfluence(rent)  ; on=d; off=b
-off=d; off=a;--;
+off=d;off=a;--;
 
 
 

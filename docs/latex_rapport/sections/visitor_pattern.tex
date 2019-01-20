@@ -7,7 +7,7 @@
 \usepackage{graphicx,wrapfig,lipsum}
 
 \begin{document}
-
+\label{sec:visitor}
         Der er blevet benyttet Visitor pattern til at håndtere problematikken omkring mangfoldigheden af landedOn() metoden for felterne, og pickedCard() for lykkekortene. I dette afsnit fokuseres mest på Visitor patterns funktion i forbindelse med felterne. \par
         Problematikkens udgangspunkt er at felterne udspiller et forskelligt scenarie, hvis udspilningsstruktur er afhængigt af deres type. Dette kunne også løses ved anvendelse af polymorfi, hvor der ville være en abstrakt klasse “Square”, med en abstrakt metode landedOn(), hvor hver af subklasserne til “Square” felt har hver deres egen implementation af landedOn() metoden, som automatisk bliver kaldt til objekter af, den subklasse den kaldes på. Et eksempel er at alle ejendoms-felterne, skal kunne købes, eller lejeprisen fratrækkes når feltet er ejet af en anden spiller, mens skatte-felterne skal kunne fratrække et beløb fra spillerens konto. \par
         Dette ville dog medføre, at felterne i programmet, som er en del af model-laget i vores projektstruktur, indeholdt mere logik end vi foretrækker, altså en eller anden grad af en kontrolstruktur. Det er generelt uønsket med logik i model-laget, når et projekt er opbygget efter Model-View-Controller arkitekturen, som vi har valgt at benytte. \par
