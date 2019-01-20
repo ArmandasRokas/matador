@@ -14,7 +14,7 @@ public class BankruptController {
         this.guiB = guiB;
     }
 
-    public boolean playerBalanceGoingNegative(PlayerController playerCtrl, int moneyInfluence) {
+    public boolean playerCanPay(PlayerController playerCtrl, int moneyInfluence) {
         return playerCtrl.getCurrPlayerBalance() > -moneyInfluence;
     }
 
@@ -22,13 +22,13 @@ public class BankruptController {
         this.propertyCtrl = propertyCtrl;
     }
 
-    public void goBankrupt(PropertySquare propertySquare, PlayerController playerCtrl, PropertyController propertyCtrl){ //Another player is creditor
+    public void goBankrupt(PropertySquare propertySquare, PlayerController playerCtrl){ //Another player is creditor
         transferPropertyToCreditor(playerCtrl, propertySquare.getOwner(), propertyCtrl);
         playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet ");
         guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
     }
 
-    public void goBankrupt(PlayerController playerCtrl, PropertyController propertyCtrl) { //Bank is creditor
+    public void goBankrupt(PlayerController playerCtrl) { //Bank is creditor
         transferPropertyToCreditor(playerCtrl, propertyCtrl);
         playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet");
         guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());

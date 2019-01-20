@@ -27,7 +27,7 @@ class PlayerControllerTest {
         gameRules = new GameRules();
         bankruptCtrl = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
-        cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
+        cardController = new ChanceCardController(mockGUI, gameBoardCtrl, bankruptCtrl);
         gameBoard = new GameBoard();
         cup = new Cup();
         propertyController = new PropertyController(mockGUI, bankruptCtrl, cup);

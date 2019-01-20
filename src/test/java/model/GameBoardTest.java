@@ -30,7 +30,7 @@ class GameBoardTest {
         mockGUI = new MockGUI();
         bankruptController = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
-        chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl);
+        chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl, bankruptController);
         cup = new Cup();
         propertyController = new PropertyController(mockGUI, bankruptController, cup);
 

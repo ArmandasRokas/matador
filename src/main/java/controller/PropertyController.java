@@ -62,10 +62,10 @@ public class PropertyController {
             rent = propertySquare.getRentPrice();
         }
 
-        if(playerController.getCurrPlayerBalance() < rent) {    //Not able to pay rent
+        if(!bankruptCtrl.playerCanPay(playerController, -rent)) {    //Not able to pay rent
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
             guiB.showCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-            bankruptCtrl.goBankrupt(propertySquare, playerController, this);
+            bankruptCtrl.goBankrupt(propertySquare, playerController);
         } else {    //Able to pay rent
             playerController.payPlayer(propertySquare.getOwner(), rent);
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
