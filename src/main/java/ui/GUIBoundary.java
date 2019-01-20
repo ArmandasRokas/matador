@@ -116,7 +116,7 @@ public class GUIBoundary {
 
     public int getOutOfJail(PlayerController plCtrl){
         String[] buttons = new String[]{"Kast For 2 ens", "Betal 50kr", "Brug Frikort"};
-        String message = "Det er " + plCtrl.getCurrPlayerName() + "s " + plCtrl.getTurnsInJail()+1 + ". tur i fængsel. Vælg hvordan du vil komme ud.";
+        String message = "Det er " + plCtrl.getCurrPlayerName() + "s " + (plCtrl.getTurnsInJail()+1) + ". tur i fængsel. Vælg hvordan du vil komme ud.";
         String res;
 
         if(plCtrl.hasGetOutOfJailCard()) {

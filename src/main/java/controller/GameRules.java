@@ -21,7 +21,7 @@ public class GameRules {
         this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA};
         this.luxuryTax = 100;
         this.incomeTax = 200;
-        this.getOutOfJailBail = 5000000;
+        this.getOutOfJailBail = 50;
     }
 
     public boolean controlPlayerCount(int numberOfPlayers) {
