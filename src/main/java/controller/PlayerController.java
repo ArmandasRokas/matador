@@ -87,11 +87,13 @@ public class PlayerController {
     }
 
     public void changePlayer() {
-            do{
-                int currID = currPlayer.getPlayerID();
-                currID = (currID + 1) % playerList.length;
-                currPlayer = playerList[currID];
-            } while (currPlayer.isBankrupt());
+        do{
+            int currID = currPlayer.getPlayerID();
+            currID = (currID + 1) % playerList.length;
+            currPlayer = playerList[currID];
+        } while (currPlayer.isBankrupt());
+
+        resetCurrPlayerExtraTurnCount();
     }
 
     public void currPlayerMoneyInfluence(int cash) {

@@ -51,14 +51,16 @@ public class GameController {
                 showBeforeTurnMenu();
                 if(!plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()){
                     showAfterTurnMenu();
-                }
-                Player p = gameRules.winnerFound(plCtrl.getPlayerList());
+                    Player p = gameRules.winnerFound(plCtrl.getPlayerList());
 
-                if (p != null) {
-                    guiB.declareWinner(p.getPlayerID());
-                    activeGame = false;
+                    if (p != null) {
+                        guiB.declareWinner(p.getPlayerID());
+                        activeGame = false;
+                    }
+                    checkForExtraRoundOrChangePlayer();
+                } else {
+                    plCtrl.changePlayer();
                 }
-                checkForExtraRoundOrChangePlayer();
             }
         }
         askForNewGame();
@@ -69,7 +71,6 @@ public class GameController {
             guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
         } else {
             plCtrl.changePlayer();
-            plCtrl.resetCurrPlayerExtraTurnCount();
         }
     }
 
