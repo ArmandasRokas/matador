@@ -130,7 +130,7 @@ bg=green</panel_attributes>
     </coordinates>
     <panel_attributes>type=decision
 
-bg=yellow</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -180,7 +180,7 @@ bg=green</panel_attributes>
     </coordinates>
     <panel_attributes>Vis scenarie
 for felt
-bg=yellow</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -344,7 +344,7 @@ bg=green</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -368,7 +368,7 @@ bg=green</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -497,7 +497,7 @@ bg=yellow</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -533,7 +533,7 @@ bg=red</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=red</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -595,7 +595,7 @@ bg=green</panel_attributes>
     <panel_attributes>Administrer
 grunde
 symbol=substate
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -609,7 +609,7 @@ bg=red</panel_attributes>
     <panel_attributes>Betal leje/skat
 til kreditor
 symbol=substate
-bg=yellow</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -635,7 +635,7 @@ bg=yellow</panel_attributes>
     </coordinates>
     <panel_attributes>Ryk i fængsel
 symbol=substate
-bg=red</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -649,7 +649,7 @@ bg=red</panel_attributes>
     <panel_attributes>Træk 
 lykkekort
 symbol=substate
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -696,7 +696,7 @@ bg=red</panel_attributes>
     <panel_attributes>Administrer
 grunde
 symbol=substate
-bg=red</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -766,7 +766,7 @@ bg=red</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=green</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -873,7 +873,7 @@ bg=green</panel_attributes>
       <h>44</h>
     </coordinates>
     <panel_attributes>type=decision
-bg=red</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -898,7 +898,7 @@ bg=red</panel_attributes>
     </coordinates>
     <panel_attributes>Ryk i fængsel
 symbol=substate
-bg=red</panel_attributes>
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
