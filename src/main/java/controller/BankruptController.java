@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class BankruptController {
     private GUIBoundary guiB;
+    private PropertyController propertyCtrl;
 
     public BankruptController(GUIBoundary guiB){
         this.guiB = guiB;
@@ -17,20 +18,24 @@ public class BankruptController {
         return playerCtrl.getCurrPlayerBalance() > -moneyInfluence;
     }
 
-    public void goBankrupt(PropertySquare propertySquare, PlayerController playerCtrl, PropertyController propertyCtrl){
+    public void setPropertyCtrl(PropertyController propertyCtrl){
+        this.propertyCtrl = propertyCtrl;
+    }
+
+    public void goBankrupt(PropertySquare propertySquare, PlayerController playerCtrl, PropertyController propertyCtrl){ //Another player is creditor
         transferPropertyToCreditor(playerCtrl, propertySquare.getOwner(), propertyCtrl);
         playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet ");
         guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
     }
 
-    public void goBankrupt(PlayerController playerCtrl, PropertyController propertyCtrl) {
+    public void goBankrupt(PlayerController playerCtrl, PropertyController propertyCtrl) { //Bank is creditor
         transferPropertyToCreditor(playerCtrl, propertyCtrl);
         playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet");
         guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
     }
 
     private void transferPropertyToCreditor(PlayerController playerCtrl, PropertyController propertyCtrl) { //Bank is creditor
-        ArrayList<PropertySquare> currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
+            ArrayList<PropertySquare> currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
 
         for(PropertySquare square: currentPlayerProperties) {
             square.setOwner(null);
