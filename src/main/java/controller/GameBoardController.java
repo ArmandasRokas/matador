@@ -50,15 +50,20 @@ public class GameBoardController {
 
         switch (incomeTaxAnswer){
             case 0:
-                playerCtrl.currPlayerMoneyInfluence((int) -payPercent);
-                playerCtrl.setCurrScenarioForPlayer(payPercent + " er 10% af " + playerCtrl.getCurrPlayerName() + "'s værdi");
-                guiB.showCurrScenarioForPlayer(playerCtrl.getCurrScenarioForPlayer());
+                if(bankruptCtrl.playerCanPay(playerCtrl, (int) -payPercent)) {
+                    playerCtrl.currPlayerMoneyInfluence((int) -payPercent);
+                    playerCtrl.setCurrScenarioForPlayer(payPercent + " er 10% af " + playerCtrl.getCurrPlayerName() + "'s værdi");
+                } else {
+                    guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale " + (int) -payPercent + "kr til indkomstskatten.");
+                    bankruptCtrl.goBankrupt(playerCtrl);
+                }
                 break;
             case 1:
                 playerCtrl.setCurrScenarioForPlayer("Du har valgt at betale 200kr");
                 if(bankruptCtrl.playerCanPay(playerCtrl, -200)) {
                     playerCtrl.currPlayerMoneyInfluence(-200);
                 } else {
+                    guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale 200kr til indkomstskatten.");
                     bankruptCtrl.goBankrupt(playerCtrl);
                 }
                 break;
