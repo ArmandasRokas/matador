@@ -95,7 +95,7 @@ public class ChanceCardController {
         cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
         cardDeck[9] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
         cardDeck[10] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
-        cardDeck[0] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 60kr til banken", -10000);
+        cardDeck[11] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 60kr til banken", -60);
         cardDeck[12] = new MoneyInfluenceCC("Grundet på dyrtiden har De fået gageforhøjelse, De har modtaget 50kr", 50);
         cardDeck[13] = new MoneyInfluenceCC("Deres præmieobligation er kommet ud. De har modtaget 100kr", 100);
         cardDeck[14] = new MoneyInfluenceCC("Efter auktionen på Assistentshuset, hvor De havde pantsat Deres tøj, og modtaget de 108kr", 108);
@@ -110,7 +110,7 @@ public class ChanceCardController {
         cardDeck[23] = new MoneyInfluenceCC("De har solgt Deres gamle klude. De har modtaget 20kr", 20);
         cardDeck[24] = new MoneyInfluenceCC("Kommunen har eftergivet et kvartals skat. De har hævet 200kr i banken til en glad aften", 200);
 
-     //   shuffleDeck();
+        shuffleDeck();
     }
 
     public ChanceCard pickCard() {
