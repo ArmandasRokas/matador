@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class GameBoardTest {
-
     private ChanceCardController chanceCardController;
     private PropertyController propertyController;
     private BankruptController bankruptController;

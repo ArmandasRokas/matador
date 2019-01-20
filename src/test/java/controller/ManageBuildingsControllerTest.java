@@ -10,7 +10,6 @@ import UI.MockGUI;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManageBuildingsControllerTest {
-
     MockGUI mockGUI ;
     GameRules gameRules;
     PlayerController playerController;

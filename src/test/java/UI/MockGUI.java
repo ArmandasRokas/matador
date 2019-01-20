@@ -5,6 +5,7 @@ import ui.GUIBoundary;
 
 import java.awt.*;
 
+//Class to test program around the issue of user communication
 public class MockGUI extends GUIBoundary {
     private int amountOfPlayers;
     private String[] names;
@@ -43,6 +44,5 @@ public class MockGUI extends GUIBoundary {
     public void movePlayer(int previousPosition, int newPosition, int playerID) { }
     @Override
     public void updateBalance(int playerID, int balance) {
-
     }
 }

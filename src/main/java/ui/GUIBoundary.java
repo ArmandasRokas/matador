@@ -80,30 +80,6 @@ public class GUIBoundary {
     }
 
     private String[] getPossibleSquareNamesForBuilding(int[] possibleStreets) {
-//        int count = 0; //TODO Slet her
-//
-//        for(int possibleStreet : possibleStreets) {
-//            if(possibleStreet != 0) {
-//                count++;
-//            }
-//        }
-//        String[] possibleStreetNames = new String[count+1];
-//
-//        for(int possibleStreet : possibleStreets) {
-//            if(possibleStreet != 0) {
-//
-//                for(int i = 0 ; i < possibleStreetNames.length ; i++) {
-//                    if(possibleStreetNames[i] == null) {
-//                        possibleStreetNames[i] = fieldList[possibleStreet].getTitle();
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        possibleStreetNames[count] = "Exit";
-//        return possibleStreetNames;
-
-//        ArrayList<String> possibleStreetNames = new ArrayList<>();
         String[] possibleStreetNames = new String[possibleStreets.length+1];
 
         for(int i = 0 ; i < possibleStreets.length ; i++) {
