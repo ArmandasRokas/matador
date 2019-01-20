@@ -44,29 +44,6 @@ public class GameController {
     private void runGame() {
         boolean activeGame = true;
 
-//        while (activeGame) {
-//            guiB.showChanceCard("");
-//            if (plCtrl.getIsCurrPlayerInJail()) {
-//                inJail();
-//            } else {
-//                showBeforeTurnMenu();
-//                if(!plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()){
-//                    showAfterTurnMenu();
-//                    Player p = gameRules.winnerFound(plCtrl.getPlayerList());
-//
-//                    if (p != null) {
-//                        guiB.declareWinner(p.getPlayerID());
-//                        activeGame = false;
-//                        break;
-//                    }
-//                    checkForExtraRoundOrChangePlayer();
-//                } else {
-//                    plCtrl.changePlayer();
-//                }
-//            }
-//        }
-//        askForNewGame();
-
         while (activeGame) {
             guiB.showChanceCard("");
 
@@ -159,7 +136,7 @@ public class GameController {
                 case "exit": //Exit menu
                     stillBuying = false;
                     break;
-                default:
+                default: //Buys house on selected street name
                     mbCtrl.buyHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -180,7 +157,7 @@ public class GameController {
                 case "exit": //Exit menu
                     stillSelling = false;
                     break;
-                default:
+                default: //Sells house on selected street name
                     mbCtrl.sellHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -258,7 +235,7 @@ public class GameController {
         guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
     }
 
-    public void getOutOfPrison(String message) {
+    private void getOutOfPrison(String message) {
         plCtrl.setCurrScenarioForPlayer(message);
         guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
         plCtrl.setCurrPlayerIsInJail(false);

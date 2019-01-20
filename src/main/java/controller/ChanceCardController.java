@@ -113,7 +113,7 @@ public class ChanceCardController {
         shuffleDeck();
     }
 
-    public ChanceCard pickCard() {
+    private ChanceCard pickCard() {
         if (cardsPicked == cardDeck.length) {
             shuffleDeck();
             cardsPicked = 0;

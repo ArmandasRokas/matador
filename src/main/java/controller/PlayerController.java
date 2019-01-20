@@ -208,6 +208,7 @@ public class PlayerController {
         }
         return res;
     }
+
     //Handling of squares
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);

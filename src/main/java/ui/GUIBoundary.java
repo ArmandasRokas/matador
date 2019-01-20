@@ -4,7 +4,6 @@ import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
-import java.util.ArrayList;
 
 public class GUIBoundary {
     private GUI gui = new GUI();
@@ -122,7 +121,7 @@ public class GUIBoundary {
         return getUserChoice(buttons, res);
     }
 
-    //General communication (information, no choice) //TODO CurrPlayerScenario?
+    //General communication (information, no choice)
     public void showCurrScenarioForPlayer(String scenario) {
         gui.getUserButtonPressed(scenario, "OK");
     }
@@ -157,6 +156,7 @@ public class GUIBoundary {
             fieldList[index].setDescription("Hus pris: " + housePrice);
         }
     }
+
     public void setupPlayer(int playerID, String name, int balance, Color color) {
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);

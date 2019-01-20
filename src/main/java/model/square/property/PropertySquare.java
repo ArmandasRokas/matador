@@ -6,10 +6,10 @@ import model.Player;
 import model.square.Square;
 
 public abstract class PropertySquare extends Square {
-    private int price;                          //Price of the property
-    private int[] rentPriceList;                //Price of landing on the property
+    private int price;
+    private int[] rentPriceList;
     private final int groupID;
-    private PropertySquare[] siblingSquares;    //Reference to the other property of same color
+    private PropertySquare[] siblingSquares;
 
     public PropertySquare(String scenario, int[] rentPriceList, int price, int groupID, int index, int numberOfSiblingsSqaures) {
         super(scenario, index);
@@ -72,11 +72,7 @@ public abstract class PropertySquare extends Square {
         return res;
     }
 
-    /**
-     * The method is used for testing purposes
-     */
     public PropertySquare[] getSiblingsSquares(){
         return siblingSquares;
     }
 }
-

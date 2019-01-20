@@ -54,7 +54,6 @@ public class GameRules {
     }
 
     //Getters and Setters
-
     public int getMinPlayers() {
         return minPlayers;
     }

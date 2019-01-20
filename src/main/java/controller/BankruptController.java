@@ -50,7 +50,7 @@ public class BankruptController {
         playerCtrl.currPlayerSetBankrupt();
     }
 
-    public void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {    //Another player is creditor
+    private void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {    //Another player is creditor
         ArrayList<PropertySquare> currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
 
         for(PropertySquare square: currentPlayerProperties) {

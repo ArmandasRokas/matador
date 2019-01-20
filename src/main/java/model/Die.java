@@ -2,16 +2,9 @@ package model;
 
 import java.util.Random;
 
-//TODO java doc
-/**@author
- * @version
- *
- * Defines the Die class and all of its fields and methods
- * Class to represent a single die to be used throughout the gameController
- */
 public class Die {
-    private int eyes;               //Eyes of the dice
-    private int minEyes, maxEyes;   //Range of eyes on the die
+    private int eyes;
+    private int minEyes, maxEyes;
 
     /**
      * Constructor of the Die

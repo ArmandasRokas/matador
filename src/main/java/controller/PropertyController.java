@@ -75,10 +75,6 @@ public class PropertyController {
         }
     }
 
-    /** //TODO java doc
-     * Updates sibling squares rent price after a player buys or receives a property by another player going bankrupt.
-     * @param propertySquare
-     */
     public void updateSiblingSquaresRentPrice(PropertySquare propertySquare){
         for (PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
             if(siblingSquare.getOwner() != null) {

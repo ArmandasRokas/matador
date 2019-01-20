@@ -59,6 +59,7 @@ public class GameBoardController {
                     bankruptCtrl.goBankrupt(playerCtrl);
                 }
                 break;
+
             case 1:
                 playerCtrl.setCurrScenarioForPlayer("Du har valgt at betale 200kr");
                 if(bankruptCtrl.playerCanPay(playerCtrl, -incomeTax)) {

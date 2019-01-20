@@ -1,7 +1,7 @@
 package model;
 
 public class Cup {
-    private Die d1, d2; //Instances of dices
+    private Die d1, d2;
 
     public Cup(){
         this.d1 = new Die(1,6);
