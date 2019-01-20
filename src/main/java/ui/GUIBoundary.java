@@ -117,21 +117,6 @@ public class GUIBoundary {
         String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
         String res = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", buttons[0], buttons[1]);
         return getUserChoice(buttons, res);
-
-        //TODO Delete when checked works
-//        String message = plCtrl.getCurrPlayerName() + " er landet på indkomstskat og må betale enten 10% af sine værdier, eller betale 200kr.";
-//        String buttonChoice = gui.getUserButtonPressed(message + " Vælg hvordan du vil betale indkomstskat ", "Betal 10%","Betal 200kr");
-//        int taxRes = -1;
-//
-//        switch (buttonChoice){
-//            case "Betal 10%":
-//                taxRes = 0;
-//                break;
-//            case "Betal 200kr":
-//                taxRes = 1;
-//                break;
-//        }
-//        return taxRes;
     }
 
     public boolean askToBuyProperty(int playerID, String squareName){
@@ -150,8 +135,8 @@ public class GUIBoundary {
     public void showCurrScenarioForPlayer(String scenario) {
         gui.getUserButtonPressed(scenario, "OK");
     }
-    public void declareWinner(int playerID) {
-        gui.showMessage("Tillykke " + playerList[playerID].getName() + "! Du har vundet");
+    public void declareWinner(PlayerController playerCtrl) {
+        gui.showMessage("Tillykke " + playerCtrl.getCurrPlayerName() + "! Du har vundet");
     }
 
     public void tellPlayerExtraTurn(int playerID) {
@@ -168,14 +153,17 @@ public class GUIBoundary {
 
     //Practical methods
         //Sets and removes
-
-    public void setupGUIFields(int index, String name) {
+    public void setupGUIFields(int index, String name, int housePrice) {
         fieldList[index].setDescription(name);
 
         if(fieldList[index] instanceof GUI_Chance || fieldList[index] instanceof GUI_Jail || fieldList[index] instanceof GUI_Refuge) {
             fieldList[index].setSubText(name);
         } else {
             fieldList[index].setTitle(name);
+        }
+
+        if(fieldList[index] instanceof GUI_Street) {
+            fieldList[index].setDescription("Hus pris: " + housePrice);
         }
     }
     public void setupPlayer(int playerID, String name, int balance, Color color) {

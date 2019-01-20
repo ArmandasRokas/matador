@@ -43,9 +43,33 @@ public class GameController {
     private void runGame() {
         boolean activeGame = true;
 
+//        while (activeGame) {
+//            guiB.showChanceCard("");
+//            if (plCtrl.getIsCurrPlayerInJail()) {
+//                inJail();
+//            } else {
+//                showBeforeTurnMenu();
+//                if(!plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()){
+//                    showAfterTurnMenu();
+//                    Player p = gameRules.winnerFound(plCtrl.getPlayerList());
+//
+//                    if (p != null) {
+//                        guiB.declareWinner(p.getPlayerID());
+//                        activeGame = false;
+//                        break;
+//                    }
+//                    checkForExtraRoundOrChangePlayer();
+//                } else {
+//                    plCtrl.changePlayer();
+//                }
+//            }
+//        }
+//        askForNewGame();
+
         while (activeGame) {
             guiB.showChanceCard("");
-            if (plCtrl.getIsCurrPlayerInJail()) {
+
+            if (plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()) {
                 inJail();
             } else {
                 showBeforeTurnMenu();
@@ -54,8 +78,8 @@ public class GameController {
                     Player p = gameRules.winnerFound(plCtrl.getPlayerList());
 
                     if (p != null) {
-                        guiB.declareWinner(p.getPlayerID());
                         activeGame = false;
+
                     }
                     checkForExtraRoundOrChangePlayer();
                 } else {
@@ -63,6 +87,7 @@ public class GameController {
                 }
             }
         }
+        guiB.declareWinner(plCtrl);
         askForNewGame();
     }
 

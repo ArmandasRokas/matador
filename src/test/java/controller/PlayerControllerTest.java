@@ -37,7 +37,6 @@ class PlayerControllerTest {
 
     @Test
     void movePlayer() {
-        //TODO add test if player can go in a circle correctly. Check for off-by-one bug
         Player[] players = playerController.getPlayerList();
         playerController.movePlayer(1, true);
 

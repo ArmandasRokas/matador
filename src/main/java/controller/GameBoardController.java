@@ -3,6 +3,7 @@ package controller;
 import model.GameBoard;
 import model.square.Square;
 import model.square.property.PropertySquare;
+import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class GameBoardController {
@@ -25,7 +26,12 @@ public class GameBoardController {
     public void setupGUISquareNames(){
         for(int i = 0; i < gameBoard.getSquareList().length; i++){
             String name = gameBoard.getSquareList()[i].getSquareName();
-            guiB.setupGUIFields(i, name);
+            int housePrice = 0;
+            if(gameBoard.getSquareList()[i] instanceof StreetSquare) {
+                StreetSquare streetSquare = (StreetSquare)gameBoard.getSquareList()[i];
+                housePrice = streetSquare.getHousePrice();
+            }
+            guiB.setupGUIFields(i, name, housePrice);
         }
     }
 
@@ -37,9 +43,7 @@ public class GameBoardController {
         double sumFromHisProperties = 0;
 
         for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
-//            if (propertySquare != null) {
-                sumFromHisProperties += propertySquare.getBuyPrice();
-//            }
+            sumFromHisProperties += propertySquare.getBuyPrice();
         }
         double payPercent = (((double)playerCtrl.getCurrPlayerBalance()+ sumFromHisProperties) / 100) * 10;
         int incomeTaxAnswer  = guiB.incomeTax(playerCtrl);

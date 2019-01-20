@@ -97,7 +97,7 @@ public class PlayerController {
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
-        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //TODO Kan vi gøre så guiB.updateBalance kun bliver kaldt herfra?
     }
 
     public Player[] getPlayerList() {
