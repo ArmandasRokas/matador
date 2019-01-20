@@ -84,6 +84,12 @@ public class GameBoardController {
         }
 
     }
+
+    public void toJail(PlayerController playerCtrl) {
+        playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er landet på " + this);
+        playerCtrl.setCurrPlayerIsInJail(true);
+        playerCtrl.movePlayerToSquare(10, false);
+    }
 }
 
 

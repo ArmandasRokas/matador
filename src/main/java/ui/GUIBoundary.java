@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class GUIBoundary {
     private GUI gui = new GUI();
-    protected GUI_Player[] playerList;
+    private GUI_Player[] playerList;
     private GUI_Field[] fieldList = gui.getFields();
 
     //Menus

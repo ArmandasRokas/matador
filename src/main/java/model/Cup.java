@@ -46,7 +46,7 @@ public class Cup {
 
     public int getCurrentRollScore() {
 //        return 36;
-        int[] array = new int[]{1, 2, 3 , 3, 1, 1};
+        int[] array = new int[]{15, 15, 3 , 3, 1, 1};
         return array[testCup++];
     }
 
@@ -55,7 +55,7 @@ public class Cup {
     }
     public int getEyesDie2() {
 //        return 2;
-        int[] array = new int[]{1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2};
+        int[] array = new int[]{1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2};
         return array[testDie++];
     }
 }
