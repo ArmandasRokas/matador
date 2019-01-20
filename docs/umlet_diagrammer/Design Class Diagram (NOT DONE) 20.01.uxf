@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>406</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>BankruptController
+--
+- guiB: GUIBoundary
+- propertyCtrl: PropertyController
+--
++ playerCanPay(PlayerController, int): boolean
++ setPropertyCtrl(PropertyController): void
++ goBankrupt(PropertySquare, PlayerController): void
++ goBankrupt(PlayerController): void
+- transferPropertyToCreditor(PlayerController, Player, PropertyController): void
+- transferPropertyToCreditor(PlayerController, PropertyController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>406</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>ChanceCardController
+--
+- guiB: GUIBoundary
+- gameBoardCtrl: GameBoardController
+- bankruptCtrl: BankruptController
+- cardDeck: ChanceCard[]
+- cardsPicked: int
+--
+- shuffleDeck(): void
++ handleChanceCards(PlayerController): void
++ handleChanceCards(GetOutOfJailCC, PlayerController): void
++ handleChanceCards(MoneyInfluenceCC, PlayerController): void
++ handleChanceCards(MovePlayerToSquareCC, PlayerController): void
++ handleChanceCards(MovePlayer3SquaresBackCC, PlayerController): void
+- createDeck(): void
++ pickCard(): ChanceCard</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>406</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GameBoardController
+--
+- gameBoard: GameBoard
+- currSquare: Square
+- guiB: GUIBoundary
+--
++ actOnSquare(PlayerController): void
++ setupGUISquareNames(): void
++ getGameBoard(): GameBoard
++ payIncomeTax(PlayerController, BankruptController, PropertyController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>406</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+-plCtrl: PlayerController
+- gameRules: GameRules
+- guiB: GUIBoundary
+- cup: Cup
+- boardCtrl: GameBoardController
+- propertyCtrl: PropertyController
+- chanceCardCtrl: ChanceCardController
+- bankruptCtrl: BankruptController
+--
+- setupGame(): void
++ startGame(): void
+- runGame(): void
+- checkForExtraRoundOrChangePlayer(): void
+- showBeforeTurnMenu(): void
+- showAfterTurnMenu(): void
+- buyHousing(): void
+- sellHousing(): void
+- inJail(): void
+- askForNewGame(): void
+- throwDices(): void
+- takeTurn(): void
++ getOutOfPrison(String): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>560</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GameRules
+--
+- minPlayers: int
+- maxPlayers: int
+- startBalance: int
+- colors: Color[]
+--
++ controlPlayerCount(int): boolean
++ winnerFound(Player[]): Player
++ passStart(int, int): boolean
++ getMinPlayers(): int
++ getMaxPlayers(): int
++ getColors(): Color[]
++ isBuyingBuildingsEvenly(PropertySquare): boolean
++ isSellingBuildingsEvenly(PropertySquare): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>560</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>ManageBuildingsController
+--
+- squareList: Square[]
+- gameBoard: GameBoard
+- gui: GUIBoundary
+- gameRules: GameRules
+--
++ buyHouse(PlayerController, String): void
++ sellHouse(PlayerController, String): void
++ getCurrPlayerSquarePossibleToBuildHousing(PlayerController): int[]
++ getCurrPlayerSquarePossibleToSellHousing(PlayerController): int[]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>560</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>PlayerController
+--
+- playerList: Player[]
+- gameRules: GameRules
+- guiB: GUIBoundary
+- currPlayer: Player
+- currScenarioForPlayer: String
+- propertyCtrl: PropertyController
+- chanceCardCtrl: ChanceCardController
+- gameBoardCtrl: GameBoardController
+- bankruptCtrl: BankruptController
+- currPlayerExtraTurnCount: int
+--
++ createPlayers(): void
++ movePlayer(int, boolean): void
++ movePlayerToSquare(int, boolean): void
+- giveStartIncome(): void
++ setCurrPlayerToJail(): void
++ checkForSpeeding(): boolean
++ changePlayer(): void
++ currPlayerMoneyInfluence(int): void
++ getPlayerList(): Player[]
++ getCurrPlayerPos(): int
++ getCurrPlayer(): Player
++ getCurrPlayerName(): String
++ addCurrPlayerProperty(PropertySquare): void
++ getCurrPlayerID(): int
++ setCurrPlayerBalance(int): void
++ getCurrPlayerBalance(): int
++ getCurrPlayerProperties(): ArrayList&lt;PropertySquare&gt;
++ payPlayer(Player, int): void
++ currPlayerSetBankrupt(): void
++ setCurrScenarioForPlayer(String): void
++ getCurrScenarioForPlayer(): String
++ setCurrPlayerIsInJail(boolean): void
++ getIsCurrPlayerInJail(): boolean
++ getCurrPlayerExtraTurnCount(): int
++ addOneCurrPlayerExtraTurnCount(): void
++ resetCurrPlayerExtraTurnCount(): void
++ giveOutOfJailCard(): void
++ hasGetOutOfJailCard(): boolean
++ useGetOutOfJailCard(): void
++ getTurnsInJail(): int
++ handleSquare(PropertySquare): void
++ handleSquare(ChanceSquare): void
++ payIncomeTax(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>560</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>PropertyController
+--
+- guiB: BUIBoundary
+- bankruptCtrl: BankruptController
+- cup: Cup
+--
++ handleProperty(PropertySquare, PlayerController): void
++ buyProperty(PropertySquare, PlayerController): void
++ payRent(PropertySqare, PlayerController): void
++ updateSiblingSquaresRentPrice(PropertySquare): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>777</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+- name: String
+- playerID: int
+- balance: int
+- currentPosition: int
+- getOutOfJailCards: int
+- properties: ArrayList&lt;PropertySquare&gt;
+- isBankrupt: boolean
+- isCurrPlayerInJail: boolean
+- turnsTakenInJail: int
+--
++ toString(): String
++ moneyInfluence(int): void
++ setBalance(int): void
++ getBalance(): int
++ setPosition(int): void
++ getCurrentPosition(): int
++ addProperty(PropertySquare): void
++ getProperties(): ArrayList&lt;PropertySquare&gt;
++ setBankrupt(): void
++ isBankrupt(): boolean
++ setIsCurrPlayerInJail(boolean): void
++ getIsCurrPlayerInJail(): boolean
++ increaseTurnsTakenInJail(): void
++ resetTurnsTakenInJail(): void
++ getTurnsTakenInJail(): int
++ addGetOutOfJailCard(): void
++ getGetOutOfJailCards(): int
++ getName(): String
++ getPlayerID(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>777</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GameBoard
+--
+- squareList: Square[]
+--
++ getSquareList(): Square[]
+- setPropertySquareSiblings(): void
++ findSquateIndexByName(String): int
+- setBoard(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>777</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Die
+--
+- eyes: int
+- minEyes: int
+- maxEyes: int
+--
++ rollDie(): void
++ getEyes(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>777</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Cup
+--
+- d1: Die
+- d2: Die
+--
++ roll(): void
++ getCurrentRollScore(): int
++ getEyesDie1(): int
++ getEyesDie2(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>287</x>
+      <y>952</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Square
+--
+- squareName: String
+- index: int
+- owner: Player
+--
+/+ landedOn(PlayerController): void/
++ toString(): String
++ getSquareName(): String
++ getIndex(): int
++ setOwner(Player): void
++ getOwner(): Player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>1113</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Jail
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>1113</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>ToJail
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>1113</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>StartSquare
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>1113</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Parking
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>1260</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>LuxuryTax
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>1260</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>IncomeTax
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>1260</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>ChanceSquare
+--
+...
+--
++ landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>1477</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Transport
+--
+...
+--
++ getRentPrice(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>1477</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>StreetSquare
+--
+- numberOfHouses: int
+- housePrice: int
+--
++ getRentPrice(): int
++ buyAHouse(): void
++ sellAHouse(): void
++ getNumberOfHouses(): int
++ getHousePrice(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>1330</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>PropertySquare
+--
+- price: int
+- rentPriceList: int[]
+- groupID: int
+- siblingSquares: PropertySquare[]
+--
++ landedOn(PlayerController): void
++ getGroupID(): int
+/getRentPrice(): int/
++ getBuyPrice(): int
++ toString(): String
++ getRentPriceList(): int[]
++ setSiblingSquare(PropertySquare): void
++ isSetOwned(): boolean
++ getSiblingsSquares(): PropertySquare[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>1477</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Company
+--
+...
+--
++ getRentPrice(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>56</x>
+      <y>1827</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>MovePlayerToSquareCC
+--
+- toPrison: boolean
+- squareIndex: int
+--
++ pickedCard(ChanceCardController, PlayerController): void
++ getSquarePosition(): int
++ isToPrison(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>217</x>
+      <y>1827</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>MovePlayer3SquaresBackCC
+--
+- squaresToMove: int
+--
++ pickedCard(ChanceCardController, PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>1827</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>MoneyInfluenceCC
+--
+- moneyInfluence: int
+--
++ pickedCard(ChanceCardController, PlayerController): void
++ getMoneyInfluence(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>539</x>
+      <y>1827</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GetOutOfJailCC
+--
+- inDeck: boolean
+--
++ pickedCard(ChanceCardController, PlayerController): void
++ isInDeck(): boolean
++ setInDeck(boolean): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>301</x>
+      <y>1666</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>ChanceCard
+--
+- cardText: String
+--
+/+ pickedCard(ChanceCardController, PlayerController): void/
++ getCardText(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>7</x>
+      <y>728</y>
+      <w>721</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;1010.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>7</x>
+      <y>364</y>
+      <w>721</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;1010.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>203</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>GUIBoundary
+--
+- gui: GUI
+- playerList: GUI_Player[]
+- fieldList: GUI_Field[]
+--
++ askForPlayerCount(int, int) : int
++ askForNames(int): String[]
++ getUserChoice(String[], String): int
+- mainMenuButtons(): String[]
++ takeTurn(PlayerController): int
++ endTurn(PlayerController): int
++ buyBuildings(int[]): String
++ sellBuildings(int[]): String
+- getPossibleSquareNamesForBuilding(int[]): String[]
++ getOutOfJail(PlayerController): int
++ incomeTax(PlayerController): int
++ askToBuyProperty(int, String): boolean
++ endGame(): int
++ showCurrScenarioForPlayer(String): void
++ declareWinner(PlayerController): void
++ tellPlayerExtraTurn(int): void
++ informPlayerGoingToJail(int): void
++ showChanceCard(String): void
++ setupGUIFields(int, String, int): void
++ removePlayerByBankrupt(int, int): void
++ movePlayer(int, int, int): void
++ setDices(int, int): void
++ updateBalance(int, int): void
++ setOwnerOnSquare(int, int, int): void
++ setOwnerOnSquare(int, int): void
++ setHousing(int, int): void
++ updateRentPrice(int, int): void
+- controlName(String[], String): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>0</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>161</y>
+      <w>721</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;1010.0;10.0</additional_attributes>
+  </element>
+</diagram>
