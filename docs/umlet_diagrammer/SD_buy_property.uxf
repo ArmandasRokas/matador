@@ -4,10 +4,10 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>10</x>
-      <y>0</y>
-      <w>860</w>
-      <h>540</h>
+      <x>0</x>
+      <y>10</y>
+      <w>930</w>
+      <h>750</h>
     </coordinates>
     <panel_attributes>title=SD: buyProperty(square,playerController) on PropertyController
 obj=:PropertyController ~a 
@@ -17,12 +17,21 @@ obj=square :PropertySquare~d
 found-&gt;&gt;&gt;a ; on=a
 a-&gt;&gt;&gt;d :getBuyPrice()  ; on=d
 d.&gt;a : price; off=d
+a-&gt;&gt;&gt;b :getCurrPlayerBalance(); on=b
+b-&gt;&gt;&gt;c : getBalance(); on=c
+c.&gt;b : balance; off=c
+b.&gt;a : balance; off=b
+combinedFragment=alt~alt1 a d ;  a:[balance &gt;= price];
+
+
 a-&gt;&gt;&gt;b :currPlayerMoney\nInfluence(-price)  ; on=b;
 b-&gt;&gt;&gt;c :moneyInfluence(-price)  ; on=c; off=b
 a-&gt;&gt;&gt;b :addCurrPlayer\nProperty(square)  ; on=b; off=c
 b-&gt;&gt;&gt;c :addProperty(square)  ; on=c; off=b
-off=c;
+off=c; 
 a-&gt;&gt;&gt;d :setOwner(currPlayer)  ; on=d; 
+--; off=d; off=a; 
+
 
 
 
