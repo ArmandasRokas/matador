@@ -12,12 +12,14 @@ import java.util.Random;
 public class ChanceCardController {
     private GUIBoundary guiB;
     private GameBoardController gameBoardCtrl;
+    private BankruptController bankruptCtrl;
     private ChanceCard cardDeck[];
     private int cardsPicked;
 
-    public ChanceCardController(GUIBoundary guiB, GameBoardController gameBoardCtrl) {
+    public ChanceCardController(GUIBoundary guiB, GameBoardController gameBoardCtrl, BankruptController bankruptCtrl) {
         this.guiB = guiB;
         this.gameBoardCtrl = gameBoardCtrl;
+        this.bankruptCtrl = bankruptCtrl;
         createDeck();
         cardsPicked = 0;
     }
@@ -55,7 +57,13 @@ public class ChanceCardController {
 
     public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
         guiB.showChanceCard(chanceCard.getCardText());
-        playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
+
+        if(!bankruptCtrl.playerCanPay(playerCtrl, chanceCard.getMoneyInfluence())) {    //Not able to pay  for chance card.
+            guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale " + chanceCard.getMoneyInfluence() + "kr.");
+            bankruptCtrl.goBankrupt(playerCtrl);
+        } else {    //Able to pay for chance card.
+            playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
+        }
     }
 
     public void handleChanceCard(MovePlayerToSquareCC chanceCard, PlayerController playerCtrl) {
@@ -105,7 +113,7 @@ public class ChanceCardController {
         shuffleDeck();
     }
 
-    public ChanceCard pickCard() {
+    private ChanceCard pickCard() {
         if (cardsPicked == cardDeck.length) {
             shuffleDeck();
             cardsPicked = 0;

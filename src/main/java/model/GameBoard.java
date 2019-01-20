@@ -81,7 +81,7 @@ public class GameBoard {
         squareList[27] = new StreetSquare("Kgs. Nytorv", new int[]{22, 110, 330, 800, 975, 1050}, 260, 5, 27, 2, 150);
         squareList[28] = new Company("Carlsberg", new int[]{4, 10}, 150, 9,28,1);
         squareList[29] = new StreetSquare("Østergade", new int[]{22, 120, 360, 850, 1025, 1200}, 280, 5, 29, 2, 150);
-        squareList[30] = new ToJail("De sætttes testInt fængsles", 30);
+        squareList[30] = new ToJail("De sætttes testCup fængsles", 30);
         squareList[31] = new StreetSquare("Amagertorv", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 31, 2, 200);
         squareList[32] = new StreetSquare("Vimmelskaftet", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 32, 2, 200);
         squareList[33] = new ChanceSquare("Prøv lykken", 33);

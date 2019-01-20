@@ -29,8 +29,7 @@ public class ManageBuildingsController {
             plCtrl.setCurrScenarioForPlayer("Der er allerede ét hotel på denne grund!");
         } else if(!gameRules.isBuyingBuildingsEvenly(streetSquare)) {
             plCtrl.setCurrScenarioForPlayer(plCtrl.getCurrPlayerName() + " kan ikke udvide denne grund før de andre er på samme niveau");
-        }
-        else if(plCtrl.getCurrPlayerBalance() >= streetSquare.getHousePrice() && streetSquare.getNumberOfHouses() < 5) {
+        } else if(plCtrl.getCurrPlayerBalance() >= streetSquare.getHousePrice() && streetSquare.getNumberOfHouses() < 5) {
             plCtrl.currPlayerMoneyInfluence(-streetSquare.getHousePrice());
             streetSquare.buyAHouse();
             int numberOfHouses = streetSquare.getNumberOfHouses();
@@ -61,38 +60,32 @@ public class ManageBuildingsController {
         }
     }
 
-    public int[] getCurrPlayerSquarePossibleToBuild(PlayerController playerCtrl){
-        int[] squaresPossibleToBuild = new int[28];
+    public int[] getCurrPlayerSquarePossibleToBuildHousing(PlayerController playerCtrl){
+        ArrayList<Integer> squaresPossibleToBuyHousing = new ArrayList<>();
 
-        for(PropertySquare property: playerCtrl.getCurrPlayerProperties()){
-            if(property instanceof StreetSquare) {
-                StreetSquare street = (StreetSquare) property;
-                if(street.isSetOwned()){
-                    for(int i = 0; i < squaresPossibleToBuild.length; i++ ){
-                        if(squaresPossibleToBuild[i] == 0){
-                            squaresPossibleToBuild[i] = street.getIndex();
-                            break;
-                        }
-                    }
-                }
+        for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
+            if(propertySquare instanceof StreetSquare && propertySquare.isSetOwned()){
+                squaresPossibleToBuyHousing.add(propertySquare.getIndex());
             }
         }
-        return squaresPossibleToBuild;
+        int[] indexesOfPossibleStreets = new int[squaresPossibleToBuyHousing.size()];
+
+        for(int i=0; i < indexesOfPossibleStreets.length; i++ ){
+            indexesOfPossibleStreets[i] = squaresPossibleToBuyHousing.get(i);
+        }
+        return indexesOfPossibleStreets;
     }
 
     public int[] getCurrPlayerSquarePossibleToSellHousing(PlayerController playerCtrl){
         ArrayList<Integer> squaresPossibleToSellHousing = new ArrayList<>();
 
         for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
-            if(propertySquare instanceof StreetSquare){
-                StreetSquare street = (StreetSquare) propertySquare;
-                if(street.getNumberOfHouses() > 0 ){
-                    squaresPossibleToSellHousing.add(street.getIndex());
-                }
+            if(propertySquare instanceof StreetSquare && ((StreetSquare)propertySquare).getNumberOfHouses() > 0){
+                squaresPossibleToSellHousing.add(propertySquare.getIndex());
             }
         }
-
         int[] convertToIntArray = new int[squaresPossibleToSellHousing.size()];
+
         for(int i=0; i < convertToIntArray.length; i++ ){
             convertToIntArray[i] = squaresPossibleToSellHousing.get(i);
         }

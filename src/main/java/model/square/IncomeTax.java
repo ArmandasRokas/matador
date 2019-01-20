@@ -9,6 +9,6 @@ public class IncomeTax extends Square {
 
     @Override
     public void landedOn(PlayerController playerController) {
-        playerController.payIncomeTax();
+        playerController.handleSquare(this);
     }
 }

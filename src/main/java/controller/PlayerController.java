@@ -2,10 +2,14 @@ package controller;
 
 import model.Player;
 import model.square.ChanceSquare;
+import model.square.IncomeTax;
+import model.square.LuxuryTax;
+import model.square.ToJail;
 import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class PlayerController {
     private Player[] playerList;
@@ -16,15 +20,17 @@ public class PlayerController {
     private PropertyController propertyCtrl;
     private ChanceCardController chanceCardCtrl;
     private GameBoardController gameBoardCtrl;
+    private BankruptController bankruptCtrl;
     private int currPlayerExtraTurnCount;
 
     public PlayerController(GUIBoundary guiB, GameRules gameRules, int numberOfPlayers, PropertyController propertyCtrl,
-                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
+                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl, BankruptController bankruptCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gameRules = gameRules;
         this.chanceCardCtrl = chanceCardCtrl;
         this.gameBoardCtrl = gameBoardCtrl;
+        this.bankruptCtrl = bankruptCtrl;
         this.currPlayerExtraTurnCount = 0;
 
         playerList = new Player[numberOfPlayers];
@@ -83,16 +89,18 @@ public class PlayerController {
     }
 
     public void changePlayer() {
-            do{
-                int currID = currPlayer.getPlayerID();
-                currID = (currID + 1) % playerList.length;
-                currPlayer = playerList[currID];
-            } while (currPlayer.isBankrupt());
+        do{
+            int currID = currPlayer.getPlayerID();
+            currID = (currID + 1) % playerList.length;
+            currPlayer = playerList[currID];
+        } while (currPlayer.isBankrupt());
+
+        resetCurrPlayerExtraTurnCount();
     }
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
-        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //FixMe var et quickfix for chanceCards (se Issue #4)
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
 
     public Player[] getPlayerList() {
@@ -126,7 +134,7 @@ public class PlayerController {
         return currPlayer.getBalance();
     }
 
-    public PropertySquare[] getCurrPlayerProperties(){
+    public ArrayList<PropertySquare> getCurrPlayerProperties(){
         return currPlayer.getProperties();
     }
 
@@ -138,8 +146,8 @@ public class PlayerController {
         }
     }
 
-    public void currPlayerGoBankrupt() {
-        this.currPlayer.goBankrupt();
+    public void currPlayerSetBankrupt() {
+        this.currPlayer.setBankrupt();
     }
 
     public void setCurrScenarioForPlayer(String currScenario) {
@@ -147,13 +155,6 @@ public class PlayerController {
     }
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
-    }
-
-    public void handleSquare(PropertySquare propertySquare){
-        propertyCtrl.handleProperty(propertySquare, this);
-    }
-    public void handleSquare(ChanceSquare chanceSquare) {
-        chanceCardCtrl.handleChanceCards(this);
     }
 
     public void setCurrPlayerIsInJail(boolean isInJail) {
@@ -191,7 +192,38 @@ public class PlayerController {
         return currPlayer.getTurnsTakenInJail();
     }
 
-    public void payIncomeTax() {
-        gameBoardCtrl.payIncomeTax(this);
+    public boolean payToGetOutOfJail() {
+        int bail = gameRules.getGetOutOfJailBail();
+        boolean res;
+
+        if(bankruptCtrl.playerCanPay(this, -bail)){
+            currPlayerMoneyInfluence(-bail);
+            guiB.updateBalance(getCurrPlayerID(), getCurrPlayerBalance());
+            res = true;
+        } else {
+            guiB.showCurrScenarioForPlayer(getCurrPlayerName() + " har ikke penge nok til at betale 50kr til Fængsel.");
+            bankruptCtrl.goBankrupt(this);
+            guiB.showCurrScenarioForPlayer(this.getCurrPlayerName() + " er gået fallit og sat ud af spillet");
+            res = false;
+        }
+        return res;
+    }
+
+    //Handling of squares
+    public void handleSquare(PropertySquare propertySquare){
+        propertyCtrl.handleProperty(propertySquare, this);
+    }
+    public void handleSquare(ChanceSquare chanceSquare) {
+        chanceCardCtrl.handleChanceCards(this);
+    }
+    public void handleSquare(IncomeTax incomeTax){
+        gameBoardCtrl.payIncomeTax(this, bankruptCtrl, gameRules);
+    }
+    public void handleSquare(LuxuryTax luxuryTax){
+        gameBoardCtrl.payLuxuryTax(this, bankruptCtrl, gameRules);
+    }
+
+    public void handleSquare(ToJail toJail){
+        gameBoardCtrl.toJail(this);
     }
 }

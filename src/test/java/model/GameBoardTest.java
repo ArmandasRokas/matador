@@ -8,13 +8,12 @@ import model.square.Square;
 import model.square.property.PropertySquare;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.MockGUI;
+import UI.MockGUI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class GameBoardTest {
-
     private ChanceCardController chanceCardController;
     private PropertyController propertyController;
     private BankruptController bankruptController;
@@ -30,7 +29,7 @@ class GameBoardTest {
         mockGUI = new MockGUI();
         bankruptController = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
-        chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl);
+        chanceCardController = new ChanceCardController(mockGUI, gameBoardCtrl, bankruptController);
         cup = new Cup();
         propertyController = new PropertyController(mockGUI, bankruptController, cup);
 

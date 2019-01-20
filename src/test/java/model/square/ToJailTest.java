@@ -1,17 +1,11 @@
 package model.square;
 
-import controller.*;
-import model.GameBoard;
-import model.square.property.PropertySquare;
 import org.junit.jupiter.api.Test;
-import ui.MockGUI;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ToJailTest {
 
     @Test
-    void testToJail(){ //FixMe
+    void testToJail(){ //FixMe or delete me
 //        //Arrange
 //        MockGUI mockGUI = new MockGUI();
 //        GameRules gL = new GameRules();

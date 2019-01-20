@@ -4,39 +4,67 @@ import model.Player;
 import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
+import java.util.ArrayList;
+
 public class BankruptController {
     private GUIBoundary guiB;
+    private PropertyController propertyCtrl;
 
     public BankruptController(GUIBoundary guiB){
         this.guiB = guiB;
     }
 
-    public void handleNegativeBalance(PropertySquare propertySquare, PlayerController playerController, PropertyController propertyController){
-        transferPropertyToCreditor(playerController, propertySquare.getOwner(), propertyController);
-        playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har gået fallit. Bye bye. ");
-        guiB.removePlayerByBankrupt(playerController.getCurrPlayerPos(), playerController.getCurrPlayerID());
+    public boolean playerCanPay(PlayerController playerCtrl, int moneyInfluence) {
+        return playerCtrl.getCurrPlayerBalance() > -moneyInfluence;
     }
 
-    public void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {
-            PropertySquare[] currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
+    public void setPropertyCtrl(PropertyController propertyCtrl){
+        this.propertyCtrl = propertyCtrl;
+    }
 
-            for(PropertySquare square: currentPlayerProperties) {
-                if(square != null){
-                    square.setOwner(owner);
-                }
-            }
-            playerCtrl.payPlayer(owner, playerCtrl.getCurrPlayerBalance());
-            playerCtrl.setCurrPlayerBalance(0);
+    public void goBankrupt(PropertySquare propertySquare, PlayerController playerCtrl){ //Another player is creditor
+        transferPropertyToCreditor(playerCtrl, propertySquare.getOwner(), propertyCtrl);
+        playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet ");
+        guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
+    }
 
-            guiB.updateBalance(playerCtrl.getCurrPlayerID(), playerCtrl.getCurrPlayerBalance());
-            guiB.updateBalance(owner.getPlayerID(), owner.getBalance());
+    public void goBankrupt(PlayerController playerCtrl) { //Bank is creditor
+        transferPropertyToCreditor(playerCtrl, propertyCtrl);
+        playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet ");
+        guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
+    }
 
-            for(PropertySquare square: currentPlayerProperties) {
-                if(square != null){
-                    guiB.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
-                    propertyCtrl.updateSiblingSquaresRentPrice(square);
-                }
-            }
-            playerCtrl.currPlayerGoBankrupt();
+    private void transferPropertyToCreditor(PlayerController playerCtrl, PropertyController propertyCtrl) { //Bank is creditor
+            ArrayList<PropertySquare> currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
+
+        for(PropertySquare square: currentPlayerProperties) {
+            square.setOwner(null);
+        }
+        playerCtrl.setCurrPlayerBalance(0);
+        guiB.updateBalance(playerCtrl.getCurrPlayerID(), playerCtrl.getCurrPlayerBalance());
+
+        for(PropertySquare square: currentPlayerProperties) {
+            guiB.setOwnerOnSquare(square.getIndex(), square.getRentPrice());
+            propertyCtrl.updateSiblingSquaresRentPrice(square);
+        }
+        playerCtrl.currPlayerSetBankrupt();
+    }
+
+    private void transferPropertyToCreditor(PlayerController playerCtrl, Player owner, PropertyController propertyCtrl) {    //Another player is creditor
+        ArrayList<PropertySquare> currentPlayerProperties = playerCtrl.getCurrPlayerProperties();
+
+        for(PropertySquare square: currentPlayerProperties) {
+                square.setOwner(owner);
+        }
+        playerCtrl.payPlayer(owner, playerCtrl.getCurrPlayerBalance());
+        playerCtrl.setCurrPlayerBalance(0);
+        guiB.updateBalance(playerCtrl.getCurrPlayerID(), playerCtrl.getCurrPlayerBalance());
+        guiB.updateBalance(owner.getPlayerID(), owner.getBalance());
+
+        for(PropertySquare square: currentPlayerProperties) {
+            guiB.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
+            propertyCtrl.updateSiblingSquaresRentPrice(square);
+        }
+        playerCtrl.currPlayerSetBankrupt();
     }
 }

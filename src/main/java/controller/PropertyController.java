@@ -3,7 +3,6 @@ package controller;
 import model.Cup;
 import model.square.property.Company;
 import model.square.property.PropertySquare;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class PropertyController {
@@ -63,9 +62,10 @@ public class PropertyController {
             rent = propertySquare.getRentPrice();
         }
 
-        if(playerController.getCurrPlayerBalance() < rent) {    //Not able to pay rent
+        if(!bankruptCtrl.playerCanPay(playerController, -rent)) {    //Not able to pay rent
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-            bankruptCtrl.handleNegativeBalance(propertySquare, playerController, this);
+            guiB.showCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
+            bankruptCtrl.goBankrupt(propertySquare, playerController);
         } else {    //Able to pay rent
             playerController.payPlayer(propertySquare.getOwner(), rent);
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
@@ -75,10 +75,6 @@ public class PropertyController {
         }
     }
 
-    /** //TODO java doc
-     * Updates sibling squares rent price after a player buys or receives a property by another player going bankrupt.
-     * @param propertySquare
-     */
     public void updateSiblingSquaresRentPrice(PropertySquare propertySquare){
         for (PropertySquare siblingSquare : propertySquare.getSiblingsSquares()) {
             if(siblingSquare.getOwner() != null) {

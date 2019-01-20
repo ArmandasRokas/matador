@@ -13,6 +13,7 @@ public class GameController {
     private GameBoardController boardCtrl;
     private PropertyController propertyCtrl;
     private ChanceCardController chanceCardCtrl;
+    private BankruptController bankruptCtrl;
 
     public GameController() {
         setupGame();
@@ -22,10 +23,11 @@ public class GameController {
         gameRules = new GameRules();
         guiB = new GUIBoundary();
         cup = new Cup();
-        BankruptController bankruptCtrl = new BankruptController(guiB);
+        this.bankruptCtrl = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl, cup);
-        this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl);
+        this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl,bankruptCtrl);
+        this.bankruptCtrl.setPropertyCtrl(propertyCtrl);
     }
 
     public void startGame() {
@@ -34,7 +36,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gameRules.getMinPlayers() , gameRules.getMaxPlayers());
         } while(!gameRules.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gameRules, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl);
+        plCtrl = new PlayerController(guiB, gameRules, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl, bankruptCtrl);
         plCtrl.createPlayers();
         runGame();
     }
@@ -44,22 +46,26 @@ public class GameController {
 
         while (activeGame) {
             guiB.showChanceCard("");
-            if (plCtrl.getIsCurrPlayerInJail()) {
+
+            if (plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()) {
                 inJail();
             } else {
                 showBeforeTurnMenu();
                 if(!plCtrl.getIsCurrPlayerInJail() && !plCtrl.getCurrPlayer().isBankrupt()){
                     showAfterTurnMenu();
-                }
-                Player p = gameRules.winnerFound(plCtrl.getPlayerList());
+                    Player p = gameRules.winnerFound(plCtrl.getPlayerList());
 
-                if (p != null) {
-                    guiB.declareWinner(p.getPlayerID());
-                    activeGame = false;
+                    if (p != null) {
+                        activeGame = false;
+
+                    }
+                    checkForExtraRoundOrChangePlayer();
+                } else {
+                    plCtrl.changePlayer();
                 }
-                checkForExtraRoundOrChangePlayer();
             }
         }
+        guiB.declareWinner(plCtrl);
         askForNewGame();
     }
 
@@ -68,7 +74,6 @@ public class GameController {
             guiB.tellPlayerExtraTurn(plCtrl.getCurrPlayerID());
         } else {
             plCtrl.changePlayer();
-            plCtrl.resetCurrPlayerExtraTurnCount();
         }
     }
 
@@ -124,14 +129,14 @@ public class GameController {
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameRules, gameBoard);
 
         while(stillBuying) {
-            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuildHousing(plCtrl);
             String res = guiB.buyBuildings(possibleStreets);
 
             switch (res.toLowerCase()) {
                 case "exit": //Exit menu
                     stillBuying = false;
                     break;
-                default:
+                default: //Buys house on selected street name
                     mbCtrl.buyHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -152,7 +157,7 @@ public class GameController {
                 case "exit": //Exit menu
                     stillSelling = false;
                     break;
-                default:
+                default: //Sells house on selected street name
                     mbCtrl.sellHouse(plCtrl, res);
                     guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
                     break;
@@ -177,21 +182,26 @@ public class GameController {
                 }
 
                 if (plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
-                    plCtrl.currPlayerMoneyInfluence(-50);
-                    guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
-                            + cup.getCurrentRollScore() + " felter.");
-                    takeTurn();
-                    plCtrl.changePlayer();
-                } else if (cup.getEyesDie1() != cup.getEyesDie2()){
+                    if(plCtrl.payToGetOutOfJail()){
+                        getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
+                                + cup.getCurrentRollScore() + " felter.");
+                        takeTurn();
+                        plCtrl.changePlayer();
+                    }else {
+                        plCtrl.changePlayer();
+                    }
+
+                } else if (cup.getEyesDie1() != cup.getEyesDie2()){ // Gives a second turn if a player throws two equals
                     plCtrl.changePlayer();
                 }
                 break;
 
             case 1: //Pay to get out of jail
-                plCtrl.currPlayerMoneyInfluence(-50);
-                getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
-                guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                if(plCtrl.payToGetOutOfJail()){
+                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
+                } else {
+                    plCtrl.changePlayer();
+                }
                 break;
 
             case 2: //Use card to get out of jail
@@ -225,7 +235,7 @@ public class GameController {
         guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
     }
 
-    public void getOutOfPrison(String message) {
+    private void getOutOfPrison(String message) {
         plCtrl.setCurrScenarioForPlayer(message);
         guiB.showCurrScenarioForPlayer(plCtrl.getCurrScenarioForPlayer());
         plCtrl.setCurrPlayerIsInJail(false);

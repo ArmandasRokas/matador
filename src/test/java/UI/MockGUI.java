@@ -1,9 +1,11 @@
-package ui;
+package UI;
 
 import gui_fields.GUI_Player;
+import ui.GUIBoundary;
 
 import java.awt.*;
 
+//Class to test program around the issue of user communication
 public class MockGUI extends GUIBoundary {
     private int amountOfPlayers;
     private String[] names;
@@ -18,7 +20,7 @@ public class MockGUI extends GUIBoundary {
     @Override
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount = amountOfPlayers;
-        super.playerList = new GUI_Player[playerCount];
+        super.setPlayerList(new GUI_Player[playerCount]);
         return playerCount;
     }
 
@@ -42,6 +44,5 @@ public class MockGUI extends GUIBoundary {
     public void movePlayer(int previousPosition, int newPosition, int playerID) { }
     @Override
     public void updateBalance(int playerID, int balance) {
-
     }
 }
