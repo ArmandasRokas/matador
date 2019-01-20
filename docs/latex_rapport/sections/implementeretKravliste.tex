@@ -24,11 +24,16 @@
 % Document
 \begin{document}
 
-    \begin{table}[]
-        \begin{tabular}{|l|l|l|l|}
+    Efterfølge side med tabel~\ref{tab:implementeret_krav_liste} er givet en oversigt over hvilke krav, der under projektforløbet er nået at blive implementeret. De implementerede krav er markeret med Alle ‘Must have’ og ‘Should have’ blev implementeret. For beskrivelse af de specifikke krav refereres til førnævnte kravliste.
+
+    \newpage
+    \begin{table}[H]
+        \caption{Liste over implementerede krav}
+        \label{tab:implementeret_krav_liste}
+        \begin{tabularx}{\textwidth}{|l|l|l|X|}
             \hline
-            & Krav nr. & Implementeret?     & Evt. kommentar                                                                                                                                                                                     \\ \hline
-            Must have       &          &                    &                                                                                                                                                                                                    \\ \hline
+            & \textbf{Krav nr.} &\textbf{ Implementeret?     }& \textbf{Evt. kommentar}                                                                                                                                                                                     \\ \hline
+            \textbf{Must have}&          &                    &                                                                                                                                                                                                    \\ \hline
             & K1       & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K2       & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K3       & Ja                 &                                                                                                                                                                                                    \\ \hline
@@ -48,14 +53,14 @@
             & K17      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K18      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K19      & Ja                 &                                                                                                                                                                                                    \\ \hline
-            Should have     &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Should have}     &          &                    &                                                                                                                                                                                                    \\ \hline
             & K20      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K21      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K22      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K23      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K24      & Ja                 &                                                                                                                                                                                                    \\ \hline
             & K25      & Ja                 &                                                                                                                                                                                                    \\ \hline
-            Could have      &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Could have}      &          &                    &                                                                                                                                                                                                    \\ \hline
             & K26      & Nej                &                                                                                                                                                                                                    \\ \hline
             & K27      & Nej                &                                                                                                                                                                                                    \\ \hline
             & K28      & Nej                &                                                                                                                                                                                                    \\ \hline
@@ -63,19 +68,19 @@
             & K30      & Ja (kun ramme)     &                                                                                                                                                                                                    \\ \hline
             & K31      & Nej                &                                                                                                                                                                                                    \\ \hline
             & K32      & Nej                & Bliver ikke solgt ved auktion, men bliver bare overført til banken.                                                                                                                                \\ \hline
-            Wont have       &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Wont have}       &          &                    &                                                                                                                                                                                                    \\ \hline
             & K33      & Nej                &                                                                                                                                                                                                    \\ \hline
-            Supportablility &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Supportablility} &          &                    &                                                                                                                                                                                                    \\ \hline
             & K34      & Nej (omformuleres) & “ikke nemt”                                                                                                                                                                                        \\ \hline
-            Usability       &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Usability       }&          &                    &                                                                                                                                                                                                    \\ \hline
             & K35      & Ja                 &                                                                                                                                                                                                    \\ \hline
-            Extensibility   &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Extensibility   }&          &                    &                                                                                                                                                                                                    \\ \hline
             & K36      & Ja                 & Vi har gennem projektet haft fokus på at anvende controller, creator og information expert til at opnå lav coupling og high cohesion. Yderligere, er polymorfisme og visitor pattern også anvendt. \\ \hline
-            Hardware        &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Hardware        }&          &                    &                                                                                                                                                                                                    \\ \hline
             & K37      & Ja                 &                                                                                                                                                                                                    \\ \hline
-            Software        &          &                    &                                                                                                                                                                                                    \\ \hline
+            \textbf{Software        }&          &                    &                                                                                                                                                                                                    \\ \hline
             & K38      & Ja                 &                                                                                                                                                                                                    \\ \hline
-        \end{tabular}
+        \end{tabularx}
     \end{table}
 
 \end{document}

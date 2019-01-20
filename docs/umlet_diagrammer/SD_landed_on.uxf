@@ -23,7 +23,7 @@ d-&gt;&gt;&gt;b : getOwner(); on=b
 b.&gt;&gt;&gt;d :  owner; off=b;
 
 combinedFragment=alt~alt1 b d ;  b:[owner == null];
-ref=id2 d: SD_buy_property
+ref=b d: SD_buyProperty
 --;
 
 

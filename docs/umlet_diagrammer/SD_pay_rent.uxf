@@ -4,27 +4,44 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>0</x>
-      <y>60</y>
-      <w>1060</w>
-      <h>500</h>
+      <x>130</x>
+      <y>0</y>
+      <w>1160</w>
+      <h>970</h>
     </coordinates>
     <panel_attributes>title=SD: payRent(square,playerController) on PropertyController
 obj=:PropertyController ~a 
 obj=playerCtrl\n:PlayerController ~b 
 obj=currPlayer :Player~c
 obj=owner :Player~d
-obj=square :PropertySquare~e
-found-&gt;&gt;&gt;a ; on=a
-a-&gt;&gt;&gt;e  :getRentPrice()  ; on=e
-e.&gt;a : rentPrice; off=e
-a-&gt;&gt;&gt;d  :getOwner()  ; on=e
-e.&gt;a : owner; off=e
-a-&gt;&gt;&gt;b :payPlayer(owner, rentPrice)  ; on=b;
-b-&gt;&gt;&gt;c :moneyInfluence(-price)  ; on=c
-off=c;
-b-&gt;&gt;&gt;d :moneyInfluence(price)  ; on=d; off=b
+obj=propertySquare :PropertySquare~e
 
+found-&gt;&gt;&gt;a ; on=a
+
+
+combinedFragment=alt~alt1 a e ;  a:[ propertySquare instanceof Company];
+a-&gt;&gt;&gt;e  :rent = getRentPrice()  ; on=e
+ off=e
+..; a:[else]
+a-&gt;&gt;&gt;e  :rent = getRentPrice() * currRollScore ; on=e
+off=e; --;
+a-&gt;&gt;&gt;b :getCurrPlayerBalance(); on=b
+b-&gt;&gt;&gt;c : getBalance(); on=c
+c.&gt;b : balance; off=c
+b.&gt;a : balance; off=b
+combinedFragment=alt~alt1 a e ;  a:[balance &lt; rent];
+ref=b e: SD_handleNegativeBalance
+tick=
+.. ; a:[else]
+a-&gt;&gt;&gt;e  :getOwner()  ; on=e
+e.&gt;a : owner; off=e
+a-&gt;&gt;&gt;b :payPlayer(owner, rent)  ; on=b;
+b-&gt;b + ; b: currPlayerMoney \n Influence(-rent); 
+on=b;  
+b-&gt;&gt;&gt;c :moneyInfluence(-rent)  ; on=c; off=b
+off=c;
+b-&gt;&gt;&gt;d :moneyInfluence(rent)  ; on=d; off=b
+off=d; off=a;--;
 
 
 
