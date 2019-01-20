@@ -52,7 +52,7 @@ public class Player {
         return properties;
     }
 
-    public void goBankrupt(){
+    public void setBankrupt(){
         this.isBankrupt = true;
     }
     public boolean isBankrupt(){
@@ -60,20 +60,19 @@ public class Player {
     }
 
     public void setIsCurrPlayerInJail(boolean isInJail){ this.isCurrPlayerInJail = isInJail;}
-
     public boolean getIsCurrPlayerInJail(){return this.isCurrPlayerInJail;}
-    public void increaseTurnsTakenInJail() { turnsTakenInJail++; }
 
+    public void increaseTurnsTakenInJail() { turnsTakenInJail++; }
     public void resetTurnsTakenInJail() {
         turnsTakenInJail = 0;
     }
     public int getTurnsTakenInJail() {
         return turnsTakenInJail;
     }
+
     public void addOutOfJailCard() {
         this.getOutOfJailCards++;
     }
-
     public void useGetOutOfJailCard() {
         this.getOutOfJailCards = getOutOfJailCards - 1;
     }

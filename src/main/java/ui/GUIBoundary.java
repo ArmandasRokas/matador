@@ -214,6 +214,14 @@ public class GUIBoundary {
         ownable.setRent(Integer.toString(rentPrice));
     }
 
+    public void setOwnerOnSquare(int squareIndex, int buyPrice) {
+        GUI_Ownable ownable = (GUI_Ownable) fieldList[squareIndex];
+        ownable.setOwnerName(null);
+        updateRentPrice(squareIndex, buyPrice);
+        ownable.setBorder(Color.GRAY);
+        ownable.setRent(Integer.toString(buyPrice));
+    }
+
     public void setHousing(int squareIndex, int numberOfHouses) {
         GUI_Street street = (GUI_Street)fieldList[squareIndex];
 

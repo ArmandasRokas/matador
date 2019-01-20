@@ -6,7 +6,6 @@ import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PlayerController {
@@ -144,8 +143,8 @@ public class PlayerController {
         }
     }
 
-    public void currPlayerGoBankrupt() {
-        this.currPlayer.goBankrupt();
+    public void currPlayerSetBankrupt() {
+        this.currPlayer.setBankrupt();
     }
 
     public void setCurrScenarioForPlayer(String currScenario) {
@@ -153,13 +152,6 @@ public class PlayerController {
     }
     public String getCurrScenarioForPlayer(){
         return currScenarioForPlayer;
-    }
-
-    public void handleSquare(PropertySquare propertySquare){
-        propertyCtrl.handleProperty(propertySquare, this);
-    }
-    public void handleSquare(ChanceSquare chanceSquare) {
-        chanceCardCtrl.handleChanceCards(this);
     }
 
     public void setCurrPlayerIsInJail(boolean isInJail) {
@@ -197,7 +189,18 @@ public class PlayerController {
         return currPlayer.getTurnsTakenInJail();
     }
 
-    public void payIncomeTax() {
-        gameBoardCtrl.payIncomeTax(this, bankruptCtrl);
+    //Handling of squares
+    public void handleSquare(PropertySquare propertySquare){
+        propertyCtrl.handleProperty(propertySquare, this);
     }
+    public void handleSquare(ChanceSquare chanceSquare) {
+        chanceCardCtrl.handleChanceCards(this);
+    }
+
+    public void payIncomeTax() {
+        gameBoardCtrl.payIncomeTax(this, bankruptCtrl, propertyCtrl);
+    }
+
+    //TODO ToJail visitor pattern
+    //TODO Jail visitor pattern?
 }
