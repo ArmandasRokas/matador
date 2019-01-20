@@ -100,7 +100,7 @@ public class PlayerController {
 
     public void currPlayerMoneyInfluence(int cash) {
         currPlayer.moneyInfluence(cash);
-        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance()); //TODO Kan vi gøre så guiB.updateBalance kun bliver kaldt herfra?
+        guiB.updateBalance(currPlayer.getPlayerID(), currPlayer.getBalance());
     }
 
     public Player[] getPlayerList() {
@@ -226,5 +226,4 @@ public class PlayerController {
     public void handleSquare(ToJail toJail){
         gameBoardCtrl.toJail(this);
     }
-
 }
