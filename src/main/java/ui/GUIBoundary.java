@@ -4,6 +4,7 @@ import controller.PlayerController;
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class GUIBoundary {
     private GUI gui = new GUI();
@@ -75,27 +76,37 @@ public class GUIBoundary {
     }
 
     private String[] getPossibleSquareNamesForBuilding(int[] possibleStreets) {
-        int count = 0;
+//        int count = 0;
+//
+//        for(int possibleStreet : possibleStreets) {
+//            if(possibleStreet != 0) {
+//                count++;
+//            }
+//        }
+//        String[] possibleStreetNames = new String[count+1];
+//
+//        for(int possibleStreet : possibleStreets) {
+//            if(possibleStreet != 0) {
+//
+//                for(int i = 0 ; i < possibleStreetNames.length ; i++) {
+//                    if(possibleStreetNames[i] == null) {
+//                        possibleStreetNames[i] = fieldList[possibleStreet].getTitle();
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        possibleStreetNames[count] = "Exit";
+//        return possibleStreetNames;
 
-        for(int possibleStreet : possibleStreets) {
-            if(possibleStreet != 0) {
-                count++;
-            }
+//        ArrayList<String> possibleStreetNames = new ArrayList<>();
+        String[] possibleStreetNames = new String[possibleStreets.length+1];
+
+        for(int i = 0 ; i < possibleStreets.length ; i++) {
+            possibleStreetNames[i] = fieldList[possibleStreets[i]].getTitle();
         }
-        String[] possibleStreetNames = new String[count+1];
+        possibleStreetNames[possibleStreetNames.length-1] = "Exit";
 
-        for(int possibleStreet : possibleStreets) { //TODO ArrayList
-            if(possibleStreet != 0) {
-
-                for(int i = 0 ; i < possibleStreetNames.length ; i++) {
-                    if(possibleStreetNames[i] == null) {
-                        possibleStreetNames[i] = fieldList[possibleStreet].getDescription();
-                        break;
-                    }
-                }
-            }
-        }
-        possibleStreetNames[count] = "Exit";
         return possibleStreetNames;
     }
 
