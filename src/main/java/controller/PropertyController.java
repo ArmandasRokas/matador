@@ -64,6 +64,7 @@ public class PropertyController {
 
         if(playerController.getCurrPlayerBalance() < rent) {    //Not able to pay rent
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
+            guiB.showCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
             bankruptCtrl.goBankrupt(propertySquare, playerController, this);
         } else {    //Able to pay rent
             playerController.payPlayer(propertySquare.getOwner(), rent);

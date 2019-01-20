@@ -26,7 +26,7 @@ public class GameController {
         this.bankruptCtrl = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl, cup);
-        this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl);
+        this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl,bankruptCtrl);
     }
 
     public void startGame() {

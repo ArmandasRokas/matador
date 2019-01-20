@@ -12,12 +12,14 @@ import java.util.Random;
 public class ChanceCardController {
     private GUIBoundary guiB;
     private GameBoardController gameBoardCtrl;
+    private BankruptController bankruptCtrl;
     private ChanceCard cardDeck[];
     private int cardsPicked;
 
-    public ChanceCardController(GUIBoundary guiB, GameBoardController gameBoardCtrl) {
+    public ChanceCardController(GUIBoundary guiB, GameBoardController gameBoardCtrl, BankruptController bankruptCtrl) {
         this.guiB = guiB;
         this.gameBoardCtrl = gameBoardCtrl;
+        this.bankruptCtrl = bankruptCtrl;
         createDeck();
         cardsPicked = 0;
     }
@@ -53,10 +55,23 @@ public class ChanceCardController {
         chanceCard.setInDeck(false);
     }
 
-    public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
-        guiB.showChanceCard(chanceCard.getCardText());
-        playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
-    }
+//    public void handleChanceCard(MoneyInfluenceCC chanceCard, PlayerController playerCtrl) {
+//        guiB.showChanceCard(chanceCard.getCardText());
+//
+//        if(playerCtrl.getCurrPlayerBalance() < -chanceCard.getMoneyInfluence()) {    //Not able to pay rent
+//            guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale " + chanceCard.getMoneyInfluence() + ".");
+//            bankruptCtrl.goBankrupt(propertySquare, playerController, this);
+//        } else {    //Able to pay rent
+//            playerController.payPlayer(propertySquare.getOwner(), rent);
+//            guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());
+//            guiB.updateBalance(propertySquare.getOwner().getPlayerID(), propertySquare.getOwner().getBalance());
+//            playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " er landet på " + propertySquare + " som er ejet af " + propertySquare.getOwner() +
+//                    ". " + playerController.getCurrPlayerName() + " har betalt " + rent + "kr til " + propertySquare.getOwner());
+//        }
+//
+//
+//        playerCtrl.currPlayerMoneyInfluence(chanceCard.getMoneyInfluence());
+//    }
 
     public void handleChanceCard(MovePlayerToSquareCC chanceCard, PlayerController playerCtrl) {
         guiB.showChanceCard(chanceCard.getCardText());
