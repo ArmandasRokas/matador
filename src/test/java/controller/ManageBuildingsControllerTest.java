@@ -31,7 +31,7 @@ class ManageBuildingsControllerTest {
         gameBoard = new GameBoard();
         cup = new Cup();
         propertyCtrl = new PropertyController(mockGUI, bankruptCtrl, cup);
-        playerController = new PlayerController(mockGUI, gameRules, 3, propertyCtrl, cardController, gameBoardCtrl);
+        playerController = new PlayerController(mockGUI, gameRules, 3, propertyCtrl, cardController, gameBoardCtrl, bankruptCtrl);
         playerController.createPlayers();
 
     }
@@ -48,7 +48,7 @@ class ManageBuildingsControllerTest {
 
         ManageBuildingsController mbController = new ManageBuildingsController(mockGUI, gameRules, gameBoard);
         //Act
-        int[] streetSquaresPossibleToBuildIndexes = mbController.getCurrPlayerSquarePossibleToBuild(playerController);
+        int[] streetSquaresPossibleToBuildIndexes = mbController.getCurrPlayerSquarePossibleToBuildHousing(playerController);
 
 
         StreetSquare[] streetSquaresPossibleToBuild = new StreetSquare[2];

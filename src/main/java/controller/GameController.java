@@ -13,6 +13,7 @@ public class GameController {
     private GameBoardController boardCtrl;
     private PropertyController propertyCtrl;
     private ChanceCardController chanceCardCtrl;
+    private BankruptController bankruptCtrl;
 
     public GameController() {
         setupGame();
@@ -22,7 +23,7 @@ public class GameController {
         gameRules = new GameRules();
         guiB = new GUIBoundary();
         cup = new Cup();
-        BankruptController bankruptCtrl = new BankruptController(guiB);
+        this.bankruptCtrl = new BankruptController(guiB);
         this.boardCtrl = new GameBoardController(guiB);
         this.propertyCtrl = new PropertyController(guiB, bankruptCtrl, cup);
         this.chanceCardCtrl = new ChanceCardController(guiB, boardCtrl);
@@ -34,7 +35,7 @@ public class GameController {
             numberOfPlayers = guiB.askForPlayerCount(gameRules.getMinPlayers() , gameRules.getMaxPlayers());
         } while(!gameRules.controlPlayerCount(numberOfPlayers));
 
-        plCtrl = new PlayerController(guiB, gameRules, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl);
+        plCtrl = new PlayerController(guiB, gameRules, numberOfPlayers, propertyCtrl, chanceCardCtrl, boardCtrl, bankruptCtrl);
         plCtrl.createPlayers();
         runGame();
     }
@@ -124,7 +125,7 @@ public class GameController {
         ManageBuildingsController mbCtrl = new ManageBuildingsController(guiB, gameRules, gameBoard);
 
         while(stillBuying) {
-            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuild(plCtrl);
+            int[] possibleStreets = mbCtrl.getCurrPlayerSquarePossibleToBuildHousing(plCtrl);
             String res = guiB.buyBuildings(possibleStreets);
 
             switch (res.toLowerCase()) {

@@ -13,7 +13,7 @@ class PlayerControllerTest {
     MockGUI mockGUI ;
     GameRules gameRules;
     PlayerController playerController;
-    BankruptController bankruptController;
+    BankruptController bankruptCtrl;
     PropertyController propertyController;
     GameBoardController gameBoardCtrl;
     ChanceCardController cardController;
@@ -25,13 +25,13 @@ class PlayerControllerTest {
     void setUp(){
         mockGUI = new MockGUI();
         gameRules = new GameRules();
-        bankruptController = new BankruptController(mockGUI);
+        bankruptCtrl = new BankruptController(mockGUI);
         gameBoardCtrl = new GameBoardController(mockGUI);
         cardController = new ChanceCardController(mockGUI, gameBoardCtrl);
         gameBoard = new GameBoard();
         cup = new Cup();
-        propertyController = new PropertyController(mockGUI,bankruptController, cup);
-        playerController = new PlayerController(mockGUI, gameRules, 3, propertyController, cardController, gameBoardCtrl);
+        propertyController = new PropertyController(mockGUI, bankruptCtrl, cup);
+        playerController = new PlayerController(mockGUI, gameRules, 3, propertyController, cardController, gameBoardCtrl, bankruptCtrl);
         playerController.createPlayers();
     }
 

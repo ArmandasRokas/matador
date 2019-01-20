@@ -54,7 +54,7 @@ public class GameBoard {
         squareList[0] = new StartSquare("Start", 0);
         squareList[1] = new StreetSquare("Rødovrevej", new int[]{2, 10, 30, 90, 160, 250}, 60, 0, 1, 1, 50);
         squareList[2] = new ChanceSquare("Prøv lykken", 2);
-        squareList[3] = new StreetSquare("Hvidovrevej", new int[]{4, 20, 60, 180, 320, 540}, 60, 0, 3, 1, 50);
+        squareList[3] = new StreetSquare("Hvidovrevej", new int[]{4000, 20, 60, 180, 320, 540}, 60, 0, 3, 1, 50);
         squareList[4] = new IncomeTax("Indkomstskat", 4);
         squareList[5] = new Transport("Øresund",  new int[]{25, 50, 100, 200},200,8,5,3);
         squareList[6] = new StreetSquare("Roskildevej", new int[]{6, 30, 90, 270, 400, 550}, 100, 1, 6, 2, 50);
@@ -81,7 +81,7 @@ public class GameBoard {
         squareList[27] = new StreetSquare("Kgs. Nytorv", new int[]{22, 110, 330, 800, 975, 1050}, 260, 5, 27, 2, 150);
         squareList[28] = new Company("Carlsberg", new int[]{4, 10}, 150, 9,28,1);
         squareList[29] = new StreetSquare("Østergade", new int[]{22, 120, 360, 850, 1025, 1200}, 280, 5, 29, 2, 150);
-        squareList[30] = new ToJail("De sætttes testInt fængsles", 30);
+        squareList[30] = new ToJail("De sætttes testCup fængsles", 30);
         squareList[31] = new StreetSquare("Amagertorv", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 31, 2, 200);
         squareList[32] = new StreetSquare("Vimmelskaftet", new int[]{26, 130, 390, 900, 1100, 1275}, 300, 6, 32, 2, 200);
         squareList[33] = new ChanceSquare("Prøv lykken", 33);

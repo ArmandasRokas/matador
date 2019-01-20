@@ -6,6 +6,8 @@ import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
 import java.awt.Color;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class PlayerController {
     private Player[] playerList;
@@ -16,15 +18,17 @@ public class PlayerController {
     private PropertyController propertyCtrl;
     private ChanceCardController chanceCardCtrl;
     private GameBoardController gameBoardCtrl;
+    private BankruptController bankruptCtrl;
     private int currPlayerExtraTurnCount;
 
     public PlayerController(GUIBoundary guiB, GameRules gameRules, int numberOfPlayers, PropertyController propertyCtrl,
-                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl) {
+                            ChanceCardController chanceCardCtrl, GameBoardController gameBoardCtrl, BankruptController bankruptCtrl) {
         this.propertyCtrl = propertyCtrl;
         this.guiB = guiB;
         this.gameRules = gameRules;
         this.chanceCardCtrl = chanceCardCtrl;
         this.gameBoardCtrl = gameBoardCtrl;
+        this.bankruptCtrl = bankruptCtrl;
         this.currPlayerExtraTurnCount = 0;
 
         playerList = new Player[numberOfPlayers];
@@ -126,7 +130,7 @@ public class PlayerController {
         return currPlayer.getBalance();
     }
 
-    public PropertySquare[] getCurrPlayerProperties(){
+    public ArrayList<PropertySquare> getCurrPlayerProperties(){
         return currPlayer.getProperties();
     }
 
@@ -192,6 +196,6 @@ public class PlayerController {
     }
 
     public void payIncomeTax() {
-        gameBoardCtrl.payIncomeTax(this);
+        gameBoardCtrl.payIncomeTax(this, bankruptCtrl);
     }
 }

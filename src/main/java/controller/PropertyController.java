@@ -3,7 +3,6 @@ package controller;
 import model.Cup;
 import model.square.property.Company;
 import model.square.property.PropertySquare;
-import model.square.property.StreetSquare;
 import ui.GUIBoundary;
 
 public class PropertyController {
@@ -65,7 +64,7 @@ public class PropertyController {
 
         if(playerController.getCurrPlayerBalance() < rent) {    //Not able to pay rent
             playerController.setCurrScenarioForPlayer(playerController.getCurrPlayerName() + " har ikke penge nok til at betale renten.");
-            bankruptCtrl.handleNegativeBalance(propertySquare, playerController, this);
+            bankruptCtrl.goBankrupt(propertySquare, playerController, this);
         } else {    //Able to pay rent
             playerController.payPlayer(propertySquare.getOwner(), rent);
             guiB.updateBalance(playerController.getCurrPlayerID(), playerController.getCurrPlayerBalance());

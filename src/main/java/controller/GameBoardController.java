@@ -33,13 +33,13 @@ public class GameBoardController {
         return gameBoard;
     }
 
-    public void payIncomeTax(PlayerController playerCtrl) {
+    public void payIncomeTax(PlayerController playerCtrl, BankruptController bankruptCtrl) {
         double sumFromHisProperties = 0;
 
         for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
-            if (propertySquare != null) {
+//            if (propertySquare != null) {
                 sumFromHisProperties += propertySquare.getBuyPrice();
-            }
+//            }
         }
         double payPercent = (((double)playerCtrl.getCurrPlayerBalance()+ sumFromHisProperties) / 100) * 10;
         int incomeTaxAnswer  = guiB.incomeTax(playerCtrl);
@@ -52,7 +52,11 @@ public class GameBoardController {
                 break;
             case 1:
                 playerCtrl.setCurrScenarioForPlayer("Du har valgt at betale 200kr");
-                playerCtrl.currPlayerMoneyInfluence(-200);
+                if(!bankruptCtrl.playerBalanceGoingNegative(playerCtrl, -200)) {
+                    playerCtrl.currPlayerMoneyInfluence(-200);
+                } else {
+
+                }
                 break;
         }
     }
