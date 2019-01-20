@@ -9,8 +9,6 @@ package model;
  */
 public class Cup {
     private Die d1, d2; //Instances of dices
-    int testCup = 0;    //TODO SLET FØR AFLEVERING
-    int testDie = 0;    //TODO SLET FØR AFLEVERING
 
     /**
      * Constructor of Cup
@@ -32,30 +30,15 @@ public class Cup {
      * Add the eyes of the two dices
      *
      * @return  Sum of the two dices
-     */ //TODO ÆNDRE TILBAGE HER FØR AFLEVERING!
-//    public int getCurrentRollScore() {
-//        return getEyesDie1() + getEyesDie2();
-//    }
-
-//    public int getEyesDie1() {
-//        return d1.getEyes();
-//    }
-//    public int getEyesDie2() {
-//        return d2.getEyes();
-//    }
-
+     */
     public int getCurrentRollScore() {
-//        return 36;
-        int[] array = new int[]{30, 1, 1 , 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-        return array[testCup++];
+        return getEyesDie1() + getEyesDie2();
     }
 
     public int getEyesDie1() {
-        return 1;
+        return d1.getEyes();
     }
     public int getEyesDie2() {
-//        return 2;
-        int[] array = new int[]{1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,2, 2, 2, 2, 2, 2, 2, 2, 2,2,2,2,2,2,2,2,2,2,2};
-        return array[testDie++];
+        return d2.getEyes();
     }
 }
