@@ -76,7 +76,7 @@ public class GUIBoundary {
     }
 
     private String[] getPossibleSquareNamesForBuilding(int[] possibleStreets) {
-//        int count = 0;
+//        int count = 0; //TODO Slet her
 //
 //        for(int possibleStreet : possibleStreets) {
 //            if(possibleStreet != 0) {
