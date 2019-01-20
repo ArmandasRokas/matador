@@ -5,7 +5,7 @@
 //import model.square.Square;
 //import model.square.property.PropertySquare;
 //import org.junit.jupiter.api.Test;
-//import ui.MockGUI;
+//import UI.MockGUI;
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //

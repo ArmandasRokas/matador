@@ -1,12 +1,6 @@
 package model.square;
 
-import controller.*;
-import model.GameBoard;
-import model.square.property.PropertySquare;
 import org.junit.jupiter.api.Test;
-import ui.MockGUI;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ToJailTest {
 

@@ -205,21 +205,26 @@ public class GameController {
                 }
 
                 if (plCtrl.getCurrPlayer().getTurnsTakenInJail() >= 3) {
-                    plCtrl.currPlayerMoneyInfluence(-50);
-                    guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
-                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
-                            + cup.getCurrentRollScore() + " felter.");
-                    takeTurn();
-                    plCtrl.changePlayer();
-                } else if (cup.getEyesDie1() != cup.getEyesDie2()){
+                    if(plCtrl.payToGetOutOfJail()){
+                        getOutOfPrison(plCtrl.getCurrPlayerName() + " har betalt 50kr for at komme ud af fængsel da du ikke har kunne slå sig selv ud. Du rykker "
+                                + cup.getCurrentRollScore() + " felter.");
+                        takeTurn();
+                        plCtrl.changePlayer();
+                    }else {
+                        plCtrl.changePlayer();
+                    }
+
+                } else if (cup.getEyesDie1() != cup.getEyesDie2()){ // Gives a second turn if a player throws two equals
                     plCtrl.changePlayer();
                 }
                 break;
 
             case 1: //Pay to get out of jail
-                plCtrl.currPlayerMoneyInfluence(-50);
-                getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
-                guiB.updateBalance(plCtrl.getCurrPlayerID(), plCtrl.getCurrPlayerBalance());
+                if(plCtrl.payToGetOutOfJail()){
+                    getOutOfPrison(plCtrl.getCurrPlayerName() + " har valgt at betale 50 kr for at komme ud af fængslet");
+                } else {
+                    plCtrl.changePlayer();
+                }
                 break;
 
             case 2: //Use card to get out of jail

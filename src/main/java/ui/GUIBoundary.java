@@ -11,6 +11,10 @@ public class GUIBoundary {
     private GUI_Player[] playerList;
     private GUI_Field[] fieldList = gui.getFields();
 
+    public void setPlayerList(GUI_Player[] playerList){
+        this.playerList = playerList;
+    }
+
     //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount;

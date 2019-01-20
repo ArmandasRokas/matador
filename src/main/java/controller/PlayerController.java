@@ -192,6 +192,22 @@ public class PlayerController {
         return currPlayer.getTurnsTakenInJail();
     }
 
+    public boolean payToGetOutOfJail() {
+        int bail = gameRules.getGetOutOfJailBail();
+        boolean res;
+
+        if(bankruptCtrl.playerCanPay(this, -bail)){
+            currPlayerMoneyInfluence(-bail);
+            guiB.updateBalance(getCurrPlayerID(), getCurrPlayerBalance());
+            res = true;
+        } else {
+            guiB.showCurrScenarioForPlayer(getCurrPlayerName() + " har ikke penge nok til at betale 50kr til Fængsel.");
+            bankruptCtrl.goBankrupt(this);
+            guiB.showCurrScenarioForPlayer(this.getCurrPlayerName() + " er gået fallit og sat ud af spillet");
+            res = false;
+        }
+        return res;
+    }
     //Handling of squares
     public void handleSquare(PropertySquare propertySquare){
         propertyCtrl.handleProperty(propertySquare, this);
@@ -205,10 +221,9 @@ public class PlayerController {
     public void handleSquare(LuxuryTax luxuryTax){
         gameBoardCtrl.payLuxuryTax(this, bankruptCtrl, gameRules);
     }
+
     public void handleSquare(ToJail toJail){
         gameBoardCtrl.toJail(this);
     }
 
-    //TODO ToJail visitor pattern
-    //TODO Jail visitor pattern?
 }

@@ -1,6 +1,7 @@
-package ui;
+package UI;
 
 import gui_fields.GUI_Player;
+import ui.GUIBoundary;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public class MockGUI extends GUIBoundary {
     @Override
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
         int playerCount = amountOfPlayers;
-        super.playerList = new GUI_Player[playerCount];
+        super.setPlayerList(new GUI_Player[playerCount]);
         return playerCount;
     }
 

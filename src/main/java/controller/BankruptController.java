@@ -30,7 +30,7 @@ public class BankruptController {
 
     public void goBankrupt(PlayerController playerCtrl) { //Bank is creditor
         transferPropertyToCreditor(playerCtrl, propertyCtrl);
-        playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet");
+        playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " er gået fallit og sat ud af spillet ");
         guiB.removePlayerByBankrupt(playerCtrl.getCurrPlayerPos(), playerCtrl.getCurrPlayerID());
     }
 

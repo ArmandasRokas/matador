@@ -10,7 +10,7 @@ import model.Player;
  * Class to represent the model.squares on board. Is not to be created instances of, since all model.squares are to be unique classes.
  */
 public abstract class Square {
-    protected String squareName;  //Name of square, used to describe the scenario of the turn
+    private String squareName;  //Name of square, used to describe the scenario of the turn
     private int index;
     private Player owner;         //Reference to the player that owns the property, or null if property is owned by bank
 

@@ -9,7 +9,10 @@ import java.awt.Color;
 public class GameRules {
     private int minPlayers, maxPlayers, startBalance;
     private Color[] colors;
-    private int luxuryTax, incomeTax;
+    private int luxuryTax;
+    private int incomeTax;
+
+    private int getOutOfJailBail;
 
     public GameRules() {
         this.minPlayers = 3;
@@ -18,6 +21,7 @@ public class GameRules {
         this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA};
         this.luxuryTax = 100;
         this.incomeTax = 200;
+        this.getOutOfJailBail = 5000000;
     }
 
     public boolean controlPlayerCount(int numberOfPlayers) {
@@ -50,13 +54,13 @@ public class GameRules {
     }
 
     //Getters and Setters
+
     public int getMinPlayers() {
         return minPlayers;
     }
     public int getMaxPlayers() {
         return maxPlayers;
     }
-
     public int getStartBalance() {
         return startBalance;
     }
@@ -71,6 +75,10 @@ public class GameRules {
 
     public int getIncomeTax() {
         return incomeTax;
+    }
+
+    public int getGetOutOfJailBail() {
+        return getOutOfJailBail;
     }
 
     public boolean isBuyingBuildingsEvenly(PropertySquare propertySquare) {
