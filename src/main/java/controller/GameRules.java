@@ -9,12 +9,15 @@ import java.awt.Color;
 public class GameRules {
     private int minPlayers, maxPlayers, startBalance;
     private Color[] colors;
+    private int luxuryTax, incomeTax;
 
     public GameRules() {
-        minPlayers = 3;
-        maxPlayers = 6;
-        startBalance = 1500;
+        this.minPlayers = 3;
+        this.maxPlayers = 6;
+        this.startBalance = 1500;
         this.colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN, Color.YELLOW, Color.MAGENTA};
+        this.luxuryTax = 100;
+        this.incomeTax = 200;
     }
 
     public boolean controlPlayerCount(int numberOfPlayers) {
@@ -60,6 +63,14 @@ public class GameRules {
 
     public Color[] getColors() {
         return colors;
+    }
+
+    public int getLuxuryTax() {
+        return this.luxuryTax;
+    }
+
+    public int getIncomeTax() {
+        return incomeTax;
     }
 
     public boolean isBuyingBuildingsEvenly(PropertySquare propertySquare) {

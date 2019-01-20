@@ -3,6 +3,7 @@ package controller;
 import model.Player;
 import model.square.ChanceSquare;
 import model.square.IncomeTax;
+import model.square.LuxuryTax;
 import model.square.property.PropertySquare;
 import ui.GUIBoundary;
 
@@ -198,7 +199,10 @@ public class PlayerController {
         chanceCardCtrl.handleChanceCards(this);
     }
     public void handleSquare(IncomeTax incomeTax){
-        gameBoardCtrl.payIncomeTax(this, bankruptCtrl, propertyCtrl);
+        gameBoardCtrl.payIncomeTax(this, bankruptCtrl, gameRules);
+    }
+    public void handleSquare(LuxuryTax luxuryTax){
+        gameBoardCtrl.payLuxuryTax(this, bankruptCtrl, gameRules);
     }
 
     //TODO ToJail visitor pattern

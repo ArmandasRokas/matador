@@ -39,13 +39,14 @@ public class GameBoardController {
         return gameBoard;
     }
 
-    public void payIncomeTax(PlayerController playerCtrl, BankruptController bankruptCtrl, PropertyController propertyCtrl) {
+    public void payIncomeTax(PlayerController playerCtrl, BankruptController bankruptCtrl, GameRules gameRules) {
         double sumFromHisProperties = 0;
 
         for(PropertySquare propertySquare: playerCtrl.getCurrPlayerProperties()){
             sumFromHisProperties += propertySquare.getBuyPrice();
         }
         double payPercent = (((double)playerCtrl.getCurrPlayerBalance()+ sumFromHisProperties) / 100) * 10;
+        int incomeTax = gameRules.getIncomeTax();
         int incomeTaxAnswer  = guiB.incomeTax(playerCtrl);
 
         switch (incomeTaxAnswer){
@@ -60,14 +61,28 @@ public class GameBoardController {
                 break;
             case 1:
                 playerCtrl.setCurrScenarioForPlayer("Du har valgt at betale 200kr");
-                if(bankruptCtrl.playerCanPay(playerCtrl, -200)) {
-                    playerCtrl.currPlayerMoneyInfluence(-200);
+                if(bankruptCtrl.playerCanPay(playerCtrl, -incomeTax)) {
+                    playerCtrl.currPlayerMoneyInfluence(-incomeTax);
                 } else {
                     guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale 200kr til indkomstskatten.");
                     bankruptCtrl.goBankrupt(playerCtrl);
                 }
                 break;
         }
+    }
+
+    public void payLuxuryTax(PlayerController playerCtrl, BankruptController bankruptCtrl, GameRules gameRules){
+
+        int luxuryTax = gameRules.getLuxuryTax();
+
+        if(bankruptCtrl.playerCanPay(playerCtrl, -luxuryTax)){
+            playerCtrl.setCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " landet på Statsskat. Du skal betale 100kr");
+            playerCtrl.currPlayerMoneyInfluence(-luxuryTax);
+        } else {
+            guiB.showCurrScenarioForPlayer(playerCtrl.getCurrPlayerName() + " har ikke penge nok til at betale 100kr til Statsskat.");
+            bankruptCtrl.goBankrupt(playerCtrl);
+        }
+
     }
 }
 
