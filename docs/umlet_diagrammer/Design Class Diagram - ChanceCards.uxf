@@ -96,7 +96,7 @@
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>ChanceCard
+    <panel_attributes>/ChanceCard/
 --
 - cardText: String
 --
