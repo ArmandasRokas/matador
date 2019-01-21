@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>100</y>
+      <w>340</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>GUIBoundary
+--
+- gui: GUI
+- playerList: GUI_Player[]
+- fieldList: GUI_Field[]
+--
++ askForPlayerCount(int, int) : int
++ askForNames(int): String[]
++ getUserChoice(String[], String): int
+- mainMenuButtons(): String[]
++ takeTurn(PlayerController): int
++ endTurn(PlayerController): int
++ buyBuildings(int[]): String
++ sellBuildings(int[]): String
+- getPossibleSquareNamesForBuilding(int[]): String[]
++ getOutOfJail(PlayerController): int
++ incomeTax(PlayerController): int
++ askToBuyProperty(int, String): boolean
++ endGame(): int
++ showCurrScenarioForPlayer(String): void
++ declareWinner(PlayerController): void
++ tellPlayerExtraTurn(int): void
++ informPlayerGoingToJail(int): void
++ showChanceCard(String): void
++ setupGUIFields(int, String, int): void
++ removePlayerByBankrupt(int, int): void
++ movePlayer(int, int, int): void
++ setDices(int, int): void
++ updateBalance(int, int): void
++ setOwnerOnSquare(int, int, int): void
++ setOwnerOnSquare(int, int): void
++ setHousing(int, int): void
++ updateRentPrice(int, int): void
+- controlName(String[], String): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>630</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+controller.*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+</diagram>

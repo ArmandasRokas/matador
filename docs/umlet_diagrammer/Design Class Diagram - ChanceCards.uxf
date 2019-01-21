@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>140</y>
+      <w>490</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>ChanceCardController
+--
+- guiB: GUIBoundary
+- gameBoardCtrl: GameBoardController
+- bankruptCtrl: BankruptController
+- cardDeck: ChanceCard[]
+- cardsPicked: int
+--
+- shuffleDeck(): void
++ handleChanceCards(PlayerController): void
++ handleChanceCards(GetOutOfJailCC, PlayerController): void
++ handleChanceCards(MoneyInfluenceCC, PlayerController): void
++ handleChanceCards(MovePlayerToSquareCC, PlayerController): void
++ handleChanceCards(MovePlayer3SquaresBackCC, PlayerController): void
+- createDeck(): void
+- pickCard(): ChanceCard</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>720</y>
+      <w>390</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>MovePlayerToSquareCC
+--
+- toPrison: boolean
+- squareIndex: int
+--
++ pickedCard(ChanceCardController, PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>610</y>
+      <w>390</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>MovePlayer3SquaresBackCC
+--
+- squaresToMove: int
+--
++ pickedCard(ChanceCardController, PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>610</y>
+      <w>390</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>MoneyInfluenceCC
+--
+- moneyInfluence: int
+--
++ pickedCard(ChanceCardController, PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>720</y>
+      <w>390</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>GetOutOfJailCC
+--
+- inDeck: boolean
+--
++ pickedCard(ChanceCardController, PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>490</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ChanceCard
+--
+- cardText: String
+--
+/+ pickedCard(ChanceCardController, PlayerController): void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>550</y>
+      <w>270</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;250.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>690</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>580</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>580</y>
+      <w>270</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;250.0;120.0;250.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>380</y>
+      <w>40</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=25</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>70</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2= PlayerController</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>70</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2= GameController</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

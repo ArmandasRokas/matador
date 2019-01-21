@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>517</x>
+      <y>363</y>
+      <w>385</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>GameRules
+--
+- minPlayers: int
+- maxPlayers: int
+- startBalance: int
+- colors: Color[]
+--
++ controlPlayerCount(int): boolean
++ winnerFound(Player[]): Player
++ passStart(int, int): boolean
++ isBuyingBuildingsEvenly(PropertySquare): boolean
++ isSellingBuildingsEvenly(PropertySquare): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>561</x>
+      <y>264</y>
+      <w>220</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ManageBuildingsController</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>781</x>
+      <y>264</y>
+      <w>143</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GameController
+PlayerController</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

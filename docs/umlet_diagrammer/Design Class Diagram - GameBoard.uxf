@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>610</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Jail
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>890</x>
+      <y>610</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ToJail
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>610</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>StartSquare
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>730</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Parking
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>730</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>LuxuryTax
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>730</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>IncomeTax
+--
+...
+--
+landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>730</y>
+      <w>230</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ChanceSquare
+--
+...
+--
++ landedOn(PlayerController): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>880</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Transport
+--
+...
+--
++ getRentPrice(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>880</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>StreetSquare
+--
+- numberOfHouses: int
+- housePrice: int
+--
++ buyAHouse(): void
++ sellAHouse(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>610</y>
+      <w>270</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>/PropertySquare/
+--
+- price: int
+- rentPriceList: int[]
+- groupID: int
+- siblingSquares: PropertySquare[]
+--
++ landedOn(PlayerController): void
+/getRentPrice(): int/
++ toString(): String
++ getRentPriceList(): int[]
++ setSiblingSquare(PropertySquare): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>880</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Company
+--
+...
+--
++ getRentPrice(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>790</y>
+      <w>150</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;130.0;50.0;130.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>830</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>830</y>
+      <w>270</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0;250.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>440</y>
+      <w>30</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>570</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>570</y>
+      <w>270</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0;250.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>570</y>
+      <w>720</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>480.0;10.0;700.0;10.0;700.0;130.0;10.0;130.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>570</y>
+      <w>290</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0;270.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>690</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>690</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>690</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>480</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=28
+r1= Player</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>330</y>
+      <w>230</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/Square/
+--
+- squareName: String
+- index: int
+- owner: Player
+--
+/+ landedOn(PlayerController): void/
++ toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>190</y>
+      <w>40</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=40</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>80</y>
+      <w>250</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>GameBoard
+--
+- squareList: Square[]
+--
++ getSquareList(): Square[]
+- setPropertySquareSiblings(): void
++ findSquateIndexByName(String): int
+- setBoard(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>430</y>
+      <w>150</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GameBoardController</panel_attributes>
+    <additional_attributes>110.0;180.0;110.0;90.0;30.0;90.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>0</y>
+      <w>160</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GameBoardController</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>0</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ManageBuildingsController</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>370</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1= Player</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
