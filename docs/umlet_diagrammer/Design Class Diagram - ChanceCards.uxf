@@ -168,7 +168,7 @@ m2=25</panel_attributes>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2= PlayerController</panel_attributes>
+PlayerController</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -180,7 +180,19 @@ m2= PlayerController</panel_attributes>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2= GameController</panel_attributes>
+GameController</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>70</y>
+      <w>110</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+GUIBoundary</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
 </diagram>
