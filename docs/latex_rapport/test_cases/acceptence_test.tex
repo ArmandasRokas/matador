@@ -46,8 +46,8 @@
             \hline
             \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
             Hvis spilleren er landet på en ikke-ejet ejendom, og har penge nok til at købe den, kan spilleren vælge at købe den    & JA \\ \hline
-            Grunde der ejes af en spiller får en rammefarve der svarer til pågældende spillers farve på spillepladen    & JA \\ \hline
-            Ejes alle ejendomme i en gruppe, fordobles lejeprisen på alle ejendommene     & JA  \\ \hline
+            Grunde der ejes af en spiller får en rammefarve, der svarer til pågældende spillers farve på spillepladen    & JA \\ \hline
+            Ejes alle ejendomme i en gruppe, fordobles lejeprisen på ejendommene     & JA  \\ \hline
             Der tilføjes et skøde med information om den købte ejendom til køberen     & JA \\ \hline
         \end{tabularx}
     \end{table}
@@ -85,7 +85,7 @@
             \hline
             \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
             Indsætter et korrekt beløb på spillerens konto ved salg af hus     & JA \\ \hline
-            Må ikke kunne sælges, så der er ujævn fordeling     & JA \\ \hline
+            Må ikke kunne sælges, så der er ujævn fordeling af bygninger i gruppen    & JA \\ \hline
             Huset fjernes fra grunden på spillepladen     & JA \\ \hline
             Lejeprisen opdateres     & JA\\ \hline
             Ved salg af hotel, fjernes hotellet, og 4 huse tilføjes, på grunden på spillepladen    & JA \\ \hline
@@ -102,7 +102,7 @@
             Maksimum 4 huse må bygges på en grund     & JA\\ \hline
             Må ikke kunne bygges ujævnt     & JA\\ \hline
             Trækkes et korrekt beløb fra spillerens konto ved køb af hus     & JA\\ \hline
-            Lejeprisen opdateres     & JA \\ \hline
+            Lejeprisen opdateres korrekt    & JA \\ \hline
         \end{tabularx}
     \end{table}
 
@@ -116,7 +116,7 @@
             Fjerner de 4 huse og tilføjer et hotel på grunden     & JA\\ \hline
             Der må maksimum være et hotel på hver grund     & JA\\ \hline
             Der trækkes et korrekt beløb fra spillerens konto ved køb af hotel     & JA\\ \hline
-            Lejeprisen opdateres     & JA \\ \hline
+            Lejeprisen opdateres korrekt    & JA \\ \hline
         \end{tabularx}
     \end{table}
 
@@ -125,11 +125,11 @@
         \begin{tabularx}{\textwidth}{|X|l|}
             \hline
             \textbf{Test scenarie}       & \textbf{Bestået}   \\ \hline
-            Overføres grundene, som er ejet af spilleren til en kreditor (enten den anden spiller, som spilleren, der går fallit skylder penge, eller banken) & JA\\ \hline
+            Overføres grundene, som er ejet af spilleren til en kreditor (enten banken, eller den anden spiller, som spilleren, der går fallit skylder penge) & JA\\ \hline
             Grundenes rammefarve opdateres til den nye ejers farve på spillepladen & JA\\ \hline
-            Lejeprisen på felter updates, hvis de overførte grunde fra en spiller, der er gået fallit gør at alle felter i en gruppe ejes (opdateres også på spillepladen) & JA\\ \hline
+            Lejeprisen på felter fordobles, hvis de overførte grunde fra en spiller, der er gået fallit gør at alle felter i en gruppe ejes (opdateres også på spillepladen) & JA\\ \hline
             Hvis alle undtagen en spiller er gået fallit, udnævnes en vinder& JA\\ \hline
-            En spiller må ikke længere interegere længere med spillet, efter spilleren er gået fallit. Inklusive at administrere ejendomme.& JA \\ \hline
+            En spiller må ikke interegere længere med spillet, efter spilleren er gået fallit. Inklusive at administrere ejendomme.& JA \\ \hline
         \end{tabularx}
     \end{table}
 
