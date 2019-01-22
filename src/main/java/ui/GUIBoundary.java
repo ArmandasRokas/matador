@@ -16,10 +16,16 @@ public class GUIBoundary {
 
     //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
-        int playerCount;
-        playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
-        playerList = new GUI_Player[playerCount];
+        int playerCount = -1;
+        try{
+            playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
+            playerList = new GUI_Player[playerCount];
+
+        } catch (Exception e){
+            gui.showMessage("Indtast nummer din dumme svin.");
+        }
         return playerCount;
+
     }
 
     public String[] askForNames(int playerCount) {
@@ -35,7 +41,7 @@ public class GUIBoundary {
         return names;
     }
 
-    public int getUserChoice(String[] buttons, String res) {
+    public int getUserChoice(String[] buttons, String res) { // convert user chosen String to int.
         int choice = -1;
 
         for(int i = 0 ; i < buttons.length ; i++) {
@@ -151,6 +157,7 @@ public class GUIBoundary {
         } else {
             fieldList[index].setTitle(name);
         }
+
 
         if(fieldList[index] instanceof GUI_Street) {
             fieldList[index].setDescription("Hus pris: " + housePrice);

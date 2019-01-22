@@ -43,7 +43,7 @@ public class ChanceCardController {
         this.cardDeck = newDeck;
     }
 
-    public void handleChanceCards(PlayerController playerCtrl) {
+    public void handleChanceCards(PlayerController playerCtrl) { // used for pick random card and call the right handlechance card
         ChanceCard chanceCard = pickCard();
         playerCtrl.setCurrScenarioForPlayer("Du har trukket en chancekort");
         chanceCard.pickedCard(this, playerCtrl);
@@ -118,6 +118,8 @@ public class ChanceCardController {
             shuffleDeck();
             cardsPicked = 0;
         }
+        int i = 5;
         return cardDeck[cardsPicked++];
+
     }
 }

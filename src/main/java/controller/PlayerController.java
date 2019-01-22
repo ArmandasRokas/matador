@@ -40,7 +40,7 @@ public class PlayerController {
         String[] names = guiB.askForNames(playerList.length);
         Color[] carColors = gameRules.getColors();
 
-        for(int i = 0; i < playerList.length; i++){
+        for(int i = 0; i < playerList.length; ++i){
             playerList[i] = new Player(i, names[i], gameRules.getStartBalance());
             guiB.setupPlayer(playerList[i].getPlayerID(), playerList[i].getName(), playerList[i].getBalance(), carColors[i]);
         }

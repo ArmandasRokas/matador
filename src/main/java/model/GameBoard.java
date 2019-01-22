@@ -1,5 +1,6 @@
 package model;
 
+import controller.PropertyController;
 import model.square.*;
 import model.square.property.Company;
 import model.square.property.PropertySquare;
@@ -19,6 +20,7 @@ public class GameBoard {
     }
 
     private void setPropertySquareSiblings() {
+
         for(Square square: squareList) {
 
             if(square instanceof PropertySquare) {

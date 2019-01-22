@@ -25,12 +25,7 @@ public class GameRules {
     }
 
     public boolean controlPlayerCount(int numberOfPlayers) {
-        boolean res = false;
-
-        if(numberOfPlayers >= minPlayers && numberOfPlayers <= maxPlayers) {
-            res = true;
-        }
-        return res;
+        return numberOfPlayers >= minPlayers && numberOfPlayers <= maxPlayers;
     }
 
     public Player winnerFound(Player[] playerList) {
