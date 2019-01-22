@@ -122,9 +122,9 @@ public class GUIBoundary {
     }
 
     public int endGame() { //TODO Will get implemented "No" button when GUI allows it
-        String[] buttons = new String[]{"Ja", "Nej"};
+        String[] buttons = new String[]{"Ja", "Nej"}; // man behøver ikke at skrive "new String[]", når man bruger "initializer list"
         String res = gui.getUserButtonPressed("Vil De spille igen?", buttons[0]);
-        return getUserChoice(buttons, res);
+        return getUserChoice(buttons, res); // man kunne bare bruge  getUserLeftButtonPressed som returnerer true eller false i stedet af at man får String og konverterer til int
     }
 
     //General communication (information, no choice)
