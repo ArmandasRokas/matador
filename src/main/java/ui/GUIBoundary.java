@@ -16,9 +16,14 @@ public class GUIBoundary {
 
     //Menus
     public int askForPlayerCount(int minPlayers, int maxPlayers) {
-        int playerCount;
-        playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
-        playerList = new GUI_Player[playerCount];
+        int playerCount = -1;
+        try{
+            playerCount = gui.getUserInteger("Vælg antal spillere (3-6)", minPlayers, maxPlayers);
+            playerList = new GUI_Player[playerCount];
+
+        } catch (Exception e){
+            gui.showMessage("Error. Der blev indtastet en forkert værdi.");
+        }
         return playerCount;
     }
 
