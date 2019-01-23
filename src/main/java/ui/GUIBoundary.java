@@ -22,6 +22,7 @@ public class GUIBoundary {
             playerList = new GUI_Player[playerCount];
 
         } catch (Exception e){
+            e.printStackTrace();
             gui.showMessage("Error. Der blev indtastet en forkert værdi.");
         }
         return playerCount;
