@@ -9,7 +9,7 @@ public class Company extends PropertySquare {
     public int getRentPrice() {
         int siblingsOwned = 0;
         for(PropertySquare sibling : super.getSiblingsSquares()) {
-            if(this.getOwner().equals(sibling.getOwner())) {
+            if(this.getOwner() != null && this.getOwner().equals(sibling.getOwner())) {
                 siblingsOwned = 1;
             }
         }

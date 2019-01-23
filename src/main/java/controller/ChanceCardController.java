@@ -85,17 +85,18 @@ public class ChanceCardController {
         cardDeck = new ChanceCard[25];
 
         cardDeck[0] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
-        cardDeck[1] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
-        cardDeck[2] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. De beholder dette kort indtil De får brug for det.");
-        cardDeck[3] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. De beholder dette kort indtil De får brug for det.");
-        cardDeck[4] = new MovePlayerToSquareCC("Tag med Øresundsbåden - Hvis de passerer 'Start' indkasserer de 200kr", false, 5);
-        cardDeck[5] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false, 39);
-        cardDeck[6] = new MovePlayerToSquareCC("Ryk frem til Frederiksbergálle . Hvis de passerer 'Start' indkasserer de 200kr", false, 11);
-        cardDeck[7] = new MovePlayerToSquareCC("Ryk frem til Grønningen. Hvis de passerer 'Start' indkasserer de 200kr", false, 24);
-        cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
-        cardDeck[9] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
+        cardDeck[1] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. De beholder dette kort indtil De får brug for det.");
+        cardDeck[2] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
+        cardDeck[3] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 6000kr til banken", -6000);
+        cardDeck[4] = new MovePlayerToSquareCC("Ryk frem til Grønningen. Hvis de passerer 'Start' indkasserer de 200kr", false, 24);
+        cardDeck[5] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 6000kr til banken", -6000);
+        cardDeck[6] = new MovePlayer3SquaresBackCC("Ryk tre felter tilbage.", 3);
+        cardDeck[6] = new GetOutOfJailCC("I anledning af Kongsens fødselsdag får de lov til at være kriminel én gang. De beholder dette kort indtil De får brug for det.");
+        cardDeck[6] = new MovePlayerToSquareCC("Tag med Øresundsbåden - Hvis de passerer 'Start' indkasserer de 200kr", false, 5);
+        cardDeck[7] = new MovePlayerToSquareCC("Tag in på Rådhuspladsen", false, 39);
+        cardDeck[8] = new MovePlayerToSquareCC("Ryk frem til Frederiksbergálle . Hvis de passerer 'Start' indkasserer de 200kr", false, 11);
+        cardDeck[9] = new MovePlayerToSquareCC("Ryk frem til 'Start'", false, 0);
         cardDeck[10] = new MovePlayerToSquareCC("Gå i fængsel. De rykkes direkte til fængsel. Selv om de passerer 'Start' indkasserer de ikke 200kr", true, 10);
-        cardDeck[11] = new MoneyInfluenceCC("De har fået en parkeingsbøde. De har betalt 60kr til banken", -60);
         cardDeck[12] = new MoneyInfluenceCC("Grundet på dyrtiden har De fået gageforhøjelse, De har modtaget 50kr", 50);
         cardDeck[13] = new MoneyInfluenceCC("Deres præmieobligation er kommet ud. De har modtaget 100kr", 100);
         cardDeck[14] = new MoneyInfluenceCC("Efter auktionen på Assistentshuset, hvor De havde pantsat Deres tøj, og modtaget de 108kr", 108);
@@ -110,7 +111,7 @@ public class ChanceCardController {
         cardDeck[23] = new MoneyInfluenceCC("De har solgt Deres gamle klude. De har modtaget 20kr", 20);
         cardDeck[24] = new MoneyInfluenceCC("Kommunen har eftergivet et kvartals skat. De har hævet 200kr i banken til en glad aften", 200);
 
-        shuffleDeck();
+//        shuffleDeck();
     }
 
     private ChanceCard pickCard() {

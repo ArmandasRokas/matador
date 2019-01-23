@@ -26,22 +26,23 @@ public class Cup {
 
 
     //These are made for demonstration, original methods above these
-    private int rollScoreList[] = new int[]{1, 2, 1, 30, 33, 33, 3, 2, 3, 15, 10, 29, 39, 6, 28, 8, 3, 10, 19};
-    private int doubleRolls[] = new int[]{1, 2, 3, 6,
-            8,
-            //9,
-            10,
-            //11,
-            12, 15, 17};
-    private int currTurn = 0;
+    private int currTurn = 0-1;
+    private int rollScoreList[] = {1, 2, 0, 30, 33, 33, 3, 0, 2, 3, 15, 10, 28, 6, 0, 29, 39, 7, 32, 10, 19
+            //, 22
+    };
+    private int doubleRolls[] = {0, 1, 2, 5, 8,
 
-    public void roll() {    }
+            10, 12, 15, 17};
+
+    public void roll() {  currTurn++;  }
 
     public int getCurrentRollScore() {
         if(currTurn >= rollScoreList.length) {
             return 0;  //Just to test if we're out of bound on our rollScoreList
         }
-        return rollScoreList[currTurn++];
+        int rollScore =  rollScoreList[currTurn];
+
+        return rollScore;
     }
 
     public int getEyesDie1() {
