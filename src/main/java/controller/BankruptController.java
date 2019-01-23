@@ -62,6 +62,7 @@ public class BankruptController {
         guiB.updateBalance(owner.getPlayerID(), owner.getBalance());
 
         for(PropertySquare square: currentPlayerProperties) {
+            owner.addProperty(square);
             guiB.setOwnerOnSquare(owner.getPlayerID(), square.getIndex(), square.getRentPrice());
             propertyCtrl.updateSiblingSquaresRentPrice(square);
         }
